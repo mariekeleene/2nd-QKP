@@ -2,7 +2,7 @@
 
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
+    font-family: Arial, sans-serif; /* dit is de basisfont voor body, kun je laten */
 }
 
 @font-face {
@@ -15,7 +15,6 @@ body {
     src: url('fonts/vagra-pixel.otf') format('opentype');
 }
 
-
 .container {
     display: flex;
     flex-direction: column;
@@ -26,7 +25,7 @@ body {
 }
 
 .artwork-link {
-    font-family: 'GapSansBold', Arial, sans-serif;
+    font-family: 'GapSansBold' !important;
     font-size: 24px;
     padding: 20px 0;
     text-decoration: none;
@@ -35,9 +34,6 @@ body {
     margin: 15px 0;
     animation: swing 3s ease-in-out infinite;
 }
-
-
-
 
 /* Animatie delays voor elke link */
 .container a:nth-child(1)  { animation-delay: 0s; }
@@ -58,7 +54,7 @@ body {
 
 /* hover effect */
 .artwork-link:hover {
-    font-family: 'VagraPixel', Courier, monospace;
+    font-family: 'VagraPixel' !important;
     text-decoration: underline;
 }
 
@@ -79,11 +75,11 @@ body {
     text-transform: uppercase;
     letter-spacing: 2px;
     color: gray;
-    font-family: Arial, sans-serif;
+    font-family: Arial, sans-serif; /* Prima zo */
     z-index: 10;  /* zeker boven andere content */
 }
 
 .vertical-text:hover {
     color: black;
-    font-family: 'VagraPixel', Courier, monospace;
+    font-family: 'VagraPixel' !important;
 }
