@@ -1,9 +1,4 @@
-/* Reset default margins */
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-}
-
+/* Load custom fonts */
 @font-face {
     font-family: 'VagraPixel';
     src: url('fonts/vagra-pixel.otf') format('opentype');
@@ -18,9 +13,11 @@ body {
     font-style: normal;
 }
 
-
+/* Reset default margins */
+body {
+    margin: 0;
+    font-family: 'GapSansBold', Arial, sans-serif;
 }
-
 
 /* Center the main content block */
 main {
@@ -50,7 +47,8 @@ a {
 }
 
 a:hover {
-    font-family: "VagraPixel", serif; /* font change on hover */
+    font-family: 'VagraPixel', Courier, monospace; /* retro hover font */
+    text-decoration: underline;
 }
 
 /* Vertical artist link in bottom-right corner */
@@ -63,7 +61,6 @@ aside {
 }
 
 #artist-link {
-    font-family: 'GapSansBold', serif;
     font-size: 14px;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -72,4 +69,5 @@ aside {
 
 #artist-link:hover {
     color: black;
+    font-family: 'VagraPixel', Courier, monospace; /* retro font for artist link hover */
 }
