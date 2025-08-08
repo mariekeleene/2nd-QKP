@@ -1,86 +1,65 @@
-/* Load custom fonts */
-@font-face {
-    font-family: 'VagraPixel';
-    src: url('fonts/vagra-pixel.otf') format('opentype');
-    font-weight: normal;
-    font-style: normal;
-}
+/* Fonts en andere regels blijven hetzelfde */
 
-@font-face {
-    font-family: 'GapSansBold';
-    src: url('fonts/GapSansBold.ttf') format('truetype');
-    font-weight: bold;
-    font-style: normal;
-}
-
-/* Reset default margins */
 body {
     margin: 0;
     font-family: Arial, sans-serif;
 }
 
-/* Center the main content block */
-main {
+.container {
     display: flex;
     flex-direction: column;
-    align-items: center;      /* center horizontally */
-    justify-content: center;  /* center vertically */
+    align-items: center;     /* center horizontaal */
+    justify-content: center; /* center verticaal */
     min-height: 100vh;
     text-align: center;
 }
 
-/* List styling for artwork links */
-ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    width: 100%;
-    max-width: 400px;
-}
-
-li {
-    margin: 15px 0;           /* space between links */
-}
-
-a {
+.artwork-link {
     text-decoration: none;
     color: black;
     font-size: 24px;
     font-family: 'GapSansBold', Arial, sans-serif;
     display: block;
-    text-align: center;       /* center text inside the link */
+    margin: 15px 0;          /* ruimte tussen links */
     animation: swing 3s ease-in-out infinite;
 }
 
-/* Adding different animation delays for each link */
-li:nth-child(1) a { animation-delay: 0s; }
-li:nth-child(2) a { animation-delay: 0.5s; }
-li:nth-child(3) a { animation-delay: 1s; }
-li:nth-child(4) a { animation-delay: 1.5s; }
-/* enzovoorts voor tot 20 items, pas aan naar wens */
+/* Animatie delays voor elke link */
+.container a:nth-child(1)  { animation-delay: 0s; }
+.container a:nth-child(2)  { animation-delay: 0.3s; }
+.container a:nth-child(3)  { animation-delay: 0.6s; }
+.container a:nth-child(4)  { animation-delay: 0.9s; }
+.container a:nth-child(5)  { animation-delay: 1.2s; }
+.container a:nth-child(6)  { animation-delay: 1.5s; }
+.container a:nth-child(7)  { animation-delay: 1.8s; }
+.container a:nth-child(8)  { animation-delay: 2.1s; }
+.container a:nth-child(9)  { animation-delay: 2.4s; }
+.container a:nth-child(10) { animation-delay: 2.7s; }
+.container a:nth-child(11) { animation-delay: 3.0s; }
+.container a:nth-child(12) { animation-delay: 3.3s; }
+.container a:nth-child(13) { animation-delay: 3.6s; }
+.container a:nth-child(14) { animation-delay: 3.9s; }
+.container a:nth-child(15) { animation-delay: 4.2s; }
 
-/* Hover effect */
-a:hover {
-    font-family: 'VagraPixel', Courier, monospace; /* retro hover font */
+/* hover effect */
+.artwork-link:hover {
+    font-family: 'VagraPixel', Courier, monospace;
     text-decoration: underline;
 }
 
-/* Swing animation: gently moves left and right */
+/* Swing animatie */
 @keyframes swing {
     0%, 100% { transform: translateX(0); }
     50% { transform: translateX(10px); }
 }
 
-/* Vertical artist link in bottom-right corner */
-aside {
+/* Verticale tekst rechtsonder */
+.vertical-text {
     position: fixed;
     right: 20px;
     bottom: 20px;
     transform: rotate(-90deg);
     transform-origin: bottom right;
-}
-
-#artist-link {
     font-size: 14px;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -88,7 +67,7 @@ aside {
     font-family: Arial, sans-serif;
 }
 
-#artist-link:hover {
+.vertical-text:hover {
     color: black;
-    font-family: 'VagraPixel', Courier, monospace; /* retro hover font */
+    font-family: 'VagraPixel', Courier, monospace;
 }
