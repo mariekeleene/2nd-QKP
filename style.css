@@ -5,9 +5,19 @@ body {
 }
 
 @font-face {
-    font-family: 'MyCustomFont';
-    src: url('fonts/vagra-pixel.otf') format('otf'),
-    url('fonts/GapSansBold.ttf') format('ttf');
+    font-family: 'VagraPixel';
+    src: url('fonts/vagra-pixel.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'GapSansBold';
+    src: url('fonts/GapSansBold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
 
 }
 
@@ -40,7 +50,7 @@ a {
 }
 
 a:hover {
-    font-family: "vagra-pixel", serif; /* font change on hover */
+    font-family: "VagraPixel", serif; /* font change on hover */
 }
 
 /* Vertical artist link in bottom-right corner */
@@ -53,7 +63,7 @@ aside {
 }
 
 #artist-link {
-    font-family: 'GabSansBold', serif;
+    font-family: 'GapSansBold', serif;
     font-size: 14px;
     text-transform: uppercase;
     letter-spacing: 2px;
