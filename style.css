@@ -16,7 +16,7 @@
 /* Reset default margins */
 body {
     margin: 0;
-    font-family: 'GapSansBold', Arial, sans-serif;
+    font-family: Arial, sans-serif;
 }
 
 /* Center the main content block */
@@ -37,13 +37,14 @@ ul {
 }
 
 li {
-    margin: 15px 0; /* more space between links */
+    margin: 15px 0; /* space between links */
 }
 
 a {
     text-decoration: none;
     color: black;
-    font-weight: bold;
+    font-size: 18px;
+    font-family: 'GapSansBold', Arial, sans-serif;
 }
 
 a:hover {
@@ -65,9 +66,10 @@ aside {
     text-transform: uppercase;
     letter-spacing: 2px;
     color: gray;
+    font-family: Arial, sans-serif;
 }
 
 #artist-link:hover {
     color: black;
-    font-family: 'VagraPixel', Courier, monospace; /* retro font for artist link hover */
+    font-family: 'VagraPixel', Courier, monospace; /* retro hover font */
 }
