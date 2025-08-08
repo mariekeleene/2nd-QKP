@@ -34,16 +34,12 @@ ul {
     list-style: none;
     padding: 0;
     margin: 0;
-    width: 100%;              /* full width so flex centering works */
-    max-width: 400px;         /* max width so it’s not too wide */
-    display: flex;
-    flex-direction: column;
-    align-items: center;      /* center links horizontally */
+    width: 100%;
+    max-width: 400px;
 }
 
 li {
     margin: 15px 0;           /* space between links */
-    width: 100%;              /* make li full width of ul */
 }
 
 a {
@@ -51,11 +47,19 @@ a {
     color: black;
     font-size: 24px;
     font-family: 'GapSansBold', Arial, sans-serif;
-    display: inline-block;
+    display: block;
     text-align: center;       /* center text inside the link */
     animation: swing 3s ease-in-out infinite;
 }
 
+/* Adding different animation delays for each link */
+li:nth-child(1) a { animation-delay: 0s; }
+li:nth-child(2) a { animation-delay: 0.5s; }
+li:nth-child(3) a { animation-delay: 1s; }
+li:nth-child(4) a { animation-delay: 1.5s; }
+/* enzovoorts voor tot 20 items, pas aan naar wens */
+
+/* Hover effect */
 a:hover {
     font-family: 'VagraPixel', Courier, monospace; /* retro hover font */
     text-decoration: underline;
