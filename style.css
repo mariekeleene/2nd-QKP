@@ -34,22 +34,37 @@ ul {
     list-style: none;
     padding: 0;
     margin: 0;
+    width: 100%;              /* full width so flex centering works */
+    max-width: 400px;         /* max width so it’s not too wide */
+    display: flex;
+    flex-direction: column;
+    align-items: center;      /* center links horizontally */
 }
 
 li {
-    margin: 15px 0; /* space between links */
+    margin: 15px 0;           /* space between links */
+    width: 100%;              /* make li full width of ul */
 }
 
 a {
     text-decoration: none;
     color: black;
-    font-size: 18px;
+    font-size: 24px;
     font-family: 'GapSansBold', Arial, sans-serif;
+    display: inline-block;
+    text-align: center;       /* center text inside the link */
+    animation: swing 3s ease-in-out infinite;
 }
 
 a:hover {
     font-family: 'VagraPixel', Courier, monospace; /* retro hover font */
     text-decoration: underline;
+}
+
+/* Swing animation: gently moves left and right */
+@keyframes swing {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(10px); }
 }
 
 /* Vertical artist link in bottom-right corner */
