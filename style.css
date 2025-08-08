@@ -4,6 +4,14 @@ body {
     font-family: Arial, sans-serif;
 }
 
+@font-face {
+    font-family: 'MyCustomFont';
+    src: url('fonts/vagra-pixel.otf') format('otf'),
+    url('fonts/GapSansBold.ttf') format('ttf');
+
+}
+
+
 /* Center the main content block */
 main {
     display: flex;
@@ -32,8 +40,7 @@ a {
 }
 
 a:hover {
-    font-family: "Courier New", monospace; /* font change on hover */
-    text-decoration: underline;
+    font-family: "vagra-pixel", serif; /* font change on hover */
 }
 
 /* Vertical artist link in bottom-right corner */
@@ -46,6 +53,7 @@ aside {
 }
 
 #artist-link {
+    font-family: 'GabSansBold', serif;
     font-size: 14px;
     text-transform: uppercase;
     letter-spacing: 2px;
