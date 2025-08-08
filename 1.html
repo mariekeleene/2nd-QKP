@@ -1,38 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Title of Artwork 1 - Year</title>
-    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Project 1 - Artwork Title</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f0f0f5;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            perspective: 800px;
+        }
+
+        .content {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            max-width: 800px;
+            width: 90%;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+            transform-style: preserve-3d;
+            transform: rotateX(5deg) rotateY(-5deg);
+        }
+
+        .text-block {
+            margin-bottom: 30px;
+        }
+
+        .text-block p {
+            font-size: 1.1rem;
+            line-height: 1.5;
+            color: #222;
+        }
+
+        .main-image {
+            float: right;
+            max-width: 40%;
+            margin-left: 20px;
+            border-radius: 8px;
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+        }
+
+        .extra-images {
+            clear: both;
+            margin-top: 40px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .extra-images img {
+            max-width: 150px;
+            border-radius: 8px;
+            box-shadow: 0 6px 10px rgba(0,0,0,0.1);
+        }
+
+        a.back-link {
+            display: inline-block;
+            margin-top: 30px;
+            text-decoration: none;
+            color: #0077cc;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        a.back-link:hover {
+            color: #005fa3;
+        }
+    </style>
 </head>
 <body>
 
-<header>
-    <a href="index.html">← Back to Home</a>
-</header>
+<div class="content">
+    <div class="text-block">
+        <img src="simartbackground.jpg" alt="Main artwork image" class="main-image" />
+        <p>
+            This is the explanation text for the artwork project. It describes the concept, materials, and process.
+        </p>
+    </div>
 
-<main>
-    <section class="project-intro">
-        <div class="text-block">
-            <h1>Title of Artwork 1 - Year</h1>
-            <p>
-                Description of the project goes here. Explain the concept, process, materials,
-                and meaning behind the artwork.
-            </p>
-        </div>
-        <div class="main-image">
-            <img src="images/artwork1-main.jpg" alt="Main view of Artwork 1">
-        </div>
-    </section>
+    <div class="extra-images">
+        <img src="simart10.jpg" alt="Extra image 1" />
+        <img src="achtergrond50.jpg" alt="Extra image 2" />
+        <img src="guido.png" alt="Extra image 3" />
+    </div>
 
-    <section class="additional-images">
-        <h2>Gallery</h2>
-        <img src="images/artwork1-extra1.jpg" alt="Extra view 1">
-        <img src="images/artwork1-extra2.jpg" alt="Extra view 2">
-        <img src="images/artwork1-extra3.jpg" alt="Extra view 3">
-    </section>
-</main>
+    <a href="index.html" class="back-link">← Back to Home</a>
+</div>
 
 </body>
 </html>
