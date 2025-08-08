@@ -5,6 +5,17 @@ body {
     font-family: Arial, sans-serif;
 }
 
+@font-face {
+    font-family: 'GapSansBold';
+    src: url('fonts/GapSansBold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'VagraPixel';
+    src: url('fonts/vagra-pixel.otf') format('opentype');
+}
+
+
 .container {
     display: flex;
     flex-direction: column;
@@ -15,14 +26,18 @@ body {
 }
 
 .artwork-link {
+    font-family: 'GapSansBold', Arial, sans-serif;
+    font-size: 24px;
+    padding: 20px 0;
     text-decoration: none;
     color: black;
-    font-size: 24px;
-    font-family: 'GapSansBold', Arial, sans-serif;
     display: block;
-    margin: 15px 0;          /* ruimte tussen links */
+    margin: 15px 0;
     animation: swing 3s ease-in-out infinite;
 }
+
+
+
 
 /* Animatie delays voor elke link */
 .container a:nth-child(1)  { animation-delay: 0s; }
@@ -57,7 +72,7 @@ body {
 .vertical-text {
     position: fixed;
     right: 20px;
-    bottom: 20px;
+    bottom: 40px;  /* omhoog zodat hij zichtbaar blijft */
     transform: rotate(-90deg);
     transform-origin: bottom right;
     font-size: 14px;
@@ -65,6 +80,7 @@ body {
     letter-spacing: 2px;
     color: gray;
     font-family: Arial, sans-serif;
+    z-index: 10;  /* zeker boven andere content */
 }
 
 .vertical-text:hover {
