@@ -1,85 +1,43 @@
-/* Top bar */
-.top-bar {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 15px;
-    position: relative;
-    font-family: 'GapSansBold';
-}
-
-.product-title {
-    position: absolute;
-    left: 20px;
-    font-size: 14px;
-}
-
-.details {
-    font-size: 24px;
-    cursor: pointer;
-}
-
-.details:hover {
-    font-family: 'VagraPixel';
-}
-
-/* Hidden details section */
-.details-text {
-    max-height: 0;
-    overflow: hidden;
-    background-color: #ffe6f0; /* light cute pink */
-    width: 100%;
+* {
     box-sizing: border-box;
-    transition: max-height 0.4s ease, padding 0.4s ease;
 }
 
-/* Show details section */
-.details-text.show {
-    max-height: 500px;
-    padding: 20px 0;
-}
-
-/* Layout for details content */
-.details-content {
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
-    padding: 0 40px;
-}
-
-.details-left {
-    flex: 1;
+body {
+    margin: 0;
     font-family: Arial, sans-serif;
 }
 
-.details-right {
-    flex: 2;
-    font-family: Arial, sans-serif;
+.slideshow-container {
+    position: relative;
+    max-width: 600px;
+    margin: 0 auto;
 }
 
-/* Slideshow arrows beside image */
-.gallery {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 15px;
-    padding: 30px 0;
+.mySlides {
+    display: none;
 }
 
-.nav {
-    background: none;
-    border: none;
-    font-size: 32px;
+.mySlides img {
+    width: 100%;
+    display: block;
+}
+
+.prev, .next {
     cursor: pointer;
+    position: absolute;
+    top: 50%;
+    padding: 16px;
+    margin-top: -22px;
+    font-size: 24px;
+    font-weight: bold;
+    color: black;
+    user-select: none;
 }
 
-.image-container img {
-    max-width: 80vw;
-    height: auto;
-}
+.prev { left: -50px; }
+.next { right: -50px; }
 
-.page-counter {
+.slide-number {
     text-align: center;
-    margin-top: 10px;
-    font-family: Arial, sans-serif;
+    margin-top: 8px;
 }

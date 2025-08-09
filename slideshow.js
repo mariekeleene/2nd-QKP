@@ -1,29 +1,21 @@
-function initSlideshow(images) {
-    let currentIndex = 0;
-    const galleryImage = document.getElementById("gallery-image");
-    const pageCounter = document.getElementById("page-counter");
-    const detailsBtn = document.getElementById("details-btn");
-    const detailsText = document.getElementById("details-text");
+let slideIndex = 1;
+showSlides(slideIndex);
 
-    function updateImage() {
-        galleryImage.src = images[currentIndex];
-        pageCounter.textContent = `${currentIndex + 1}/${images.length}`;
+document.querySelector(".prev").addEventListener("click", () => plusSlides(-1));
+document.querySelector(".next").addEventListener("click", () => plusSlides(1));
+
+function plusSlides(n) {
+    showSlides(slideIndex += n);
+}
+
+function showSlides(n) {
+    let i;
+    let slides = document.getElementsByClassName("mySlides");
+    if (n > slides.length) { slideIndex = 1 }
+    if (n < 1) { slideIndex = slides.length }
+    for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
     }
-
-    document.querySelector(".prev").addEventListener("click", () => {
-        currentIndex = (currentIndex - 1 + images.length) % images.length;
-        updateImage();
-    });
-
-    document.querySelector(".next").addEventListener("click", () => {
-        currentIndex = (currentIndex + 1) % images.length;
-        updateImage();
-    });
-
-    detailsBtn.addEventListener("click", () => {
-        detailsText.classList.toggle("show");
-        detailsBtn.textContent = detailsText.classList.contains("show") ? "Details -" : "Details +";
-    });
-
-    updateImage(); // show first image
+    slides[slideIndex-1].style.display = "block";
+    document.getElementById("slide-number").textContent = `${slideIndex}/${slides.length}`;
 }
