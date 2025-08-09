@@ -1,27 +1,28 @@
 .top-bar {
     display: flex;
     align-items: center;
-    justify-content: center; /* center content horizontally */
+    justify-content: space-between;
     padding: 10px 20px;
     position: relative;
+    font-family: 'GapSansBold', Arial, sans-serif;
+    height: 60px;
+    box-sizing: border-box;
 }
 
 .close-btn {
-    position: absolute;
-    right: 20px;
     font-size: 28px;
     cursor: pointer;
     user-select: none;
     font-weight: bold;
-    top: 50%;
-    transform: translateY(-50%);
     color: black;
+    white-space: nowrap;
+    flex-shrink: 0;
 }
 
 .details-container {
     position: relative;
-    max-width: 400px;
-    font-family: 'GapSansBold', Arial, sans-serif;
+    text-align: center;
+    flex: 1;
 }
 
 .details {
@@ -29,22 +30,28 @@
     cursor: pointer;
     user-select: none;
     display: inline-block;
-    margin-bottom: 5px;
+    font-family: 'GapSansBold', Arial, sans-serif;
+    line-height: 1;
 }
 
 .details-text {
-    max-width: 400px;
+    position: absolute;
+    top: 100%; /* right below the Details + text */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 300px;  /* wide enough for all text */
     background: #f9f9f9;
-    padding: 8px;
+    padding: 12px;
     border-radius: 4px;
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    display: none;
     font-family: Arial, sans-serif;
     font-size: 14px;
     line-height: 1.4;
     color: #333;
+    display: none; /* hidden by default */
+    z-index: 10;
     text-align: left;
-    margin: 0 auto;
+    white-space: normal;
 }
 
 .artwork-info {
@@ -57,9 +64,40 @@
     color: #555;
 }
 
+.artwork-title {
+    font-size: 18px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
 .details-text p {
     margin: 0;
     overflow: hidden;
 }
 
-/* other existing styles remain unchanged */
+/* Gallery */
+.gallery {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    max-width: 100%;
+    height: auto;
+    padding-top: 40px;  /* more padding top */
+    padding-bottom: 40px; /* more padding bottom */
+}
+
+.image-container {
+    max-height: 60vh;  /* smaller image height */
+    max-width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.image-container img {
+    max-width: 100%;
+    max-height: 100%;
+    display: block;
+    object-fit: contain;
+}

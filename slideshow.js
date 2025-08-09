@@ -39,3 +39,5 @@ detailsBtn.addEventListener("click", () => {
 
 // Initialize gallery on page load
 updateGallery();
+
+
