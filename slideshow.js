@@ -8,7 +8,6 @@ let currentIndex = 0;
 
 const galleryImage = document.getElementById("gallery-image");
 const pageCounter = document.getElementById("page-counter");
-
 const detailsBtn = document.getElementById("details-btn");
 const detailsText = document.getElementById("details-text");
 
@@ -37,7 +36,4 @@ detailsBtn.addEventListener("click", () => {
     }
 });
 
-// Initialize gallery on page load
 updateGallery();
-
-
