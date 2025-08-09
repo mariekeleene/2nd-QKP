@@ -1,5 +1,3 @@
-/* ---- SLIDESHOW STYLES ---- */
-
 @font-face {
     font-family: 'GapSansBold';
     src: url('fonts/GapSansBold.ttf') format('truetype');
@@ -14,47 +12,33 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 20px;  /* increase top padding */
+    padding: 20px 20px;
     position: relative;
     z-index: 10;
-    background: white;  /* to make sure it's visible on top */
+    background: white;
+    font-family: 'VagraPixel', Arial, sans-serif; /* Both texts same font */
+    font-size: 24px; /* Adjust font size if you want */
 }
 
-
 .product-title {
-    font-size: 18px;
-    font-family: 'GapSansBold', Arial, sans-serif;
-    flex: 1; /* pushes details to center */
+    /* Remove font-family here since top-bar sets it */
+    font-weight: normal;
 }
 
 .details {
-    font-size: 24px;
     cursor: pointer;
+}
+
+.close-btn {
+    cursor: pointer;
+    font-size: 24px;
     font-family: 'VagraPixel', Arial, sans-serif;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
     user-select: none;
 }
 
-/* Details slide down panel (hidden by default) */
-.details-panel {
-    overflow: hidden;
-    max-height: 0;
-    transition: max-height 0.5s ease, padding 0.5s ease;
-    background: #f0f0f0;
-    padding: 0 20px;
-    font-family: Arial, sans-serif;
-}
-
-.details-panel.open {
-    max-height: 200px; /* adjust as needed */
-    padding: 10px 20px;
-}
-
 .gallery {
-    padding-top: 60px;   /* add enough space to see top text */
-    padding-bottom: 40px; /* some bottom space */
+    padding-top: 40px;   /* reduced padding */
+    padding-bottom: 30px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -62,7 +46,6 @@
     max-width: 100%;
     height: 80vh;
 }
-
 
 .nav {
     background: none;
@@ -85,16 +68,18 @@
 }
 
 .image-container {
-    max-height: 70vh; /* reduce height for vertical space */
+    max-height: 100%;
     max-width: 90%;
     display: flex;
     align-items: center;
     justify-content: center;
+    padding-top: 20px;   /* less padding */
+    padding-bottom: 20px;
 }
 
 .image-container img {
     max-width: 100%;
-    max-height: calc(80vh - 100px); /* subtract padding to avoid overflow */
+    max-height: calc(80vh - 60px); /* adjust for smaller padding */
     display: block;
     object-fit: contain;
 }
