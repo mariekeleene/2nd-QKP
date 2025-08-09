@@ -24,7 +24,7 @@
 .details-text {
     display: none;
     width: 100%;
-    background: linear-gradient(90deg, #ffecd2, #f64105);
+    background: linear-gradient(90deg, #ffecd2, #fcb69f);
     padding: 20px;
     animation: fadeIn 0.3s ease;
     font-size: 14px;

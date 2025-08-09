@@ -23,36 +23,11 @@
     <a href="Screen.html" class="artwork-link">[ Screen Based Works - 2020 ]</a>
     <a href="Cow.html" class="artwork-link">[ Cow to 3d Printer - 2019 ]</a>
     <a href="Space.html" class="artwork-link">[ Space Waste book - 2019 ]</a>
+
+    <!-- Add more links up to 20 -->
 </div>
 
 <a href="artist.html" class="vertical-text">get to know more about the artist</a>
-
-<img src="images/kip1.jpeg" class="bouncing-img" id="bouncer">
-
-<script>
-    const bouncer = document.getElementById("bouncer");
-    let x = 50, y = 50;
-    let dx = 2, dy = 2;
-
-    function moveBouncer() {
-        const screenWidth = window.innerWidth - bouncer.clientWidth;
-        const screenHeight = window.innerHeight - bouncer.clientHeight;
-
-        x += dx;
-        y += dy;
-
-        if (x <= 0 || x >= screenWidth) dx *= -1;
-        if (y <= 0 || y >= screenHeight) dy *= -1;
-
-        bouncer.style.left = x + "px";
-        bouncer.style.top = y + "px";
-
-        requestAnimationFrame(moveBouncer);
-    }
-
-    bouncer.style.position = "fixed";
-    moveBouncer();
-</script>
 
 </body>
 </html>

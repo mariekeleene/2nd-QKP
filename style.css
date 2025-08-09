@@ -1,7 +1,6 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    overflow: hidden; /* so bouncing image doesn't cause scrollbars */
 }
 
 @font-face {
@@ -24,18 +23,21 @@ body {
 }
 
 .artwork-link {
-    font-family: 'GapSansBold' !important;
+    font-family: 'GapSansBold';
     font-size: 24px;
+    padding: 20px 0;
     text-decoration: none;
     color: black;
     display: block;
-    margin: 0; /* no space between links */
+    margin: 15px 0;
     animation: swing 3s ease-in-out infinite;
 }
 
+.container a:nth-child(n) { animation-delay: calc(0.3s * (var(--i))); }
+
 .artwork-link:hover {
-    font-family: 'VagraPixel' !important;
-    text-decoration: none; /* no underline */
+    font-family: 'VagraPixel';
+    text-decoration: underline;
 }
 
 @keyframes swing {
@@ -45,10 +47,10 @@ body {
 
 .vertical-text {
     position: fixed;
-    left: 0;
-    top: 50%;
-    transform: rotate(-90deg) translateY(-50%);
-    transform-origin: left center;
+    right: 20px;
+    bottom: 40px;
+    transform: rotate(-90deg);
+    transform-origin: bottom right;
     font-size: 14px;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -59,13 +61,5 @@ body {
 
 .vertical-text:hover {
     color: black;
-    font-family: 'VagraPixel' !important;
-}
-
-/* Bouncing image */
-.bouncing-img {
-    position: fixed;
-    width: 80px;
-    height: auto;
-    z-index: 20;
+    font-family: 'VagraPixel';
 }
