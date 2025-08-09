@@ -8,8 +8,11 @@ let currentIndex = 0;
 
 const galleryImage = document.getElementById("gallery-image");
 const pageCounter = document.getElementById("page-counter");
+
 const detailsBtn = document.getElementById("details-btn");
 const detailsText = document.getElementById("details-text");
+
+
 
 function updateGallery() {
     galleryImage.src = images[currentIndex];
@@ -26,13 +29,13 @@ document.querySelector(".next").addEventListener("click", () => {
     updateGallery();
 });
 
+
 detailsBtn.addEventListener("click", () => {
-    if (detailsText.style.display === "block") {
-        detailsText.style.display = "none";
-        detailsBtn.textContent = "Details +";
-    } else {
-        detailsText.style.display = "block";
+    detailsText.classList.toggle("show");
+    if (detailsText.classList.contains("show")) {
         detailsBtn.textContent = "Details -";
+    } else {
+        detailsBtn.textContent = "Details +";
     }
 });
 

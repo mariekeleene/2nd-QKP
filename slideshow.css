@@ -16,9 +16,9 @@ body {
 
 .top-bar {
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    padding: 15px 20px;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
     position: relative;
 }
 
@@ -34,6 +34,7 @@ body {
     align-items: flex-end;
 }
 
+/* Details button styling */
 .details {
     font-size: 24px;
     cursor: pointer;
@@ -44,11 +45,21 @@ body {
     font-family: 'VagraPixel';
 }
 
+/* Hidden details text initially */
 .details-text {
-    display: none;
-    max-width: 300px;
-    font-size: 14px;
-    margin-top: 5px;
+    max-height: 0;
+    overflow: hidden;
+    background: linear-gradient(90deg, #ffecd2, #fcb69f);
+    padding: 0 20px;
+    width: 100%;
+    box-sizing: border-box;
+    transition: max-height 0.4s ease, padding 0.4s ease;
+}
+
+/* Show details when toggled */
+.details-text.show {
+    max-height: 500px; /* enough space for content */
+    padding: 20px;
 }
 
 .close-btn {
