@@ -88,15 +88,20 @@
 /* Smaller image container */
 .image-container {
     max-height: 60vh;  /* smaller image */
-    max-width: 70%;    /* restrict width so arrows fit nicely */
+    max-width: 70%;
+    padding: 10px 0;   /* vertical padding */
     display: flex;
     align-items: center;
     justify-content: center;
+    box-sizing: border-box; /* make sure padding doesn’t add to size */
 }
+
 
 .image-container img {
     max-width: 100%;
     max-height: 100%;
+    padding: 0 10px;    /* horizontal padding inside image */
+    box-sizing: border-box;
     display: block;
     object-fit: contain;
 }
