@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Fountain For Golfers</title>
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="slideshow.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/slideshow.css" />
 </head>
 <body>
 
@@ -24,7 +24,7 @@
 <main class="gallery">
     <button class="nav prev">&#10094;</button>
     <div class="image-container">
-        <img id="gallery-image" src="" alt="Artwork" />
+        <img id="gallery-image" src="images/kip1.jpeg" alt="Artwork" />
     </div>
     <button class="nav next">&#10095;</button>
 </main>
@@ -34,4 +34,42 @@
 </footer>
 
 <script>
-    cons
+    // Array with image paths - confirm these exist in your 'images' folder
+    const images = [
+        "images/kip1.jpeg",
+        "images/rollade.jpeg",
+        "images/kotelet.jpeg"
+    ];
+
+    let currentIndex = 0;
+
+    function updateGallery() {
+        const imgElement = document.getElementById('gallery-image');
+        imgElement.src = images[currentIndex];
+        document.getElementById('page-counter').textContent = `${currentIndex + 1}/${images.length}`;
+    }
+
+    document.querySelector('.prev').addEventListener('click', () => {
+        currentIndex = (currentIndex - 1 + images.length) % images.length;
+        updateGallery();
+    });
+
+    document.querySelector('.next').addEventListener('click', () => {
+        currentIndex = (currentIndex + 1) % images.length;
+        updateGallery();
+    });
+
+    // Toggle details panel sliding down/up
+    const detailsBtn = document.querySelector('.details');
+    const detailsPanel = document.querySelector('.details-panel');
+
+    detailsBtn.addEventListener('click', () => {
+        detailsPanel.classList.toggle('open');
+    });
+
+    // Initialize the slideshow on page load
+    updateGallery();
+</script>
+
+</body>
+</html>
