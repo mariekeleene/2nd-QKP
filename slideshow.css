@@ -1,3 +1,4 @@
+/* Header */
 .top-bar {
     display: flex;
     align-items: center;
@@ -9,22 +10,25 @@
     box-sizing: border-box;
 }
 
-.close-btn {
-    font-size: 28px;
-    cursor: pointer;
-    user-select: none;
-    font-weight: bold;
-    color: black;
+/* Artwork title top-left corner, using VagraPixel */
+.artwork-title {
+    font-family: 'VagraPixel', Arial, sans-serif;
+    font-size: 18px;
+    font-weight: normal;
     white-space: nowrap;
-    flex-shrink: 0;
+    position: absolute;  /* absolutely position it top-left */
+    left: 10px;
+    top: 10px;
 }
 
+/* Center details container uses flex-grow to center properly */
 .details-container {
     position: relative;
     text-align: center;
     flex: 1;
 }
 
+/* Details + toggle styling */
 .details {
     font-size: 24px;
     cursor: pointer;
@@ -54,28 +58,21 @@
     white-space: normal;
 }
 
-.artwork-info {
-    float: left;
-    width: 130px;
-    margin-right: 12px;
-    font-size: 13px;
+/* Close X top-right */
+.close-btn {
+    font-size: 28px;
+    cursor: pointer;
+    user-select: none;
     font-weight: bold;
-    line-height: 1.3;
-    color: #555;
-}
-
-.artwork-title {
-    font-size: 18px;
-    font-weight: bold;
+    color: black;
     white-space: nowrap;
+    flex-shrink: 0;
+    position: absolute;
+    right: 10px;
+    top: 10px;
 }
 
-.details-text p {
-    margin: 0;
-    overflow: hidden;
-}
-
-/* Gallery */
+/* Gallery container - flex for arrows next to image */
 .gallery {
     display: flex;
     align-items: center;
@@ -83,13 +80,15 @@
     position: relative;
     max-width: 100%;
     height: auto;
-    padding-top: 40px;  /* more padding top */
-    padding-bottom: 40px; /* more padding bottom */
+    padding-top: 30px;    /* less padding top */
+    padding-bottom: 30px; /* less padding bottom */
+    gap: 10px; /* space between arrows and image */
 }
 
+/* Smaller image container */
 .image-container {
-    max-height: 60vh;  /* smaller image height */
-    max-width: 90%;
+    max-height: 60vh;  /* smaller image */
+    max-width: 70%;    /* restrict width so arrows fit nicely */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -100,4 +99,35 @@
     max-height: 100%;
     display: block;
     object-fit: contain;
+}
+
+/* Nav arrows styled as buttons */
+.nav {
+    background: none;
+    border: none;
+    font-size: 40px;
+    cursor: pointer;
+    color: black;
+    z-index: 5;
+    user-select: none;
+    padding: 0 10px;
+    height: 60vh;  /* match image height roughly */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Optional: make nav arrows slightly bigger on smaller screens */
+@media (max-width: 768px) {
+    .details {
+        font-size: 28px;
+    }
+    .nav {
+        font-size: 50px;
+        height: 50vh;
+    }
+    .gallery {
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
 }
