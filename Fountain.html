@@ -1,18 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Fountain For Golfers</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="slideshow.css">
-
-    <style>
-        body {
-            background: yellow !important;
-        }
-    </style>
-
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="slideshow.css" />
 </head>
 <body>
 
@@ -21,10 +14,17 @@
     <span class="details">Details +</span>
 </header>
 
+<div class="details-panel">
+    <p>
+        This fountain is designed especially for golfers, combining elegance with function.
+        Crafted from high-quality materials, it enhances any golf course or home.
+    </p>
+</div>
+
 <main class="gallery">
     <button class="nav prev">&#10094;</button>
     <div class="image-container">
-        <img id="gallery-image" src="" alt="Artwork">
+        <img id="gallery-image" src="" alt="Artwork" />
     </div>
     <button class="nav next">&#10095;</button>
 </main>
@@ -34,36 +34,4 @@
 </footer>
 
 <script>
-    // Array with only the image paths
-    const images = [
-        "images/kip1.jpeg",
-        "images/rollade.jpeg",
-        "images/kotelet.jpeg"
-    ];
-
-    let currentIndex = 0;
-
-    // Function to update the slideshow
-    function updateGallery() {
-        const imgElement = document.getElementById('gallery-image');
-        imgElement.src = images[currentIndex];
-        document.getElementById('page-counter').textContent = `${currentIndex + 1}/${images.length}`;
-    }
-
-    // Event listeners for arrows
-    document.querySelector('.prev').addEventListener('click', () => {
-        currentIndex = (currentIndex - 1 + images.length) % images.length;
-        updateGallery();
-    });
-
-    document.querySelector('.next').addEventListener('click', () => {
-        currentIndex = (currentIndex + 1) % images.length;
-        updateGallery();
-    });
-
-    // Initialize slideshow
-    updateGallery();
-</script>
-
-</body>
-</html>
+    cons
