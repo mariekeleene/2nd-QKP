@@ -102,3 +102,158 @@ body {
 .artwork-link.highlight {
     color: rgba(255, 255, 255, 0.74) !important; /* tekst wit */
 }
+
+
+
+/*-------*/
+
+.iconorchid {
+    width: 70px;
+    height: 100px;
+    position: absolute;
+    top: 60px;
+    left: 0px;
+    animation-duration: 360s;
+    animation-name: orchid;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+@keyframes orchid {
+    0% {
+        transform: rotate(180deg);
+        left: 10vw;
+        top: 10vw;
+    }
+
+    10% {
+        transform: rotate(180deg);
+        left: 80vw;
+        top: 10vw;
+    }
+
+    12% {
+        transform: rotate(180deg);
+        left: 80vw;
+        top: 14vw;
+    }
+
+    22% {
+        transform: rotate(180deg);
+        left: 10vw;
+        top: 14vw;
+    }
+
+    24% {
+        transform: rotate(180deg);
+        left: 10vw;
+        top: 18vw;
+    }
+
+    34% {
+        transform: rotate(180deg);
+        left: 80vw;
+        top: 18vw;
+    }
+
+    36% {
+        transform: rotate(180deg);
+        left: 80vw;
+        top: 22vw;
+    }
+
+    46% {
+        transform: rotate(180deg);
+        left: 10vw;
+        top: 22vw;
+    }
+
+    48% {
+        transform: rotate(180deg);
+        left: 10vw;
+        top: 26vw;
+    }
+
+    58% {
+        transform: rotate(180deg);
+        left: 80vw;
+        top: 26vw;
+    }
+
+    60% {
+        transform: rotate(180deg);
+        left: 10vw;
+        top: 30vw;
+    }
+
+    70% {
+        transform: rotate(90deg);
+        left: 10vw;
+        top: 10vw;
+    }
+
+    71% {
+        transform: rotate(0deg);
+        left: 5vw;
+        top: 5vw;
+    }
+
+    100% {
+        transform: rotate(180deg);
+        left: 10vw;
+        top: 10vw;
+    }
+}
+
+@keyframes roadhuis {
+    0% {
+        left: 0vw;
+        top: 10vw;
+    }
+
+    25% {
+        left: 45vw;
+        top: 23vw;
+    }
+
+    50% {
+        left: 80vw;
+        top: 50vw;
+    }
+
+    65% {
+        left: 60vw;
+        top: 15vw;
+    }
+
+    95% {
+        left: 45vw;
+        top: 45vw;
+    }
+
+    100% {
+        left: 0vw;
+        top: 10vw;
+    }
+}
+
+@keyframes milk {
+    0% {
+        transform: rotate(50deg);
+        left: 5vw;
+        top: 10vw;
+    }
+
+    50% {
+        transform: rotate(200deg);
+        left: 5vw;
+        top: 30vw;
+    }
+
+    100% {
+        transform: rotate(360deg);
+        left: 5vw;
+        top: 10vw;
+    }
+
+}
