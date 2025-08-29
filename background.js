@@ -5,7 +5,7 @@ canvas.height = window.innerHeight;
 
 // Afbeelding laden
 const img = new Image();
-img.src = "images/kip1.jpeg"; // pad naar kip-afbeelding
+img.src = "images/garnaal.png"; // pad naar kip-afbeelding
 
 // Startpositie en snelheid
 let x = 100, y = 100;
