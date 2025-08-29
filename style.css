@@ -80,3 +80,31 @@ body {
     color: #2200ff;
 }
 
+/* Canvas altijd op de achtergrond */
+#bgCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+/* Links in het midden */
+.container {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    font-size: 1.2rem;
+    gap: 0; /* geen ruimte ertussen */
+}
+
+.artwork-link {
+    text-decoration: none;
+    color: black; /* default zwart */
+    transition: color 0.3s;
+}
