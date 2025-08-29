@@ -27,10 +27,11 @@
 .details-text {
     max-height: 0;
     overflow: hidden;
-    background-color: #ffe6f0; /* light cute pink */
+    background-color: #ffffff;
     width: 100%;
     box-sizing: border-box;
     transition: max-height 0.4s ease, padding 0.4s ease;
+    font-family: 'GapSansBold', serif;
 }
 
 /* Show details section */
@@ -75,7 +76,7 @@
 
 .image-container img {
     max-width: 80vw;
-    height: auto;
+    height: 40vw;
 }
 
 .page-counter {
