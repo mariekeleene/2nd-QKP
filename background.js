@@ -1,55 +1,81 @@
 const canvas = document.getElementById("bgCanvas");
 const ctx = canvas.getContext("2d");
+
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-// Afbeelding laden
-const img = new Image();
-img.src = "images/garnaal.png"; // pad naar kip-afbeelding
+// meerdere afbeeldingen laden
+const imageSources = [
+    "images/kip1.jpeg",
+    "images/kip2.jpeg",
+    "images/kip3.jpeg"
+];
 
-// Startpositie en snelheid
-let x = 100, y = 100;
-let dx = 1, dy = 1;
-let imgWidth = 80, imgHeight = 80;
+const images = [];
+let loaded = 0;
 
-// Trail opslaan
-let trail = [];
+// preload alle afbeeldingen
+imageSources.forEach(src => {
+    const img = new Image();
+    img.src = src;
+    img.onload = () => {
+        loaded++;
+        if (loaded === imageSources.length) startAnimation();
+    };
+    images.push(img);
+});
 
-// Tekenen van de afbeelding en trail
-function draw() {
-    // oude posities opslaan voor de trail
-    trail.push({ x, y });
+let x = 100;
+let y = 100;
+let dx = 1;
+let dy = 1;
 
-    // trail beperkt houden (optioneel → stel lengte in)
-    if (trail.length > 200) {
-        trail.shift();
+const trail = []; // blijft gewoon oneindig groeien
+const spacing = 40;
+let frameCounter = 0;
+
+let currentImage = 0;
+let imageSwitchCounter = 0;
+const switchEvery = 500; // om de 500 frames wisselen
+
+function startAnimation() {
+    function animate() {
+        // GEEN clearRect meer → oude kipjes blijven staan
+
+        // positie update
+        x += dx;
+        y += dy;
+
+        // botsen tegen de randen
+        if (x + 80 > canvas.width || x < 0) dx *= -1;
+        if (y + 80 > canvas.height || y < 0) dy *= -1;
+
+        frameCounter++;
+        imageSwitchCounter++;
+
+        // voeg kipje toe
+        if (frameCounter % spacing === 0) {
+            trail.push({ x, y, img: images[currentImage] });
+        }
+
+        // teken alle kipjes (blijven voor altijd zichtbaar)
+        trail.forEach(pos => {
+            ctx.drawImage(pos.img, pos.x, pos.y, 80, 80);
+        });
+
+        // teken huidige bewegende kip
+        ctx.drawImage(images[currentImage], x, y, 80, 80);
+
+        // wissel afbeelding na een tijdje
+        if (imageSwitchCounter >= switchEvery) {
+            currentImage = (currentImage + 1) % images.length;
+            imageSwitchCounter = 0;
+        }
+
+        requestAnimationFrame(animate);
     }
 
-    // Trail tekenen (blijft zichtbaar, geen fade)
-    trail.forEach(pos => {
-        ctx.drawImage(img, pos.x, pos.y, imgWidth, imgHeight);
-    });
-
-    // huidige positie tekenen
-    ctx.drawImage(img, x, y, imgWidth, imgHeight);
-}
-
-// Animatie loop
-function animate() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    // positie bijwerken
-    x += dx;
-    y += dy;
-
-    // bounce check
-    if (x + imgWidth > canvas.width || x < 0) dx *= -1;
-    if (y + imgHeight > canvas.height || y < 0) dy *= -1;
-
-    draw();
-    checkCollision();
-
-    requestAnimationFrame(animate);
+    animate();
 }
 
 // Collision check met tekst
@@ -87,4 +113,4 @@ window.addEventListener("resize", () => {
     canvas.height = window.innerHeight;
 });
 
-img.onload = animate;
+// img.onload = animate;
