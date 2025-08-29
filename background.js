@@ -9,7 +9,7 @@ img.src = "images/garnaal.png"; // pad naar kip-afbeelding
 
 // Startpositie en snelheid
 let x = 100, y = 100;
-let dx = 2, dy = 2;
+let dx = 1, dy = 1;
 let imgWidth = 80, imgHeight = 80;
 
 // Trail opslaan
