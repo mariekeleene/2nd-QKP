@@ -1,51 +1,90 @@
 const canvas = document.getElementById("bgCanvas");
 const ctx = canvas.getContext("2d");
-
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-let img = new Image();
-img.src = "images/kip1.jpeg"; // <-- vervang door jouw afbeelding
+// Afbeelding laden
+const img = new Image();
+img.src = "images/kip1.jpeg"; // pad naar kip-afbeelding
 
-let x = 100, y = 100;   // startpositie
-let dx = 3, dy = 2;     // snelheid
-let imgWidth = 120, imgHeight = 120;
+// Startpositie en snelheid
+let x = 100, y = 100;
+let dx = 2, dy = 2;
+let imgWidth = 80, imgHeight = 80;
 
-// Animation loop
-function animate() {
-    // ❌ geen ctx.fillRect meer → trail blijft zichtbaar
+// Trail opslaan
+let trail = [];
+
+// Tekenen van de afbeelding en trail
+function draw() {
+    // oude posities opslaan voor de trail
+    trail.push({ x, y });
+
+    // trail beperkt houden (optioneel → stel lengte in)
+    if (trail.length > 200) {
+        trail.shift();
+    }
+
+    // Trail tekenen (blijft zichtbaar, geen fade)
+    trail.forEach(pos => {
+        ctx.drawImage(img, pos.x, pos.y, imgWidth, imgHeight);
+    });
+
+    // huidige positie tekenen
     ctx.drawImage(img, x, y, imgWidth, imgHeight);
+}
 
+// Animatie loop
+function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // positie bijwerken
     x += dx;
     y += dy;
 
-    // bounce tegen de randen
-    if (x + imgWidth > canvas.width || x < 0) dx = -dx;
-    if (y + imgHeight > canvas.height || y < 0) dy = -dy;
+    // bounce check
+    if (x + imgWidth > canvas.width || x < 0) dx *= -1;
+    if (y + imgHeight > canvas.height || y < 0) dy *= -1;
+
+    draw();
+    checkCollision();
 
     requestAnimationFrame(animate);
 }
 
-img.onload = () => {
-    animate();
-};
+// Collision check met tekst
+function checkCollision() {
+    const links = document.querySelectorAll(".artwork-link");
 
-// Tekstkleur aanpassen afhankelijk van vulling
-function updateTextColor() {
-    const imageData = ctx.getImageData(canvas.width/2, canvas.height/2, 1, 1);
-    const [r, g, b] = imageData.data;
-    const brightness = (r*0.299 + g*0.587 + b*0.114);
+    links.forEach(link => {
+        const rect = link.getBoundingClientRect();
 
-    document.querySelectorAll(".artwork-link").forEach(link => {
-        link.style.color = (brightness < 128) ? "white" : "black";
+        // afbeelding-rect in viewport coördinaten
+        const imgRect = {
+            left: x,
+            right: x + imgWidth,
+            top: y,
+            bottom: y + imgHeight
+        };
+
+        // overlap berekenen
+        const overlap = !(imgRect.right < rect.left ||
+            imgRect.left > rect.right ||
+            imgRect.bottom < rect.top ||
+            imgRect.top > rect.bottom);
+
+        if (overlap) {
+            link.classList.add("highlight");
+        } else {
+            link.classList.remove("highlight");
+        }
     });
-
-    requestAnimationFrame(updateTextColor);
 }
-updateTextColor();
 
-// Resize fix
+// Herbereken canvas bij resize
 window.addEventListener("resize", () => {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 });
+
+img.onload = animate;
