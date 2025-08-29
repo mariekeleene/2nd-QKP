@@ -23,7 +23,7 @@ body {
 }
 
 .artwork-link {
-    font-family: 'GapSansBold';
+    font-family: 'GapSansBold', serif;
     font-size: 24px;
     padding: 20px 0;
     text-decoration: none;
@@ -36,7 +36,7 @@ body {
 .container a:nth-child(n) { animation-delay: calc(0.3s * (var(--i))); }
 
 .artwork-link:hover {
-    font-family: 'VagraPixel';
+    font-family: 'VagraPixel', serif;;
     text-decoration: underline;
 }
 
@@ -61,7 +61,7 @@ body {
 
 .vertical-text:hover {
     color: black;
-    font-family: 'VagraPixel';
+    font-family: 'VagraPixel', serif;
 }
 
 .close-btn {

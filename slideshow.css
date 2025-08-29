@@ -5,7 +5,7 @@
     align-items: center;
     padding: 15px;
     position: relative;
-    font-family: 'GapSansBold';
+    font-family: 'GapSansBold', serif;
 }
 
 .product-title {
@@ -20,7 +20,7 @@
 }
 
 .details:hover {
-    font-family: 'VagraPixel';
+    font-family: 'VagraPixel', serif;
 }
 
 /* Hidden details section */
