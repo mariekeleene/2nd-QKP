@@ -63,3 +63,20 @@ body {
     color: black;
     font-family: 'VagraPixel';
 }
+
+.close-btn {
+    position: fixed;
+    top: 15px;
+    right: 20px;
+    font-size: 32px;
+    font-weight: bold;
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+    z-index: 1000;
+}
+
+.close-btn:hover {
+    color: #2200ff;
+}
+
