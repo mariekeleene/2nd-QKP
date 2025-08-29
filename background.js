@@ -6,9 +6,9 @@ canvas.height = window.innerHeight;
 
 // meerdere afbeeldingen laden
 const imageSources = [
-    "images/kip1.jpeg",
-    "images/kip2.jpeg",
-    "images/kip3.jpeg"
+    "images/garnaal.png",
+    "images/krab.png",
+    "images/fiets.png"
 ];
 
 const images = [];
