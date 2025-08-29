@@ -31,7 +31,6 @@
     width: 100%;
     box-sizing: border-box;
     transition: max-height 0.4s ease, padding 0.4s ease;
-    font-family: 'GapSansBold', serif;
 }
 
 /* Show details section */
@@ -44,18 +43,18 @@
 .details-content {
     display: flex;
     justify-content: space-between;
-    gap: 20px;
-    padding: 0 40px;
+    gap: 10px;
+    padding: 0 30px;
 }
 
 .details-left {
     flex: 1;
-    font-family: Arial, sans-serif;
+    font-family: 'GapSansBold', serif;
 }
 
 .details-right {
     flex: 2;
-    font-family: Arial, sans-serif;
+    font-family: 'GapSansBold', serif;
 }
 
 /* Slideshow arrows beside image */
