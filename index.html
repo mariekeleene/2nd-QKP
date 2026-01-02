@@ -9,98 +9,110 @@
             margin: 0;
             padding: 0;
             height: 100%;
-            font-family: Arial, sans-serif;
         }
 
         body {
             display: flex;
             justify-content: center;
             align-items: center;
-            background-size: cover;
-            background-position: center;
-            transition: background-image 1s ease-in-out;
+            background: #000; /* hier kan later je slideshow */
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
         }
 
-        .menu-container {
+        /* Container */
+        .dropdown-wrapper {
             position: relative;
-            text-align: center;
         }
 
-        .menu-button {
-            padding: 15px 30px;
-            font-size: 18px;
+        /* Onderste klikbare label */
+        .dropdown-trigger {
+            padding: 6px 14px;
+            font-size: 14px;
+            background: #e6e6e6;
+            border-radius: 6px;
             cursor: pointer;
-            background: rgba(255,255,255,0.85);
-            border: none;
-            border-radius: 8px;
+            user-select: none;
         }
 
-        .menu-list {
+        /* Menu zelf */
+        .dropdown-menu {
             position: absolute;
-            top: 100%;
+            top: -10px;
             left: 50%;
             transform: translateX(-50%);
-            margin-top: 10px;
-            width: 200px;
+            width: 220px;
+
+            background: #f1dbe5;
+            border-radius: 16px;
+            padding: 10px 0;
+
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+
             max-height: 0;
             overflow: hidden;
-            background: rgba(255,255,255,0.9);
-            border-radius: 8px;
-            transition: max-height 0.4s ease;
+            opacity: 0;
+
+            transition: max-height 0.4s ease, opacity 0.3s ease;
         }
 
-        .menu-list.open {
-            max-height: 300px;
+        /* Open toestand */
+        .dropdown-menu.open {
+            max-height: 420px;
+            opacity: 1;
         }
 
-        .menu-list a {
-            display: block;
-            padding: 12px;
-            text-decoration: none;
-            color: black;
-            border-bottom: 1px solid #ddd;
+        /* Items */
+        .item {
+            padding: 8px 18px;
+            font-size: 15px;
+            color: #111;
+            cursor: pointer;
+            white-space: nowrap;
         }
 
-        .menu-list a:hover {
-            background: #f0f0f0;
+        .item:hover {
+            background: rgba(255,255,255,0.4);
+        }
+
+        /* Actieve selectie */
+        .item.active {
+            background: #ec5a8c;
+            color: white;
+            font-weight: 500;
+            border-radius: 12px;
+            margin: 4px 10px;
         }
     </style>
 </head>
 
 <body>
 
-<div class="menu-container">
-    <button class="menu-button" onclick="toggleMenu()">Open projecten</button>
-    <div class="menu-list" id="menu">
-        <a href="#">Project 1</a>
-        <a href="#">Project 2</a>
-        <a href="#">Project 3</a>
-        <a href="#">Project 4</a>
+<div class="dropdown-wrapper">
+    <div class="dropdown-trigger" onclick="toggleMenu()">
+        striped penis
+    </div>
+
+    <div class="dropdown-menu" id="menu">
+        <div class="item">browse me</div>
+        <div class="item">m.org.ue</div>
+        <div class="item">7 songs</div>
+        <div class="item">dead fly</div>
+        <div class="item">Lullaby</div>
+        <div class="item">cat</div>
+        <div class="item">Flesh&amp;Blood</div>
+        <div class="item active">✓ striped penis</div>
+        <div class="item">I love mouchette</div>
+        <div class="item">dummy</div>
+        <div class="item">My Shop</div>
+        <div class="item">About Me</div>
+        <div class="item">paintings</div>
     </div>
 </div>
 
 <script>
-    // Dropdown openen/sluiten
     function toggleMenu() {
         document.getElementById("menu").classList.toggle("open");
     }
-
-    // Achtergrond slideshow
-    const images = [
-        "img/bg1.jpg",
-        "img/bg2.jpg",
-        "img/bg3.jpg"
-    ];
-
-    let index = 0;
-
-    function changeBackground() {
-        document.body.style.backgroundImage = `url(${images[index]})`;
-        index = (index + 1) % images.length;
-    }
-
-    changeBackground();
-    setInterval(changeBackground, 5000); // elke 5 seconden
 </script>
 
 </body>
