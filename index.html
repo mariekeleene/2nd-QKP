@@ -15,26 +15,42 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: #000; /* hier kan later je slideshow */
+            background-size: cover;
+            background-position: center;
+            transition: background-image 1s ease-in-out;
             font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
         }
 
-        /* Container */
+        /* Wrapper */
         .dropdown-wrapper {
             position: relative;
         }
 
-        /* Onderste klikbare label */
+        /* Trigger */
         .dropdown-trigger {
-            padding: 6px 14px;
+            padding: 6px 12px;
             font-size: 14px;
             background: #e6e6e6;
             border-radius: 6px;
             cursor: pointer;
             user-select: none;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
 
-        /* Menu zelf */
+        /* Arrow */
+        .arrow {
+            font-size: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        /* Arrow rotate */
+        .dropdown-wrapper.open .arrow {
+            transform: rotate(180deg);
+        }
+
+        /* Menu */
         .dropdown-menu {
             position: absolute;
             top: -10px;
@@ -46,27 +62,36 @@
             border-radius: 16px;
             padding: 10px 0;
 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
 
             max-height: 0;
-            overflow: hidden;
+            overflow-y: auto;
             opacity: 0;
 
             transition: max-height 0.4s ease, opacity 0.3s ease;
         }
 
-        /* Open toestand */
-        .dropdown-menu.open {
+        /* Hide scrollbar */
+        .dropdown-menu::-webkit-scrollbar {
+            width: 0;
+        }
+        .dropdown-menu {
+            scrollbar-width: none;
+        }
+
+        /* Open */
+        .dropdown-wrapper.open .dropdown-menu {
             max-height: 420px;
             opacity: 1;
         }
 
         /* Items */
         .item {
+            display: block;
             padding: 8px 18px;
             font-size: 15px;
             color: #111;
-            cursor: pointer;
+            text-decoration: none;
             white-space: nowrap;
         }
 
@@ -74,7 +99,7 @@
             background: rgba(255,255,255,0.4);
         }
 
-        /* Actieve selectie */
+        /* Active */
         .item.active {
             background: #ec5a8c;
             color: white;
@@ -87,34 +112,59 @@
 
 <body>
 
-<div class="dropdown-wrapper">
-    <div class="dropdown-trigger" onclick="toggleMenu()">
-        Open
+<div class="dropdown-wrapper" id="dropdown">
+    <div class="dropdown-trigger" id="trigger">
+        striped penis
+        <span class="arrow">▼</span>
     </div>
 
-    <div class="dropdown-menu" id="menu">
-        <div class="item">Concrete Lover</div>
-        <div class="item">Cow to 3D Printer</div>
-        <div class="item">Fountain for Golfers</div>
-        <div class="item">Gezellig/ Ongezellig</div>
-        <div class="item">Immigration Celebration</div>
-        <div class="item">Let's Keep it Gezellig</div>
-        <div class="item">Prazer em Conhecerte</div>
-        <div class="item active">✓ Open</div>
-        <div class="item">Screen Based Works</div>
-        <div class="item">Space Waste</div>
-        <div class="item">Stills</div>
-        <div class="item">These Where All My Clothes</div>
-        <div class="item">We Need Forests But Not This One</div>
-        <div class="item">And It Might Not Be True</div>
-        <div class="item">Here We Are, Now Entertain Us</div>
+    <div class="dropdown-menu">
+        <a href="browse.html" class="item">browse me</a>
+        <a href="orgue.html" class="item">m.org.ue</a>
+        <a href="songs.html" class="item">7 songs</a>
+        <a href="dead-fly.html" class="item">dead fly</a>
+        <a href="lullaby.html" class="item">Lullaby</a>
+        <a href="cat.html" class="item">cat</a>
+        <a href="flesh-blood.html" class="item">Flesh&amp;Blood</a>
+        <a href="striped-penis.html" class="item active">✓ striped penis</a>
+        <a href="mouchette.html" class="item">I love mouchette</a>
+        <a href="dummy.html" class="item">dummy</a>
+        <a href="shop.html" class="item">My Shop</a>
+        <a href="about.html" class="item">About Me</a>
+        <a href="paintings.html" class="item">paintings</a>
     </div>
 </div>
 
 <script>
-    function toggleMenu() {
-        document.getElementById("menu").classList.toggle("open");
+    /* Dropdown toggle */
+    const dropdown = document.getElementById("dropdown");
+    const trigger = document.getElementById("trigger");
+
+    trigger.addEventListener("click", (e) => {
+        e.stopPropagation();
+        dropdown.classList.toggle("open");
+    });
+
+    /* Close when clicking outside */
+    document.addEventListener("click", () => {
+        dropdown.classList.remove("open");
+    });
+
+    /* Background slideshow */
+    const images = [
+        "img/bg1.jpg",
+        "img/bg2.jpg",
+        "img/bg3.jpg"
+    ];
+
+    let i = 0;
+    function changeBackground() {
+        document.body.style.backgroundImage = `url(${images[i]})`;
+        i = (i + 1) % images.length;
     }
+
+    changeBackground();
+    setInterval(changeBackground, 6000); // elke 6 seconden
 </script>
 
 </body>
