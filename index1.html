@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Marieke Leene2222</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            overflow-y: scroll; /* always show vertical scrollbar */
+            position: relative;
+            min-height: 100vh;
+
+        }
+
+        .container {
+            position: relative;
+            max-width: 600px;
+            margin: 40px auto;
+            padding-bottom: 100px; /* space so last link isn't hidden behind vertical text */
+            z-index: 10;
+        }
+
+        .artwork-link {
+            display: block;
+            margin: 20px 0;
+            font-size: 1.2rem;
+            text-decoration: none;
+            color: black;
+            transition: font-family 0.3s ease;
+            cursor: pointer;
+        }
+
+        .artwork-link:hover {
+            font-family: 'Courier New', Courier, monospace;
+            color: #444;
+        }
+
+        .vertical-text {
+            position: fixed;
+            right: 10px;
+            bottom: 20px;
+            writing-mode: vertical-rl;
+            transform: rotate(180deg);
+            font-weight: bold;
+            cursor: pointer;
+            user-select: none;
+            font-size: 1rem;
+            color: #333;
+        }
+    </style>
+</head>
+
+<canvas id="bgCanvas"></canvas>
+<body>
+
+<div class="container">
+    <a href="Fountain.html" class="artwork-link">[ Fountain For Golfers - 2025 ]</a>
+    <a href="Concrete.html" class="artwork-link">[ Concrete Lover - 2025 ]</a>
+    <a href="Hard.html" class="artwork-link">[ Hard Working Artists - 2024 ]</a>
+    <a href="Immigration.html" class="artwork-link">[ Immigration Celebration/ Welcome Home - 2024 ]</a>
+    <a href="Stills.html" class="artwork-link">[ Stills in Jelsa - 2024 ]</a>
+    <a href="7.html" class="artwork-link">[ 7 Trees - 2023 ]</a>
+    <a href="We.html" class="artwork-link">[ We Need Forests But Not This One - 2023 ]</a>
+    <a href="Prazer.html" class="artwork-link">[ Prazer em Conhecer-te - 2023 ]</a>
+    <a href="Lets.html" class="artwork-link">[ Lets Keep It Gezellig - 2022 ]</a>
+    <a href="These.html" class="artwork-link">[ These Were All My Clothes - 2021/2022 ]</a>
+    <a href="Gezellig.html" class="artwork-link">[ Gezellig / Ongezellig - 2020 ]</a>
+    <a href="Screen.html" class="artwork-link">[ Screen Based Works - 2020 ]</a>
+    <a href="Cow.html" class="artwork-link">[ Cow to 3d Printer - 2019 ]</a>
+    <a href="Space.html" class="artwork-link">[ Space Waste book - 2019 ]</a>
+
+    <!-- Add more links up to 20 -->
+</div>
+
+<a href="artist.html" class="vertical-text">get to know more about the artist</a>
+<script src="background.js"></script>
+</body>
+</html>
