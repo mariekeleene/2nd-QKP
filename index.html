@@ -11,17 +11,16 @@
             height: 100%;
         }
 
+        /* Body als achtergrond */
         body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            position: relative;
             background-size: cover;
             background-position: center;
             transition: background-image 1s ease-in-out;
             font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
         }
 
-        /* Wrapper */
+        /* Wrapper op 25% hoogte */
         .dropdown-wrapper {
             position: absolute;
             top: 25%;
@@ -29,19 +28,19 @@
             transform: translateX(-50%);
         }
 
-        /* Trigger */
-            .dropdown-trigger {
-                width: 220px;
-                padding: 8px 14px;
-                font-size: 14px;
-                background: #e6e6e6;
-                border-radius: 6px;
-                cursor: pointer;
-                user-select: none;
+        /* Toggle / trigger — ZELFDE BREEDTE ALS MENU */
+        .dropdown-trigger {
+            width: 220px;
+            padding: 8px 14px;
+            font-size: 14px;
+            background: #e6e6e6;
+            border-radius: 6px;
+            cursor: pointer;
+            user-select: none;
 
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
 
         /* Arrow */
@@ -55,10 +54,10 @@
             transform: rotate(180deg);
         }
 
-        /* Menu */
+        /* Menu – opent onder toggle */
         .dropdown-menu {
             position: absolute;
-            top: 100%;          /* direct onder trigger */
+            top: 100%;
             left: 50%;
             transform: translateX(-50%);
             margin-top: 6px;
@@ -66,6 +65,8 @@
             width: 220px;
             background: #f1dbe5;
             border-radius: 16px;
+
+            /* MEER RUIMTE BINNEN */
             padding: 14px 0;
 
             box-shadow: 0 10px 30px rgba(0,0,0,0.25);
@@ -75,10 +76,9 @@
             opacity: 0;
 
             transition: max-height 0.4s ease, opacity 0.3s ease;
-
         }
 
-        /* Hide scrollbar */
+        /* Scrollbar verbergen */
         .dropdown-menu::-webkit-scrollbar {
             width: 0;
         }
@@ -88,11 +88,11 @@
 
         /* Open */
         .dropdown-wrapper.open .dropdown-menu {
-            max-height: 420px;
+            max-height: 440px;
             opacity: 1;
         }
 
-        /* Items */
+        /* Items — LOSER, MEER LUCHT */
         .item {
             display: block;
 
@@ -107,11 +107,12 @@
             white-space: nowrap;
         }
 
+        /* Hover */
         .item:hover {
             background: rgba(255,255,255,0.4);
         }
 
-        /* Active */
+        /* Active item */
         .item.active {
             background: #ec5a8c;
             color: white;
@@ -129,7 +130,7 @@
 
 <div class="dropdown-wrapper" id="dropdown">
     <div class="dropdown-trigger" id="trigger">
-        Open
+        <span>striped penis</span>
         <span class="arrow">▼</span>
     </div>
 
@@ -165,7 +166,7 @@
 </div>
 
 <script>
-    /* Dropdown toggle */
+    /* Toggle */
     const dropdown = document.getElementById("dropdown");
     const trigger = document.getElementById("trigger");
 
@@ -174,16 +175,16 @@
         dropdown.classList.toggle("open");
     });
 
-    /* Close when clicking outside */
+    /* Close on outside click */
     document.addEventListener("click", () => {
         dropdown.classList.remove("open");
     });
 
     /* Background slideshow */
     const images = [
-        "img/aberta.jpeg",
-        "img/fontein.jpeg",
-        "img/garnaal.png"
+        "img/bg1.jpg",
+        "img/bg2.jpg",
+        "img/bg3.jpg"
     ];
 
     let i = 0;
@@ -193,7 +194,7 @@
     }
 
     changeBackground();
-    setInterval(changeBackground, 6000); // elke 6 seconden
+    setInterval(changeBackground, 6000);
 </script>
 
 </body>
