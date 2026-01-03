@@ -30,16 +30,18 @@
         }
 
         /* Trigger */
-        .dropdown-trigger {
-            padding: 6px 12px;
-            font-size: 14px;
-            background: #e6e6e6;
-            border-radius: 6px;
-            cursor: pointer;
-            user-select: none;
-            display: flex;
-            align-items: center;
-            gap: 25px;
+            .dropdown-trigger {
+                width: 220px;
+                padding: 8px 14px;
+                font-size: 14px;
+                background: #e6e6e6;
+                border-radius: 6px;
+                cursor: pointer;
+                user-select: none;
+
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
         }
 
         /* Arrow */
@@ -64,7 +66,7 @@
             width: 220px;
             background: #f1dbe5;
             border-radius: 16px;
-            padding: 10px 0;
+            padding: 14px 0;
 
             box-shadow: 0 10px 30px rgba(0,0,0,0.25);
 
@@ -73,6 +75,7 @@
             opacity: 0;
 
             transition: max-height 0.4s ease, opacity 0.3s ease;
+
         }
 
         /* Hide scrollbar */
@@ -92,8 +95,13 @@
         /* Items */
         .item {
             display: block;
-            padding: 8px 18px;
+
+            /* meer afstand van borders */
+            padding: 10px 22px;
+
             font-size: 15px;
+            line-height: 1.6;   /* MEER REGELAFSTAND */
+
             color: #111;
             text-decoration: none;
             white-space: nowrap;
@@ -108,8 +116,11 @@
             background: #ec5a8c;
             color: white;
             font-weight: 500;
+
             border-radius: 12px;
-            margin: 4px 10px;
+
+            /* extra marge zodat hij "zweeft" */
+            margin: 6px 14px;
         }
     </style>
 </head>
