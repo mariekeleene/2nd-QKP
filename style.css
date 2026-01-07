@@ -121,6 +121,25 @@ body {
     color: rgba(255, 255, 255, 0.74) !important;
 }
 
+/* Footer styling */
+.site-footer {
+    text-align: center;       /* Center the text */
+    padding: 12px 0;          /* Space above and below */
+    font-size: 14px;          /* Small, neat text */
+    color: #555;              /* Gray text color */
+    background-color: rgba(255,255,255,0.8); /* Light background */
+    position: relative;       /* Normal positioning */
+}
+
+/* Optional: adjust on small screens */
+@media (max-width: 480px) {
+    .site-footer {
+        font-size: 12px;
+        padding: 10px 0;
+    }
+}
+
+
 /* ===============================
    FLOATING ICON
    =============================== */
