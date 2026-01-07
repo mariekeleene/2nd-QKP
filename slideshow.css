@@ -1,0 +1,86 @@
+/* Top bar */
+.top-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    position: relative;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+
+}
+
+.product-title {
+    position: absolute;
+    left: 28px;
+    font-size: 22px;
+}
+
+.details {
+    font-size: 60px;
+    cursor: pointer;
+}
+
+.details:hover {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Hidden details section */
+.details-text {
+    max-height: 0;
+    overflow: hidden;
+    background-color: #ffffff;
+    width: 100%;
+    box-sizing: border-box;
+    transition: max-height 0.4s ease, padding 0.4s ease;
+}
+
+/* Show details section */
+.details-text.show {
+    max-height: 500px;
+    padding: 20px 0;
+}
+
+/* Layout for details content */
+.details-content {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 0 30px;
+}
+
+.details-left {
+    flex: 1;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.details-right {
+    flex: 2;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Slideshow arrows beside image */
+.gallery {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    padding: 30px 0;
+}
+
+.nav {
+    background: none;
+    border: none;
+    font-size: 32px;
+    cursor: pointer;
+}
+
+.image-container img {
+    max-width: 80vw;
+    height: 40vw;
+}
+
+.page-counter {
+    text-align: center;
+    margin-top: 10px;
+    font-family: Arial, sans-serif;
+}

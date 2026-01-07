@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+
+    <!-- IMPORTANT FOR MOBILE -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Homepage</title>
+
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+
+        body {
+            position: relative;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            transition: background-image 1s ease-in-out;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Wrapper */
+        .dropdown-wrapper {
+            position: absolute;
+            top: 25%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 260px;
+        }
+
+        /* Trigger */
+        .dropdown-trigger {
+            width: 100%;
+            padding: 12px 16px;            /* bigger touch area */
+            font-size: 15px;
+            background: #e6e6e6;
+            border-radius: 8px;
+            cursor: pointer;
+            user-select: none;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .arrow {
+            font-size: 12px;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown-wrapper.open .arrow {
+            transform: rotate(180deg);
+        }
+
+        /* Menu */
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-top: 8px;
+
+            width: 100%;
+            max-width: 280px;
+
+            background: #e6e6e6;
+            border-radius: 8px;
+            padding: 14px 0;
+
+            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+
+            max-height: 0;
+            overflow-y: auto;
+            opacity: 0;
+
+            transition: max-height 0.4s ease, opacity 0.3s ease;
+        }
+
+        /* Scrollbar hidden */
+        .dropdown-menu::-webkit-scrollbar {
+            width: 0;
+        }
+        .dropdown-menu {
+            scrollbar-width: none;
+        }
+
+        .dropdown-wrapper.open .dropdown-menu {
+            max-height: 70vh;   /* mobile-friendly */
+            opacity: 1;
+        }
+
+        /* Items */
+        .item {
+            display: block;
+            padding: 12px 28px;
+            font-size: 15px;
+            line-height: 1.4;
+            color: #111;
+            text-decoration: none;
+            white-space: normal;   /* allow wrapping on mobile */
+        }
+
+        .item:hover {
+            background: #fff;
+        }
+
+        .item.active {
+            background: #ff6ec0;
+            color: #fff;
+            font-weight: 500;
+            border-radius: 6px;
+            margin: 6px 14px;
+        }
+
+        /* -------- MOBILE TWEAKS -------- */
+        @media (max-width: 480px) {
+            .dropdown-wrapper {
+                top: 20%;
+            }
+
+            .dropdown-trigger {
+                font-size: 16px;
+            }
+
+            .item {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="dropdown-wrapper" id="dropdown">
+    <div class="dropdown-trigger" id="trigger">
+        <span>Open</span>
+        <span class="arrow">▼</span>
+    </div>
+
+    <div class="dropdown-menu">
+        <a href="Fountain.html" class="item">Fountain for Golfers</a>
+        <a href="Concrete.html" class="item">Concrete Lover</a>
+        <a href="7.html" class="item">7 Trees</a>
+        <a href="Hard.html" class="item">Hard Working Artists</a>
+        <a href="Immigration.html" class="item">Immigration Celebration / Welcome Home</a>
+        <a href="Stills.html" class="item">Stills from Jelsa</a>
+        <a href="We.html" class="item">WNFBNTO</a>
+        <a href="index.html" class="item active">✓ Open</a>
+        <a href="Prazer.html" class="item">Prazer em Conhecer-te</a>
+        <a href="Lets.html" class="item">Let's Keep It Gezellig</a>
+        <a href="These.html" class="item">These Were All My Clothes</a>
+        <a href="artist.html" class="item">About Me</a>
+        <a href="Gezellig.html" class="item">Gezellig / Ongezellig</a>
+        <a href="Screen.html" class="item">Screen Based Works</a>
+        <a href="Cow.html" class="item">Cow to 3D Printer</a>
+        <a href="Space.html" class="item">Space Waste book</a>
+    </div>
+</div>
+
+<script>
+    const dropdown = document.getElementById("dropdown");
+    const trigger = document.getElementById("trigger");
+
+    trigger.addEventListener("click", (e) => {
+        e.stopPropagation();
+        dropdown.classList.toggle("open");
+    });
+
+    document.addEventListener("click", () => {
+        dropdown.classList.remove("open");
+    });
+
+    const images = [
+        "images/lift.jpeg",
+        "images/achtergrond50.jpg"
+    ];
+
+    let i = 0;
+    function changeBackground() {
+        document.body.style.backgroundImage = `url(${images[i]})`;
+        i = (i + 1) % images.length;
+    }
+
+    changeBackground();
+    setInterval(changeBackground, 6000);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        html, body {
+            margin: 0;
+        }
+
+        body {
+            background-color: #0600ff;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .background{
+            height: 100vh;
+            width: 100vw;
+            z-index: -1;
+            position: fixed;
+        }
+
+        .orchidee {
+            height: 60px;
+            width: 60px;
+            position: fixed;
+            animation-duration: 10s;
+            animation-name: orchidee;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+            cursor: pointer;
+        }
+
+        .orchidee > a > img {
+            width: 120px;
+            height: 150px;
+        }
+
+        @keyframes orchidee {
+            0% {
+                top: 0vw;
+                left: 50vw;
+            }
+            10% {
+                top: 20vw;
+            }
+            12% {
+                top: 18vw;
+            }
+            15% {
+                top: 20vw;
+            }
+            25% {
+                top: 30vw;
+            }
+            30% {
+                transform: rotate(-80deg);
+                top: 40vw;
+            }
+            35% {
+                transform: rotate(-180deg);
+                top: 30vw;
+            }
+            50% {
+                transform: rotate(-180deg);
+                top: 35vw;
+            }
+            60% {
+                transform: rotate(-300deg);
+                top: 20vw;
+            }
+            65% {
+                transform: rotate(-360deg);
+                top: 80vw;
+            }
+            80% {
+                transform: rotate(-360deg);
+                top: 70vw;
+            }
+            85% {
+                transform: rotate(-360deg);
+                top: 80vw;
+            }
+            90% {
+                transform: rotate(-360deg);
+                top: 90vw;
+            }
+            100% {
+                top: 100vw;
+            }
+        }
+
+        .closebutton {
+            position: fixed;
+            height: 40px;
+            top: 10px;
+            left: 10px;
+            cursor: url("/images/krab.png")22 22, auto;
+            color: #ff8181;
+        }
+
+
+    </style>
+</head>
+<body>
+
+<img src="images/krab.png"  class="background">
+
+<a href="/index1.html"><svg class="closebutton" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+</svg></a>
+
+<!--<a href="/VJ.html"><img src="/img/icons website/orchid.png" class="orchidee"></a>-->
+
+<script>
+    for(i=0; i<90;i++) {
+        var orchidee = document.createElement('div');
+        orchidee.innerHTML = "<a href='/index1.html'><img src='/images/krab.png'></a>";
+        orchidee.style.left = i * 15 + "px";
+        orchidee.className = "orchidee";
+        orchidee.style.animationDelay = 20 * i + "ms";
+
+        document.body.appendChild(orchidee);
+    }
+
+    for(i=0; i<70;i++) {
+        var orchidee = document.createElement('div');
+        orchidee.innerHTML = "<a href='/index1.html'><img src='/images/krab.png'></a>";
+        orchidee.style.top = i * 40 + "px";
+        orchidee.className = "orchidee";
+        orchidee.style.animationDelay = 90 * i + "ms";
+
+        document.body.appendChild(orchidee);
+    }
+
+    for(i=0; i<30;i++) {
+        var orchidee = document.createElement('div');
+        orchidee.innerHTML = "<a href='/index1.html'><img src='/images/krab.png'></a>";
+        orchidee.style.left = Math.random() * 500 + "px";
+        // orchidee.style.top = i * 80 + "px";
+        orchidee.className = "orchidee";
+        orchidee.style.animationDelay = i * 1000 + "ms";
+
+
+        document.body.appendChild(orchidee);
+    }
+
+</script>
+
+</body>
+</html>

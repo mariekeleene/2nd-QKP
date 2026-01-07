@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Project 1 - Artwork Title</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f0f0f5;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            perspective: 800px;
+        }
+
+        .content {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            max-width: 800px;
+            width: 90%;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+            transform-style: preserve-3d;
+            transform: rotateX(5deg) rotateY(-5deg);
+        }
+
+        .text-block {
+            margin-bottom: 30px;
+        }
+
+        .text-block p {
+            font-size: 1.1rem;
+            line-height: 1.5;
+            color: #222;
+        }
+
+        .main-image {
+            float: right;
+            max-width: 40%;
+            margin-left: 20px;
+            border-radius: 8px;
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+        }
+
+        .extra-images {
+            clear: both;
+            margin-top: 40px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .extra-images img {
+            max-width: 150px;
+            border-radius: 8px;
+            box-shadow: 0 6px 10px rgba(0,0,0,0.1);
+        }
+
+        a.back-link {
+            display: inline-block;
+            margin-top: 30px;
+            text-decoration: none;
+            color: #0077cc;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        a.back-link:hover {
+            color: #005fa3;
+        }
+    </style>
+</head>
+<body>
+
+<div class="content">
+    <div class="text-block">
+        <img src="simartbackground.jpg" alt="Main artwork image" class="main-image" />
+        <p>
+            7 short loops representing trees around the world and
+            the state they are currently in. After some research i
+            found out that suposedly every human needs 7 trees to
+            provide in their oxygen needs, from this ‘fact’ came the
+            idea of bringing those 7 trees to show.        </p>
+    </div>
+
+    <div class="extra-images">
+        <img src="images/simart.jpg" alt="Extra image 1" />
+        <img src="images/simart1.jpg" alt="Extra image 2" />
+        <img src="images/simart14.jpg" alt="Extra image 3" />
+    </div>
+
+    <a href="index1.html" class="back-link">← Back to Home</a>
+</div>
+
+</body>
+</html>
