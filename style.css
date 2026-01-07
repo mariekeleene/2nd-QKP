@@ -121,23 +121,31 @@ body {
     color: rgba(255, 255, 255, 0.74) !important;
 }
 
-/* Footer styling */
+/* ===============================
+   STICKY FOOTER
+   =============================== */
 .site-footer {
-    text-align: center;       /* Center the text */
-    padding: 12px 0;          /* Space above and below */
-    font-size: 14px;          /* Small, neat text */
-    color: #555;              /* Gray text color */
-    background-color: rgba(255,255,255,0.8); /* Light background */
-    position: relative;       /* Normal positioning */
+    position: fixed;            /* sticks at bottom of screen */
+    bottom: 0;                  /* zero distance from bottom */
+    left: 0;                    /* start at left edge */
+    width: 100%;                /* full width */
+    background-color: rgba(255, 255, 255, 0.85); /* light translucent background */
+    color: #555;                /* text color */
+    font-size: 14px;            /* readable size */
+    text-align: center;          /* center the text */
+    padding: 12px 0;             /* space above and below */
+    z-index: 30;                 /* above canvas (-1/-2), below vertical-text (20) or close-btn (9999) */
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.15); /* subtle top shadow */
 }
 
-/* Optional: adjust on small screens */
+/* Responsive adjustments for small screens */
 @media (max-width: 480px) {
     .site-footer {
         font-size: 12px;
-        padding: 10px 0;
+        padding: 8px 0;
     }
 }
+
 
 
 /* ===============================
