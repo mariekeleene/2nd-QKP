@@ -15,7 +15,7 @@ const IMG_SIZE = 80;
 /* Images */
 const imageSources = [
     "images/lift.jpeg",
-    "images/achtergrond50.jpg"
+    "images/achtergrond1.jpg"
 ];
 
 const images = [];
