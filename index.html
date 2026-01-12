@@ -10,11 +10,10 @@
 
 <div class="dropdown-wrapper" id="dropdown">
     <div class="dropdown-trigger" id="trigger">
-        <span>open</span>
-        <span class="arrow">▼</span>
+        open
     </div>
 
-    <div class="dropdown-menu" id="menu">
+    <div class="dropdown-menu">
         <a href="Fountain.html" class="item">Fountain for Golfers</a>
         <a href="Concrete.html" class="item">Concrete Lover</a>
         <a href="7.html" class="item">7 Trees</a>
@@ -37,19 +36,12 @@
 <script>
     const dropdown = document.getElementById("dropdown");
     const trigger = document.getElementById("trigger");
-    const menu = document.getElementById("menu");
 
     trigger.addEventListener("click", (e) => {
         e.stopPropagation();
         dropdown.classList.toggle("open");
     });
 
-    // ❗️BELANGRIJK: klik in menu sluit hem NIET
-    menu.addEventListener("click", (e) => {
-        e.stopPropagation();
-    });
-
-    // klik buiten menu sluit
     document.addEventListener("click", () => {
         dropdown.classList.remove("open");
     });

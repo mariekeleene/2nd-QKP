@@ -20,7 +20,7 @@ body {
 }
 
 /* ===============================
-   SCROLLBAR – CLINICAL
+   SCROLLBAR (VISIBLE / CLINICAL)
    =============================== */
 
 ::-webkit-scrollbar {
@@ -55,53 +55,41 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 260px;
     z-index: 40;
 }
 
 .dropdown-trigger {
-    width: 100%;
-    padding: 14px 18px;
-    font-size: 22px;
-    background: transparent;
+    font-size: 24px;
     cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     user-select: none;
+    background: transparent;
 }
 
-.arrow {
-    font-size: 12px;
-    transition: transform 0.3s ease;
-}
+/* ===============================
+   MENU – GECENTREERD OP PAGINA
+   =============================== */
 
-.dropdown-wrapper.open .arrow {
-    transform: rotate(180deg);
-}
-
-/* MENU – OPENT ONDER TRIGGER */
 .dropdown-menu {
-    position: absolute;
-    top: calc(100% + 12px);
-    left: 0;
-    width: 100%;
-    max-height: 0;
+    position: fixed;                 /* 🔑 los van trigger */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 280px;
+    max-height: 70vh;
     overflow-y: auto;
     background: #e6e6e6;
     opacity: 0;
     pointer-events: none;
-    transition: max-height 0.4s ease, opacity 0.3s ease;
 }
 
 /* OPEN STATE */
 .dropdown-wrapper.open .dropdown-menu {
-    max-height: 70vh;
     opacity: 1;
     pointer-events: auto;
 }
 
 /* ITEMS */
+
 .item {
     display: block;
     padding: 14px 22px;
