@@ -1,35 +1,29 @@
 function initSlideshow(images) {
     let currentIndex = 0;
-
-    const img = document.getElementById("gallery-image");
-    const counter = document.getElementById("page-counter");
-    const prev = document.querySelector(".prev");
-    const next = document.querySelector(".next");
+    const galleryImage = document.getElementById("gallery-image");
+    const pageCounter = document.getElementById("page-counter");
     const detailsBtn = document.getElementById("details-btn");
     const detailsText = document.getElementById("details-text");
 
-    function update() {
-        img.src = images[currentIndex];
-        counter.textContent = `${currentIndex + 1} / ${images.length}`;
+    function updateImage() {
+        galleryImage.src = images[currentIndex];
+        pageCounter.textContent = `${currentIndex + 1}/${images.length}`;
     }
 
-    prev.onclick = () => {
+    document.querySelector(".prev").addEventListener("click", () => {
         currentIndex = (currentIndex - 1 + images.length) % images.length;
-        update();
-    };
+        updateImage();
+    });
 
-    next.onclick = () => {
+    document.querySelector(".next").addEventListener("click", () => {
         currentIndex = (currentIndex + 1) % images.length;
-        update();
-    };
+        updateImage();
+    });
 
-    detailsBtn.onclick = () => {
+    detailsBtn.addEventListener("click", () => {
         detailsText.classList.toggle("show");
-        detailsBtn.textContent =
-            detailsText.classList.contains("show")
-                ? "Click Here ▲"
-                : "Click Here ▽";
-    };
+        detailsBtn.textContent = detailsText.classList.contains("show") ? "Click Here ▲" : "Click Here ▽";
+    });
 
-    update();
+    updateImage(); // show first image
 }
