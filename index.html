@@ -8,19 +8,18 @@
 </head>
 <body>
 
-<!-- Dropdown navigation -->
 <div class="dropdown-wrapper" id="dropdown">
     <div class="dropdown-trigger" id="trigger">
         <span>open</span>
         <span class="arrow">▼</span>
     </div>
 
-    <div class="dropdown-menu">
+    <div class="dropdown-menu" id="menu">
         <a href="Fountain.html" class="item">Fountain for Golfers</a>
         <a href="Concrete.html" class="item">Concrete Lover</a>
         <a href="7.html" class="item">7 Trees</a>
         <a href="Hard.html" class="item">Hard Working Artists</a>
-        <a href="Immigration.html" class="item">Immigration Celebration / Welcome Home</a>
+        <a href="Immigration.html" class="item">Immigration Celebration</a>
         <a href="Stills.html" class="item">Stills from Jelsa</a>
         <a href="We.html" class="item">WNFBNTO</a>
         <a href="index.html" class="item active">✓ Open</a>
@@ -28,14 +27,9 @@
         <a href="Lets.html" class="item">Let's Keep It Gezellig</a>
         <a href="These.html" class="item">These Were All My Clothes</a>
         <a href="artist.html" class="item">About Me</a>
-        <a href="Gezellig.html" class="item">Gezellig / Ongezellig</a>
-        <a href="Screen.html" class="item">Screen Based Works</a>
-        <a href="Cow.html" class="item">Cow to 3D Printer</a>
-        <a href="Space.html" class="item">Space Waste book</a>
     </div>
 </div>
 
-<!-- Footer -->
 <footer class="site-footer">
     Created by Marieke Leene — Last updated Spring 2025
 </footer>
@@ -43,12 +37,19 @@
 <script>
     const dropdown = document.getElementById("dropdown");
     const trigger = document.getElementById("trigger");
+    const menu = document.getElementById("menu");
 
     trigger.addEventListener("click", (e) => {
         e.stopPropagation();
         dropdown.classList.toggle("open");
     });
 
+    // ❗️BELANGRIJK: klik in menu sluit hem NIET
+    menu.addEventListener("click", (e) => {
+        e.stopPropagation();
+    });
+
+    // klik buiten menu sluit
     document.addEventListener("click", () => {
         dropdown.classList.remove("open");
     });
@@ -63,6 +64,7 @@
         document.body.style.backgroundImage = `url(${images[i]})`;
         i = (i + 1) % images.length;
     }
+
     changeBackground();
     setInterval(changeBackground, 6000);
 </script>

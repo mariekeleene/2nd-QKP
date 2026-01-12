@@ -1,13 +1,13 @@
 /* ===============================
-   BASE STYLING
+   BASE
    =============================== */
 
 html, body {
     margin: 0;
     padding: 0;
     height: 100%;
-    overflow-y: scroll; /* always show scrollbar */
-    font-family: "Menlo", monospace; /* main font */
+    font-family: "Menlo", monospace;
+    overflow-y: scroll;
 }
 
 body {
@@ -20,62 +20,55 @@ body {
 }
 
 /* ===============================
-   CLINICAL / VISIBLE SCROLLBAR
+   SCROLLBAR – CLINICAL
    =============================== */
 
-/* Webkit / Chrome / Safari / Edge */
 ::-webkit-scrollbar {
-    width: 14px; /* overduidelijk zichtbaar */
+    width: 14px;
 }
 
 ::-webkit-scrollbar-track {
-    background-color: #1a1a1a; /* dark track */
+    background: #1a1a1a;
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: #f5f5f5; /* light thumb */
+    background: #f5f5f5;
     border-left: 3px solid #1a1a1a;
     border-right: 3px solid #1a1a1a;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background-color: #ffffff;
-    border-left: 3px solid #111;
-    border-right: 3px solid #111;
+    background: #ffffff;
 }
 
-/* Firefox */
 * {
     scrollbar-width: auto;
     scrollbar-color: #f5f5f5 #1a1a1a;
 }
 
 /* ===============================
-   DROPDOWN NAVIGATION
+   DROPDOWN
    =============================== */
 
 .dropdown-wrapper {
     position: fixed;
-    top: 50%; /* menu trigger in midden van scherm */
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 90%;
-    max-width: 260px;
+    width: 260px;
     z-index: 40;
 }
 
 .dropdown-trigger {
-    width: 90%;
-    padding: 12px 16px;
-    font-size: 25px;
+    width: 100%;
+    padding: 14px 18px;
+    font-size: 22px;
     background: transparent;
     cursor: pointer;
-    user-select: none;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-family: "Menlo", monospace; /* ensure Menlo */
-    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+    user-select: none;
 }
 
 .arrow {
@@ -87,90 +80,55 @@ body {
     transform: rotate(180deg);
 }
 
+/* MENU – OPENT ONDER TRIGGER */
 .dropdown-menu {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    top: calc(100% + 12px);
+    left: 0;
     width: 100%;
-    max-width: 280px;
-    background: #e8ff77;
-    border-radius: 0px;
-    padding: 14px 0;
-    max-height: 70vh;
+    max-height: 0;
     overflow-y: auto;
-    opacity: 0;
-    transition: max-height 0.4s ease, opacity 0.3s ease;
-    font-family: "Menlo", monospace; /* ensure Menlo */
-    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
-
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 100%;
-    max-width: 280px;
     background: #e6e6e6;
-    border-radius: 8px;
-    padding: 14px 0;
-    max-height: 70vh;
-    overflow-y: auto;
     opacity: 0;
+    pointer-events: none;
     transition: max-height 0.4s ease, opacity 0.3s ease;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
-    font-family: "Menlo", monospace;
 }
 
-
+/* OPEN STATE */
 .dropdown-wrapper.open .dropdown-menu {
     max-height: 70vh;
     opacity: 1;
+    pointer-events: auto;
 }
 
+/* ITEMS */
 .item {
     display: block;
-    padding: 12px 28px;
-    font-size: 15px;
-    color: #111;
+    padding: 14px 22px;
+    font-size: 14px;
     text-decoration: none;
-    font-family: "Menlo", monospace; /* ensure Menlo */
+    color: #111;
 }
 
 .item:hover {
-    background: #fff;
+    background: #ffffff;
 }
 
 .item.active {
     background: #ffffff;
-    color: #3e4e3b;
-    margin: 6px 14px;
-    border-radius: 4px;
+    margin: 6px;
 }
 
 /* ===============================
-   FOOTER TEXT (TRANSPARENT)
+   FOOTER
    =============================== */
 
 .site-footer {
     position: fixed;
     bottom: 10px;
-    left: 0;
     width: 100%;
-    padding: 6px 0;
-    font-size: 11px;
     text-align: center;
+    font-size: 11px;
     letter-spacing: 0.08em;
     color: #373737;
-    background: transparent; /* no background */
-    font-family: "Menlo", monospace; /* ensure Menlo */
-}
-
-/* ===============================
-   MOBILE TWEAK
-   =============================== */
-
-@media (max-width: 480px) {
-    .dropdown-wrapper {
-        bottom: 80px;
-    }
 }
