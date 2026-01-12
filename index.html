@@ -23,10 +23,6 @@
         <a href="Stills.html" class="item">Stills from Jelsa</a>
         <a href="We.html" class="item">WNFBNTO</a>
         <a href="index.html" class="item active">✓ Open</a>
-        <a href="Prazer.html" class="item">Prazer em Conhecer-te</a>
-        <a href="Lets.html" class="item">Let's Keep It Gezellig</a>
-        <a href="These.html" class="item">These Were All My Clothes</a>
-        <a href="artist.html" class="item">About Me</a>
     </div>
 </div>
 
@@ -46,20 +42,6 @@
     document.addEventListener("click", () => {
         dropdown.classList.remove("open");
     });
-
-    const images = [
-        "images/lift.jpeg",
-        "images/achtergrond1.jpg"
-    ];
-
-    let i = 0;
-    function changeBackground() {
-        document.body.style.backgroundImage = `url(${images[i]})`;
-        i = (i + 1) % images.length;
-    }
-
-    changeBackground();
-    setInterval(changeBackground, 6000);
 </script>
 
 </body>

@@ -20,7 +20,7 @@ body {
 }
 
 /* ===============================
-   SCROLLBAR – CLINICAL / VISIBLE
+   SCROLLBAR
    =============================== */
 
 ::-webkit-scrollbar {
@@ -37,10 +37,6 @@ body {
     border-right: 3px solid #1a1a1a;
 }
 
-::-webkit-scrollbar-thumb:hover {
-    background: #ffffff;
-}
-
 * {
     scrollbar-width: auto;
     scrollbar-color: #f5f5f5 #1a1a1a;
@@ -52,7 +48,7 @@ body {
 
 .dropdown-wrapper {
     position: fixed;
-    top: 25%;                 /* 🔑 trigger ook op 25% */
+    top: 25vh;                 /* 🔑 viewport-based */
     left: 50%;
     transform: translateX(-50%);
     z-index: 40;
@@ -62,12 +58,12 @@ body {
     width: 260px;
     padding: 12px 16px;
     font-size: 25px;
-    background: transparent;
     cursor: pointer;
-    user-select: none;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background: transparent;
+
     box-shadow:
             rgba(0, 0, 0, 0.4) 0px 2px 4px,
             rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
@@ -88,19 +84,20 @@ body {
    =============================== */
 
 .dropdown-menu {
-    position: fixed;          /* los van trigger */
-    top: 25%;                 /* 🔑 exact wat je vroeg */
+    position: fixed;
+    top: 25vh;                 /* 🔑 THIS is the real change */
     left: 50%;
     transform: translateX(-50%);
     width: 280px;
     max-height: 70vh;
     overflow-y: auto;
+
     background: #e6e6e6;
     border-radius: 8px;
     padding: 14px 0;
+
     opacity: 0;
     pointer-events: none;
-    font-family: "Menlo", monospace;
 
     box-shadow:
             rgba(0, 0, 0, 0.4) 0px 2px 4px,
@@ -116,7 +113,7 @@ body {
 }
 
 /* ===============================
-   MENU ITEMS
+   ITEMS
    =============================== */
 
 .item {
@@ -133,7 +130,6 @@ body {
 
 .item.active {
     background: #ffffff;
-    color: #3e4e3b;
     margin: 6px 14px;
     border-radius: 4px;
 }
