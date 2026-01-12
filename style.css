@@ -92,17 +92,6 @@ body {
     max-height: 70vh;
     overflow-y: auto;
 
-
-    /* ⬇️ onder de trigger */
-    top: calc(25vh + 60px);
-    left: 50%;
-    transform: translateX(-50%);
-
-    width: 280px;
-
-    /* ⬇️ altijd 20px vrij onderaan */
-    max-height: calc(100vh - (25vh + 60px) - 20px);
-
     background: #f0ff85;
     border-radius: 1px;
     padding: 14px 0;
