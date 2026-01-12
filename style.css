@@ -62,20 +62,21 @@ body {
     width: 90%;
     max-width: 260px;
     z-index: 40;
+
 }
 
 .dropdown-trigger {
     width: 100%;
     padding: 12px 16px;
     font-size: 15px;
-    background: #e6e6e6;
-    border-radius: 8px;
+    background: #e8ff77;
     cursor: pointer;
     user-select: none;
     display: flex;
     justify-content: space-between;
     align-items: center;
     font-family: "Menlo", monospace; /* ensure Menlo */
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
 }
 
 .arrow {
@@ -94,15 +95,16 @@ body {
     transform: translateX(-50%);
     margin-bottom: 8px;
     width: 100%;
-    background: #e6e6e6;
-    border-radius: 8px;
+    background: #e8ff77;
+    border-radius: 0px;
     padding: 14px 0;
     max-height: 0;
     overflow-y: auto;
     opacity: 0;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
     transition: max-height 0.4s ease, opacity 0.3s ease;
     font-family: "Menlo", monospace; /* ensure Menlo */
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+
 }
 
 .dropdown-wrapper.open .dropdown-menu {
@@ -124,8 +126,8 @@ body {
 }
 
 .item.active {
-    background: #000;
-    color: #fff;
+    background: #ffffff;
+    color: #3e4e3b;
     margin: 6px 14px;
     border-radius: 4px;
 }
@@ -143,7 +145,7 @@ body {
     font-size: 11px;
     text-align: center;
     letter-spacing: 0.08em;
-    color: #888;
+    color: #373737;
     background: transparent; /* no background */
     font-family: "Menlo", monospace; /* ensure Menlo */
 }
