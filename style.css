@@ -20,7 +20,7 @@ body {
 }
 
 /* ===============================
-   SCROLLBAR (VISIBLE / CLINICAL)
+   SCROLLBAR – CLINICAL / VISIBLE
    =============================== */
 
 ::-webkit-scrollbar {
@@ -47,55 +47,84 @@ body {
 }
 
 /* ===============================
-   DROPDOWN
+   DROPDOWN TRIGGER
    =============================== */
 
 .dropdown-wrapper {
     position: fixed;
-    top: 50%;
+    top: 25%;                 /* 🔑 trigger ook op 25% */
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translateX(-50%);
     z-index: 40;
 }
 
 .dropdown-trigger {
-    font-size: 24px;
+    width: 260px;
+    padding: 12px 16px;
+    font-size: 25px;
+    background: transparent;
     cursor: pointer;
     user-select: none;
-    background: transparent;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow:
+            rgba(0, 0, 0, 0.4) 0px 2px 4px,
+            rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
+            rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+
+.arrow {
+    font-size: 12px;
+    transition: transform 0.3s ease;
+}
+
+.dropdown-wrapper.open .arrow {
+    transform: rotate(180deg);
 }
 
 /* ===============================
-   MENU – GECENTREERD OP PAGINA
+   DROPDOWN MENU
    =============================== */
 
 .dropdown-menu {
-    position: fixed;                 /* 🔑 los van trigger */
-    top: 50%;
+    position: fixed;          /* los van trigger */
+    top: 25%;                 /* 🔑 exact wat je vroeg */
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translateX(-50%);
     width: 280px;
     max-height: 70vh;
     overflow-y: auto;
     background: #e6e6e6;
+    border-radius: 8px;
+    padding: 14px 0;
     opacity: 0;
     pointer-events: none;
+    font-family: "Menlo", monospace;
+
+    box-shadow:
+            rgba(0, 0, 0, 0.4) 0px 2px 4px,
+            rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
+            rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+
+    transition: opacity 0.3s ease;
 }
 
-/* OPEN STATE */
 .dropdown-wrapper.open .dropdown-menu {
     opacity: 1;
     pointer-events: auto;
 }
 
-/* ITEMS */
+/* ===============================
+   MENU ITEMS
+   =============================== */
 
 .item {
     display: block;
-    padding: 14px 22px;
-    font-size: 14px;
-    text-decoration: none;
+    padding: 12px 28px;
+    font-size: 15px;
     color: #111;
+    text-decoration: none;
 }
 
 .item:hover {
@@ -104,7 +133,9 @@ body {
 
 .item.active {
     background: #ffffff;
-    margin: 6px;
+    color: #3e4e3b;
+    margin: 6px 14px;
+    border-radius: 4px;
 }
 
 /* ===============================
