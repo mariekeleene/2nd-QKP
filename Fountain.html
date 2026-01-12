@@ -5,19 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Fountain for Golfers 🏌️‍♀️</title>
 
-    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="slideshow.css">
 </head>
 
 <body>
 
-<!-- BACKGROUND SLIDESHOW -->
-<div id="background"></div>
-
-<!-- CANVAS LAYER -->
-<canvas id="bgCanvas"></canvas>
-
-<!-- CLOSE BUTTON (GLOBAL UI) -->
+<!-- CLOSE BUTTON -->
 <a href="index.html" class="close-btn">☒</a>
 
 <header class="top-bar">
@@ -43,24 +36,11 @@
     </div>
 </section>
 
-<main class="gallery">
-    <button class="nav prev">&#10094;</button>
-    <div class="image-container">
-        <img id="gallery-image" src="images/rollade.jpeg" alt="Artwork">
-    </div>
-    <button class="nav next">&#10095;</button>
+<!-- INSTAGRAM STYLE FEED -->
+<main class="feed-wrapper">
+    <div id="feed" class="feed"></div>
 </main>
 
-<footer class="page-counter" id="page-counter">1/3</footer>
-
 <script src="slideshow.js"></script>
-<script>
-    initSlideshow([
-        "images/rollade.jpeg",
-        "images/hamburger.jpeg",
-        "images/varkenspoot.jpeg"
-    ]);
-</script>
-
 </body>
 </html>

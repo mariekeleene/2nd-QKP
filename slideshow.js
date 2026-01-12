@@ -1,29 +1,38 @@
-function initSlideshow(images) {
-    let currentIndex = 0;
-    const galleryImage = document.getElementById("gallery-image");
-    const pageCounter = document.getElementById("page-counter");
-    const detailsBtn = document.getElementById("details-btn");
-    const detailsText = document.getElementById("details-text");
+const images = [
+    "images/rollade.jpeg",
+    "images/hamburger.jpeg",
+    "images/varkenspoot.jpeg"
+];
 
-    function updateImage() {
-        galleryImage.src = images[currentIndex];
-        pageCounter.textContent = `${currentIndex + 1}/${images.length}`;
-    }
+const feed = document.getElementById("feed");
+const detailsBtn = document.getElementById("details-btn");
+const detailsText = document.getElementById("details-text");
 
-    document.querySelector(".prev").addEventListener("click", () => {
-        currentIndex = (currentIndex - 1 + images.length) % images.length;
-        updateImage();
+/* DETAILS TOGGLE */
+detailsBtn.addEventListener("click", () => {
+    detailsText.classList.toggle("show");
+    detailsBtn.textContent = detailsText.classList.contains("show")
+        ? "Click Here ▲"
+        : "Click Here ▽";
+});
+
+/* ADD IMAGES TO FEED */
+function addImages() {
+    images.forEach(src => {
+        const img = document.createElement("img");
+        img.src = src;
+        img.alt = "Artwork";
+        feed.appendChild(img);
     });
-
-    document.querySelector(".next").addEventListener("click", () => {
-        currentIndex = (currentIndex + 1) % images.length;
-        updateImage();
-    });
-
-    detailsBtn.addEventListener("click", () => {
-        detailsText.classList.toggle("show");
-        detailsBtn.textContent = detailsText.classList.contains("show") ? "Click Here ▲" : "Click Here ▽";
-    });
-
-    updateImage(); // show first image
 }
+
+/* INITIAL LOAD */
+addImages();
+addImages(); // meteen wat extra content
+
+/* INFINITE SCROLL */
+window.addEventListener("scroll", () => {
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 300) {
+        addImages();
+    }
+});
