@@ -32,6 +32,7 @@
 </footer>
 
 <script>
+    /* Dropdown */
     const dropdown = document.getElementById("dropdown");
     const trigger = document.getElementById("trigger");
 
@@ -43,6 +44,21 @@
     document.addEventListener("click", () => {
         dropdown.classList.remove("open");
     });
+
+    /* Background slideshow */
+    const images = [
+        "images/lift.jpeg",
+        "images/achtergrond1.jpg"
+    ];
+
+    let i = 0;
+    function changeBackground() {
+        document.body.style.backgroundImage = `url(${images[i]})`;
+        i = (i + 1) % images.length;
+    }
+
+    changeBackground();
+    setInterval(changeBackground, 6000);
 </script>
 
 </body>

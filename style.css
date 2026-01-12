@@ -21,7 +21,7 @@ body {
 }
 
 /* ===============================
-   SCROLLBAR (CLINICAL)
+   SCROLLBAR
    =============================== */
 
 ::-webkit-scrollbar {
@@ -49,9 +49,10 @@ body {
 
 .dropdown-wrapper {
     position: fixed;
-    top: 25vh;
+    top: 25vh;              /* juiste hoogte */
     left: 50%;
     transform: translateX(-50%);
+    width: 280px;
     z-index: 40;
 }
 
@@ -60,7 +61,7 @@ body {
    =============================== */
 
 .dropdown-trigger {
-    width: 260px;
+    width: 100%;
     padding: 12px 16px;
     font-size: 20px;
     cursor: pointer;
@@ -91,13 +92,12 @@ body {
    =============================== */
 
 .dropdown-menu {
-    position: fixed;
-    top: calc(25vh + 60px);          /* below trigger */
-    left: 50%;
-    transform: translateX(-50%);
+    position: absolute;
+    top: calc(100% + 12px); /* direct onder trigger */
+    left: 0;
 
-    width: 280px;
-    max-height: calc(100vh - (25vh + 60px) - 20px);
+    width: 100%;
+    max-height: calc(100vh - 25vh - 80px); /* ruimte tot onderkant */
     overflow-y: auto;
 
     background: #f0ff85;
