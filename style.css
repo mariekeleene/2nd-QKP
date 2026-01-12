@@ -85,6 +85,13 @@ body {
 
 .dropdown-menu {
     position: fixed;
+    top: 25vh;                 /* 🔑 THIS is the real change */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 280px;
+    max-height: 70vh;
+    overflow-y: auto;
+
 
     /* ⬇️ onder de trigger */
     top: calc(25vh + 60px);
@@ -95,8 +102,6 @@ body {
 
     /* ⬇️ altijd 20px vrij onderaan */
     max-height: calc(100vh - (25vh + 60px) - 20px);
-
-    overflow-y: auto;
 
     background: #f0ff85;
     border-radius: 1px;
