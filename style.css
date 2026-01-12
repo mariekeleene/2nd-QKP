@@ -1,170 +1,169 @@
-body {
+/* ===============================
+   BASE
+   =============================== */
+
+html, body {
     margin: 0;
-    font-family: Arial, sans-serif;
+    padding: 0;
+    height: 100%;
 }
 
-/* ===============================
-   BACKGROUND SLIDESHOW LAYER
-   =============================== */
-#background {
-    position: fixed;
-    inset: 0;
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    transition: opacity 1s ease;
-    z-index: -2; /* behind canvas */
+    transition: background-image 1s ease-in-out;
+    overflow-x: hidden;
 }
 
 /* ===============================
-   FONTS
+   CLINICAL SCROLLBAR
    =============================== */
-@font-face {
-    font-family: 'GapSansBold';
-    src: url('fonts/GapSansBold.ttf') format('truetype');
+
+/* WebKit */
+::-webkit-scrollbar {
+    width: 10px;
 }
 
-@font-face {
-    font-family: 'VagraPixel';
-    src: url('fonts/vagra-pixel.otf') format('opentype');
+::-webkit-scrollbar-track {
+    background: #e5e5e5;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #111;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #000;
+}
+
+/* Firefox */
+* {
+    scrollbar-width: auto;
+    scrollbar-color: #111 #e5e5e5;
 }
 
 /* ===============================
-   CANVAS (ABOVE BACKGROUND)
+   DROPDOWN
    =============================== */
-#bgCanvas {
+
+.dropdown-wrapper {
     position: fixed;
-    inset: 0;
+    bottom: 90px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 260px;
+    z-index: 40;
+}
+
+.dropdown-trigger {
     width: 100%;
-    height: 100%;
-    z-index: -1;
-}
+    padding: 12px 16px;
+    font-size: 15px;
+    background: #e6e6e6;
+    border-radius: 8px;
+    cursor: pointer;
+    user-select: none;
 
-/* ===============================
-   CENTER CONTENT
-   =============================== */
-.container {
-    position: relative;
-    z-index: 10;
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    text-align: center;
-    font-size: 1.2rem;
-    gap: 0;
 }
 
-.artwork-link {
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-    font-size: 24px;
-    padding: 20px 0;
-    margin: 0;
-    text-decoration: none;
-    color: black;
+.arrow {
+    font-size: 12px;
+    transition: transform 0.3s ease;
+}
+
+.dropdown-wrapper.open .arrow {
+    transform: rotate(180deg);
+}
+
+.dropdown-menu {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: 8px;
+
+    width: 100%;
+    background: #e6e6e6;
+    border-radius: 8px;
+    padding: 14px 0;
+
+    max-height: 0;
+    overflow-y: auto;
+    opacity: 0;
+
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    transition: max-height 0.4s ease, opacity 0.3s ease;
+}
+
+.dropdown-wrapper.open .dropdown-menu {
+    max-height: 70vh;
+    opacity: 1;
+}
+
+/* Dropdown scrollbar (same clinical style) */
+.dropdown-menu::-webkit-scrollbar {
+    width: 8px;
+}
+
+.dropdown-menu::-webkit-scrollbar-thumb {
+    background: #111;
+}
+
+.dropdown-menu {
+    scrollbar-color: #111 #e6e6e6;
+    scrollbar-width: auto;
+}
+
+/* Items */
+.item {
     display: block;
-    animation: swing 3s ease-in-out infinite;
-    transition: color 0.3s;
-}
-
-.artwork-link:hover {
+    padding: 12px 28px;
+    font-size: 15px;
+    color: #111;
     text-decoration: none;
 }
 
-/* Swing animation */
-@keyframes swing {
-    0%, 100% { transform: translateX(0); }
-    50% { transform: translateX(10px); }
+.item:hover {
+    background: #ffffff;
+}
+
+.item.active {
+    background: #000;
+    color: #fff;
+    margin: 6px 14px;
+    border-radius: 4px;
 }
 
 /* ===============================
-   VERTICAL TEXT
+   FOOTER (QUIET, LOW)
    =============================== */
-.vertical-text {
+
+.site-footer {
     position: fixed;
-    right: 20px;
-    bottom: 40px;
-    transform: rotate(-90deg);
-    transform-origin: bottom right;
-    font-size: 14px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: gray;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px 0;
+    font-size: 11px;
+    text-align: center;
+    letter-spacing: 0.08em;
+    color: #666;
+    background: rgba(255,255,255,0.85);
     z-index: 20;
 }
 
-.vertical-text:hover {
-    color: black;
-}
-
 /* ===============================
-   CLOSE BUTTON
+   MOBILE
    =============================== */
-.close-btn {
-    position: fixed;
-    top: 15px;
-    right: 20px;
-    font-size: 32px;
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-    z-index: 9999;
-}
 
-.close-btn:hover {
-    color: #e518fd;
-}
-
-/* Highlight on canvas collision */
-.artwork-link.highlight {
-    color: rgba(255, 255, 255, 0.74) !important;
-}
-
-/* ===============================
-   STICKY FOOTER
-   =============================== */
-.site-footer {
-    position: fixed;            /* sticks at bottom of screen */
-    bottom: 0;                  /* zero distance from bottom */
-    left: 0;                    /* start at left edge */
-    width: 100%;                /* full width */
-    background-color: rgba(255, 255, 255, 0.85); /* light translucent background */
-    color: #555;                /* text color */
-    font-size: 14px;            /* readable size */
-    text-align: center;          /* center the text */
-    padding: 12px 0;             /* space above and below */
-    z-index: 30;                 /* above canvas (-1/-2), below vertical-text (20) or close-btn (9999) */
-    box-shadow: 0 -2px 10px rgba(0,0,0,0.15); /* subtle top shadow */
-}
-
-/* Responsive adjustments for small screens */
 @media (max-width: 480px) {
-    .site-footer {
-        font-size: 12px;
-        padding: 8px 0;
+    .dropdown-wrapper {
+        bottom: 80px;
     }
-}
-
-
-
-/* ===============================
-   FLOATING ICON
-   =============================== */
-.iconorchid {
-    width: 70px;
-    height: 100px;
-    position: absolute;
-    animation: orchid 360s linear infinite;
-}
-
-@keyframes orchid {
-    0% { transform: rotate(180deg); left: 10vw; top: 10vw; }
-    10% { left: 80vw; top: 10vw; }
-    22% { left: 10vw; top: 14vw; }
-    34% { left: 80vw; top: 18vw; }
-    46% { left: 10vw; top: 22vw; }
-    58% { left: 80vw; top: 26vw; }
-    70% { transform: rotate(90deg); left: 10vw; top: 10vw; }
-    100% { transform: rotate(180deg); left: 10vw; top: 10vw; }
 }
