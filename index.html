@@ -2,11 +2,8 @@
 <html lang="nl">
 <head>
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Homepage</title>
-
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -59,13 +56,11 @@
         "images/lift.jpeg",
         "images/achtergrond1.jpg"
     ];
-
     let i = 0;
     function changeBackground() {
         document.body.style.backgroundImage = `url(${images[i]})`;
         i = (i + 1) % images.length;
     }
-
     changeBackground();
     setInterval(changeBackground, 6000);
 </script>

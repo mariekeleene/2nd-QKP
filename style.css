@@ -1,11 +1,12 @@
 /* ===============================
-   BASE
+   BASE STYLING
    =============================== */
 
 html, body {
     margin: 0;
     padding: 0;
     height: 100%;
+    overflow-y: scroll; /* always show */
 }
 
 body {
@@ -15,37 +16,44 @@ body {
     background-repeat: no-repeat;
     transition: background-image 1s ease-in-out;
     overflow-x: hidden;
+    color: #111;
 }
 
 /* ===============================
-   CLINICAL SCROLLBAR
+   CUSTOM SCROLLBAR (portfolio-style)
+   inspired by minimal & intentional design
    =============================== */
 
-/* WebKit */
+/* WebKit / Blink */
 ::-webkit-scrollbar {
-    width: 10px;
+    width: 12px;
 }
 
 ::-webkit-scrollbar-track {
-    background: #e5e5e5;
+    background: #1a1a1a; /* dark track */
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #111;
+    background: #e6e6e6; /* light thumb */
+    border-left: 3px solid #0d0d0d;
+    border-right: 3px solid #0d0d0d;
 }
 
+/* Hover state for scrollbar thumb */
 ::-webkit-scrollbar-thumb:hover {
-    background: #000;
+    background: #fafafa;
+    border-left: 3px solid #0a0a0a;
+    border-right: 3px solid #0a0a0a;
 }
 
 /* Firefox */
 * {
-    scrollbar-width: auto;
-    scrollbar-color: #111 #e5e5e5;
+    scrollbar-width: thin;
+    scrollbar-color: #e6e6e6 #1a1a1a;
 }
 
 /* ===============================
-   DROPDOWN
+   DROPDOWN NAVIGATION
    =============================== */
 
 .dropdown-wrapper {
@@ -66,7 +74,6 @@ body {
     border-radius: 8px;
     cursor: pointer;
     user-select: none;
-
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -87,16 +94,13 @@ body {
     left: 50%;
     transform: translateX(-50%);
     margin-bottom: 8px;
-
     width: 100%;
     background: #e6e6e6;
     border-radius: 8px;
     padding: 14px 0;
-
     max-height: 0;
     overflow-y: auto;
     opacity: 0;
-
     box-shadow: 0 10px 30px rgba(0,0,0,0.25);
     transition: max-height 0.4s ease, opacity 0.3s ease;
 }
@@ -106,21 +110,6 @@ body {
     opacity: 1;
 }
 
-/* Dropdown scrollbar (same clinical style) */
-.dropdown-menu::-webkit-scrollbar {
-    width: 8px;
-}
-
-.dropdown-menu::-webkit-scrollbar-thumb {
-    background: #111;
-}
-
-.dropdown-menu {
-    scrollbar-color: #111 #e6e6e6;
-    scrollbar-width: auto;
-}
-
-/* Items */
 .item {
     display: block;
     padding: 12px 28px;
@@ -130,7 +119,7 @@ body {
 }
 
 .item:hover {
-    background: #ffffff;
+    background: #fff;
 }
 
 .item.active {
@@ -141,25 +130,23 @@ body {
 }
 
 /* ===============================
-   FOOTER (QUIET, LOW)
+   FOOTER TEXT (NO BACKGROUND!)
    =============================== */
 
 .site-footer {
     position: fixed;
-    bottom: 0;
+    bottom: 10px;
     left: 0;
     width: 100%;
-    padding: 10px 0;
+    padding: 6px 0;
     font-size: 11px;
     text-align: center;
     letter-spacing: 0.08em;
-    color: #666;
-    background: rgba(255,255,255,0.85);
-    z-index: 20;
+    color: #888;
 }
 
 /* ===============================
-   MOBILE
+   MOBILE TWEAK
    =============================== */
 
 @media (max-width: 480px) {
