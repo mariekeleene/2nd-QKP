@@ -56,20 +56,19 @@ body {
 
 .dropdown-wrapper {
     position: fixed;
-    bottom: 90px;
+    top: 50%; /* menu trigger in midden van scherm */
     left: 50%;
-    transform: translateX(-50%);
+    transform: translate(-50%, -50%);
     width: 90%;
     max-width: 260px;
     z-index: 40;
-
 }
 
 .dropdown-trigger {
-    width: 100%;
+    width: 90%;
     padding: 12px 16px;
-    font-size: 15px;
-    background: #e8ff77;
+    font-size: 20px;
+
     cursor: pointer;
     user-select: none;
     display: flex;
@@ -90,22 +89,38 @@ body {
 
 .dropdown-menu {
     position: absolute;
-    bottom: 100%;
+    top: 50%;
     left: 50%;
-    transform: translateX(-50%);
-    margin-bottom: 8px;
+    transform: translate(-50%, -50%);
     width: 100%;
+    max-width: 280px;
     background: #e8ff77;
     border-radius: 0px;
     padding: 14px 0;
-    max-height: 0;
+    max-height: 70vh;
     overflow-y: auto;
     opacity: 0;
     transition: max-height 0.4s ease, opacity 0.3s ease;
     font-family: "Menlo", monospace; /* ensure Menlo */
     box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
 
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    max-width: 280px;
+    background: #e6e6e6;
+    border-radius: 8px;
+    padding: 14px 0;
+    max-height: 70vh;
+    overflow-y: auto;
+    opacity: 0;
+    transition: max-height 0.4s ease, opacity 0.3s ease;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    font-family: "Menlo", monospace;
 }
+
 
 .dropdown-wrapper.open .dropdown-menu {
     max-height: 70vh;
