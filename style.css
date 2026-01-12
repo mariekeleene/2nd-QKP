@@ -6,7 +6,7 @@ html, body {
     margin: 0;
     padding: 0;
     height: 100%;
-    overflow-y: scroll; /* always show */
+    overflow-y: scroll; /* always show scrollbar */
 }
 
 body {
@@ -15,41 +15,40 @@ body {
     background-position: center;
     background-repeat: no-repeat;
     transition: background-image 1s ease-in-out;
-    overflow-x: hidden;
     color: #111;
+    overflow-x: hidden;
 }
 
 /* ===============================
-   CUSTOM SCROLLBAR (portfolio-style)
-   inspired by minimal & intentional design
+   CLINICAL SCROLLBAR (VISIBLE)
+   Inspired by minimal portfolio style
    =============================== */
 
-/* WebKit / Blink */
+/* Webkit / Chrome / Safari / Edge */
 ::-webkit-scrollbar {
-    width: 12px;
+    width: 14px; /* overduidelijk zichtbaar */
 }
 
 ::-webkit-scrollbar-track {
-    background: #1a1a1a; /* dark track */
+    background-color: #1a1a1a; /* dark track */
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #e6e6e6; /* light thumb */
-    border-left: 3px solid #0d0d0d;
-    border-right: 3px solid #0d0d0d;
+    background-color: #f5f5f5; /* light thumb */
+    border-left: 3px solid #1a1a1a;
+    border-right: 3px solid #1a1a1a;
 }
 
-/* Hover state for scrollbar thumb */
 ::-webkit-scrollbar-thumb:hover {
-    background: #fafafa;
-    border-left: 3px solid #0a0a0a;
-    border-right: 3px solid #0a0a0a;
+    background-color: #ffffff;
+    border-left: 3px solid #111;
+    border-right: 3px solid #111;
 }
 
 /* Firefox */
 * {
-    scrollbar-width: thin;
-    scrollbar-color: #e6e6e6 #1a1a1a;
+    scrollbar-width: auto;
+    scrollbar-color: #f5f5f5 #1a1a1a;
 }
 
 /* ===============================
@@ -130,7 +129,7 @@ body {
 }
 
 /* ===============================
-   FOOTER TEXT (NO BACKGROUND!)
+   FOOTER TEXT (TRANSPARENT)
    =============================== */
 
 .site-footer {
@@ -143,6 +142,7 @@ body {
     text-align: center;
     letter-spacing: 0.08em;
     color: #888;
+    background: transparent; /* removed background */
 }
 
 /* ===============================
