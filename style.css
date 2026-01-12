@@ -2,7 +2,8 @@
    BASE
    =============================== */
 
-html, body {
+html,
+body {
     margin: 0;
     padding: 0;
     height: 100%;
@@ -20,7 +21,7 @@ body {
 }
 
 /* ===============================
-   SCROLLBAR
+   SCROLLBAR (CLINICAL)
    =============================== */
 
 ::-webkit-scrollbar {
@@ -43,25 +44,31 @@ body {
 }
 
 /* ===============================
-   DROPDOWN TRIGGER
+   DROPDOWN WRAPPER
    =============================== */
 
 .dropdown-wrapper {
     position: fixed;
-    top: 25vh;                 /* 🔑 viewport-based */
+    top: 25vh;
     left: 50%;
     transform: translateX(-50%);
     z-index: 40;
 }
+
+/* ===============================
+   TRIGGER
+   =============================== */
 
 .dropdown-trigger {
     width: 260px;
     padding: 12px 16px;
     font-size: 20px;
     cursor: pointer;
+
     display: flex;
     justify-content: space-between;
     align-items: center;
+
     background: #f0ff85;
 
     box-shadow:
@@ -85,15 +92,15 @@ body {
 
 .dropdown-menu {
     position: fixed;
-    top: 25vh;                 /* 🔑 THIS is the real change */
+    top: calc(25vh + 60px);          /* below trigger */
     left: 50%;
     transform: translateX(-50%);
+
     width: 280px;
-    max-height: 70vh;
+    max-height: calc(100vh - (25vh + 60px) - 20px);
     overflow-y: auto;
 
     background: #f0ff85;
-    border-radius: 1px;
     padding: 14px 0;
 
     opacity: 0;
