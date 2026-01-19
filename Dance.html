@@ -2,7 +2,7 @@
 <html lang="nl">
 <head>
     <meta charset="UTF-8">
-    <title>Roterende Afbeeldingen Cirkel</title>
+    <title>Schuivende Rechthoeken in Cirkel</title>
 
     <style>
         html, body {
@@ -11,11 +11,10 @@
             width: 100%;
             height: 100%;
             overflow: hidden;
-            background: #ffffff;
-            font-family: sans-serif;
+            background: white;
         }
 
-        /* Container die als geheel beweegt (DVD-effect) */
+        /* DVD container */
         #dvd-container {
             position: absolute;
             width: 400px;
@@ -23,15 +22,13 @@
             pointer-events: none;
         }
 
-        /* Roterende cirkel */
+        /* Cirkel zelf beweegt niet/roteert niet */
         #circle {
             position: relative;
             width: 100%;
             height: 100%;
-            animation: rotateCircle 20s linear infinite;
         }
 
-        /* Rechthoeken */
         .item {
             position: absolute;
             width: 120px;
@@ -42,13 +39,7 @@
             background-size: cover;
             background-position: center;
             border-radius: 4px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-        }
-
-        /* Rotatie van de cirkel */
-        @keyframes rotateCircle {
-            from { transform: rotate(0deg); }
-            to   { transform: rotate(360deg); }
+            box-shadow: 0 4px 10px rgba(0,0,0,0.25);
         }
     </style>
 </head>
@@ -75,37 +66,69 @@
     ];
 
     const radius = 150;
+    const duration = 20000; // 20 seconden per volledige schuif
     const count = images.length;
 
-    images.forEach((img, index) => {
-        const angle = (360 / count) * index;
+    const items = [];
+    const slots = [];
 
-        const item = document.createElement("div");
-        item.className = "item";
-        item.style.backgroundImage = `url(${img})`;
+    /* Bereken vaste posities op de cirkel */
+    for (let i = 0; i < count; i++) {
+        const angle = (Math.PI * 2 / count) * i;
+        slots.push({
+            x: Math.cos(angle) * radius,
+            y: Math.sin(angle) * radius
+        });
+    }
 
-        /*
-           Belangrijk:
-           - Eerst draaien we het punt rond de cirkel
-           - Dan verplaatsen we naar buiten (radius)
-           - Daarna draaien we TERUG zodat de afbeelding horizontaal blijft
-        */
-        item.style.transform = `
-            rotate(${angle}deg)
-            translate(${radius}px)
-            rotate(${-angle}deg)
-        `;
+    /* Maak items */
+    images.forEach((img, i) => {
+        const el = document.createElement("div");
+        el.className = "item";
+        el.style.backgroundImage = `url(${img})`;
+        circle.appendChild(el);
 
-        circle.appendChild(item);
+        items.push({
+            el,
+            index: i
+        });
     });
 
-    /* DVD-achtige beweging */
-    let x = 100;
-    let y = 100;
-    let vx = 1.5;
-    let vy = 1.2;
+    /* Interpolatie helper */
+    function lerp(a, b, t) {
+        return a + (b - a) * t;
+    }
 
-    function animate() {
+    /* Animatie van schuiven */
+    let startTime = performance.now();
+
+    function updatePositions(time) {
+        const elapsed = (time - startTime) % duration;
+        const t = elapsed / duration;
+
+        items.forEach((item, i) => {
+            const from = slots[item.index];
+            const to = slots[(item.index + 1) % count];
+
+            const x = lerp(from.x, to.x, t);
+            const y = lerp(from.y, to.y, t);
+
+            item.el.style.transform = `
+            translate(${x}px, ${y}px)
+            translate(-50%, -50%)
+        `;
+        });
+
+        requestAnimationFrame(updatePositions);
+    }
+
+    requestAnimationFrame(updatePositions);
+
+    /* DVD-logo beweging */
+    let x = 100, y = 100;
+    let vx = 1.4, vy = 1.1;
+
+    function moveDVD() {
         const w = window.innerWidth;
         const h = window.innerHeight;
         const rect = container.getBoundingClientRect();
@@ -118,10 +141,10 @@
 
         container.style.transform = `translate(${x}px, ${y}px)`;
 
-        requestAnimationFrame(animate);
+        requestAnimationFrame(moveDVD);
     }
 
-    animate();
+    moveDVD();
 </script>
 
 </body>
