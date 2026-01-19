@@ -14,21 +14,18 @@
             background: white;
         }
 
-        /* DVD container */
         #dvd-container {
             position: absolute;
             width: 420px;
             height: 420px;
         }
 
-        /* Cirkel (niet roterend) */
         #circle {
             position: relative;
             width: 100%;
             height: 100%;
         }
 
-        /* Strakke rechthoeken */
         .item {
             position: absolute;
             width: 120px;
@@ -37,7 +34,7 @@
             left: 50%;
         }
 
-        /* Afbeelding */
+        /* Afbeeldingen & video exact gelijk */
         .item img,
         .item video {
             width: 100%;
@@ -67,40 +64,42 @@
         { type: "image", src: "dans4.jpg" }
     ];
 
-    const itemWidth = 120;
-    const radius = 180; // groot genoeg → geen overlap
-    const speed = (Math.PI * 2) / 20000; // volledige cyclus in 20s
+    const radius = 180;
+    const rotationDuration = 20000; // 20s
+    const angularSpeed = (Math.PI * 2) / rotationDuration;
+
     const items = [];
-    const count = itemsData.length;
 
     /* Maak items */
     itemsData.forEach((data, i) => {
-        const el = document.createElement("div");
-        el.className = "item";
+        const wrapper = document.createElement("div");
+        wrapper.className = "item";
 
         if (data.type === "image") {
             const img = document.createElement("img");
             img.src = data.src;
-            el.appendChild(img);
-        } else {
-            const video = document.createElement("video");
-            video.src = data.src;
-            video.autoplay = true;
-            video.loop = true;
-            video.muted = true;
-            video.playsInline = true;
-            el.appendChild(video);
+            wrapper.appendChild(img);
         }
 
-        circle.appendChild(el);
+        if (data.type === "video") {
+            const video = document.createElement("video");
+            video.src = data.src;
+            video.muted = true;
+            video.autoplay = true;
+            video.loop = true;
+            video.playsInline = true;
+            wrapper.appendChild(video);
+        }
+
+        circle.appendChild(wrapper);
 
         items.push({
-            el,
-            angle: (Math.PI * 2 / count) * i
+            el: wrapper,
+            angle: (Math.PI * 2 / itemsData.length) * i
         });
     });
 
-    /* Continue carrousel */
+    /* Oneindige continue carrousel */
     let lastTime = performance.now();
 
     function animateCarousel(time) {
@@ -108,7 +107,7 @@
         lastTime = time;
 
         items.forEach(item => {
-            item.angle += speed * delta;
+            item.angle += angularSpeed * delta;
 
             const x = Math.cos(item.angle) * radius;
             const y = Math.sin(item.angle) * radius;
@@ -125,19 +124,19 @@
     requestAnimationFrame(animateCarousel);
 
     /* DVD-logo beweging */
-    let dx = 1.4, dy = 1.2;
     let px = 100, py = 100;
+    let vx = 1.4, vy = 1.2;
 
     function moveDVD() {
         const w = window.innerWidth;
         const h = window.innerHeight;
         const rect = container.getBoundingClientRect();
 
-        px += dx;
-        py += dy;
+        px += vx;
+        py += vy;
 
-        if (px <= 0 || px + rect.width >= w) dx *= -1;
-        if (py <= 0 || py + rect.height >= h) dy *= -1;
+        if (px <= 0 || px + rect.width >= w) vx *= -1;
+        if (py <= 0 || py + rect.height >= h) vy *= -1;
 
         container.style.transform = `translate(${px}px, ${py}px)`;
 
