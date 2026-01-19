@@ -2,7 +2,7 @@
 <html lang="nl">
 <head>
     <meta charset="UTF-8">
-    <title>Oneindige Carrousel Cirkel</title>
+    <title>Compacte Oneindige Carrousel</title>
 
     <style>
         html, body {
@@ -14,10 +14,11 @@
             background: white;
         }
 
+        /* DVD container – compact */
         #dvd-container {
             position: absolute;
-            width: 520px;
-            height: 520px;
+            width: 300px;
+            height: 300px;
         }
 
         #circle {
@@ -26,15 +27,16 @@
             height: 100%;
         }
 
+        /* Strakke rechthoeken */
         .item {
             position: absolute;
-            width: 120px;
-            height: 70px;
+            width: 90px;
+            height: 55px;
             top: 50%;
             left: 50%;
         }
 
-        /* Afbeeldingen & video exact gelijk */
+        /* Image & video identiek */
         .item img,
         .item video {
             width: 100%;
@@ -55,7 +57,7 @@
     const circle = document.getElementById("circle");
     const container = document.getElementById("dvd-container");
 
-    /* Content */
+    /* Content: 4 images + 1 video */
     const itemsData = [
         { type: "image", src: "dans1.jpg" },
         { type: "image", src: "dans2.jpg" },
@@ -64,39 +66,35 @@
         { type: "image", src: "dans4.jpg" }
     ];
 
-
-    const radius = 240;
-    const rotationDuration = 20000;   /* 20s */
-    const angularSpeed = (Math.PI * 2) / rotationDuration;
-
+    const radius = 110;               // compact
+    const duration = 20000;           // 20s per ronde
+    const speed = (Math.PI * 2) / duration;
 
     const items = [];
 
-    /* Maak items */
+    /* Items maken */
     itemsData.forEach((data, i) => {
-        const wrapper = document.createElement("div");
-        wrapper.className = "item";
+        const el = document.createElement("div");
+        el.className = "item";
 
         if (data.type === "image") {
             const img = document.createElement("img");
             img.src = data.src;
-            wrapper.appendChild(img);
-        }
-
-        if (data.type === "video") {
+            el.appendChild(img);
+        } else {
             const video = document.createElement("video");
             video.src = data.src;
-            video.muted = true;
             video.autoplay = true;
             video.loop = true;
+            video.muted = true;
             video.playsInline = true;
-            wrapper.appendChild(video);
+            el.appendChild(video);
         }
 
-        circle.appendChild(wrapper);
+        circle.appendChild(el);
 
         items.push({
-            el: wrapper,
+            el,
             angle: (Math.PI * 2 / itemsData.length) * i
         });
     });
@@ -109,15 +107,13 @@
         lastTime = time;
 
         items.forEach(item => {
-            item.angle += angularSpeed * delta;
+            item.angle += speed * delta;
 
             const x = Math.cos(item.angle) * radius;
             const y = Math.sin(item.angle) * radius;
 
-            item.el.style.transform = `
-            translate(${x}px, ${y}px)
-            translate(-50%, -50%)
-        `;
+            item.el.style.transform =
+                `translate(${x}px, ${y}px) translate(-50%, -50%)`;
         });
 
         requestAnimationFrame(animateCarousel);
@@ -126,22 +122,21 @@
     requestAnimationFrame(animateCarousel);
 
     /* DVD-logo beweging */
-    let px = 100, py = 100;
-    let vx = 1.4, vy = 1.2;
+    let x = 80, y = 80;
+    let vx = 1.3, vy = 1.1;
 
     function moveDVD() {
         const w = window.innerWidth;
         const h = window.innerHeight;
         const rect = container.getBoundingClientRect();
 
-        px += vx;
-        py += vy;
+        x += vx;
+        y += vy;
 
-        if (px <= 0 || px + rect.width >= w) vx *= -1;
-        if (py <= 0 || py + rect.height >= h) vy *= -1;
+        if (x <= 0 || x + rect.width >= w) vx *= -1;
+        if (y <= 0 || y + rect.height >= h) vy *= -1;
 
-        container.style.transform = `translate(${px}px, ${py}px)`;
-
+        container.style.transform = `translate(${x}px, ${y}px)`;
         requestAnimationFrame(moveDVD);
     }
 
