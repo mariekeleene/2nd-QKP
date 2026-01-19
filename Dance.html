@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <title>Roterende Afbeeldingen Cirkel</title>
+
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: #ffffff;
+            font-family: sans-serif;
+        }
+
+        /* Container die als geheel beweegt (DVD-effect) */
+        #dvd-container {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            pointer-events: none;
+        }
+
+        /* Roterende cirkel */
+        #circle {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            animation: rotateCircle 20s linear infinite;
+        }
+
+        /* Rechthoeken */
+        .item {
+            position: absolute;
+            width: 120px;
+            height: 70px;
+            top: 50%;
+            left: 50%;
+            transform-origin: center center;
+            background-size: cover;
+            background-position: center;
+            border-radius: 4px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        /* Rotatie van de cirkel */
+        @keyframes rotateCircle {
+            from { transform: rotate(0deg); }
+            to   { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+
+<body>
+
+<div id="dvd-container">
+    <div id="circle"></div>
+</div>
+
+<script>
+    const circle = document.getElementById("circle");
+    const container = document.getElementById("dvd-container");
+
+    const images = [
+        "https://picsum.photos/300/200?1",
+        "https://picsum.photos/300/200?2",
+        "https://picsum.photos/300/200?3",
+        "https://picsum.photos/300/200?4",
+        "https://picsum.photos/300/200?5",
+        "https://picsum.photos/300/200?6",
+        "https://picsum.photos/300/200?7",
+        "https://picsum.photos/300/200?8"
+    ];
+
+    const radius = 150;
+    const count = images.length;
+
+    images.forEach((img, index) => {
+        const angle = (360 / count) * index;
+
+        const item = document.createElement("div");
+        item.className = "item";
+        item.style.backgroundImage = `url(${img})`;
+
+        /*
+           Belangrijk:
+           - Eerst draaien we het punt rond de cirkel
+           - Dan verplaatsen we naar buiten (radius)
+           - Daarna draaien we TERUG zodat de afbeelding horizontaal blijft
+        */
+        item.style.transform = `
+            rotate(${angle}deg)
+            translate(${radius}px)
+            rotate(${-angle}deg)
+        `;
+
+        circle.appendChild(item);
+    });
+
+    /* DVD-achtige beweging */
+    let x = 100;
+    let y = 100;
+    let vx = 1.5;
+    let vy = 1.2;
+
+    function animate() {
+        const w = window.innerWidth;
+        const h = window.innerHeight;
+        const rect = container.getBoundingClientRect();
+
+        x += vx;
+        y += vy;
+
+        if (x <= 0 || x + rect.width >= w) vx *= -1;
+        if (y <= 0 || y + rect.height >= h) vy *= -1;
+
+        container.style.transform = `translate(${x}px, ${y}px)`;
+
+        requestAnimationFrame(animate);
+    }
+
+    animate();
+</script>
+
+</body>
+</html>
