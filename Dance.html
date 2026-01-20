@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rectangle Carousel</title>
+    <title>Dance</title>
     <style>
         html, body {
             margin: 0;
@@ -14,14 +14,17 @@
             background: rgba(255, 255, 255, 0.05);
             touch-action: none;
             user-select: none;
+            -ms-touch-action: none;   /* for older IE/Edge */
             overscroll-behavior: none;
+
+
         }
 
         .carousel {
             position: absolute;
             top: 50%;
             left: 50%;
-            width: 800px;
+            width: 800px;   /* fixed size for rectangle carousel */
             height: 500px;
             transform: translate(-50%, -50%);
         }
@@ -32,14 +35,17 @@
             height: 100%;
         }
 
+
         .item {
             position: absolute;
-            width: 189px;   /* 180px * 1.05 */
-            height: 126px;  /* 120px * 1.05 */
+            width: 200px;   /* 180px * 1.05 = 189px */
+            height: 140px;  /* 120px * 1.05 = 126px */
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
+            touch-action: pan-x pan-y; /* prevents pinch-zoom */
         }
+
 
         .item img, .item video {
             width: 100%;
@@ -47,54 +53,22 @@
             object-fit: cover;
             display: block;
             pointer-events: none;
-            border-radius: 8px;
+            border-radius: 0px;
         }
 
         .item video {
             display: none;
         }
 
-        /* Mobile: images twice as big and touching */
         @media(max-width:600px){
-            .carousel {
-                width: 100%;
-                height: 80%;  /* bigger for larger images */
-            }
-
             .item {
-                width: 50vw;   /* double previous 25vw */
-                height: 32vw;  /* double previous 16vw */
+                width: 120px;
+                height: 80px;
             }
-        }
-
-        /* Central home button */
-        #homeButton {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 40px;
-            background: rgb(255, 255, 255);
-            color: #8efb0b;
-            border: none;
-            border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            text-align: center;
-            line-height: 60px;
-            cursor: pointer;
-            z-index: 1000;
-            user-select: none;
-        }
-        #homeButton:active {
-            background: rgba(0,0,0,0.7);
         }
     </style>
 </head>
 <body>
-
-<!-- Home button -->
-<button id="homeButton" onclick="location.href='index.html'">☒</button>
 
 <script>
     const mediaSet1 = [
@@ -106,7 +80,7 @@
         { image: "images/Dans6.png", video: "images/pigeonreverse.mov" }
     ];
 
-    function createCarousel({ media, radiusDesktop, radiusMobile, speedMultiplier }) {
+    function createCarousel({ media, radius, speedMultiplier }) {
         const container = document.createElement("div");
         container.className = "carousel";
 
@@ -157,8 +131,9 @@
             isDragging = true;
             lastTouchX = e.touches[0].clientX;
             items.forEach(item=>{
-                item.img.style.display="block";
-                item.video.style.display="none";
+                item.img.style.display="none";
+                item.video.style.display="block";
+                item.video.play().catch(()=>{});
             });
         });
 
@@ -173,8 +148,9 @@
         container.addEventListener("touchend", ()=>{
             isDragging=false;
             items.forEach(item=>{
-                item.img.style.display="block";
+                item.video.pause();
                 item.video.style.display="none";
+                item.img.style.display="block";
             });
         });
 
@@ -184,11 +160,8 @@
 
             if(!isDragging) dragVelocity *= 0.95;
 
-            // Use smaller radius on mobile so carousel stays centered
-            const isMobile = window.innerWidth <= 600;
-            const radius = isMobile ? radiusMobile : radiusDesktop;
-
             items.forEach(item=>{
+                // SLOWER rotation: divide speedMultiplier by 2
                 item.angle += delta*0.0003*(speedMultiplier/2) + dragVelocity;
                 const px = Math.cos(item.angle)*radius;
                 const py = Math.sin(item.angle)*radius;
@@ -201,14 +174,14 @@
         requestAnimationFrame(animate);
     }
 
-    // Desktop radius 200, Mobile radius 100 (smaller for centered circle)
+    // Create carousel with rectangle layout and slower rotation
     createCarousel({
         media: mediaSet1,
-        radiusDesktop: 200,
-        radiusMobile: 100,
+        radius: 200,       // radius smaller than carousel width/height
         speedMultiplier: 1
     });
 </script>
-
 </body>
 </html>
+
+
