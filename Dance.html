@@ -12,11 +12,10 @@
             width: 100%;
             height: 100%;
             overflow: hidden;
-            background: #dff5e1; /* lichtgroen */
+            background: #2424370d;
             touch-action: none;
         }
 
-        /* DVD container */
         #dvd-container {
             position: absolute;
             width: 260px;
@@ -24,7 +23,6 @@
             will-change: transform;
         }
 
-        /* Schaal iets kleiner op mobiel */
         @media (max-width: 600px) {
             #dvd-container {
                 width: 220px;
@@ -46,13 +44,11 @@
             left: 50%;
         }
 
-        .item img,
         .item video {
             width: 150%;
             height: 150%;
             object-fit: cover;
             display: block;
-            border-radius: 0px;
         }
     </style>
 </head>
@@ -67,12 +63,13 @@
     const circle = document.getElementById("circle");
     const container = document.getElementById("dvd-container");
 
+    /* 5 videos */
     const itemsData = [
-        { type: "image", src: "images/dans2.JPG" },
-        { type: "video", src: "images/pigeon.mp4" },
-        { type: "image", src: "images/dans3.JPG" },
-        { type: "image", src: "images/dans1.JPG" },
-        { type: "image", src: "images/dans4.JPG" }
+        { src: "images/pigeon.mp4" },
+        { src: "images/pigeon.mp4" },
+        { src: "images/pigeon.mp4" },
+        { src: "images/pigeon.mp4" },
+        { src: "images/pigeon.mp4" }
     ];
 
     let radius = 110;
@@ -86,31 +83,61 @@
     updateRadius();
     window.addEventListener("resize", updateRadius);
 
-    /* Items maken */
+    /* Drag state */
+    let isDragging = false;
+    let lastTouchX = 0;
+    let dragVelocity = 0;
+
+    /* Items maken + staggered video start */
     itemsData.forEach((data, i) => {
         const el = document.createElement("div");
         el.className = "item";
 
-        if (data.type === "image") {
-            const img = document.createElement("img");
-            img.src = data.src;
-            el.appendChild(img);
-        } else {
-            const video = document.createElement("video");
-            video.src = data.src;
-            video.autoplay = true;
-            video.loop = true;
-            video.muted = true;
-            video.playsInline = true;
-            el.appendChild(video);
-        }
+        const video = document.createElement("video");
+        video.src = data.src;
+        video.loop = true;
+        video.muted = true;
+        video.playsInline = true;
+        video.preload = "auto";
 
+        el.appendChild(video);
         circle.appendChild(el);
+
+        // video’s starten na elkaar
+        setTimeout(() => {
+            video.play().catch(() => {});
+        }, i * 400);
 
         items.push({
             el,
             angle: (Math.PI * 2 / itemsData.length) * i
         });
+    });
+
+    /* Touch-drag */
+    container.addEventListener("touchstart", e => {
+        isDragging = true;
+        lastTouchX = e.touches[0].clientX;
+        dragVelocity = 0;
+    });
+
+    container.addEventListener("touchmove", e => {
+        if (!isDragging) return;
+
+        const x = e.touches[0].clientX;
+        const deltaX = x - lastTouchX;
+        lastTouchX = x;
+
+        const rotationDelta = deltaX * 0.005;
+        dragVelocity = rotationDelta;
+
+        items.forEach(item => {
+            item.angle += rotationDelta;
+        });
+    });
+
+    container.addEventListener("touchend", () => {
+        isDragging = false;
     });
 
     /* Carrousel animatie */
@@ -120,9 +147,14 @@
         const delta = time - lastTime;
         lastTime = time;
 
-        items.forEach(item => {
-            item.angle += speed * delta;
+        if (!isDragging) {
+            dragVelocity *= 0.95;
+            items.forEach(item => {
+                item.angle += speed * delta + dragVelocity;
+            });
+        }
 
+        items.forEach(item => {
             const x = Math.cos(item.angle) * radius;
             const y = Math.sin(item.angle) * radius;
 
@@ -135,7 +167,7 @@
 
     requestAnimationFrame(animateCarousel);
 
-    /* DVD-beweging (mobiel-proof) */
+    /* DVD-bounce */
     let x = 60, y = 60;
     let vx = 1.1, vy = 1.0;
 
