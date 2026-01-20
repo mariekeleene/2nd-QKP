@@ -11,9 +11,13 @@
             width: 100%;
             height: 100%;
             overflow: hidden;
-            background: #2424370d;
+            background: rgba(255, 255, 255, 0.05);
             touch-action: none;
             user-select: none;
+            -ms-touch-action: none;   /* for older IE/Edge */
+            overscroll-behavior: none;
+
+
         }
 
         .carousel {
@@ -31,14 +35,17 @@
             height: 100%;
         }
 
+
         .item {
             position: absolute;
-            width: 180px;   /* rectangle width */
-            height: 120px;  /* rectangle height */
+            width: 200px;   /* 180px * 1.05 = 189px */
+            height: 140px;  /* 120px * 1.05 = 126px */
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
+            touch-action: pan-x pan-y; /* prevents pinch-zoom */
         }
+
 
         .item img, .item video {
             width: 100%;
