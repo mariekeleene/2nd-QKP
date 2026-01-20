@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Overlapping Media Carrousels</title>
+    <title>Interactive Carrousels</title>
 
     <style>
         html, body {
@@ -35,11 +35,15 @@
             left: 50%;
         }
 
-        .item video, .item img {
+        .item img, .item video {
             width: 150%;
             height: 150%;
             object-fit: cover;
             display: block;
+            pointer-events: none; /* zodat hover / drag werkt op item div */
+        }
+        .item video {
+            display: none; /* default hidden */
         }
     </style>
 </head>
@@ -47,36 +51,14 @@
 <body>
 
 <script>
-    /* =======================
-       MEDIA SETS (video & images)
-    ======================= */
     const mediaSet1 = [
-        { type: "video", src: "images/pigeon.mp4" },
-        { type: "image", src: "images/dans4.JPG" },
-        { type: "video", src: "images/pigeon.mp4" },
-        { type: "image", src: "images/dans3.JPG" },
-        { type: "video", src: "images/pigeon.mp4" }
+        { image: "images/dans4.JPG", video: "images/pigeon.mp4" },
+        { image: "images/dans1.JPG", video: "images/pigeon.mp4" },
+        { image: "images/dans2.JPG", video: "images/pigeon.mp4" },
+        { image: "images/dans3.JPG", video: "images/pigeon.mp4" },
+        { image: "images/dans4.JPG", video: "images/pigeon.mp4" }
     ];
 
-    const mediaSet2 = [
-        { type: "image", src: "images/dans4.JPG" },
-        { type: "image", src: "images/dans1.JPG" },
-        { type: "image", src: "images/dans2.JPG" },
-        { type: "image", src: "images/dans3.JPG" },
-        { type: "image", src: "images/dans4.JPG" }
-    ];
-
-    const mediaSet3 = [
-        { type: "image", src: "images/dans1.JPG" },
-        { type: "video", src: "images/pigeon.mp4" },
-        { type: "image", src: "images/dans2.JPG" },
-        { type: "video", src: "images/pigeon.mp4" },
-        { type: "image", src: "images/dans3.JPG" }
-    ];
-
-    /* =======================
-       CAROUSEL FACTORY
-    ======================= */
     function createCarousel({ media, size, radius, speedMultiplier, startX, startY }) {
         const container = document.createElement("div");
         container.className = "carousel";
@@ -99,27 +81,49 @@
         let dragVelocity = 0;
         let lastTime = performance.now();
 
-        /* Items + staggered start */
         media.forEach((m, i) => {
             const el = document.createElement("div");
             el.className = "item";
 
-            if (m.type === "video") {
-                const video = document.createElement("video");
-                video.src = m.src;
-                video.loop = true;
-                video.muted = true;
-                video.playsInline = true;
-                video.preload = "auto";
-                el.appendChild(video);
-                setTimeout(() => video.play().catch(() => {}), i * 400);
-            } else if (m.type === "image") {
-                const img = document.createElement("img");
-                img.src = m.src;
-                el.appendChild(img);
-            }
+            const img = document.createElement("img");
+            img.src = m.image;
 
+            const video = document.createElement("video");
+            video.src = m.video;
+            video.loop = true;
+            video.muted = true;
+            video.playsInline = true;
+            video.preload = "auto";
+
+            el.appendChild(img);
+            el.appendChild(video);
             circle.appendChild(el);
+
+            // Hover for desktop
+            el.addEventListener("mouseenter", () => {
+                img.style.display = "none";
+                video.style.display = "block";
+                video.play().catch(()=>{});
+            });
+            el.addEventListener("mouseleave", () => {
+                video.pause();
+                video.style.display = "none";
+                img.style.display = "block";
+            });
+
+            // Touch / drag for mobile
+            el.addEventListener("touchstart", () => {
+                isDragging = true;
+                img.style.display = "none";
+                video.style.display = "block";
+                video.play().catch(()=>{});
+            });
+            el.addEventListener("touchend", () => {
+                isDragging = false;
+                video.pause();
+                video.style.display = "none";
+                img.style.display = "block";
+            });
 
             items.push({
                 el,
@@ -127,24 +131,16 @@
             });
         });
 
-        /* Touch drag */
+        // Touch drag rotation
         container.addEventListener("touchstart", e => {
-            isDragging = true;
             lastTouchX = e.touches[0].clientX;
-            dragVelocity = 0;
         });
 
         container.addEventListener("touchmove", e => {
-            if (!isDragging) return;
             const dx = e.touches[0].clientX - lastTouchX;
             lastTouchX = e.touches[0].clientX;
-            const rot = dx * 0.005;
-            dragVelocity = rot;
-            items.forEach(item => item.angle += rot);
-        });
-
-        container.addEventListener("touchend", () => {
-            isDragging = false;
+            dragVelocity = dx * 0.005;
+            items.forEach(item => item.angle += dragVelocity);
         });
 
         /* Animation loop */
@@ -152,14 +148,9 @@
             const delta = time - lastTime;
             lastTime = time;
 
-            if (!isDragging) {
-                dragVelocity *= 0.95;
-                items.forEach(item => {
-                    item.angle += (delta * 0.0003 * speedMultiplier) + dragVelocity;
-                });
-            }
-
+            dragVelocity *= 0.95;
             items.forEach(item => {
+                item.angle += delta * 0.0003 * speedMultiplier + dragVelocity;
                 const px = Math.cos(item.angle) * radius;
                 const py = Math.sin(item.angle) * radius;
                 item.el.style.transform = `translate(${px}px, ${py}px) translate(-50%, -50%)`;
@@ -170,19 +161,16 @@
             const rect = container.getBoundingClientRect();
             x += vx;
             y += vy;
-            if (x <= 0 || x + rect.width >= w) vx *= -1;
-            if (y <= 0 || y + rect.height >= h) vy *= -1;
+            if(x<=0 || x+rect.width>=w) vx*=-1;
+            if(y<=0 || y+rect.height>=h) vy*=-1;
             container.style.transform = `translate3d(${x}px, ${y}px, 0)`;
 
             requestAnimationFrame(animate);
         }
-
         requestAnimationFrame(animate);
     }
 
-    /* =======================
-       CREATE 3 CAROUSELS
-    ======================= */
+    /* CREATE CAROUSELS */
     createCarousel({
         media: mediaSet1,
         size: 260,
@@ -192,24 +180,6 @@
         startY: 80
     });
 
-    createCarousel({
-        media: mediaSet2,
-        size: 220,
-        radius: 90,
-        speedMultiplier: -0.8,
-        startX: 220,
-        startY: 300
-    });
-
-    createCarousel({
-        media: mediaSet3,
-        size: 300,
-        radius: 130,
-        speedMultiplier: 1.2,
-        startX: 420,
-        startY: 150
-    });
 </script>
-
 </body>
 </html>
