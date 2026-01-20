@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Mobile Carrousel</title>
+    <title>Centered Interactive Fullscreen Carrousel</title>
 
     <style>
         html, body {
@@ -14,11 +14,14 @@
             overflow: hidden;
             background: #2424370d;
             touch-action: none;
-            user-select: none; /* voorkomt selectie/zoom */
+            user-select: none;
         }
 
         .carousel {
             position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             will-change: transform;
         }
 
@@ -30,51 +33,54 @@
 
         .item {
             position: absolute;
-            width: 100px;
-            height: 65px;
+            width: 15%;   /* 6 items, passen zich aan desktop full screen */
+            height: 10%;
             top: 50%;
             left: 50%;
         }
 
         .item img, .item video {
-            width: 150%;
-            height: 150%;
+            width: 100%;
+            height: 100%;
             object-fit: cover;
             display: block;
             pointer-events: none;
         }
+
         .item video {
-            display: none; /* standaard hidden */
+            display: none;
+        }
+
+        /* Mobile aanpassing */
+        @media(max-width:600px){
+            .item{
+                width:25%;
+                height:15%;
+            }
         }
     </style>
 </head>
 <body>
 
 <script>
-    // Media set: elke item heeft een image + video
+    // Media set: elk item heeft image + video, nu 6 items
     const mediaSet1 = [
-        { image: "images/dans4.JPG", video: "images/pigeon.mp4" },
         { image: "images/dans1.JPG", video: "images/pigeon.mp4" },
         { image: "images/dans2.JPG", video: "images/pigeon.mp4" },
         { image: "images/dans3.JPG", video: "images/pigeon.mp4" },
-        { image: "images/dans4.JPG", video: "images/pigeon.mp4" }
+        { image: "images/dans4.JPG", video: "images/pigeon.mp4" },
+        { image: "images/dans1.JPG", video: "images/pigeon.mp4" },
+        { image: "images/dans2.JPG", video: "images/pigeon.mp4" }
     ];
 
-    function createCarousel({ media, size, radius, speedMultiplier, startX, startY }) {
+    function createCarousel({ media, radius, speedMultiplier }) {
         const container = document.createElement("div");
         container.className = "carousel";
-        container.style.width = size + "px";
-        container.style.height = size + "px";
 
         const circle = document.createElement("div");
         circle.className = "circle";
         container.appendChild(circle);
         document.body.appendChild(container);
-
-        let x = startX;
-        let y = startY;
-        let vx = (Math.random()*1+0.6)*(Math.random()<0.5?-1:1);
-        let vy = (Math.random()*1+0.6)*(Math.random()<0.5?-1:1);
 
         const items = [];
         let isDragging = false;
@@ -100,50 +106,49 @@
             el.appendChild(video);
             circle.appendChild(el);
 
-            items.push({ el, img, video, angle: (Math.PI*2/media.length)*i });
+            // Desktop hover
+            el.addEventListener("mouseenter", ()=>{
+                img.style.display="none";
+                video.style.display="block";
+                video.play().catch(()=>{});
+            });
+            el.addEventListener("mouseleave", ()=>{
+                video.pause();
+                video.style.display="none";
+                img.style.display="block";
+            });
+
+            // Touch drag: alle images -> video
+            el.addEventListener("touchstart", ()=>{
+                isDragging = true;
+                items.forEach(item=>{
+                    item.img.style.display="none";
+                    item.video.style.display="block";
+                    item.video.play().catch(()=>{});
+                });
+            });
+            el.addEventListener("touchend", ()=>{
+                isDragging=false;
+                items.forEach(item=>{
+                    item.video.pause();
+                    item.video.style.display="none";
+                    item.img.style.display="block";
+                });
+            });
+
+            items.push({el,img,video,angle:(Math.PI*2/media.length)*i});
         });
 
-        // Desktop hover: enkel eigen item verandert
-        items.forEach(item=>{
-            item.el.addEventListener("mouseenter", ()=>{
-                item.img.style.display="none";
-                item.video.style.display="block";
-                item.video.play().catch(()=>{});
-            });
-            item.el.addEventListener("mouseleave", ()=>{
-                item.video.pause();
-                item.video.style.display="none";
-                item.img.style.display="block";
-            });
-        });
-
-        // Touch drag: alle afbeeldingen -> pigeon video
+        // Touch drag rotation
         container.addEventListener("touchstart", e=>{
-            isDragging=true;
             lastTouchX = e.touches[0].clientX;
-
-            items.forEach(item=>{
-                item.img.style.display="none";
-                item.video.style.display="block";
-                item.video.play().catch(()=>{});
-            });
         });
-
         container.addEventListener("touchmove", e=>{
             if(!isDragging) return;
             const dx = e.touches[0].clientX - lastTouchX;
             lastTouchX = e.touches[0].clientX;
             dragVelocity = dx*0.005;
             items.forEach(item=>item.angle+=dragVelocity);
-        });
-
-        container.addEventListener("touchend", ()=>{
-            isDragging=false;
-            items.forEach(item=>{
-                item.video.pause();
-                item.video.style.display="none";
-                item.img.style.display="block";
-            });
         });
 
         // Animation loop
@@ -160,27 +165,16 @@
                 item.el.style.transform = `translate(${px}px, ${py}px) translate(-50%, -50%)`;
             });
 
-            const w = window.innerWidth;
-            const h = window.innerHeight;
-            const rect = container.getBoundingClientRect();
-            x+=vx; y+=vy;
-            if(x<=0 || x+rect.width>=w) vx*=-1;
-            if(y<=0 || y+rect.height>=h) vy*=-1;
-            container.style.transform = `translate3d(${x}px,${y}px,0)`;
-
             requestAnimationFrame(animate);
         }
         requestAnimationFrame(animate);
     }
 
-    // Create carousel
+    // Maak de fullscreen carousel
     createCarousel({
         media: mediaSet1,
-        size: 260,
-        radius: 110,
-        speedMultiplier: 1,
-        startX: 40,
-        startY: 80
+        radius: 250,   // groter radius voor fullscreen effect
+        speedMultiplier: 1
     });
 </script>
 
