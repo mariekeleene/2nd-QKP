@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Overlapping Video Carrousels</title>
+    <title>Overlapping Media Carrousels</title>
 
     <style>
         html, body {
@@ -35,7 +35,7 @@
             left: 50%;
         }
 
-        .item video {
+        .item video, .item img {
             width: 150%;
             height: 150%;
             object-fit: cover;
@@ -48,43 +48,36 @@
 
 <script>
     /* =======================
-       VIDEO SETS
+       MEDIA SETS (video & images)
     ======================= */
-    const videosSet1 = [
-        "images/pigeon.mp4",
-        "images/dans4.JPG",
-        "images/pigeon.mp4",
-        "images/pigeon.mp4",
-        "images/pigeon.mp4"
+    const mediaSet1 = [
+        { type: "video", src: "images/pigeon.mp4" },
+        { type: "image", src: "images/dans4.JPG" },
+        { type: "video", src: "images/pigeon.mp4" },
+        { type: "image", src: "images/dans3.JPG" },
+        { type: "video", src: "images/pigeon.mp4" }
     ];
 
-    const videosSet2 = [
-        "images/dans4.JPG",
-        "images/dans4.JPG",
-        "images/dans4.JPG",
-        "images/dans4.JPG",
-        "images/dans4.JPG"
+    const mediaSet2 = [
+        { type: "image", src: "images/dans4.JPG" },
+        { type: "image", src: "images/dans1.JPG" },
+        { type: "image", src: "images/dans2.JPG" },
+        { type: "image", src: "images/dans3.JPG" },
+        { type: "image", src: "images/dans4.JPG" }
     ];
 
-    const videosSet3 = [
-        "images/dans1.JPG",
-        "images/dans1.JPG",
-        "images/dans1.JPG",
-        "images/dans1.JPG",
-        "images/dans1.JPG"
+    const mediaSet3 = [
+        { type: "image", src: "images/dans1.JPG" },
+        { type: "video", src: "images/pigeon.mp4" },
+        { type: "image", src: "images/dans2.JPG" },
+        { type: "video", src: "images/pigeon.mp4" },
+        { type: "image", src: "images/dans3.JPG" }
     ];
 
     /* =======================
        CAROUSEL FACTORY
     ======================= */
-    function createCarousel({
-                                videos,
-                                size,
-                                radius,
-                                speedMultiplier,
-                                startX,
-                                startY
-                            }) {
+    function createCarousel({ media, size, radius, speedMultiplier, startX, startY }) {
         const container = document.createElement("div");
         container.className = "carousel";
         container.style.width = size + "px";
@@ -106,28 +99,31 @@
         let dragVelocity = 0;
         let lastTime = performance.now();
 
-        /* Items + staggered video start */
-        videos.forEach((src, i) => {
+        /* Items + staggered start */
+        media.forEach((m, i) => {
             const el = document.createElement("div");
             el.className = "item";
 
-            const video = document.createElement("video");
-            video.src = src;
-            video.loop = true;
-            video.muted = true;
-            video.playsInline = true;
-            video.preload = "auto";
+            if (m.type === "video") {
+                const video = document.createElement("video");
+                video.src = m.src;
+                video.loop = true;
+                video.muted = true;
+                video.playsInline = true;
+                video.preload = "auto";
+                el.appendChild(video);
+                setTimeout(() => video.play().catch(() => {}), i * 400);
+            } else if (m.type === "image") {
+                const img = document.createElement("img");
+                img.src = m.src;
+                el.appendChild(img);
+            }
 
-            el.appendChild(video);
             circle.appendChild(el);
-
-            setTimeout(() => {
-                video.play().catch(() => {});
-            }, i * 400);
 
             items.push({
                 el,
-                angle: (Math.PI * 2 / videos.length) * i
+                angle: (Math.PI * 2 / media.length) * i
             });
         });
 
@@ -140,13 +136,10 @@
 
         container.addEventListener("touchmove", e => {
             if (!isDragging) return;
-
             const dx = e.touches[0].clientX - lastTouchX;
             lastTouchX = e.touches[0].clientX;
-
             const rot = dx * 0.005;
             dragVelocity = rot;
-
             items.forEach(item => item.angle += rot);
         });
 
@@ -169,21 +162,16 @@
             items.forEach(item => {
                 const px = Math.cos(item.angle) * radius;
                 const py = Math.sin(item.angle) * radius;
-
-                item.el.style.transform =
-                    `translate(${px}px, ${py}px) translate(-50%, -50%)`;
+                item.el.style.transform = `translate(${px}px, ${py}px) translate(-50%, -50%)`;
             });
 
             const w = window.innerWidth;
             const h = window.innerHeight;
             const rect = container.getBoundingClientRect();
-
             x += vx;
             y += vy;
-
             if (x <= 0 || x + rect.width >= w) vx *= -1;
             if (y <= 0 || y + rect.height >= h) vy *= -1;
-
             container.style.transform = `translate3d(${x}px, ${y}px, 0)`;
 
             requestAnimationFrame(animate);
@@ -196,7 +184,7 @@
        CREATE 3 CAROUSELS
     ======================= */
     createCarousel({
-        videos: videosSet1,
+        media: mediaSet1,
         size: 260,
         radius: 110,
         speedMultiplier: 1,
@@ -205,7 +193,7 @@
     });
 
     createCarousel({
-        videos: videosSet2,
+        media: mediaSet2,
         size: 220,
         radius: 90,
         speedMultiplier: -0.8,
@@ -214,7 +202,7 @@
     });
 
     createCarousel({
-        videos: videosSet3,
+        media: mediaSet3,
         size: 300,
         radius: 130,
         speedMultiplier: 1.2,
