@@ -183,3 +183,213 @@
 </script>
 </body>
 </html>
+
+
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rectangle Carousel</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.05);
+            touch-action: none;
+            user-select: none;
+            overscroll-behavior: none;
+        }
+
+        .carousel {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 800px;
+            height: 500px;
+            transform: translate(-50%, -50%);
+        }
+
+        .circle {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .item {
+            position: absolute;
+            width: 189px;   /* 180px * 1.05 */
+            height: 126px;  /* 120px * 1.05 */
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .item img, .item video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            pointer-events: none;
+            border-radius: 8px;
+        }
+
+        .item video {
+            display: none;
+        }
+
+        /* Mobile: images touch each other */
+        @media(max-width:600px){
+            .carousel {
+                width: 100%;
+                height: 70%;  /* reduce height to fit viewport */
+            }
+
+            .item {
+                width: 25vw;   /* rectangle almost fills space */
+                height: 16vw;  /* rectangle almost fills space */
+            }
+        }
+
+        /* Central home button */
+        #homeButton {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 40px;
+            background: rgba(0,0,0,0.5);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            text-align: center;
+            line-height: 60px;
+            cursor: pointer;
+            z-index: 1000;
+            user-select: none;
+        }
+        #homeButton:active {
+            background: rgba(0,0,0,0.7);
+        }
+    </style>
+</head>
+<body>
+
+<!-- Home button -->
+<button id="homeButton" onclick="location.href='index.html'">☒</button>
+
+<script>
+    const mediaSet1 = [
+        { image: "images/Dans1.png", video: "images/pigeonreverse.mov" },
+        { image: "images/Dans2.png", video: "images/pigeonreverse.mov" },
+        { image: "images/Dans3.png", video: "images/pigeonreverse.mov" },
+        { image: "images/Dans4.png", video: "images/pigeonreverse.mov" },
+        { image: "images/Dans5.png", video: "images/pigeonreverse.mov" },
+        { image: "images/Dans6.png", video: "images/pigeonreverse.mov" }
+    ];
+
+    function createCarousel({ media, radius, speedMultiplier }) {
+        const container = document.createElement("div");
+        container.className = "carousel";
+
+        const circle = document.createElement("div");
+        circle.className = "circle";
+        container.appendChild(circle);
+        document.body.appendChild(container);
+
+        const items = [];
+        let isDragging = false;
+        let lastTouchX = 0;
+        let dragVelocity = 0;
+        let lastTime = performance.now();
+
+        media.forEach((m,i)=>{
+            const el = document.createElement("div");
+            el.className = "item";
+
+            const img = document.createElement("img");
+            img.src = m.image;
+
+            const video = document.createElement("video");
+            video.src = m.video;
+            video.loop = true;
+            video.muted = true;
+            video.playsInline = true;
+            video.preload = "auto";
+
+            el.appendChild(img);
+            el.appendChild(video);
+            circle.appendChild(el);
+
+            el.addEventListener("mouseenter", ()=>{
+                img.style.display="none";
+                video.style.display="block";
+                video.play().catch(()=>{});
+            });
+            el.addEventListener("mouseleave", ()=>{
+                video.pause();
+                video.style.display="none";
+                img.style.display="block";
+            });
+
+            items.push({el,img,video,angle:(Math.PI*2/media.length)*i});
+        });
+
+        container.addEventListener("touchstart", e=>{
+            isDragging = true;
+            lastTouchX = e.touches[0].clientX;
+            items.forEach(item=>{
+                item.img.style.display="block"; // keep images visible, no zoom
+                item.video.style.display="none"; // don’t autoplay pigeon video
+            });
+        });
+
+        container.addEventListener("touchmove", e=>{
+            if(!isDragging) return;
+            const dx = e.touches[0].clientX - lastTouchX;
+            lastTouchX = e.touches[0].clientX;
+            dragVelocity = dx * 0.005;
+            items.forEach(item=>item.angle+=dragVelocity);
+        });
+
+        container.addEventListener("touchend", ()=>{
+            isDragging=false;
+            items.forEach(item=>{
+                item.img.style.display="block";
+                item.video.style.display="none";
+            });
+        });
+
+        function animate(time){
+            const delta = time - lastTime;
+            lastTime = time;
+
+            if(!isDragging) dragVelocity *= 0.95;
+
+            items.forEach(item=>{
+                item.angle += delta*0.0003*(speedMultiplier/2) + dragVelocity;
+                const px = Math.cos(item.angle)*radius;
+                const py = Math.sin(item.angle)*radius;
+                item.el.style.transform = `translate(${px}px, ${py}px) translate(-50%, -50%)`;
+            });
+
+            requestAnimationFrame(animate);
+        }
+
+        requestAnimationFrame(animate);
+    }
+
+    createCarousel({
+        media: mediaSet1,
+        radius: 200,
+        speedMultiplier: 1
+    });
+</script>
+
+</body>
+</html>
