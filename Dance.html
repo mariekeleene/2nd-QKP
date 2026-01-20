@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dance</title>
+    <title>Rectangle Carousel</title>
     <style>
         html, body {
             margin: 0;
@@ -11,20 +11,17 @@
             width: 100%;
             height: 100%;
             overflow: hidden;
-            background: rgba(255, 255, 255, 0.05);
+            background: #2424370d;
             touch-action: none;
             user-select: none;
-            -ms-touch-action: none;   /* for older IE/Edge */
             overscroll-behavior: none;
-
-
         }
 
         .carousel {
             position: absolute;
             top: 50%;
             left: 50%;
-            width: 800px;   /* fixed size for rectangle carousel */
+            width: 800px;
             height: 500px;
             transform: translate(-50%, -50%);
         }
@@ -35,17 +32,14 @@
             height: 100%;
         }
 
-
         .item {
             position: absolute;
-            width: 200px;   /* 180px * 1.05 = 189px */
-            height: 140px;  /* 120px * 1.05 = 126px */
+            width: 189px;   /* 180px * 1.05 */
+            height: 126px;  /* 120px * 1.05 */
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            touch-action: pan-x pan-y; /* prevents pinch-zoom */
         }
-
 
         .item img, .item video {
             width: 100%;
@@ -53,31 +47,63 @@
             object-fit: cover;
             display: block;
             pointer-events: none;
-            border-radius: 0px;
+            border-radius: 8px;
         }
 
         .item video {
             display: none;
         }
 
+        /* Mobile: images touch each other */
         @media(max-width:600px){
-            .item {
-                width: 120px;
-                height: 80px;
+            .carousel {
+                width: 100%;
+                height: 70%;  /* reduce height to fit viewport */
             }
+
+            .item {
+                width: 25vw;   /* rectangle almost fills space */
+                height: 16vw;  /* rectangle almost fills space */
+            }
+        }
+
+        /* Central home button */
+        #homeButton {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 40px;
+            background: rgba(0,0,0,0.5);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            text-align: center;
+            line-height: 60px;
+            cursor: pointer;
+            z-index: 1000;
+            user-select: none;
+        }
+        #homeButton:active {
+            background: rgba(0,0,0,0.7);
         }
     </style>
 </head>
 <body>
 
+<!-- Home button -->
+<button id="homeButton" onclick="location.href='index.html'">☒</button>
+
 <script>
     const mediaSet1 = [
-        { image: "images/Dans1.png", video: "images/pigeonreverse.mov" },
-        { image: "images/Dans2.png", video: "images/pigeonreverse.mov" },
-        { image: "images/Dans3.png", video: "images/pigeonreverse.mov" },
-        { image: "images/Dans4.png", video: "images/pigeonreverse.mov" },
-        { image: "images/Dans5.png", video: "images/pigeonreverse.mov" },
-        { image: "images/Dans6.png", video: "images/pigeonreverse.mov" }
+        { image: "images/simart11.jpg", video: "images/pigeon.mp4" },
+        { image: "images/dans2.JPG", video: "images/pigeon.mp4" },
+        { image: "images/dans3.JPG", video: "images/pigeon.mp4" },
+        { image: "images/dans4.JPG", video: "images/pigeon.mp4" },
+        { image: "images/dans1.JPG", video: "images/pigeon.mp4" },
+        { image: "images/dans2.JPG", video: "images/pigeon.mp4" }
     ];
 
     function createCarousel({ media, radius, speedMultiplier }) {
@@ -131,9 +157,8 @@
             isDragging = true;
             lastTouchX = e.touches[0].clientX;
             items.forEach(item=>{
-                item.img.style.display="none";
-                item.video.style.display="block";
-                item.video.play().catch(()=>{});
+                item.img.style.display="block"; // keep images visible, no zoom
+                item.video.style.display="none"; // don’t autoplay pigeon video
             });
         });
 
@@ -148,9 +173,8 @@
         container.addEventListener("touchend", ()=>{
             isDragging=false;
             items.forEach(item=>{
-                item.video.pause();
-                item.video.style.display="none";
                 item.img.style.display="block";
+                item.video.style.display="none";
             });
         });
 
@@ -161,7 +185,6 @@
             if(!isDragging) dragVelocity *= 0.95;
 
             items.forEach(item=>{
-                // SLOWER rotation: divide speedMultiplier by 2
                 item.angle += delta*0.0003*(speedMultiplier/2) + dragVelocity;
                 const px = Math.cos(item.angle)*radius;
                 const py = Math.sin(item.angle)*radius;
@@ -174,14 +197,12 @@
         requestAnimationFrame(animate);
     }
 
-    // Create carousel with rectangle layout and slower rotation
     createCarousel({
         media: mediaSet1,
-        radius: 200,       // radius smaller than carousel width/height
+        radius: 200,
         speedMultiplier: 1
     });
 </script>
+
 </body>
 </html>
-
-
