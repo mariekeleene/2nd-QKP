@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Compacte Oneindige Carrousel</title>
+    <title>Overlapping Video Carrousels</title>
 
     <style>
         html, body {
@@ -16,21 +16,12 @@
             touch-action: none;
         }
 
-        #dvd-container {
+        .carousel {
             position: absolute;
-            width: 260px;
-            height: 260px;
             will-change: transform;
         }
 
-        @media (max-width: 600px) {
-            #dvd-container {
-                width: 220px;
-                height: 220px;
-            }
-        }
-
-        #circle {
+        .circle {
             position: relative;
             width: 100%;
             height: 100%;
@@ -55,138 +46,181 @@
 
 <body>
 
-<div id="dvd-container">
-    <div id="circle"></div>
-</div>
-
 <script>
-    const circle = document.getElementById("circle");
-    const container = document.getElementById("dvd-container");
-
-    /* 5 videos */
-    const itemsData = [
-        { src: "images/pigeon.mp4" },
-        { src: "images/pigeon.mp4" },
-        { src: "images/pigeon.mp4" },
-        { src: "images/pigeon.mp4" },
-        { src: "images/pigeon.mp4" }
+    /* =======================
+       VIDEO SETS
+    ======================= */
+    const videosSet1 = [
+        "images/pigeon.mp4",
+        "images/pigeon.mp4",
+        "images/pigeon.mp4",
+        "images/pigeon.mp4",
+        "images/pigeon.mp4"
     ];
 
-    let radius = 110;
-    const duration = 20000;
-    const speed = (Math.PI * 2) / duration;
-    const items = [];
+    const videosSet2 = [
+        "images/dans4.JPG",
+        "images/dans4.JPG",
+        "images/dans4.JPG",
+        "images/dans4.JPG",
+        "images/dans4.JPG"
+    ];
 
-    function updateRadius() {
-        radius = window.innerWidth < 600 ? 90 : 110;
-    }
-    updateRadius();
-    window.addEventListener("resize", updateRadius);
+    const videosSet3 = [
+        "images/dans1.JPG",
+        "images/dans1.JPG",
+        "images/dans1.JPG",
+        "images/dans1.JPG",
+        "images/dans1.JPG"
+    ];
 
-    /* Drag state */
-    let isDragging = false;
-    let lastTouchX = 0;
-    let dragVelocity = 0;
+    /* =======================
+       CAROUSEL FACTORY
+    ======================= */
+    function createCarousel({
+                                videos,
+                                size,
+                                radius,
+                                speedMultiplier,
+                                startX,
+                                startY
+                            }) {
+        const container = document.createElement("div");
+        container.className = "carousel";
+        container.style.width = size + "px";
+        container.style.height = size + "px";
 
-    /* Items maken + staggered video start */
-    itemsData.forEach((data, i) => {
-        const el = document.createElement("div");
-        el.className = "item";
+        const circle = document.createElement("div");
+        circle.className = "circle";
+        container.appendChild(circle);
+        document.body.appendChild(container);
 
-        const video = document.createElement("video");
-        video.src = data.src;
-        video.loop = true;
-        video.muted = true;
-        video.playsInline = true;
-        video.preload = "auto";
+        let x = startX;
+        let y = startY;
+        let vx = (Math.random() * 1 + 0.6) * (Math.random() < 0.5 ? -1 : 1);
+        let vy = (Math.random() * 1 + 0.6) * (Math.random() < 0.5 ? -1 : 1);
 
-        el.appendChild(video);
-        circle.appendChild(el);
+        const items = [];
+        let isDragging = false;
+        let lastTouchX = 0;
+        let dragVelocity = 0;
+        let lastTime = performance.now();
 
-        // video’s starten na elkaar
-        setTimeout(() => {
-            video.play().catch(() => {});
-        }, i * 400);
+        /* Items + staggered video start */
+        videos.forEach((src, i) => {
+            const el = document.createElement("div");
+            el.className = "item";
 
-        items.push({
-            el,
-            angle: (Math.PI * 2 / itemsData.length) * i
-        });
-    });
+            const video = document.createElement("video");
+            video.src = src;
+            video.loop = true;
+            video.muted = true;
+            video.playsInline = true;
+            video.preload = "auto";
 
-    /* Touch-drag */
-    container.addEventListener("touchstart", e => {
-        isDragging = true;
-        lastTouchX = e.touches[0].clientX;
-        dragVelocity = 0;
-    });
+            el.appendChild(video);
+            circle.appendChild(el);
 
-    container.addEventListener("touchmove", e => {
-        if (!isDragging) return;
+            setTimeout(() => {
+                video.play().catch(() => {});
+            }, i * 400);
 
-        const x = e.touches[0].clientX;
-        const deltaX = x - lastTouchX;
-        lastTouchX = x;
-
-        const rotationDelta = deltaX * 0.005;
-        dragVelocity = rotationDelta;
-
-        items.forEach(item => {
-            item.angle += rotationDelta;
-        });
-    });
-
-    container.addEventListener("touchend", () => {
-        isDragging = false;
-    });
-
-    /* Carrousel animatie */
-    let lastTime = performance.now();
-
-    function animateCarousel(time) {
-        const delta = time - lastTime;
-        lastTime = time;
-
-        if (!isDragging) {
-            dragVelocity *= 0.95;
-            items.forEach(item => {
-                item.angle += speed * delta + dragVelocity;
+            items.push({
+                el,
+                angle: (Math.PI * 2 / videos.length) * i
             });
+        });
+
+        /* Touch drag */
+        container.addEventListener("touchstart", e => {
+            isDragging = true;
+            lastTouchX = e.touches[0].clientX;
+            dragVelocity = 0;
+        });
+
+        container.addEventListener("touchmove", e => {
+            if (!isDragging) return;
+
+            const dx = e.touches[0].clientX - lastTouchX;
+            lastTouchX = e.touches[0].clientX;
+
+            const rot = dx * 0.005;
+            dragVelocity = rot;
+
+            items.forEach(item => item.angle += rot);
+        });
+
+        container.addEventListener("touchend", () => {
+            isDragging = false;
+        });
+
+        /* Animation loop */
+        function animate(time) {
+            const delta = time - lastTime;
+            lastTime = time;
+
+            if (!isDragging) {
+                dragVelocity *= 0.95;
+                items.forEach(item => {
+                    item.angle += (delta * 0.0003 * speedMultiplier) + dragVelocity;
+                });
+            }
+
+            items.forEach(item => {
+                const px = Math.cos(item.angle) * radius;
+                const py = Math.sin(item.angle) * radius;
+
+                item.el.style.transform =
+                    `translate(${px}px, ${py}px) translate(-50%, -50%)`;
+            });
+
+            const w = window.innerWidth;
+            const h = window.innerHeight;
+            const rect = container.getBoundingClientRect();
+
+            x += vx;
+            y += vy;
+
+            if (x <= 0 || x + rect.width >= w) vx *= -1;
+            if (y <= 0 || y + rect.height >= h) vy *= -1;
+
+            container.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+
+            requestAnimationFrame(animate);
         }
 
-        items.forEach(item => {
-            const x = Math.cos(item.angle) * radius;
-            const y = Math.sin(item.angle) * radius;
-
-            item.el.style.transform =
-                `translate(${x}px, ${y}px) translate(-50%, -50%)`;
-        });
-
-        requestAnimationFrame(animateCarousel);
+        requestAnimationFrame(animate);
     }
 
-    requestAnimationFrame(animateCarousel);
+    /* =======================
+       CREATE 3 CAROUSELS
+    ======================= */
+    createCarousel({
+        videos: videosSet1,
+        size: 260,
+        radius: 110,
+        speedMultiplier: 1,
+        startX: 40,
+        startY: 80
+    });
 
-    /* DVD-bounce */
-    let x = 60, y = 60;
-    let vx = 1.1, vy = 1.0;
+    createCarousel({
+        videos: videosSet2,
+        size: 220,
+        radius: 90,
+        speedMultiplier: -0.8,
+        startX: 220,
+        startY: 300
+    });
 
-    function moveDVD() {
-        const w = window.innerWidth;
-        const h = window.innerHeight;
-        const rect = container.getBoundingClientRect();
-
-        x += vx;
-        y += vy;
-
-        if (x <= 0 || x + rect.width >= w) vx *= -1;
-        if (y <= 0 || y + rect.height >= h) vy *= -1;
-
-        container.style.transform = `translate3d(${x}px, ${y}px, 0)`;
-        requestAnimationFrame(moveDVD);
-    }
-
-    moveDVD();
+    createCarousel({
+        videos: videosSet3,
+        size: 300,
+        radius: 130,
+        speedMultiplier: 1.2,
+        startX: 420,
+        startY: 150
+    });
 </script>
 
 </body>
