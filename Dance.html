@@ -58,13 +58,16 @@
     const container = document.getElementById("dvd-container");
 
     /* Content: 4 images + 1 video */
+
     const itemsData = [
-        "images/dans2.jpg",
-        "images/pigeon.mp4",
-        "images/dans3.jpg",
-        "images/dans1.jpg",
-        "images/dans4.jpg"
+        { type: "image", src: "images/dans2.jpg" },
+        { type: "video", src: "images/pigeon.mp4" },
+        { type: "image", src: "images/dans3.jpg" },
+        { type: "image", src: "images/dans1.jpg" },
+        { type: "image", src: "images/dans4.jpg" }
     ];
+
+
 
     const radius = 110;               // compact
     const duration = 20000;           // 20s per ronde
