@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Carrousels</title>
+    <title>Interactive Mobile Carrousel</title>
 
     <style>
         html, body {
@@ -14,6 +14,7 @@
             overflow: hidden;
             background: #2424370d;
             touch-action: none;
+            user-select: none; /* voorkomt selectie/zoom */
         }
 
         .carousel {
@@ -40,17 +41,17 @@
             height: 150%;
             object-fit: cover;
             display: block;
-            pointer-events: none; /* zodat hover / drag werkt op item div */
+            pointer-events: none;
         }
         .item video {
-            display: none; /* default hidden */
+            display: none; /* standaard hidden */
         }
     </style>
 </head>
-
 <body>
 
 <script>
+    // Media set: elke item heeft een image + video
     const mediaSet1 = [
         { image: "images/dans4.JPG", video: "images/pigeon.mp4" },
         { image: "images/dans1.JPG", video: "images/pigeon.mp4" },
@@ -72,8 +73,8 @@
 
         let x = startX;
         let y = startY;
-        let vx = (Math.random() * 1 + 0.6) * (Math.random() < 0.5 ? -1 : 1);
-        let vy = (Math.random() * 1 + 0.6) * (Math.random() < 0.5 ? -1 : 1);
+        let vx = (Math.random()*1+0.6)*(Math.random()<0.5?-1:1);
+        let vy = (Math.random()*1+0.6)*(Math.random()<0.5?-1:1);
 
         const items = [];
         let isDragging = false;
@@ -81,7 +82,7 @@
         let dragVelocity = 0;
         let lastTime = performance.now();
 
-        media.forEach((m, i) => {
+        media.forEach((m,i)=>{
             const el = document.createElement("div");
             el.className = "item";
 
@@ -99,78 +100,80 @@
             el.appendChild(video);
             circle.appendChild(el);
 
-            // Hover for desktop
-            el.addEventListener("mouseenter", () => {
-                img.style.display = "none";
-                video.style.display = "block";
-                video.play().catch(()=>{});
-            });
-            el.addEventListener("mouseleave", () => {
-                video.pause();
-                video.style.display = "none";
-                img.style.display = "block";
-            });
+            items.push({ el, img, video, angle: (Math.PI*2/media.length)*i });
+        });
 
-            // Touch / drag for mobile
-            el.addEventListener("touchstart", () => {
-                isDragging = true;
-                img.style.display = "none";
-                video.style.display = "block";
-                video.play().catch(()=>{});
+        // Desktop hover: enkel eigen item verandert
+        items.forEach(item=>{
+            item.el.addEventListener("mouseenter", ()=>{
+                item.img.style.display="none";
+                item.video.style.display="block";
+                item.video.play().catch(()=>{});
             });
-            el.addEventListener("touchend", () => {
-                isDragging = false;
-                video.pause();
-                video.style.display = "none";
-                img.style.display = "block";
-            });
-
-            items.push({
-                el,
-                angle: (Math.PI * 2 / media.length) * i
+            item.el.addEventListener("mouseleave", ()=>{
+                item.video.pause();
+                item.video.style.display="none";
+                item.img.style.display="block";
             });
         });
 
-        // Touch drag rotation
-        container.addEventListener("touchstart", e => {
+        // Touch drag: alle afbeeldingen -> pigeon video
+        container.addEventListener("touchstart", e=>{
+            isDragging=true;
             lastTouchX = e.touches[0].clientX;
+
+            items.forEach(item=>{
+                item.img.style.display="none";
+                item.video.style.display="block";
+                item.video.play().catch(()=>{});
+            });
         });
 
-        container.addEventListener("touchmove", e => {
+        container.addEventListener("touchmove", e=>{
+            if(!isDragging) return;
             const dx = e.touches[0].clientX - lastTouchX;
             lastTouchX = e.touches[0].clientX;
-            dragVelocity = dx * 0.005;
-            items.forEach(item => item.angle += dragVelocity);
+            dragVelocity = dx*0.005;
+            items.forEach(item=>item.angle+=dragVelocity);
         });
 
-        /* Animation loop */
-        function animate(time) {
+        container.addEventListener("touchend", ()=>{
+            isDragging=false;
+            items.forEach(item=>{
+                item.video.pause();
+                item.video.style.display="none";
+                item.img.style.display="block";
+            });
+        });
+
+        // Animation loop
+        function animate(time){
             const delta = time - lastTime;
             lastTime = time;
 
-            dragVelocity *= 0.95;
-            items.forEach(item => {
-                item.angle += delta * 0.0003 * speedMultiplier + dragVelocity;
-                const px = Math.cos(item.angle) * radius;
-                const py = Math.sin(item.angle) * radius;
+            if(!isDragging) dragVelocity *= 0.95;
+
+            items.forEach(item=>{
+                item.angle += delta*0.0003*speedMultiplier + dragVelocity;
+                const px = Math.cos(item.angle)*radius;
+                const py = Math.sin(item.angle)*radius;
                 item.el.style.transform = `translate(${px}px, ${py}px) translate(-50%, -50%)`;
             });
 
             const w = window.innerWidth;
             const h = window.innerHeight;
             const rect = container.getBoundingClientRect();
-            x += vx;
-            y += vy;
+            x+=vx; y+=vy;
             if(x<=0 || x+rect.width>=w) vx*=-1;
             if(y<=0 || y+rect.height>=h) vy*=-1;
-            container.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+            container.style.transform = `translate3d(${x}px,${y}px,0)`;
 
             requestAnimationFrame(animate);
         }
         requestAnimationFrame(animate);
     }
 
-    /* CREATE CAROUSELS */
+    // Create carousel
     createCarousel({
         media: mediaSet1,
         size: 260,
@@ -179,7 +182,7 @@
         startX: 40,
         startY: 80
     });
-
 </script>
+
 </body>
 </html>
