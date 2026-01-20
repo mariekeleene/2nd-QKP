@@ -54,16 +54,16 @@
             display: none;
         }
 
-        /* Mobile: images touch each other */
+        /* Mobile: images twice as big and touching */
         @media(max-width:600px){
             .carousel {
                 width: 100%;
-                height: 70%;  /* reduce height to fit viewport */
+                height: 80%;
             }
 
             .item {
-                width: 25vw;   /* rectangle almost fills space */
-                height: 16vw;  /* rectangle almost fills space */
+                width: 50vw;
+                height: 32vw;
             }
         }
 
@@ -93,7 +93,6 @@
 </head>
 <body>
 
-<!-- Home button -->
 <button id="homeButton" onclick="location.href='index.html'">☒</button>
 
 <script>
@@ -106,7 +105,7 @@
         { image: "images/dans2.JPG", video: "images/pigeon.mp4" }
     ];
 
-    function createCarousel({ media, radius, speedMultiplier }) {
+    function createCarousel({ media, speedMultiplier }) {
         const container = document.createElement("div");
         container.className = "carousel";
 
@@ -121,6 +120,7 @@
         let dragVelocity = 0;
         let lastTime = performance.now();
 
+        // Create items
         media.forEach((m,i)=>{
             const el = document.createElement("div");
             el.className = "item";
@@ -139,6 +139,7 @@
             el.appendChild(video);
             circle.appendChild(el);
 
+            // Desktop hover: play video
             el.addEventListener("mouseenter", ()=>{
                 img.style.display="none";
                 video.style.display="block";
@@ -153,12 +154,13 @@
             items.push({el,img,video,angle:(Math.PI*2/media.length)*i});
         });
 
+        // Mobile drag: do not zoom
         container.addEventListener("touchstart", e=>{
             isDragging = true;
             lastTouchX = e.touches[0].clientX;
             items.forEach(item=>{
-                item.img.style.display="block"; // keep images visible, no zoom
-                item.video.style.display="none"; // don’t autoplay pigeon video
+                item.img.style.display="block";
+                item.video.style.display="none";
             });
         });
 
@@ -178,11 +180,32 @@
             });
         });
 
+        // Calculate mobile radius once to prevent carousel jumping
+        let radiusDesktop = 200;
+        let radiusMobile = 100;
+
+        function calculateMobileRadius() {
+            if(items.length === 0) return;
+            const isMobile = window.innerWidth <= 600;
+            if(isMobile){
+                const rect = items[0].el.getBoundingClientRect();
+                const itemWidth = rect.width;
+                radiusMobile = (window.innerWidth / 2) - (itemWidth / 2);
+            }
+        }
+
+        // Calculate after DOM ready
+        setTimeout(calculateMobileRadius, 50);
+        window.addEventListener('resize', calculateMobileRadius);
+
         function animate(time){
             const delta = time - lastTime;
             lastTime = time;
 
             if(!isDragging) dragVelocity *= 0.95;
+
+            const isMobile = window.innerWidth <= 600;
+            const radius = isMobile ? radiusMobile : radiusDesktop;
 
             items.forEach(item=>{
                 item.angle += delta*0.0003*(speedMultiplier/2) + dragVelocity;
@@ -197,9 +220,9 @@
         requestAnimationFrame(animate);
     }
 
+    // Create carousel
     createCarousel({
         media: mediaSet1,
-        radius: 200,
         speedMultiplier: 1
     });
 </script>
