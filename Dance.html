@@ -3,193 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dance</title>
-    <style>
-        html, body {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            background: rgba(255, 255, 255, 0.05);
-            touch-action: none;
-            user-select: none;
-            -ms-touch-action: none;   /* for older IE/Edge */
-            overscroll-behavior: none;
-
-
-        }
-
-        .carousel {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 800px;   /* fixed size for rectangle carousel */
-            height: 500px;
-            transform: translate(-50%, -50%);
-        }
-
-        .circle {
-            position: relative;
-            width: 100%;
-            height: 100%;
-        }
-
-
-        .item {
-            position: absolute;
-            width: 200px;   /* 180px * 1.05 = 189px */
-            height: 140px;  /* 120px * 1.05 = 126px */
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            touch-action: pan-x pan-y; /* prevents pinch-zoom */
-        }
-
-
-        .item img, .item video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-            pointer-events: none;
-            border-radius: 0px;
-        }
-
-        .item video {
-            display: none;
-        }
-
-        @media(max-width:600px){
-            .item {
-                width: 120px;
-                height: 80px;
-            }
-        }
-    </style>
-</head>
-<body>
-
-<script>
-    const mediaSet1 = [
-        { image: "images/Dans1.png", video: "images/pigeonreverse.mov" },
-        { image: "images/Dans2.png", video: "images/pigeonreverse.mov" },
-        { image: "images/Dans3.png", video: "images/pigeonreverse.mov" },
-        { image: "images/Dans4.png", video: "images/pigeonreverse.mov" },
-        { image: "images/Dans5.png", video: "images/pigeonreverse.mov" },
-        { image: "images/Dans6.png", video: "images/pigeonreverse.mov" }
-    ];
-
-    function createCarousel({ media, radius, speedMultiplier }) {
-        const container = document.createElement("div");
-        container.className = "carousel";
-
-        const circle = document.createElement("div");
-        circle.className = "circle";
-        container.appendChild(circle);
-        document.body.appendChild(container);
-
-        const items = [];
-        let isDragging = false;
-        let lastTouchX = 0;
-        let dragVelocity = 0;
-        let lastTime = performance.now();
-
-        media.forEach((m,i)=>{
-            const el = document.createElement("div");
-            el.className = "item";
-
-            const img = document.createElement("img");
-            img.src = m.image;
-
-            const video = document.createElement("video");
-            video.src = m.video;
-            video.loop = true;
-            video.muted = true;
-            video.playsInline = true;
-            video.preload = "auto";
-
-            el.appendChild(img);
-            el.appendChild(video);
-            circle.appendChild(el);
-
-            el.addEventListener("mouseenter", ()=>{
-                img.style.display="none";
-                video.style.display="block";
-                video.play().catch(()=>{});
-            });
-            el.addEventListener("mouseleave", ()=>{
-                video.pause();
-                video.style.display="none";
-                img.style.display="block";
-            });
-
-            items.push({el,img,video,angle:(Math.PI*2/media.length)*i});
-        });
-
-        container.addEventListener("touchstart", e=>{
-            isDragging = true;
-            lastTouchX = e.touches[0].clientX;
-            items.forEach(item=>{
-                item.img.style.display="none";
-                item.video.style.display="block";
-                item.video.play().catch(()=>{});
-            });
-        });
-
-        container.addEventListener("touchmove", e=>{
-            if(!isDragging) return;
-            const dx = e.touches[0].clientX - lastTouchX;
-            lastTouchX = e.touches[0].clientX;
-            dragVelocity = dx * 0.005;
-            items.forEach(item=>item.angle+=dragVelocity);
-        });
-
-        container.addEventListener("touchend", ()=>{
-            isDragging=false;
-            items.forEach(item=>{
-                item.video.pause();
-                item.video.style.display="none";
-                item.img.style.display="block";
-            });
-        });
-
-        function animate(time){
-            const delta = time - lastTime;
-            lastTime = time;
-
-            if(!isDragging) dragVelocity *= 0.95;
-
-            items.forEach(item=>{
-                // SLOWER rotation: divide speedMultiplier by 2
-                item.angle += delta*0.0003*(speedMultiplier/2) + dragVelocity;
-                const px = Math.cos(item.angle)*radius;
-                const py = Math.sin(item.angle)*radius;
-                item.el.style.transform = `translate(${px}px, ${py}px) translate(-50%, -50%)`;
-            });
-
-            requestAnimationFrame(animate);
-        }
-
-        requestAnimationFrame(animate);
-    }
-
-    // Create carousel with rectangle layout and slower rotation
-    createCarousel({
-        media: mediaSet1,
-        radius: 200,       // radius smaller than carousel width/height
-        speedMultiplier: 1
-    });
-</script>
-</body>
-</html>
-
-
-<!DOCTYPE html>
-<html lang="nl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rectangle Carousel</title>
     <style>
         html, body {
@@ -198,7 +11,7 @@
             width: 100%;
             height: 100%;
             overflow: hidden;
-            background: rgba(255, 255, 255, 0.05);
+            background: #2424370d;
             touch-action: none;
             user-select: none;
             overscroll-behavior: none;
@@ -241,16 +54,16 @@
             display: none;
         }
 
-        /* Mobile: images touch each other */
+        /* Mobile: images twice as big and touching */
         @media(max-width:600px){
             .carousel {
                 width: 100%;
-                height: 70%;  /* reduce height to fit viewport */
+                height: 80%;  /* bigger for larger images */
             }
 
             .item {
-                width: 25vw;   /* rectangle almost fills space */
-                height: 16vw;  /* rectangle almost fills space */
+                width: 50vw;   /* double previous 25vw */
+                height: 32vw;  /* double previous 16vw */
             }
         }
 
@@ -293,7 +106,7 @@
         { image: "images/Dans6.png", video: "images/pigeonreverse.mov" }
     ];
 
-    function createCarousel({ media, radius, speedMultiplier }) {
+    function createCarousel({ media, radiusDesktop, radiusMobile, speedMultiplier }) {
         const container = document.createElement("div");
         container.className = "carousel";
 
@@ -344,8 +157,8 @@
             isDragging = true;
             lastTouchX = e.touches[0].clientX;
             items.forEach(item=>{
-                item.img.style.display="block"; // keep images visible, no zoom
-                item.video.style.display="none"; // don’t autoplay pigeon video
+                item.img.style.display="block";
+                item.video.style.display="none";
             });
         });
 
@@ -371,6 +184,10 @@
 
             if(!isDragging) dragVelocity *= 0.95;
 
+            // Use smaller radius on mobile so carousel stays centered
+            const isMobile = window.innerWidth <= 600;
+            const radius = isMobile ? radiusMobile : radiusDesktop;
+
             items.forEach(item=>{
                 item.angle += delta*0.0003*(speedMultiplier/2) + dragVelocity;
                 const px = Math.cos(item.angle)*radius;
@@ -384,9 +201,11 @@
         requestAnimationFrame(animate);
     }
 
+    // Desktop radius 200, Mobile radius 100 (smaller for centered circle)
     createCarousel({
         media: mediaSet1,
-        radius: 200,
+        radiusDesktop: 200,
+        radiusMobile: 100,
         speedMultiplier: 1
     });
 </script>
