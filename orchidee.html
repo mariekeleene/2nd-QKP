@@ -48,7 +48,7 @@
             }
             10% {
                 top: 20vw;
-              }
+            }
             12% {
                 top: 18vw;
             }
@@ -95,8 +95,18 @@
             }
         }
 
-
-
+        /* ✅ ADDED — fountain-style close button */
+        .close-btn {
+            position: fixed;
+            top: 12px;
+            left: 12px;
+            font-size: 28px;
+            text-decoration: none;
+            color: black;
+            z-index: 9999;
+            cursor: pointer;
+        }
+        /* ⬆️ nothing else changed */
 
     </style>
 </head>
@@ -138,14 +148,11 @@
         var orchidee = document.createElement('div');
         orchidee.innerHTML = "<a href='/VJ.html'><img src='/img/icons website/orchid.png'></a>";
         orchidee.style.left = Math.random() * 500 + "px";
-        // orchidee.style.top = i * 80 + "px";
         orchidee.className = "orchidee";
         orchidee.style.animationDelay = i * 1000 + "ms";
 
-
         document.body.appendChild(orchidee);
     }
-
 </script>
 
 </body>
