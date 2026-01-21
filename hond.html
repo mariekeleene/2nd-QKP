@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <style>
+          content="width=device-width, initial-scale=1.0">
+    <title>Hond</title>
 
+    <style>
         html, body {
             margin: 0;
         }
@@ -16,7 +15,6 @@
             background-color: #50FF93;
             position: relative;
         }
-
 
         .hondlink {
             height: 3000px;
@@ -29,28 +27,27 @@
             cursor: pointer;
         }
 
-        .closebutton {
+        .close-btn {
             position: fixed;
-            height: 40px;
-            top: 10px;
-            left: 10px;
-            cursor: url("/images/krab.png")22 22, auto;
-            color: #ff8181;
+            top: 12px;
+            left: 12px;
+            font-size: 28px;
+            text-decoration: none;
+            color: black;
+            z-index: 9999;
+            cursor: pointer;
         }
-
-
     </style>
 </head>
+
 <body>
 
-<!--<img src="img/other/1dog.jpeg"  class="hond">-->
+<!-- CLOSE BUTTON -->
+<a href="index.html" class="close-btn">☒</a>
 
-<a href="/orchidee.html"><img src="images/1dog.jpeg" class="hondlink"></a>
-
-<a href="/index.html"><svg class="closebutton"  xmlns="http://www.w3.org/2000/svg" fill="none"
-                           viewBox="0 0 24 24" stroke="currentColor">
-    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-</svg></a>
+<a href="orchidee.html">
+    <img src="images/1dog.jpeg" class="hondlink">
+</a>
 
 </body>
 </html>
