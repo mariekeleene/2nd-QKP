@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-    <title>Orchidee</title>
-
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
     <style>
         html, body {
             margin: 0;
@@ -13,62 +13,62 @@
 
         body {
             background-color: #0600ff;
+            background-position: center;
+            background-repeat: no-repeat;
             background-size: cover;
         }
 
-        .background {
+        .background{
             height: 100vh;
             width: 100vw;
-            position: fixed;
             z-index: -1;
+            position: fixed;
         }
 
         .orchidee {
             height: 60px;
             width: 60px;
             position: fixed;
-            animation: orchidee 10s linear infinite;
+            animation-duration: 10s;
+            animation-name: orchidee;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
             cursor: pointer;
         }
 
-        .orchidee img {
-            width: 120px;
-            height: 150px;
-        }
-
-        .close-btn {
+        .closebutton {
             position: fixed;
-            top: 12px;
-            left: 12px;
-            font-size: 28px;
-            text-decoration: none;
-            color: white;
-            z-index: 9999;
-            cursor: pointer;
-        }
-
-        @keyframes orchidee {
-            0% { top: 0; left: 50vw; }
-            100% { top: 100vw; }
+            height: 40px;
+            top: 10px;
+            left: 10px;
+            cursor: url("/img/cursoropen.png")22 22, auto;
+            color: #ff8181;
         }
     </style>
 </head>
-
 <body>
 
-<!-- CLOSE BUTTON -->
+<!-- CLOSE BUTTON (toegevoegd) -->
 <a href="index.html" class="close-btn">☒</a>
 
-<img src="img/other/fbm%20(10).png" class="background">
+<img src="img/other/fbm%20(10).png"  class="background">
+
+<a href="/posters.html">
+    <svg class="closebutton" xmlns="http://www.w3.org/2000/svg" fill="none"
+         viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"/>
+    </svg>
+</a>
 
 <script>
-    for (let i = 0; i < 90; i++) {
-        const o = document.createElement('div');
-        o.className = 'orchidee';
-        o.style.left = i * 15 + 'px';
-        o.style.animationDelay = 20 * i + 'ms';
-        o.innerHTML = "<a href='/VJ.html'><img src='/img/icons website/orchid.png'></a>";
-        document.body.appendChild(o);
+    for(i=0; i<90;i++) {
+        var orchidee = document.createElement('div');
+        orchidee.innerHTML = "<a href='/VJ.html'><img src='/img/icons website/orchid.png'></a>";
+        orchidee.style.left = i * 15 + "px";
+        orchidee.className = "orchidee";
+        orchidee.style.animationDelay = 20 * i + "ms";
+        document.body.appendChild(orchidee);
     }
 </script>
 
