@@ -12,19 +12,6 @@
             position: relative;
         }
 
-        /* ✅ toegevoegd – close button zoals fountain */
-        .close-btn {
-            position: fixed;
-            top: 12px;
-            left: 12px;
-            font-size: 28px;
-            text-decoration: none;
-            color: white;
-            z-index: 9999;
-            cursor: pointer;
-        }
-        /* ⬆️ verder niets gewijzigd */
-
         .spacewaste1 {
             height: 50vh;
             width: 50vw;
@@ -145,24 +132,61 @@
             left: 10vw;
         }
 
-        .iconsattelite1,
-        .iconsattelite2,
-        .iconsattelite3,
-        .iconsattelite4 {
+        .iconsattelite1 {
+            width: 400px;
+            height: 400px;
             position: absolute;
             top: 60px;
             left: 0px;
             animation-duration: 360s;
+            animation-name: sattelite1;
             animation-iteration-count: infinite;
             animation-timing-function: linear;
             cursor: pointer;
             z-index: 3;
         }
 
-        .iconsattelite1 { width: 400px; height: 400px; animation-name: sattelite1; }
-        .iconsattelite2 { width: 300px; height: 300px; animation-name: sattelite2; }
-        .iconsattelite3 { width: 300px; height: 300px; animation-name: sattelite3; }
-        .iconsattelite4 { width: 300px; height: 300px; animation-name: sattelite4, sattelite3; }
+        .iconsattelite2 {
+            width: 300px;
+            height: 300px;
+            position: absolute;
+            top: 60px;
+            left: 0px;
+            animation-duration: 360s;
+            animation-name: sattelite2;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+            cursor: pointer;
+            z-index: 3;
+        }
+
+        .iconsattelite4 {
+            width: 300px;
+            height: 300px;
+            position: absolute;
+            top: 60px;
+            left: 0px;
+            animation-duration: 360s;
+            animation-name: sattelite4, sattelite3;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+            cursor: pointer;
+            z-index: 3;
+        }
+
+        .iconsattelite3 {
+            width: 300px;
+            height: 300px;
+            position: absolute;
+            top: 60px;
+            left: 0px;
+            animation-duration: 360s;
+            animation-name: sattelite3;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+            cursor: pointer;
+            z-index: 3;
+        }
 
         .iconsun {
             width: 50px;
@@ -178,13 +202,149 @@
             z-index: 4;
         }
 
-        /* animaties ongewijzigd */
+
+        @keyframes sattelite1 {
+            0% {
+                transform: rotate(180deg);
+                left: 10vw;
+                top: 30vw;
+            }
+
+
+            12% {
+                transform: rotate(0deg);
+                left: 80vw;
+                top: 100vw;
+            }
+
+            22% {
+                transform: rotate(360deg);
+                left: 10vw;
+                top: 100vw;
+            }
+
+
+            58% {
+                transform: rotate(180deg);
+                left: 80vw;
+                top: 26vw;
+            }
+
+            100% {
+                transform: rotate(0deg);
+                left: 10vw;
+                top: 30vw;
+            }
+
+          }
+
+        @keyframes sattelite2 {
+            0% {
+                transform: rotate(0deg);
+                left: 80vw;
+                top: 0vw;
+            }
+
+            25% {
+                transform: rotate(360deg);
+                left: 50vw;
+                top: 40vw;
+            }
+
+            75% {
+                transform: rotate(0deg);
+                left: 10vw;
+                top: 30vw;
+            }
+
+            100% {
+                transform: rotate(0deg);
+                left: 80vw;
+                top: 0vw;
+            }
+
+        }
+
+        @keyframes sattelite3 {
+            0% {
+                transform: rotate(180deg);
+                left: 10vw;
+                top: 300vw;
+            }
+
+
+            12% {
+                transform: rotate(0deg);
+                left: 40vw;
+                top: 100vw;
+            }
+
+            22% {
+                transform: rotate(360deg);
+                left: 10vw;
+                top: 100vw;
+            }
+
+
+            58% {
+                transform: rotate(180deg);
+                left: 80vw;
+                top: 26vw;
+            }
+
+            100% {
+                transform: rotate(180deg);
+                left: 10vw;
+                top: 300vw;
+            }
+
+        }
+
+        @keyframes sattelite4 {
+            0% {
+                transform: rotate(0deg);
+                left: 80vw;
+                top: 500vw;
+            }
+
+            25% {
+                transform: rotate(360deg);
+                left: 50vw;
+                top: 400vw;
+            }
+
+            75% {
+                transform: rotate(0deg);
+                left: 10vw;
+                top: 450vw;
+            }
+
+            100% {
+                transform: rotate(0deg);
+                left: 80vw;
+                top: 500vw;
+            }
+
+        }
+
+
+        @keyframes sun {
+            0% {
+                left: 50vw;
+                top: 100%;
+            }
+
+            100% {
+                transform: rotate(360deg);
+                left: 50vw;
+                top: 90%;
+            }
+
+        }
+
     </style>
 </head>
 <body>
-
-<!-- ✅ close button toegevoegd -->
-<a href="index.html" class="close-btn">☒</a>
 
 <img src="images/spacewaste (1).jpg" alt="" class="spacewaste1">
 <img src="images/spacewaste (2).jpg" alt="" class="spacewaste2">
@@ -203,11 +363,13 @@
 <img src="images/spacewaste (20).jpg" alt="" class="spacewaste20">
 <img src="images/spacewaste (21).jpg" alt="" class="spacewaste21">
 
-<div><img src="/images/spacewaste-(81).png" class="iconsattelite1"></div>
-<div><img src="/images/spacewaste-(161).png" class="iconsattelite2"></div>
-<div><img src="/images/spacewaste-(201).png" class="iconsattelite3"></div>
-<div><img src="/images/spacewaste-(201).png" class="iconsattelite4"></div>
-<div><img src="/images/roadhuis.png" class="iconsun"></div>
+<!--img[src='img/other/spacewaste ('$').jpg']*20 -->
+
+<div> <img src="/img/icons website/spacewaste-(81).png" class="iconsattelite1" v-on:click="openProject(projectList[6])"></div>
+<div> <img src="/img/icons website/spacewaste-(161).png" class="iconsattelite2" v-on:click="openProject(projectList[6])"></div>
+<div> <img src="/img/icons website/spacewaste-(201).png" class="iconsattelite3" v-on:click="openProject(projectList[6])"></div>
+<div> <img src="/img/icons website/spacewaste-(201).png" class="iconsattelite4" v-on:click="openProject(projectList[6])"></div>
+<div> <img src="/images/roadhuis.png" class="iconsun" v-on:click="openProject(projectList[2])"></div>
 
 </body>
 </html>
