@@ -354,11 +354,77 @@
 
         }
 
+        /* ---------- Mobile responsiveness ---------- */
+        @media (max-width: 768px) {
+
+            body {
+                overflow-x: hidden;
+            }
+
+            /* Spacewaste images smaller & stacked */
+            .spacewaste1,
+            .spacewaste10,
+            .spacewaste16 {
+                width: 90vw;
+                height: auto;
+            }
+
+            .spacewaste2,
+            .spacewaste6,
+            .spacewaste7,
+            .spacewaste8,
+            .spacewaste11,
+            .spacewaste13,
+            .spacewaste14,
+            .spacewaste15,
+            .spacewaste18,
+            .spacewaste19,
+            .spacewaste20,
+            .spacewaste21 {
+                width: 100vw;
+                height: auto;
+                left: 0;
+            }
+
+            .spacewaste9 {
+                position: relative;
+                width: 90vw;
+                height: auto;
+                top: 0;
+                left: 0;
+            }
+
+            /* Satellites smaller on phone */
+            .iconsattelite1 {
+                width: 180px;
+                height: 180px;
+            }
+
+            .iconsattelite2,
+            .iconsattelite3,
+            .iconsattelite4 {
+                width: 140px;
+                height: 140px;
+            }
+
+            .iconsun {
+                width: 40px;
+                height: 40px;
+            }
+
+            /* Close button bigger & easier to tap */
+            .close-btn {
+                font-size: 32px;
+                padding: 8px;
+            }
+        }
+
+
     </style>
 </head>
 <body>
 
-<a href="index.html" class="close-btn">☒</a>
+
 
 <img src="images/spacewaste (1).jpg" alt="" class="spacewaste1">
 <img src="images/spacewaste (2).jpg" alt="" class="spacewaste2">
@@ -383,7 +449,15 @@
 <div> <img src="images/spacewaste-(161).png" class="iconsattelite2"></div>
 <div> <img src="images/spacewaste-(201).png" class="iconsattelite3"></div>
 <div> <img src="images/spacewaste-(201).png" class="iconsattelite4"></div>
-<div> <img src="images/roadhuis.png" class="iconsun"></div>
+
+<div>
+    <a href="index.html">
+        <img src="images/roadhuis.png" class="iconsun" alt="Close">
+    </a>
+</div>
+
+
 
 </body>
 </html>
+
