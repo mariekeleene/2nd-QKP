@@ -36,30 +36,82 @@
             cursor: pointer;
         }
 
-        .closebutton {
-            position: fixed;
-            height: 40px;
-            top: 10px;
-            left: 10px;
-            cursor: url("/img/cursoropen.png")22 22, auto;
-            color: #ff8181;
+        .orchidee > a > img {
+            width: 120px;
+            height: 150px;
         }
+
+        @keyframes orchidee {
+            0% {
+                top: 0vw;
+                left: 50vw;
+            }
+            10% {
+                top: 20vw;
+              }
+            12% {
+                top: 18vw;
+            }
+            15% {
+                top: 20vw;
+            }
+            25% {
+                top: 30vw;
+            }
+            30% {
+                transform: rotate(-80deg);
+                top: 40vw;
+            }
+            35% {
+                transform: rotate(-180deg);
+                top: 30vw;
+            }
+            50% {
+                transform: rotate(-180deg);
+                top: 35vw;
+            }
+            60% {
+                transform: rotate(-300deg);
+                top: 20vw;
+            }
+            65% {
+                transform: rotate(-360deg);
+                top: 80vw;
+            }
+            80% {
+                transform: rotate(-360deg);
+                top: 70vw;
+            }
+            85% {
+                transform: rotate(-360deg);
+                top: 80vw;
+            }
+            90% {
+                transform: rotate(-360deg);
+                top: 90vw;
+            }
+            100% {
+                top: 100vw;
+            }
+        }
+
+
+
+
     </style>
 </head>
 <body>
 
-<!-- CLOSE BUTTON (toegevoegd) -->
 <a href="index.html" class="close-btn">☒</a>
 
 <img src="img/other/fbm%20(10).png"  class="background">
 
-<a href="/posters.html">
-    <svg class="closebutton" xmlns="http://www.w3.org/2000/svg" fill="none"
-         viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="M6 18L18 6M6 6l12 12"/>
-    </svg>
-</a>
+<a href="/posters.html"><svg class="closebutton"  xmlns="http://www.w3.org/2000/svg" fill="none"
+                             viewBox="0 0 24 24" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+</svg></a>
+
+<!--<a href="/VJ.html"><img src="/img/icons website/orchid.png" class="orchidee"></a>-->
 
 <script>
     for(i=0; i<90;i++) {
@@ -68,8 +120,32 @@
         orchidee.style.left = i * 15 + "px";
         orchidee.className = "orchidee";
         orchidee.style.animationDelay = 20 * i + "ms";
+
         document.body.appendChild(orchidee);
     }
+
+    for(i=0; i<70;i++) {
+        var orchidee = document.createElement('div');
+        orchidee.innerHTML = "<a href='/VJ.html'><img src='/img/icons website/orchid.png'></a>";
+        orchidee.style.top = i * 40 + "px";
+        orchidee.className = "orchidee";
+        orchidee.style.animationDelay = 90 * i + "ms";
+
+        document.body.appendChild(orchidee);
+    }
+
+    for(i=0; i<30;i++) {
+        var orchidee = document.createElement('div');
+        orchidee.innerHTML = "<a href='/VJ.html'><img src='/img/icons website/orchid.png'></a>";
+        orchidee.style.left = Math.random() * 500 + "px";
+        // orchidee.style.top = i * 80 + "px";
+        orchidee.className = "orchidee";
+        orchidee.style.animationDelay = i * 1000 + "ms";
+
+
+        document.body.appendChild(orchidee);
+    }
+
 </script>
 
 </body>
