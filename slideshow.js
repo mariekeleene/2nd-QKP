@@ -14,8 +14,8 @@ document.addEventListener("DOMContentLoaded", () => {
     detailsBtn.addEventListener("click", () => {
         detailsText.classList.toggle("show");
         detailsBtn.textContent = detailsText.classList.contains("show")
-            ? "Click Here ▲"
-            : "Click Here ▽";
+            ? "click here if you want to see more than image ▲"
+            : "close ▽";
     });
 
     function addImages() {
