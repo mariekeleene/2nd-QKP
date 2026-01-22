@@ -30,7 +30,6 @@
             padding: 1.5rem;
             white-space: pre-line;
 
-            /* disable native selection */
             user-select: none;
             -webkit-user-select: none;
         }
@@ -40,7 +39,7 @@
         }
 
         .selected {
-            background: hotpink;
+            background: #294bff;
             color: white;
         }
     </style>
@@ -75,7 +74,6 @@
     const text = poem.innerText;
     poem.innerHTML = "";
 
-    // wrap every character
     [...text].forEach(char => {
         const span = document.createElement("span");
         span.className = "char";
@@ -85,15 +83,8 @@
 
     let selecting = false;
 
-    function clearSelection() {
-        document.querySelectorAll(".selected").forEach(el =>
-            el.classList.remove("selected")
-        );
-    }
-
     poem.addEventListener("touchstart", e => {
         selecting = true;
-        clearSelection();
         const target = e.target;
         if (target.classList.contains("char")) {
             target.classList.add("selected");
@@ -113,10 +104,9 @@
         selecting = false;
     });
 
-    // desktop mouse support
+    // Desktop
     poem.addEventListener("mousedown", e => {
         selecting = true;
-        clearSelection();
         if (e.target.classList.contains("char")) {
             e.target.classList.add("selected");
         }
