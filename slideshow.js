@@ -10,6 +10,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const detailsBtn = document.getElementById("details-btn");
     const detailsText = document.getElementById("details-text");
 
+    const btn = document.getElementById("details-btn");
+    const details = document.getElementById("details-text");
+
+    btn.addEventListener("click", () => {
+        details.classList.toggle("active");
+    });
+
     /* TOGGLE */
     detailsBtn.addEventListener("click", () => {
         detailsText.classList.toggle("show");
