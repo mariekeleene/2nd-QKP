@@ -7,12 +7,13 @@
     <title>thicker than forget</title>
 
     <style>
+
         html, body {
             margin: 0;
             padding: 0;
             height: 100%;
-            background: #ffffff;
-            font-family: "Menlo", monospace;
+            background: black;
+            font-family: serif;
         }
 
         body {
@@ -29,20 +30,25 @@
             padding: 1.5rem;
             max-width: 90%;
             white-space: pre-line;
+
+            /* VERY IMPORTANT for mobile */
+            -webkit-user-select: text;
+            user-select: text;
         }
 
-        /* Desktop + most browsers */
+        /* Desktop */
         ::selection {
-            color: #ff71c7;
-            background: transparent;
+            color: hotpink;
+            background: rgba(255, 105, 180, 0.2);
         }
 
-        /* Mobile / iOS Safari */
+        /* iOS / mobile Safari */
         ::-webkit-selection {
-            color: #ff6ec0;
-            background: transparent;
+            color: hotpink;
+            background: rgba(255, 105, 180, 0.2);
         }
     </style>
+
 </head>
 
 <body>
