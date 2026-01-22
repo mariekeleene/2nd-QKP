@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>thicker than forget</title>
+    <title>love is more thicker than forget</title>
 
     <style>
         html, body {
@@ -19,39 +19,36 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            text-align: center;
         }
 
         .poem {
             color: white;
             font-size: 1.1rem;
             line-height: 1.6;
-            padding: 1.5rem;
+            text-align: center;
             max-width: 90%;
+            padding: 1.5rem;
             white-space: pre-line;
 
-            -webkit-user-select: text;
-            user-select: text;
+            /* disable native selection */
+            user-select: none;
+            -webkit-user-select: none;
         }
 
-        /* Desktop */
-        ::selection {
-            background: hotpink;
-            color: white;
+        .char {
+            display: inline;
         }
 
-        /* Mobile / iOS Safari */
-         {
+        .selected {
             background: hotpink;
             color: white;
         }
     </style>
-
-
 </head>
 
 <body>
-<div class="poem">
+
+<div class="poem" id="poem">
     love is more thicker than forget
     more thinner than recall
     more seldom than a wave is wet
@@ -72,5 +69,69 @@
     than all the sky which only
     is higher than the sky
 </div>
+
+<script>
+    const poem = document.getElementById("poem");
+    const text = poem.innerText;
+    poem.innerHTML = "";
+
+    // wrap every character
+    [...text].forEach(char => {
+        const span = document.createElement("span");
+        span.className = "char";
+        span.textContent = char === "\n" ? "\n" : char;
+        poem.appendChild(span);
+    });
+
+    let selecting = false;
+
+    function clearSelection() {
+        document.querySelectorAll(".selected").forEach(el =>
+            el.classList.remove("selected")
+        );
+    }
+
+    poem.addEventListener("touchstart", e => {
+        selecting = true;
+        clearSelection();
+        const target = e.target;
+        if (target.classList.contains("char")) {
+            target.classList.add("selected");
+        }
+    });
+
+    poem.addEventListener("touchmove", e => {
+        if (!selecting) return;
+        const touch = e.touches[0];
+        const el = document.elementFromPoint(touch.clientX, touch.clientY);
+        if (el && el.classList.contains("char")) {
+            el.classList.add("selected");
+        }
+    });
+
+    poem.addEventListener("touchend", () => {
+        selecting = false;
+    });
+
+    // desktop mouse support
+    poem.addEventListener("mousedown", e => {
+        selecting = true;
+        clearSelection();
+        if (e.target.classList.contains("char")) {
+            e.target.classList.add("selected");
+        }
+    });
+
+    poem.addEventListener("mouseover", e => {
+        if (selecting && e.target.classList.contains("char")) {
+            e.target.classList.add("selected");
+        }
+    });
+
+    document.addEventListener("mouseup", () => {
+        selecting = false;
+    });
+</script>
+
 </body>
 </html>
