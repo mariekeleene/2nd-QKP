@@ -48,7 +48,6 @@
 <body>
 
 <div class="poem" id="poem">
-    .
 
     love is more thicker than forget
     more thinner than recall
@@ -88,7 +87,12 @@
         }
     });
 
-    document.querySelectorAll(".char")[1].style.color = "hotpink";
+    document.querySelectorAll(".char").forEach(span => {
+        if (span.textContent === "b") {
+            span.style.color = "hotpink";
+        }
+    });
+
 
 
     let selecting = false;
