@@ -87,11 +87,18 @@
         }
     });
 
+    let firstB = true; // flag to skip first "b"
+
     document.querySelectorAll(".char").forEach(span => {
         if (span.textContent === "b") {
-            span.style.color = "hotpink";
+            if (firstB) {
+                firstB = false; // skip the first "b"
+            } else {
+                span.style.color = "hotpink"; // color all other "b"s
+            }
         }
     });
+
 
 
 
