@@ -48,6 +48,8 @@
 <body>
 
 <div class="poem" id="poem">
+    .
+
     love is more thicker than forget
     more thinner than recall
     more seldom than a wave is wet
@@ -74,12 +76,20 @@
     const text = poem.innerText;
     poem.innerHTML = "";
 
+
     [...text].forEach(char => {
-        const span = document.createElement("span");
-        span.className = "char";
-        span.textContent = char === "\n" ? "\n" : char;
-        poem.appendChild(span);
+        if (char === "\n") {
+            poem.appendChild(document.createElement("br"));
+        } else {
+            const span = document.createElement("span");
+            span.className = "char";
+            span.textContent = char;
+            poem.appendChild(span);
+        }
     });
+
+    document.querySelectorAll(".char")[1].style.color = "hotpink";
+
 
     let selecting = false;
 
