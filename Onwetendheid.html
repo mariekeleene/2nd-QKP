@@ -3,10 +3,11 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <title>Embroidery — Long Press</title>
+    <title>Embroidery — Hold to Reveal</title>
+
     <style>
         :root {
-            --bg-dark: #0b1f3a; /* deep dark blue */
+            --bg-dark: #0b1f3a;
             --fg-light: #ffffff;
         }
 
@@ -14,20 +15,21 @@
 
         html, body {
             margin: 0;
-            padding: 0;
             width: 100%;
             height: 100%;
             background: #000;
-            color: #000;
             -webkit-user-select: none;
             user-select: none;
-            -webkit-touch-callout: none;
+        }
+
+        .image-view,
+        .info-view {
+            position: fixed;
+            inset: 0;
         }
 
         /* IMAGE VIEW */
         .image-view {
-            position: fixed;
-            inset: 0;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -37,17 +39,15 @@
         .image-view img {
             width: 100vw;
             height: 100vh;
-            object-fit: contain; /* fits exactly without distortion */
+            object-fit: contain;
         }
 
         /* INFO VIEW */
         .info-view {
-            position: fixed;
-            inset: 0;
             padding: 20px 18px 28px;
             background: var(--bg-dark);
             color: var(--fg-light);
-            font-family: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+            font-family: Menlo, Monaco, Consolas, monospace;
             line-height: 1.55;
             overflow-y: auto;
             display: none;
@@ -55,26 +55,18 @@
 
         .info-view h1 {
             font-size: 1.1rem;
-            margin: 0 0 12px 0;
-            font-weight: 600;
-            letter-spacing: 0.02em;
-        }
-
-        .info-view p {
-            font-size: 0.95rem;
-            margin: 0 0 12px 0;
+            margin-bottom: 12px;
         }
 
         .meta {
-            opacity: 0.9;
             font-size: 0.85rem;
+            opacity: 0.9;
             margin-bottom: 14px;
         }
 
         a {
             color: #cfe1ff;
             text-decoration: underline;
-            word-break: break-word;
         }
 
         .hint {
@@ -89,39 +81,35 @@
         }
     </style>
 </head>
+
 <body>
 
-<!-- IMAGE VIEW -->
+<!-- IMAGE -->
 <div class="image-view" id="imageView">
-    <!-- Replace src with your actual image file -->
-    <img src="mobilemariekebetter.jpg" alt="Embroidery artwork" />
-    <div class="hint">tap & hold</div>
+    <img src="images/mobilemariekebetter.jpg" alt="Embroidery artwork" />
+    <div class="hint">.</div>
 </div>
 
-<!-- INFO VIEW -->
+<!-- INFO -->
 <div class="info-view" id="infoView">
     <h1>Free Embroidery — 2024</h1>
 
     <div class="meta">
-        15 × 15 cm<br />
+        15 × 15 cm<br>
         Made by Maria Virginia de Almeida Aguiar
     </div>
 
     <p>
-        This hand‑embroidered work was created in 2024 and draws inspiration from the practice of Dutch artist Marieke Leene, particularly her installation presented at the ArtEZ Finals 2022 in Arnhem. Leene’s work places her own body at the center of a sharp yet humorous reflection on environmental damage, consumer culture, and their entanglement with global political dynamics.
+        This hand-embroidered work was created in 2024 and draws inspiration from the practice of Dutch artist Marieke Leene, particularly her installation presented at the ArtEZ Finals 2022 in Arnhem.
     </p>
 
     <p>
-        Through embroidery, Maria Virginia translates this critical perspective into textile form, connecting contemporary artistic discourse with traditional handcraft. The piece reflects on nature, culture, and social responsibility while honoring embroidery as a daily, living practice passed down through generations of women.
+        Through embroidery, Maria Virginia translates this critical perspective into textile form, connecting contemporary artistic discourse with traditional handcraft.
     </p>
 
     <p>
-        Her practice is rooted in Brazilian embroidery traditions—especially from Minas Gerais and the Northeast—as well as Indigenous artisanship. It also converses with textile cultures from Portugal, Peru, Colombia, Mexico, and historical European embroidery, weaving together ancestral knowledge and contemporary art.
-    </p>
-
-    <p>
-        More about the artist:<br />
-        <a href="https://staging.vialmeida.com/para-marieke-que-reflete-sobre-a-ignorancia-do-mundo/" target="_blank" rel="noopener noreferrer">
+        More about the artist:<br>
+        <a href="https://staging.vialmeida.com/para-marieke-que-reflete-sobre-a-ignorancia-do-mundo/" target="_blank">
             staging.vialmeida.com/para-marieke-que-reflete-sobre-a-ignorancia-do-mundo/
         </a>
     </p>
@@ -130,9 +118,6 @@
 <script>
     const imageView = document.getElementById('imageView');
     const infoView = document.getElementById('infoView');
-
-    let pressTimer = null;
-    const HOLD_TIME = 400; // ms
 
     function showInfo() {
         infoView.style.display = 'block';
@@ -144,34 +129,15 @@
         imageView.style.display = 'flex';
     }
 
-    // Touch (mobile)
-    imageView.addEventListener('touchstart', () => {
-        pressTimer = setTimeout(showInfo, HOLD_TIME);
-    });
+    /* TOUCH */
+    imageView.addEventListener('touchstart', showInfo);
+    imageView.addEventListener('touchend', showImage);
+    imageView.addEventListener('touchcancel', showImage);
 
-    imageView.addEventListener('touchend', () => {
-        clearTimeout(pressTimer);
-    });
-
-    imageView.addEventListener('touchmove', () => {
-        clearTimeout(pressTimer);
-    });
-
-    // Mouse (desktop fallback)
-    imageView.addEventListener('mousedown', () => {
-        pressTimer = setTimeout(showInfo, HOLD_TIME);
-    });
-
-    imageView.addEventListener('mouseup', () => {
-        clearTimeout(pressTimer);
-    });
-
-    imageView.addEventListener('mouseleave', () => {
-        clearTimeout(pressTimer);
-    });
-
-    // Tap anywhere on info page to return
-    infoView.addEventListener('click', showImage);
+    /* MOUSE */
+    imageView.addEventListener('mousedown', showInfo);
+    imageView.addEventListener('mouseup', showImage);
+    imageView.addEventListener('mouseleave', showImage);
 </script>
 
 </body>
