@@ -3,15 +3,17 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <title>Embroidery — Hold to Reveal</title>
+    <title>Embroidery — Hold</title>
 
     <style>
         :root {
-            --bg-dark: #0b1f3a;
-            --fg-light: #ffffff;
+            --bg-lila: #c6b7e2; /* lila background */
+            --fg-dark: #000000;
         }
 
-        * { box-sizing: border-box; }
+        * {
+            box-sizing: border-box;
+        }
 
         html, body {
             margin: 0;
@@ -22,17 +24,18 @@
             user-select: none;
         }
 
-        .image-view,
-        .info-view {
-            position: fixed;
-            inset: 0;
-        }
-
         /* IMAGE VIEW */
         .image-view {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+
             display: flex;
             align-items: center;
             justify-content: center;
+
             background: #000;
         }
 
@@ -44,28 +47,41 @@
 
         /* INFO VIEW */
         .info-view {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+
             padding: 20px 18px 28px;
-            background: var(--bg-dark);
-            color: var(--fg-light);
+            background: var(--bg-lila);
+            color: var(--fg-dark);
+
             font-family: Menlo, Monaco, Consolas, monospace;
             line-height: 1.55;
+
             overflow-y: auto;
             display: none;
         }
 
         .info-view h1 {
             font-size: 1.1rem;
-            margin-bottom: 12px;
+            margin: 0 0 12px 0;
+            font-weight: 600;
         }
 
         .meta {
-            font-size: 0.85rem;
-            opacity: 0.9;
+            font-size: 0.9rem;
             margin-bottom: 14px;
         }
 
+        .info-view p {
+            font-size: 1rem;
+            margin-bottom: 12px;
+        }
+
         a {
-            color: #cfe1ff;
+            color: #000;
             text-decoration: underline;
         }
 
@@ -86,8 +102,8 @@
 
 <!-- IMAGE -->
 <div class="image-view" id="imageView">
-    <img src="images/mobilemariekebetter.jpg" alt="Embroidery artwork" />
-    <div class="hint">.</div>
+    <img src="mariekebetter.jpg" alt="Embroidery artwork">
+    <div class="hint">press & hold</div>
 </div>
 
 <!-- INFO -->
@@ -108,8 +124,12 @@
     </p>
 
     <p>
+        Her practice is rooted in Brazilian embroidery traditions and Indigenous artisanship, weaving together ancestral knowledge and contemporary art.
+    </p>
+
+    <p>
         More about the artist:<br>
-        <a href="https://staging.vialmeida.com/para-marieke-que-reflete-sobre-a-ignorancia-do-mundo/" target="_blank">
+        <a href="https://staging.vialmeida.com/para-marieke-que-reflete-sobre-a-ignorancia-do-mundo/" target="_blank" rel="noopener noreferrer">
             staging.vialmeida.com/para-marieke-que-reflete-sobre-a-ignorancia-do-mundo/
         </a>
     </p>
