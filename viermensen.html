@@ -2,12 +2,99 @@
 <html lang="nl">
 <head>
     <meta charset="UTF-8" />
-    <title>LIQUID TEXT</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Liquid Rainbow Text</title>
+
+    <style>
+        @font-face {
+            font-family: "Mona Sans";
+            src: url("https://assets.codepen.io/64/Mona-Sans.woff2")
+            format("woff2-variations");
+            font-weight: 100 1000;
+        }
+
+        body {
+            margin: 0;
+            height: 100vh;
+            background: radial-gradient(circle at center, #050505, #000);
+            display: grid;
+            place-items: center;
+            font-family: "Mona Sans", sans-serif;
+            overflow: hidden;
+        }
+
+        .container {
+            filter: url(#liquid);
+        }
+
+        h1 {
+            display: flex;
+            gap: 0.12em;
+            font-size: clamp(3rem, 9vw, 9rem);
+            font-weight: 900;
+            letter-spacing: 0.25em;
+        }
+
+        /* LETTERS */
+        h1 span {
+            display: inline-block;
+            transform-origin: center;
+            animation:
+                    pulse 1.8s ease-in-out infinite,
+                    wobble 3s ease-in-out infinite;
+        }
+
+        /* 🌈 RAINBOW */
+        .rainbow span {
+            background: linear-gradient(
+                    90deg,
+                    #ffffff,
+                    #00ffff,
+                    #0000ff,
+                    #a020f0,
+                    #ff69b4,
+                    #ff0000,
+                    #ffff00,
+                    #7fff00,
+                    #ffffff
+            );
+            background-size: 900%;
+            animation:
+                    rainbowMove 4s linear infinite,
+                    pulse 1.8s ease-in-out infinite,
+                    wobble 3s ease-in-out infinite;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* 💓 HARTSLAG */
+        @keyframes pulse {
+            0%   { transform: scale(1); }
+            25%  { transform: scale(1.2); }
+            45%  { transform: scale(0.9); }
+            60%  { transform: scale(1.15); }
+            100% { transform: scale(1); }
+        }
+
+        /* 🌊 LIQUID WOBBLE */
+        @keyframes wobble {
+            0%   { rotate: 0deg; }
+            25%  { rotate: 3deg; }
+            50%  { rotate: -3deg; }
+            75%  { rotate: 2deg; }
+            100% { rotate: 0deg; }
+        }
+
+        /* 🌈 BEWEGENDE KLEUR */
+        @keyframes rainbowMove {
+            0%   { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+    </style>
 </head>
+
 <body>
 
-<!-- SVG FILTERS -->
+<!-- SVG LIQUID FILTER -->
 <svg width="0" height="0">
     <filter id="liquid">
         <feTurbulence
@@ -36,10 +123,10 @@
                 in="blur"
                 mode="matrix"
                 values="
-        1 0 0 0 0
-        0 1 0 0 0
-        0 0 1 0 0
-        0 0 0 18 -7"
+          1 0 0 0 0
+          0 1 0 0 0
+          0 0 1 0 0
+          0 0 0 18 -7"
                 result="goo" />
 
         <feComposite in="SourceGraphic" in2="goo" operator="atop" />
@@ -47,11 +134,24 @@
 </svg>
 
 <div class="container">
-    <h1 id="liquidText" class="liquid rainbow">
-        BINNENSTEBUITEN
+    <h1 id="liquidText" class="rainbow">
+        Er zijn bij een ontmoeting altijd vier mensen aanwezig. Dat ben ik, dat ben jij, dat is wat ik van jou maak en dat is wat jij van mij maakt.
     </h1>
 </div>
 
-<script src="script.js"></script>
+<script>
+    const el = document.getElementById("liquidText");
+    const text = el.innerText;
+
+    el.innerHTML = [...text]
+        .map(
+            (char, i) =>
+                `<span style="animation-delay:${i * 0.1}s">
+            ${char === " " ? "&nbsp;" : char}
+          </span>`
+        )
+        .join("");
+</script>
+
 </body>
 </html>
