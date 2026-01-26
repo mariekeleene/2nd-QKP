@@ -1,66 +1,164 @@
 <!DOCTYPE html>
-<html lang="nl">
+<html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <title>Er zijn bij een ontmoeting altijd <br></title>
-    vier mensen aanwezig <br>
-    vier mensen <br>
-    jij, ik <br>
-    wat jij van mij maakt, wat ik van jou maak<br>
+    <title>Encounter</title>
 
     <style>
-        @font-face {
-            font-family: "Mona Sans";
-            src: url("https://assets.codepen.io/64/Mona-Sans.woff2")
-            format("woff2-variations");
-            font-weight: 100 1000;
-        }
-
         body {
             margin: 0;
             height: 100vh;
-            background: #000;
-            font-family: "Mona Sans", sans-serif;
-            overflow: hidden;
-            cursor: none; /* optioneel: cursor verbergen */
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: Menlo, monospace;
         }
 
-        .dot {
-            position: fixed;
-            pointer-events: none;
+        .wrapper {
+            text-align: center;
+            max-width: 520px;
             font-size: 12px;
-            font-weight: 300;
-            color: white;
-            white-space: nowrap;
-            transform: translate(-50%, -50%);
-            opacity: 0.9;
+            color: black;
+            line-height: 1.6;
+        }
+
+        #base {
+            margin-bottom: 8px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li::before {
+            content: "– ";
+        }
+
+        select {
+            margin-top: 16px;
+            font-family: Menlo, monospace;
+            font-size: 12px;
         }
     </style>
 </head>
 
 <body>
 
+<div class="wrapper">
+    <div id="base">
+        there are always
+        <span id="number">4</span>
+        people present in an encounter:
+    </div>
+
+    <ul id="list"></ul>
+
+    <select id="chooser">
+        <option value="3">3</option>
+        <option value="4" selected>4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+    </select>
+</div>
+
 <script>
-    const text = "trace";
-    let index = 0;
-    let lastTime = 0;
-    const interval = 40; // lager = dichter spoor
+    const data = {
+        3: [
+            "you",
+            "me",
+            "whatever is accidentally happening between us"
+        ],
+        4: [
+            "you",
+            "me",
+            "what I make of you",
+            "what you make of me"
+        ],
+        5: [
+            "you",
+            "me",
+            "what I make of you",
+            "what you make of me",
+            "a version of us that exists only for a few seconds"
+        ],
+        6: [
+            "you",
+            "me",
+            "what I make of you",
+            "what you make of me",
+            "who I think you are",
+            "who you briefly pretend to be"
+        ],
+        7: [
+            "you",
+            "me",
+            "what I make of you",
+            "what you make of me",
+            "who I think you are",
+            "who you think I am",
+            "the person neither of us mentions"
+        ],
+        8: [
+            "you",
+            "me",
+            "what I make of you",
+            "what you make of me",
+            "who I think you are",
+            "who you think I am",
+            "what I am performing",
+            "what you are performing"
+        ],
+        9: [
+            "you",
+            "me",
+            "what I make of you",
+            "what you make of me",
+            "who I think you are",
+            "who you think I am",
+            "what I am performing",
+            "what you are performing",
+            "the misunderstanding holding it together"
+        ],
+        10: [
+            "you",
+            "me",
+            "what I make of you",
+            "what you make of me",
+            "who I think you are",
+            "who you think I am",
+            "what I am performing",
+            "what you are performing",
+            "what neither of us notices",
+            "what will be remembered incorrectly"
+        ]
+    };
 
-    document.addEventListener("mousemove", (e) => {
-        const now = performance.now();
-        if (now - lastTime < interval) return;
-        lastTime = now;
+    const chooser = document.getElementById("chooser");
+    const number = document.getElementById("number");
+    const list = document.getElementById("list");
 
-        const span = document.createElement("span");
-        span.className = "dot";
-        span.textContent = text[index % text.length];
-        index++;
+    function render(n) {
+        number.textContent = n;
+        list.innerHTML = "";
+        data[n].forEach(item => {
+            const li = document.createElement("li");
+            li.textContent = item;
+            list.appendChild(li);
+        });
+    }
 
-        span.style.left = e.clientX + "px";
-        span.style.top = e.clientY + "px";
-
-        document.body.appendChild(span);
+    chooser.addEventListener("change", () => {
+        render(chooser.value);
     });
+
+    render(4);
 </script>
 
 </body>
