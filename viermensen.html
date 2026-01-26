@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <title>Encounter</title>
-
+    <meta charset="UTF-8">
+    <title>Encounter up to 100</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <style>
         body {
             margin: 0;
@@ -15,12 +13,12 @@
             align-items: center;
             justify-content: center;
             font-family: Menlo, monospace;
-            padding: 16px; /* padding for small screens */
+            padding: 16px;
         }
 
         .wrapper {
             text-align: center;
-            max-width: 520px;
+            max-width: 600px;
             font-size: 12px;
             color: black;
             line-height: 1.6;
@@ -31,7 +29,7 @@
             margin-bottom: 12px;
         }
 
-        /* Inline dropdown as real UI element, touch-friendly */
+        /* Dropdown styled as UI button */
         #chooser {
             font-family: Menlo, monospace;
             font-size: 12px;
@@ -43,7 +41,7 @@
             margin: 0 2px;
             vertical-align: baseline;
             cursor: pointer;
-            min-width: 36px; /* makes it tappable on phones */
+            min-width: 36px;
         }
 
         #chooser:focus {
@@ -56,13 +54,14 @@
             padding: 0;
             margin: 0;
             text-align: left;
+            max-height: 60vh;
+            overflow-y: auto;
         }
 
         li::before {
             content: "– ";
         }
 
-        /* Bigger font on mobile for readability */
         @media (max-width: 480px) {
             .wrapper {
                 font-size: 14px;
@@ -74,22 +73,12 @@
         }
     </style>
 </head>
-
 <body>
 
 <div class="wrapper">
     <div id="base">
         there are always
-        <select id="chooser" aria-label="number of people">
-            <option value="3">3</option>
-            <option value="4" selected>4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-            <option value="10">10</option>
-        </select>
+        <select id="chooser" aria-label="number of people"></select>
         people present in an encounter:
     </div>
 
@@ -97,83 +86,42 @@
 </div>
 
 <script>
-    const data = {
-        3: [
-            "you",
-            "me",
-            "and the ears of a wall"
-        ],
-        4: [
-            "you",
-            "me",
-            "what I make of you",
-            "what you make of me"
-        ],
-        5: [
-            "you",
-            "me",
-            "what I make of you",
-            "a once human reincarnated into a carpet",
-            "a version of us that exists only for a few seconds"
-        ],
-        6: [
-            "you",
-            "me",
-            "a version of us that exists only for a few seconds",
-            "the carpet",
-            "who I think you are",
-            "who you briefly pretend to be"
-        ],
-        7: [
-            "you",
-            "me",
-            "what I make of you",
-            "what you make of you",
-            "who I think you are",
-            "the ears of a wall",
-            "the person neither of us mentions"
-        ],
-        8: [
-            "you",
-            "me",
-            "what I make of myself",
-            "what you make of yourself",
-            "who I think you are",
-            "who you think I will be",
-            "Lucy",
-            "what you are performing"
-        ],
-        9: [
-            "you",
-            "me",
-            "what I make of you",
-            "what you make of me",
-            "who I think you are",
-            "who you think I am",
-            "what I am performing",
-            "what you are performing",
-            "the misunderstanding holding it together"
-        ],
-        10: [
-            "you",
-            "me",
-            "what I make of you",
-            "what you make of me",
-            "who I think you are",
-            "who do you think I am",
-            "what I am performing",
-            "what you are",
-            "what neither of us notices",
-            "what will be remembered incorrectly"
-        ]
+    const baseData = {
+        3: ["you", "me", "and the ears of a wall"],
+        4: ["you", "me", "what I make of you", "what you make of me"],
+        5: ["you","me","what I make of you","a once human reincarnated into a carpet","a version of us that exists only for a few seconds"],
+        6: ["you","me","a version of us that exists only for a few seconds","the carpet","who I think you are","who you briefly pretend to be"],
+        7: ["you","me","what I make of you","what you make of you","who I think you are","the ears of a wall","the person neither of us mentions"],
+        8: ["you","me","what I make of myself","what you make of yourself","who I think you are","who you think I will be","Lucy","what you are performing"],
+        9: ["you","me","what I make of you","what you make of me","who I think you are","who you think I am","what I am performing","what you are performing","the misunderstanding holding it together"],
+        10: ["you","me","what I make of you","what you make of me","who I think you are","who do you think I am","what I am performing","what you are","what neither of us notices","what will be remembered incorrectly"]
     };
 
     const chooser = document.getElementById("chooser");
     const list = document.getElementById("list");
 
+    // Generate dropdown options 3–100
+    for (let i = 3; i <= 100; i++) {
+        const option = document.createElement("option");
+        option.value = i;
+        option.textContent = i;
+        if (i === 4) option.selected = true; // default
+        chooser.appendChild(option);
+    }
+
+    function generateData(n) {
+        if (baseData[n]) return baseData[n];
+        const arr = baseData[10].slice(); // first 10
+        for (let i = 11; i <= n; i++) {
+            arr.push(`participant ${i} doing something inexplicable`);
+        }
+        return arr;
+    }
+
     function render(n) {
         list.innerHTML = "";
-        data[n].forEach(item => {
+        const items = generateData(n);
+        items.forEach(item => {
             const li = document.createElement("li");
             li.textContent = item;
             list.appendChild(li);
@@ -181,10 +129,10 @@
     }
 
     chooser.addEventListener("change", () => {
-        render(chooser.value);
+        render(parseInt(chooser.value));
     });
 
-    render(chooser.value);
+    render(parseInt(chooser.value));
 </script>
 
 </body>
