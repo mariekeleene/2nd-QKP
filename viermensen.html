@@ -2,11 +2,11 @@
 <html lang="nl">
 <head>
     <meta charset="UTF-8" />
-    <title>Rainbow Pulse Text</title>
+    <title>Text Trace Cursor</title>
 
     <style>
         @font-face {
-            font-family: Menlo;
+            font-family: "Mona Sans";
             src: url("https://assets.codepen.io/64/Mona-Sans.woff2")
             format("woff2-variations");
             font-weight: 100 1000;
@@ -15,104 +15,48 @@
         body {
             margin: 0;
             height: 100vh;
-            background: radial-gradient(circle at center, #ffffff, #efe6e6);
-            display: grid;
-            place-items: center;
+            background: #000;
             font-family: "Mona Sans", sans-serif;
             overflow: hidden;
+            cursor: none; /* optioneel: cursor verbergen */
         }
 
-        h1 {
-            display: flex;
-            gap: 0.12em;
-            font-size: calc(4rem + 4vw);
-            font-weight: 900;
-            letter-spacing: 0.25em;
-        }
-
-        /* LETTERS */
-        h1 span {
-            display: inline-block;
-            transform-origin: center;
-            animation:
-                    pulse 1.8s ease-in-out infinite,
-                    wobble 3s ease-in-out infinite;
-        }
-
-        /* 🌈 RAINBOW */
-        .rainbow span {
-            background: linear-gradient(
-                    90deg,
-                    #ffffff,
-                    #3e4e3b,
-                    #a1c1ff,
-                    #f64105,
-                    #3a433a,
-                    #ff0000,
-                    #ef5e5e,
-                    #bffd05,
-                    #b1ea09
-            );
-            background-size: 900%;
-            animation:
-                    rainbowMove 4s linear infinite,
-                    pulse 1.8s ease-in-out infinite,
-                    wobble 3s ease-in-out infinite;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        /* 💓 HARTSLAG */
-        @keyframes pulse {
-            0%   { transform: scale(1); }
-            25%  { transform: scale(1.2); }
-            45%  { transform: scale(0.9); }
-            60%  { transform: scale(1.15); }
-            100% { transform: scale(1); }
-        }
-
-        /* 🌊 SUBTIELE WOBBLE */
-        @keyframes wobble {
-            0%   { rotate: 0deg; }
-            25%  { rotate: 2deg; }
-            50%  { rotate: -2deg; }
-            75%  { rotate: 1deg; }
-            100% { rotate: 0deg; }
-        }
-
-        /* 🌈 BEWEGENDE KLEUR */
-        @keyframes rainbowMove {
-            0%   { background-position: 0% 50%; }
-            100% { background-position: 100% 50%; }
+        .dot {
+            position: fixed;
+            pointer-events: none;
+            font-size: 12px;
+            font-weight: 300;
+            color: white;
+            white-space: nowrap;
+            transform: translate(-50%, -50%);
+            opacity: 0.9;
         }
     </style>
 </head>
 
 <body>
 
-<h1 id="pulseText" class="rainbow">
-    Er zijn bij een ontmoeting altijd <u>vier mensen</u> aanwezig
-    vier mensen <br>
-    mensen<br>
-    jij<br>
-    ik<br>
-    wat ik van jou maak<br>
-    wat jij van mij maakt.<br>
-    br<br>
-</h1>
-
 <script>
-    const el = document.getElementById("pulseText");
-    const text = el.innerText;
+    const text = "trace";
+    let index = 0;
+    let lastTime = 0;
+    const interval = 40; // lager = dichter spoor
 
-    el.innerHTML = [...text]
-        .map(
-            (char, i) =>
-                `<span style="animation-delay:${i * 0.1}s">
-            ${char === " " ? "&nbsp;" : char}
-          </span>`
-        )
-        .join("");
+    document.addEventListener("mousemove", (e) => {
+        const now = performance.now();
+        if (now - lastTime < interval) return;
+        lastTime = now;
+
+        const span = document.createElement("span");
+        span.className = "dot";
+        span.textContent = text[index % text.length];
+        index++;
+
+        span.style.left = e.clientX + "px";
+        span.style.top = e.clientY + "px";
+
+        document.body.appendChild(span);
+    });
 </script>
 
 </body>
