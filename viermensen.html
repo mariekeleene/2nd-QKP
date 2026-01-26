@@ -2,11 +2,11 @@
 <html lang="nl">
 <head>
     <meta charset="UTF-8" />
-    <title>Liquid Rainbow Text</title>
+    <title>Rainbow Pulse Text</title>
 
     <style>
         @font-face {
-            font-family: "Mona Sans";
+            font-family: Menlo;
             src: url("https://assets.codepen.io/64/Mona-Sans.woff2")
             format("woff2-variations");
             font-weight: 100 1000;
@@ -15,21 +15,17 @@
         body {
             margin: 0;
             height: 100vh;
-            background: radial-gradient(circle at center, #ffffff, #ffffff);
+            background: radial-gradient(circle at center, #ffffff, #efe6e6);
             display: grid;
             place-items: center;
-            font-family: "Menlo", monospace;
+            font-family: "Mona Sans", sans-serif;
             overflow: hidden;
-        }
-
-        .container {
-            filter: url(#liquid);
         }
 
         h1 {
             display: flex;
             gap: 0.12em;
-            font-size: clamp(3rem, 9vw, 9rem);
+            font-size: calc(4rem + 4vw);
             font-weight: 900;
             letter-spacing: 0.25em;
         }
@@ -47,15 +43,15 @@
         .rainbow span {
             background: linear-gradient(
                     90deg,
-                    #efe6e6,
-                    #a1c1ff,
-                    #0000ff,
+                    #ffffff,
                     #3e4e3b,
-                    #ff69b4,
+                    #a1c1ff,
+                    #f64105,
+                    #3a433a,
+                    #ff0000,
                     #ef5e5e,
-                    #5e8cef,
-                    #7fff00,
-                    #f64105
+                    #bffd05,
+                    #b1ea09
             );
             background-size: 900%;
             animation:
@@ -75,12 +71,12 @@
             100% { transform: scale(1); }
         }
 
-        /* 🌊 LIQUID WOBBLE */
+        /* 🌊 SUBTIELE WOBBLE */
         @keyframes wobble {
             0%   { rotate: 0deg; }
-            25%  { rotate: 3deg; }
-            50%  { rotate: -3deg; }
-            75%  { rotate: 2deg; }
+            25%  { rotate: 2deg; }
+            50%  { rotate: -2deg; }
+            75%  { rotate: 1deg; }
             100% { rotate: 0deg; }
         }
 
@@ -94,53 +90,19 @@
 
 <body>
 
-<!-- SVG LIQUID FILTER -->
-<svg width="0" height="0">
-    <filter id="liquid">
-        <feTurbulence
-                type="fractalNoise"
-                baseFrequency="0.015"
-                numOctaves="2"
-                seed="2"
-                result="noise">
-            <animate
-                    attributeName="baseFrequency"
-                    dur="6s"
-                    values="0.01;0.02;0.01"
-                    repeatCount="indefinite" />
-        </feTurbulence>
-
-        <feDisplacementMap
-                in="SourceGraphic"
-                in2="noise"
-                scale="30"
-                xChannelSelector="R"
-                yChannelSelector="G" />
-
-        <feGaussianBlur stdDeviation="4" result="blur" />
-
-        <feColorMatrix
-                in="blur"
-                mode="matrix"
-                values="
-          1 0 0 0 0
-          0 1 0 0 0
-          0 0 1 0 0
-          0 0 0 18 -7"
-                result="goo" />
-
-        <feComposite in="SourceGraphic" in2="goo" operator="atop" />
-    </filter>
-</svg>
-
-<div class="container">
-    <h1 id="liquidText" class="rainbow">
-        Er zijn bij een ontmoeting altijd vier mensen aanwezig. Dat ben ik, dat ben jij, dat is wat ik van jou maak en dat is wat jij van mij maakt.
-    </h1>
-</div>
+<h1 id="pulseText" class="rainbow">
+    Er zijn bij een ontmoeting altijd <u>vier mensen</u> aanwezig
+    vier mensen <br>
+    mensen<br>
+    jij<br>
+    ik<br>
+    wat ik van jou maak<br>
+    wat jij van mij maakt.<br>
+    br<br>
+</h1>
 
 <script>
-    const el = document.getElementById("liquidText");
+    const el = document.getElementById("pulseText");
     const text = el.innerText;
 
     el.innerHTML = [...text]
