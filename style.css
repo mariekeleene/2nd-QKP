@@ -8,7 +8,7 @@ body {
     padding: 0;
     height: 100%;
     font-family: "Menlo", monospace;
-    overflow-y: scroll;
+    overflow: hidden;
 }
 
 body {
@@ -17,7 +17,6 @@ body {
     background-repeat: no-repeat;
     transition: background-image 1s ease-in-out;
     color: #111;
-    overflow-x: hidden;
 }
 
 /* ===============================
@@ -44,16 +43,27 @@ body {
 }
 
 /* ===============================
+   DROPDOWN CONTAINER
+   =============================== */
+
+.dropdown-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100%;
+}
+
+/* ===============================
    DROPDOWN WRAPPER
    =============================== */
 
 .dropdown-wrapper {
-    position: fixed;
-    top: 25vh;              /* juiste hoogte */
-    left: 50%;
-    transform: translateX(-50%);
-    width: 280px;
-    z-index: 40;
+    flex: 1;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid rgba(255,255,255,0.3);
 }
 
 /* ===============================
@@ -61,7 +71,7 @@ body {
    =============================== */
 
 .dropdown-trigger {
-    width: 90%;
+    width: 280px;
     padding: 12px 15px;
     font-size: 20px;
     cursor: pointer;
@@ -93,11 +103,10 @@ body {
 
 .dropdown-menu {
     position: absolute;
-    top: calc(100% + 12px); /* direct onder trigger */
-    left: 0;
+    top: 60%;
+    width: 280px;
 
-    width: 100%;
-    max-height: calc(100vh - 25vh - 80px); /* ruimte tot onderkant */
+    max-height: 60vh;
     overflow-y: auto;
 
     background: #f0ff85;
