@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         detailsBtn.textContent = detailsText.classList.contains("active")
             ? "CLOSE ▲"
-            : "DETAILS ▽";
+            : "MORE INFORMATION ▽";
 
     });
 

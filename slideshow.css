@@ -61,20 +61,24 @@ body {
     top: 48px;
     left: 0;
     width: 100%;
-    height: calc(100vh - 48px);
-    background: white; /* was black */
-    color: #0000EE;
-    z-index: 9999;
 
-    overflow-y: auto;
+    background: white;
+    color: #0000EE;
+
+    padding: 20px 0 20px 0; /* 20px onder de tekst */
+
+    z-index: 9999;
 
     transform: translateY(-100%);
     transition: transform 0.4s ease;
-    font-family: "Times New Roman", Times, serif;
 }
 
 .details-text.active {
     transform: translateY(0);
+}
+
+.details-text {
+    border-bottom: 1px solid #0000EE;
 }
 
 .details-text.show {
