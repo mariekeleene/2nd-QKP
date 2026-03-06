@@ -1,21 +1,29 @@
 body {
     margin: 0;
     font-family: "Times New Roman", Times, serif;
-    background: #ffffff;
+    background: white;
+    color: #0000EE;
     padding-top: 48px;
+}
+
+.top-bar {
+    background: white;
     color: #0000EE;
 }
 
+.details-text {
+    background: white;
+    color: #0000EE;
+}
 
-/* CLOSE BUTTON */
 .close-btn {
-    position: fixed;
-    top: 15px;
+    position: absolute;
     right: 20px;
-    font-size: 24px;
+    top: 8px;
+    font-size: 28px;
     text-decoration: none;
     color: #0000EE;
-    z-index: 1000;
+    z-index: 20000;
 }
 
 /* TOP BAR */

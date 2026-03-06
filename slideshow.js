@@ -10,21 +10,18 @@ document.addEventListener("DOMContentLoaded", () => {
     const detailsBtn = document.getElementById("details-btn");
     const detailsText = document.getElementById("details-text");
 
-    const btn = document.getElementById("details-btn");
-    const details = document.getElementById("details-text");
-
-    btn.addEventListener("click", () => {
-        details.classList.toggle("active");
-    });
-
-    /* TOGGLE */
+    /* DETAILS TOGGLE */
     detailsBtn.addEventListener("click", () => {
-        detailsText.classList.toggle("show");
-        detailsBtn.textContent = detailsText.classList.contains("show")
-            ? "close ▲"
-            : "click here if you want to see more than image ▽";
+
+        detailsText.classList.toggle("active");
+
+        detailsBtn.textContent = detailsText.classList.contains("active")
+            ? "CLOSE ▲"
+            : "DETAILS ▽";
+
     });
 
+    /* ADD IMAGES */
     function addImages() {
         images.forEach(src => {
             const img = document.createElement("img");
@@ -44,4 +41,5 @@ document.addEventListener("DOMContentLoaded", () => {
             addImages();
         }
     });
+
 });
