@@ -1,9 +1,10 @@
 body {
     margin: 0;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: "Times New Roman", Times, serif;
     background: #ffffff;
     padding-top: 48px;
- }
+    color: #0000EE;
+}
 
 
 /* CLOSE BUTTON */
@@ -13,7 +14,7 @@ body {
     right: 20px;
     font-size: 24px;
     text-decoration: none;
-    color: black;
+    color: #0000EE;
     z-index: 1000;
 }
 
@@ -24,15 +25,15 @@ body {
     left: 0;
     width: 100%;
     height: 48px;
-    background: black;
-    color: white;
+    background: white; /* was black */
+    color: #0000EE;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 16px;
     z-index: 10000;
+    font-family: "Times New Roman", Times, serif;
 }
-
 
 .product-title {
     position: absolute;
@@ -43,28 +44,30 @@ body {
 .details {
     font-size: 18px;
     cursor: pointer;
+    color: #0000EE;
 }
 
 /* DETAILS */
 .details-text {
     position: fixed;
-    top: 48px; /* direct onder de bar */
+    top: 48px;
     left: 0;
     width: 100%;
     height: calc(100vh - 48px);
-    background: black;
-    color: white;
+    background: white; /* was black */
+    color: #0000EE;
     z-index: 9999;
 
     overflow-y: auto;
 
     transform: translateY(-100%);
     transition: transform 0.4s ease;
+    font-family: "Times New Roman", Times, serif;
 }
+
 .details-text.active {
     transform: translateY(0);
 }
-
 
 .details-text.show {
     max-height: 500px;
@@ -93,7 +96,7 @@ body {
 
 .feed {
     width: 100%;
-    max-width: 430px; /* telefoonbreedte */
+    max-width: 430px;
 }
 
 /* IMAGES */
