@@ -6,26 +6,6 @@ body {
     padding-top: 48px;
 }
 
-.top-bar {
-    background: white;
-    color: #0000EE;
-}
-
-.details-text {
-    background: white;
-    color: #0000EE;
-}
-
-.close-btn {
-    position: absolute;
-    right: 20px;
-    top: 8px;
-    font-size: 28px;
-    text-decoration: none;
-    color: #0000EE;
-    z-index: 20000;
-}
-
 /* TOP BAR */
 .top-bar {
     position: fixed;
@@ -33,57 +13,63 @@ body {
     left: 0;
     width: 100%;
     height: 48px;
-    background: white; /* was black */
+
+    background: white;
     color: #0000EE;
+
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: center;
     padding: 0 16px;
+
     z-index: 10000;
-    font-family: "Times New Roman", Times, serif;
 }
 
+/* PRODUCT TITLE */
 .product-title {
     position: absolute;
-    left: 28px;
-    font-size: 22px;
+    left: 16px;
+    font-size: 20px;
 }
 
+/* CLOSE BUTTON */
+.close-btn {
+    position: absolute;
+    right: 16px;
+    top: 8px;
+    font-size: 28px;
+    text-decoration: none;
+    color: #0000EE;
+    z-index: 20000;
+}
+
+/* DETAILS BUTTON */
 .details {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
     font-size: 18px;
     cursor: pointer;
-    color: #0000EE;
 }
 
-/* DETAILS */
+/* DETAILS DRAWER */
 .details-text {
     position: fixed;
     top: 48px;
     left: 0;
     width: 100%;
-
     background: white;
     color: #0000EE;
-
-    padding: 20px 0 20px 0; /* 20px onder de tekst */
-
-    z-index: 9999;
+    padding: 20px 0 20px 0; /* 20px padding onderaan */
+    overflow-y: auto;
 
     transform: translateY(-100%);
     transition: transform 0.4s ease;
+    z-index: 9999;
 }
 
 .details-text.active {
     transform: translateY(0);
-}
-
-.details-text {
-    border-bottom: 1px solid #0000EE;
-}
-
-.details-text.show {
-    max-height: 500px;
-    padding: 20px 0;
 }
 
 .details-content {
@@ -116,4 +102,28 @@ body {
     width: 100%;
     display: block;
     margin-bottom: 20px;
+}
+
+/* RESPONSIVE - MOBILE */
+@media (max-width: 600px) {
+
+    body {
+        padding-top: 80px;
+    }
+
+    .details {
+        position: absolute;
+        top: 56px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .details-content {
+        flex-direction: column;
+        padding: 0 16px;
+    }
+
+    .details-left, .details-right {
+        flex: unset;
+    }
 }
