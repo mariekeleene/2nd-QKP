@@ -8,7 +8,7 @@ body {
 
 /* TOP BAR */
 .top-bar {
-    position: fixed;
+    position: relative; /* changed from fixed inside body context */
     top: 0;
     left: 0;
     width: 100%;
@@ -35,8 +35,9 @@ body {
 /* CLOSE BUTTON */
 .close-btn {
     position: absolute;
-    right: 16px;
-    top: 8px;
+    right: 16px; /* safe distance from right edge */
+    top: 50%;    /* vertically center in top-bar */
+    transform: translateY(-50%); /* perfect vertical centering */
     font-size: 28px;
     text-decoration: none;
     color: #0000EE;
