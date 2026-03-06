@@ -1,14 +1,11 @@
 .top-bar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
+    position: relative;   /* so the absolute chicken is inside it */
     height: 48px;
+    width: 100%;
     background: white;
-    color: #0000EE;
     display: flex;
     align-items: center;
-    justify-content: center; /* centers MORE INFO */
+    justify-content: center;  /* centers MORE INFO */
     padding: 0 16px;
     z-index: 10000;
     font-family: "Times New Roman", serif;
@@ -23,8 +20,9 @@
 
 /* Word on top right */
 .top-right-word {
-    position: absolute;
-    right: 16px;
+    position: absolute;   /* relative to top-bar */
+    top: 20px;            /* 20px from top */
+    right: 20px;          /* 20px from right */
     font-size: 20px;
     color: #0000EE;
 }
@@ -51,11 +49,13 @@
     transform: translateY(-100%);
     transition: transform 0.4s ease;
     z-index: 9999;
+    border-bottom: 1px solid #0000EE;
 }
 
 .details-text.active {
     transform: translateY(0);
 }
+
 
 .details-content {
     display: flex;
