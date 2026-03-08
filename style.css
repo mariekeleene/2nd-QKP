@@ -53,6 +53,7 @@ body {
     display: flex;
     justify-content: center;
     padding: 6px 0;
+    isolation: isolate;
 }
 
 /* ================= TRIGGER ================= */
@@ -89,7 +90,8 @@ body {
 .dropdown-menu {
     position: absolute;
     top: 60%;
-    width: 280px;
+    width: 100%;
+    max-width: 280px;
 
     max-height: 60vh;
     overflow-y: auto;
