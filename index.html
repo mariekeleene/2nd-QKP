@@ -212,6 +212,38 @@
     changeBackground();
     setInterval(changeBackground, 6000);
 
+    /* ===============================
+   VISITED PROJECT TRACKING
+   =============================== */
+
+    const items = document.querySelectorAll(".item");
+
+    // load visited pages from storage
+    let visited = JSON.parse(localStorage.getItem("visitedPages")) || [];
+
+    /* Mark items already visited */
+
+    items.forEach(item => {
+
+        const url = item.getAttribute("href");
+
+        if (visited.includes(url)) {
+            item.classList.add("visited");
+        }
+
+        /* Save when clicking */
+
+        item.addEventListener("click", () => {
+
+            if (!visited.includes(url)) {
+                visited.push(url);
+                localStorage.setItem("visitedPages", JSON.stringify(visited));
+            }
+
+        });
+
+    });
+
 </script>
 
 </body>
