@@ -144,7 +144,7 @@ body {
 }
 
 .item.visited {
-    text-decoration-color: #f9ffd0;
+    color: #d6f215;
     opacity: 0.45;
     transition: opacity 0.3s;
 }
