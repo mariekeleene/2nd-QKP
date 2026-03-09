@@ -44,7 +44,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 6px; /* afstand tussen dropdowns */
+    gap: 10px;
     padding-top: 40px;
     position: relative;
 }
@@ -68,8 +68,8 @@ body {
 
 .dropdown-trigger {
     width: 280px;
-    padding: 12px 15px;
-    font-size: 20px;
+    padding: 10px 12px;
+    font-size: 15px;
     cursor: pointer;
 
     display: flex;
@@ -79,13 +79,13 @@ body {
     background: #f0ff85;
 
     box-shadow:
-            rgba(0,0,0,0.4) 0px 2px 4px,
-            rgba(0,0,0,0.3) 0px 7px 13px -3px,
-            rgba(0,0,0,0.2) 0px -3px 0px inset;
+            rgba(0,0,0,0.35) 0px 2px 3px,
+            rgba(0,0,0,0.25) 0px 6px 10px -3px,
+            rgba(0,0,0,0.2) 0px -2px 0px inset;
 }
 
 .arrow {
-    font-size: 12px;
+    font-size: 10px;
     transition: transform 0.3s ease;
 }
 
@@ -126,8 +126,9 @@ body {
 
 .item {
     display: block;
-    padding: 12px 28px;
-    font-size: 15px;
+    padding: 8px 26px;
+    font-size: 13px;
+    line-height: 1.25;
     color: #111;
     text-decoration: none;
 }
@@ -151,7 +152,7 @@ body {
 /* ================= INLINE IMAGE IN TEXT ================= */
 
 .inline-img {
-    height: 1.2em;
+    height: 10em;
     vertical-align: middle;
     margin: 0 4px;
 }
@@ -163,8 +164,8 @@ body {
     bottom: 10px;
     width: 100%;
     text-align: center;
-    font-size: 11px;
-    letter-spacing: 0.08em;
+    font-size: 10px;
+    letter-spacing: 0.04em;
     color: #373737;
 }
 
@@ -174,20 +175,19 @@ body {
 
     .dropdown-trigger {
         width: 280px;
-        max-width: 90vw; /* behoud breedte maar schaal op kleine schermen */
-        font-size: 16px;
-        padding: 10px 12px;
+        max-width: 90vw;
+        font-size: 14px;
+        padding: 8px 10px;
     }
 
     .dropdown-menu {
         width: 280px;
         max-width: 90vw;
-        max-height: 50vh;
     }
 
     .item {
-        font-size: 14px;
-        padding: 10px 18px;
+        font-size: 13px;
+        padding: 8px 18px;
     }
 
     .site-footer {
