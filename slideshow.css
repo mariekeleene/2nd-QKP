@@ -98,9 +98,9 @@
 /* floating back */
 #floating-back {
     position: fixed;
-    width: 90px;
+    width: 110px;
     cursor: pointer;
-    z-index: 9999;
+    z-index: 29999;
     transition: left 0.8s ease, top 0.8s ease;
 }
 
@@ -143,5 +143,5 @@
     .feed { max-width: 100%; padding: 0 10px; }
     .feed img { margin-bottom: 10px; }
 
-    #floating-back { width: 70px; }
+    #floating-back { width: 100px; }
 }

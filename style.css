@@ -76,12 +76,12 @@ body {
     justify-content: space-between;
     align-items: center;
 
-    background: #f0ff85;
+    background: #f9ffd0;
 
     box-shadow:
-            rgba(0,0,0,0.35) 0px 2px 3px,
-            rgba(0,0,0,0.25) 0px 6px 10px -3px,
-            rgba(0,0,0,0.2) 0px -2px 0px inset;
+            rgba(244, 18, 18, 0.4) 0px 2px 3px,
+            rgba(255, 29, 29, 0.3) 0px 6px 10px -3px,
+            rgba(78, 89, 255, 0.2) 0px -2px 0px inset;
 }
 
 .arrow {
@@ -103,7 +103,7 @@ body {
     max-height: 60vh;
     overflow-y: auto;
 
-    background: #f0ff85;
+    background: #f9ffd0;
     padding: 14px 0;
 
     opacity: 0;
@@ -144,7 +144,7 @@ body {
 }
 
 .item.visited {
-    text-decoration: line-through;
+    text-decoration-color: #f9ffd0;
     opacity: 0.45;
     transition: opacity 0.3s;
 }
