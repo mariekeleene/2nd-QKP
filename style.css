@@ -144,7 +144,7 @@ body {
 }
 
 .item.visited {
-    color: #d6f215;
+    color: #8d98a6;
     opacity: 0.45;
     transition: opacity 0.3s;
 }
@@ -167,6 +167,35 @@ body {
     font-size: 10px;
     letter-spacing: 0.04em;
     color: #373737;
+}
+
+#dropdown3 .dropdown-menu {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    padding: 20px 30px;
+    align-items: flex-start;
+    background: #ffffff; /* lichte achtergrond voor contrast */
+    border-left: 1px solid #0000EE;
+    border-right: 1px solid #0000EE;
+    border-bottom: 1px solid #0000EE;
+}
+
+#dropdown3 .dropdown-menu p {
+    font-family: "Times New Roman", serif;
+    font-size: 15px;
+    line-height: 1.6;
+    color: #0000EE;
+    margin: 0 0 16px 0;
+    flex: 1;
+}
+
+#dropdown3 .inline-img {
+    max-width: 180px;
+    height: auto;
+    border-radius: 4px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    object-fit: cover;
 }
 
 /* ================= MOBILE ================= */
@@ -195,4 +224,20 @@ body {
         bottom: 6px;
     }
 
+    #dropdown3 .dropdown-menu {
+            flex-direction: column;
+            gap: 16px;
+            padding: 12px 16px;
+    }
+
+    #dropdown3 .dropdown-menu p {
+            font-size: 13px;
+            line-height: 1.4;
+    }
+
+    #dropdown3 .inline-img {
+            max-width: 100%;
+            margin: auto;
+    }
 }
+
