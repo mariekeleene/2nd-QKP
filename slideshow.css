@@ -76,6 +76,14 @@
 .feed { width: 100%; max-width: 430px; }
 .feed img { width: 100%; display: block; margin-bottom: 20px; }
 
+#floating-back {
+    position: fixed;
+    width: 90px;
+    cursor: pointer;
+    z-index: 9999;
+    transition: left 0.8s ease, top 0.8s ease;
+}
+
 /* Mobile */
 @media (max-width: 600px) {
 
