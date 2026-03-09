@@ -1,5 +1,4 @@
 /* ================= BASE ================= */
-
 html,
 body {
     margin: 0;
@@ -7,6 +6,7 @@ body {
     height: 100%;
     font-family: "Menlo", monospace;
     overflow-x: hidden;
+    color: #111;
 }
 
 body {
@@ -14,32 +14,26 @@ body {
     background-position: center;
     background-repeat: no-repeat;
     transition: background-image 1s ease-in-out;
-    color: #111;
 }
 
 /* ================= SCROLLBAR ================= */
-
 ::-webkit-scrollbar {
     width: 14px;
 }
-
 ::-webkit-scrollbar-track {
     background: #1a1a1a;
 }
-
 ::-webkit-scrollbar-thumb {
     background: #f5f5f5;
     border-left: 3px solid #1a1a1a;
     border-right: 3px solid #1a1a1a;
 }
-
 * {
     scrollbar-width: auto;
     scrollbar-color: #f5f5f5 #1a1a1a;
 }
 
-/* ================= DROPDOWNS ================= */
-
+/* ================= DROPDOWN CONTAINER ================= */
 .dropdown-container {
     display: flex;
     flex-direction: column;
@@ -58,26 +52,20 @@ body {
     z-index: 1;
 }
 
-/* open dropdown komt boven andere */
-
 .dropdown-wrapper.open {
     z-index: 9999;
 }
 
 /* ================= TRIGGER ================= */
-
 .dropdown-trigger {
     width: 280px;
     padding: 10px 12px;
     font-size: 15px;
     cursor: pointer;
-
     display: flex;
     justify-content: space-between;
     align-items: center;
-
-    background: #f9ffd0;
-
+    background: #f9ffd0; /* gele triggers */
     box-shadow:
             rgba(244, 18, 18, 0.4) 0px 2px 3px,
             rgba(255, 29, 29, 0.3) 0px 6px 10px -3px,
@@ -94,27 +82,24 @@ body {
 }
 
 /* ================= DROPDOWN MENU ================= */
-
 .dropdown-menu {
     position: absolute;
-    top: 60%;
+    top: 100%; /* direct onder trigger */
     width: 280px;
-
     max-height: 60vh;
     overflow-y: auto;
-
     background: #f9ffd0;
     padding: 14px 0;
-
     opacity: 0;
     pointer-events: none;
-
     box-shadow:
             rgba(0,0,0,0.4) 0px 2px 4px,
             rgba(0,0,0,0.3) 0px 7px 13px -3px,
             rgba(0,0,0,0.2) 0px -3px 0px inset;
-
-    transition: opacity 0.3s ease;
+    font-family: "Menlo", monospace;
+    font-size: 13px;
+    line-height: 1.45;
+    letter-spacing: 0.02em;
 }
 
 .dropdown-wrapper.open .dropdown-menu {
@@ -123,7 +108,6 @@ body {
 }
 
 /* ================= ITEMS ================= */
-
 .item {
     display: block;
     padding: 8px 26px;
@@ -149,16 +133,21 @@ body {
     transition: opacity 0.3s;
 }
 
-/* ================= INLINE IMAGE IN TEXT ================= */
+/* ================= ABOUT THE ARTIST ================= */
+#dropdown3 .dropdown-menu p {
+    margin: 0 26px 12px 26px; /* gelijk aan .item padding */
+    line-height: 1.4;
+}
 
-.inline-img {
-    height: 10em;
+#dropdown3 .inline-img {
+    height: 8em;
     vertical-align: middle;
-    margin: 0 4px;
+    margin: 0 6px;
+    display: inline-block;
+    object-fit: cover;
 }
 
 /* ================= FOOTER ================= */
-
 .site-footer {
     position: fixed;
     bottom: 10px;
@@ -169,50 +158,7 @@ body {
     color: #373737;
 }
 
-#dropdown3 .dropdown-menu {
-    position: absolute;
-    top: 60%;
-    width: 280px;
-    max-height: 60vh;
-    overflow-y: auto;
-
-    background: #f9ffd0; /* gelijke kleur als andere dropdowns */
-    padding: 14px 18px; /* ruimte rondom tekst zodat het niet tegen de randen zit */
-
-    opacity: 0;
-    pointer-events: none;
-
-    box-shadow:
-            rgba(0,0,0,0.4) 0px 2px 4px,
-            rgba(0,0,0,0.3) 0px 7px 13px -3px,
-            rgba(0,0,0,0.2) 0px -3px 0px inset;
-
-    font-family: "Menlo", monospace; /* zelfde font als andere dropdowns */
-    font-size: 13px;
-    line-height: 1.45;
-    letter-spacing: 0.02em;
-}
-
-.dropdown-wrapper.open #dropdown3 .dropdown-menu {
-    opacity: 1;
-    pointer-events: auto;
-}
-
-#dropdown3 .dropdown-menu p {
-    margin: 0 0 12px 0; /* ruimte tussen paragrafen */
-}
-
-/* inline image styling */
-#dropdown3 .inline-img {
-    height: 8em;
-    vertical-align: middle; /* tussen de regels */
-    margin: 0 6px; /* kleine ruimte rondom afbeelding */
-    object-fit: cover;
-}
-
-
 /* ================= MOBILE ================= */
-
 @media (max-width: 600px) {
 
     .dropdown-trigger {
@@ -236,20 +182,24 @@ body {
         font-size: 8px;
         bottom: 6px;
     }
+
+    /* About the Artist adjustments */
     #dropdown3 .dropdown-menu {
         width: 260px;
         max-width: 90vw;
-        padding: 12px 14px;
+        padding: 12px 16px;
         font-size: 12px;
         line-height: 1.4;
     }
 
     #dropdown3 .inline-img {
         max-width: 100%;
-        margin: 6px 0; /* boven/onder spacing in column layout */
+        margin: 6px 0; /* spacing in column layout */
         display: block;
         vertical-align: initial;
     }
 
+    #dropdown3 .dropdown-menu p {
+        margin: 0 12px 12px 12px;
+    }
 }
-
