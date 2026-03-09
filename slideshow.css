@@ -136,16 +136,27 @@
         display:none; /* cleaner mobile */
     }
 
-    .details-text {
-        top: 70px;
-        font-size: 18px;
-        padding: 20px;
+    .details-text{
+        top: 110px;
+
+        font-size: 13px;
+        line-height: 1.2;
+
+        padding: 12px 16px;
+        margin: 4px 0;
+        max-width: 640px;
+
     }
 
-    .details-content {
+    .details-content{
         flex-direction: column;
-        gap: 20px;
-        padding: 0 20px;
+        gap: 10px;
+        padding: 0 16px;
+    }
+
+    .details-left,
+    .details-right{
+        margin: 0;
     }
 
     .feed {
