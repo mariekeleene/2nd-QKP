@@ -170,33 +170,46 @@ body {
 }
 
 #dropdown3 .dropdown-menu {
-    display: flex;
-    flex-direction: row;
-    gap: 30px;
-    padding: 20px 30px;
-    align-items: flex-start;
-    background: #ffffff; /* lichte achtergrond voor contrast */
-    border-left: 1px solid #0000EE;
-    border-right: 1px solid #0000EE;
-    border-bottom: 1px solid #0000EE;
+    position: absolute;
+    top: 60%;
+    width: 280px;
+    max-height: 60vh;
+    overflow-y: auto;
+
+    background: #f9ffd0; /* gelijke kleur als andere dropdowns */
+    padding: 14px 18px; /* ruimte rondom tekst zodat het niet tegen de randen zit */
+
+    opacity: 0;
+    pointer-events: none;
+
+    box-shadow:
+            rgba(0,0,0,0.4) 0px 2px 4px,
+            rgba(0,0,0,0.3) 0px 7px 13px -3px,
+            rgba(0,0,0,0.2) 0px -3px 0px inset;
+
+    font-family: "Menlo", monospace; /* zelfde font als andere dropdowns */
+    font-size: 13px;
+    line-height: 1.45;
+    letter-spacing: 0.02em;
+}
+
+.dropdown-wrapper.open #dropdown3 .dropdown-menu {
+    opacity: 1;
+    pointer-events: auto;
 }
 
 #dropdown3 .dropdown-menu p {
-    font-family: "Times New Roman", serif;
-    font-size: 15px;
-    line-height: 1.6;
-    color: #0000EE;
-    margin: 0 0 16px 0;
-    flex: 1;
+    margin: 0 0 12px 0; /* ruimte tussen paragrafen */
 }
 
+/* inline image styling */
 #dropdown3 .inline-img {
-    max-width: 180px;
-    height: auto;
-    border-radius: 4px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    height: 8em;
+    vertical-align: middle; /* tussen de regels */
+    margin: 0 6px; /* kleine ruimte rondom afbeelding */
     object-fit: cover;
 }
+
 
 /* ================= MOBILE ================= */
 
@@ -223,21 +236,20 @@ body {
         font-size: 8px;
         bottom: 6px;
     }
-
     #dropdown3 .dropdown-menu {
-            flex-direction: column;
-            gap: 16px;
-            padding: 12px 16px;
-    }
-
-    #dropdown3 .dropdown-menu p {
-            font-size: 13px;
-            line-height: 1.4;
+        width: 260px;
+        max-width: 90vw;
+        padding: 12px 14px;
+        font-size: 12px;
+        line-height: 1.4;
     }
 
     #dropdown3 .inline-img {
-            max-width: 100%;
-            margin: auto;
+        max-width: 100%;
+        margin: 6px 0; /* boven/onder spacing in column layout */
+        display: block;
+        vertical-align: initial;
     }
+
 }
 
