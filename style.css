@@ -137,12 +137,13 @@ body {
 #dropdown3 .dropdown-menu p {
     margin: 0 26px 12px 26px; /* gelijk aan .item padding */
     line-height: 1.4;
+    margin-top: 10px
 }
 
 #dropdown3 .inline-img {
-    height: 8em;
+    height: 12em;
     vertical-align: middle;
-    margin: 0 6px;
+    margin: 0 26px;
     display: inline-block;
     object-fit: cover;
 }
@@ -186,7 +187,7 @@ body {
     /* About the Artist adjustments */
     #dropdown3 .dropdown-menu {
         width: 260px;
-        max-width: 90vw;
+        max-width: 50vw;
         padding: 12px 16px;
         font-size: 12px;
         line-height: 1.4;
@@ -200,6 +201,6 @@ body {
     }
 
     #dropdown3 .dropdown-menu p {
-        margin: 0 12px 12px 12px;
+        margin: 0 8px 8px 8px;
     }
 }
