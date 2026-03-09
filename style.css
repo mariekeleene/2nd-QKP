@@ -44,7 +44,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 6px;
+    gap: 8px;
     padding-top: 40px;
 }
 
@@ -54,6 +54,8 @@ body {
     justify-content: center;
     padding: 6px 0;
     isolation: isolate;
+    z-index: 1;
+
 }
 
 /* ================= TRIGGER ================= */
@@ -101,7 +103,7 @@ body {
 
     opacity: 0;
     pointer-events: none;
-    z-index: 9999;
+    z-index: 1;
 
     box-shadow:
             rgba(0,0,0,0.4) 0px 2px 4px,
@@ -114,6 +116,7 @@ body {
 .dropdown-wrapper.open .dropdown-menu {
     opacity: 1;
     pointer-events: auto;
+    z-index: 10000;
 }
 
 /* ================= ITEMS ================= */
@@ -159,13 +162,15 @@ body {
 @media (max-width: 600px) {
 
     .dropdown-trigger {
-        width: 60%;
+        width: 280px;
+        max-width: 60vw;
         font-size: 16px;
         padding: 10px 12px;
     }
 
     .dropdown-menu {
-        width: 60%;
+        width: 280px;
+        max-width: 60vw;
         max-height: 50vh;
     }
 
