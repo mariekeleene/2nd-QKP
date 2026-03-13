@@ -21,14 +21,14 @@
         <div class="details-left">
             <p>Title: Fountain for Golfers</p>
             <p>Year: 2025</p>
-            <p>Medium: Clay</p>
-            <p>Collaborators: Perry Duarte</p>
-            <p>Showed at: MoMA, Luxembourg museum for contemporary art</p>
+            <p>Medium: PVC, metal, fake grass, waterpump</p>
+<!--            <p>Collaborators: Perry Duarte</p>-->
+            <p>Showed at: Aqua Invísivel, Lagos and Pop up event: The Museum of Contemporary art of Tuvalu, Agueda</p>
+
         </div>
         <div class="details-right">
             <p>
-                and here is a bunch of text about the artworks that is very
-                interesting to read blablabla and more text here oh so lovely
+                In Lagos (Portugal) specifically one thing popped my eye, the beauty of the green golf courses. And there strong contrast to the dead and dry land around it. While working on the theme of water I thought about that sentence saying “the grass is greener where you water it” meaning, the things you put most attention to will grow the most. This installation is questioning whether that grass should be the one of the golf courts.
             </p>
         </div>
     </div>
@@ -42,6 +42,73 @@
     <div id="feed" class="feed"></div>
 </main>
 
-<script src="slideshow.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+
+        const images = [
+            "images/fountain1.png",
+            "images/fountain2.png",
+            "images/fountain3.png",
+            "images/fountain4.png",
+            "images/fountain7.png"
+        ];
+
+        const feed = document.getElementById("feed");
+        const detailsBtn = document.getElementById("details-btn");
+        const detailsText = document.getElementById("details-text");
+
+        /* DETAILS TOGGLE */
+        detailsBtn.addEventListener("click", () => {
+
+            detailsText.classList.toggle("active");
+
+            detailsBtn.textContent = detailsText.classList.contains("active")
+                ? "CLOSE ▲"
+                : "MORE INFO ▽";
+
+        });
+
+        /* ADD IMAGES */
+        function addImages() {
+            images.forEach(src => {
+                const img = document.createElement("img");
+                img.src = src;
+                img.loading = "lazy";
+                feed.appendChild(img);
+            });
+        }
+
+        /* INIT */
+        addImages();
+        addImages();
+
+        /* INFINITE SCROLL */
+        window.addEventListener("scroll", () => {
+            if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 300) {
+                addImages();
+            }
+        });
+
+        const button = document.getElementById("floating-back");
+
+        function moveButton() {
+
+            const w = window.innerWidth - button.offsetWidth;
+            const h = window.innerHeight - button.offsetHeight;
+
+            const x = Math.random() * w;
+            const y = Math.random() * h;
+
+            button.style.left = x + "px";
+            button.style.top = y + "px";
+        }
+
+        /* move every 2 seconds */
+
+        moveButton();
+        setInterval(moveButton, 2000);
+
+    });
+</script>
 </body>
 </html>
