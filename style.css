@@ -65,7 +65,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #f9ffd0; /* gele triggers */
+    background: #fdfcdf; /* gele triggers */
     box-shadow:
             rgba(244, 18, 18, 0.4) 0px 2px 3px,
             rgba(255, 29, 29, 0.3) 0px 6px 10px -3px,
@@ -88,7 +88,7 @@ body {
     width: 280px;
     max-height: 60vh;
     overflow-y: auto;
-    background: #f9ffd0;
+    background: #fdfcdf;
     padding: 14px 0;
     opacity: 0;
     pointer-events: none;
