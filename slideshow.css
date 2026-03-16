@@ -1,13 +1,13 @@
-body {
-    background: #e6e6e6;
-}
+/*body {*/
+/*    background: #e6e6e6;*/
+/*}*/
 
-.feed-wrapper {
-    max-width: 480px;
-    margin: auto;
-    background: white;
-    min-height: 100vh;
-}
+/*.feed-wrapper {*/
+/*    max-width: 480px;*/
+/*    margin: auto;*/
+/*    background: white;*/
+/*    min-height: 100vh;*/
+/*}*/
 
 .top-bar {
     position: fixed;
