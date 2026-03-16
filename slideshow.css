@@ -101,7 +101,7 @@
     width: 110px;
     cursor: pointer;
     z-index: 29999;
-    transition: left 0.8s ease, top 0.8s ease;
+    transition: left 30s ease, top 30s ease;
 }
 
 @media (max-width: 600px) {
