@@ -1,210 +1,180 @@
-/* ================= BASE ================= */
-html,
-body {
-    margin: 0;
-    padding: 0;
-    height: 100vh;
-    overflow: hidden;
-    font-family: "Menlo", monospace;
-    color: #0034ff;
+html,body{
+    margin:0;
+    padding:0;
+    height:100vh;
+    overflow:hidden;
+    font-family:"Menlo",monospace;
+    color:#0034ff;
 }
 
-body {
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    transition: background-image 1s ease-in-out;
+body{
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
 }
 
-/* ================= SCROLLBAR ================= */
-::-webkit-scrollbar {
-    width: 14px;
-}
-::-webkit-scrollbar-track {
-    background: #1a1a1a;
-}
-::-webkit-scrollbar-thumb {
-    background: #f5f5f5;
-    border-left: 3px solid #1a1a1a;
-    border-right: 3px solid #1a1a1a;
-}
-* {
-    scrollbar-width: auto;
-    scrollbar-color: #f5f5f5 #1a1a1a;
+/* scrollbars */
+
+::-webkit-scrollbar{width:14px}
+::-webkit-scrollbar-track{background:#1a1a1a}
+::-webkit-scrollbar-thumb{
+    background:#f5f5f5;
+    border-left:3px solid #1a1a1a;
+    border-right:3px solid #1a1a1a;
 }
 
-/* ================= DROPDOWN CONTAINER ================= */
-.dropdown-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 26px;
-    min-height: 75vh;
-    padding-bottom: 20px;
+*{
+    scrollbar-width:auto;
+    scrollbar-color:#f5f5f5 #1a1a1a;
 }
 
-.dropdown-wrapper {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    padding: 4px 0;
-    z-index: 1;
+/* container */
+
+.dropdown-container{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:26px;
+    min-height:75vh;
+    padding-bottom:20px;
 }
 
-.dropdown-wrapper.open {
-    z-index: 9999;
+.dropdown-wrapper{
+    position:relative;
+    display:flex;
+    justify-content:center;
+    width:100%;
+    z-index:1;
 }
 
-/* ================= TRIGGER ================= */
-.dropdown-trigger {
-    width: 280px;
-    padding: 10px 12px;
-    font-size: 15px;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #fffffa; /* gele triggers */
+.dropdown-wrapper.open{
+    z-index:9999;
+}
+
+/* trigger */
+
+.dropdown-trigger{
+    width:280px;
+    padding:10px 12px;
+    font-size:15px;
+    cursor:pointer;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background:#fffffa;
+
     box-shadow:
-            rgba(107, 107, 108, 0.4) 0px 2px 3px,
-            rgba(255, 29, 29, 0.3) 0px 6px 10px -3px,
-            rgba(78, 89, 255, 0.2) 0px -2px 0px inset;
+            rgba(107,107,108,.4) 0 2px 3px,
+            rgba(255,29,29,.3) 0 6px 10px -3px,
+            rgba(78,89,255,.2) 0 -2px 0 inset;
 }
 
-.arrow {
-    font-size: 10px;
-    transition: transform 0.3s ease;
+.arrow{
+    font-size:10px;
+    transition:transform .3s;
 }
 
-.dropdown-wrapper.open .arrow {
-    transform: rotate(180deg);
+.dropdown-wrapper.open .arrow{
+    transform:rotate(180deg);
 }
 
-/* ================= DROPDOWN MENU ================= */
-.dropdown-menu {
-    position: absolute;
-    top: 100%; /* direct onder trigger */
-    width: 280px;
-    max-height: calc(100vh - 140px);
-    overflow-y: auto;
-    background: #fffffa;
-    padding: 14px 0;
-    opacity: 0;
-    pointer-events: none;
+/* dropdown menu */
+
+.dropdown-menu{
+    position:absolute;
+    top:100%;
+    width:280px;
+
+    max-height:calc(100vh - 140px);
+    overflow-y:auto;
+
+    background:#fffffa;
+    padding:14px 0;
+
+    opacity:0;
+    pointer-events:none;
+
     box-shadow:
-            rgba(0,0,0,0.4) 0px 2px 4px,
-            rgba(0,0,0,0.3) 0px 7px 13px -3px,
-            rgba(0,0,0,0.2) 0px -3px 0px inset;
-    font-family: "Menlo", monospace;
-    font-size: 13px;
-    line-height: 1.45;
-    letter-spacing: 0.02em;
-    scroll-padding-bottom: 20px;
+            rgba(0,0,0,.4) 0 2px 4px,
+            rgba(0,0,0,.3) 0 7px 13px -3px,
+            rgba(0,0,0,.2) 0 -3px 0 inset;
+
+    font-size:13px;
+    line-height:1.45;
+    letter-spacing:.02em;
 }
 
+/* open upwards if needed */
 
-
-.dropdown-wrapper.open .dropdown-menu {
-    opacity: 1;
-    pointer-events: auto;
+.dropdown-wrapper.open-up .dropdown-menu{
+    top:auto;
+    bottom:100%;
 }
 
-/* ================= ITEMS ================= */
-.item {
-    display: block;
-    padding: 8px 26px;
-    font-size: 13px;
-    line-height: 1.25;
-    color: #0034ff;
-    text-decoration: none;
+.dropdown-wrapper.open .dropdown-menu{
+    opacity:1;
+    pointer-events:auto;
 }
 
-.item:hover {
-    background: #fff;
+/* items */
+
+.item{
+    display:block;
+    padding:8px 26px;
+    font-size:13px;
+    line-height:1.25;
+    color:#0034ff;
+    text-decoration:none;
 }
 
-.item.active {
-    background: #fff;
-    margin: 6px 14px;
-    border-radius: 4px;
+.item:hover
+
+.item.visited{
+    color:#00a61a;
 }
 
-.item.visited {
-    color: #00a61a;
-    opacity: 1;
-    transition: opacity 1s;
+/* about section */
+
+#dropdown3 p{
+    margin:0 26px 12px 26px;
+    line-height:1.4;
 }
 
-/* ================= ABOUT THE ARTIST ================= */
-#dropdown3 .dropdown-menu p {
-    margin: 0 26px 12px 26px; /* gelijk aan .item padding */
-    line-height: 1.4;
-    margin-top: 10px
+.inline-img{
+    height:12em;
+    margin:0 26px;
+    display:block;
+    object-fit:cover;
 }
 
-#dropdown3 .inline-img {
-    height: 12em;
-    vertical-align: middle;
-    margin: 0 26px;
-    display: inline-block;
-    object-fit: cover;
+/* footer */
+
+.site-footer{
+    position:fixed;
+    bottom:10px;
+    width:100%;
+    text-align:center;
+    font-size:10px;
+    letter-spacing:.04em;
+    color:#373737;
 }
 
-/* ================= FOOTER ================= */
-.site-footer {
-    position: fixed;
-    bottom: 10px;
-    width: 100%;
-    text-align: center;
-    font-size: 10px;
-    letter-spacing: 0.04em;
-    color: #373737;
-}
+/* mobile */
 
-/* ================= MOBILE ================= */
-@media (max-width: 600px) {
+@media (max-width:600px){
 
-    .dropdown-trigger {
-        width: 280px;
-        max-width: 60vw;
-        font-size: 14px;
-        padding: 8px 10px;
+    .dropdown-trigger{
+        width:60vw;
+        font-size:14px;
     }
 
-    .dropdown-menu {
-        width: 280px;
-        max-width: 60vw;
+    .dropdown-menu{
+        width:60vw;
     }
 
-    .item {
-        font-size: 13px;
-        padding: 8px 18px;
+    .site-footer{
+        font-size:8px;
     }
 
-    .site-footer {
-        font-size: 8px;
-        bottom: 6px;
-    }
-
-    /* About the Artist adjustments */
-    #dropdown3 .dropdown-menu {
-        width: 260px;
-        max-width: 50vw;
-        padding: 12px 16px;
-        font-size: 12px;
-        line-height: 1.4;
-    }
-
-    #dropdown3 .inline-img {
-        max-width: 100%;
-        margin: 6px 0; /* spacing in column layout */
-        display: block;
-        vertical-align: initial;
-    }
-
-    #dropdown3 .dropdown-menu p {
-        margin: 0 8px 8px 2px;
-    }
 }
