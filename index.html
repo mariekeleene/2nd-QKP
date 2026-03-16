@@ -177,6 +177,9 @@
 
             if (visited.includes(url)) {
                 item.classList.add("visited");
+                if (!item.textContent.includes("🏁")) { // dubbele voorkomen
+                    item.textContent = "🏁 " + item.textContent;
+                }
             }
         });
     }
