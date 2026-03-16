@@ -10,48 +10,39 @@
 
 <body>
 
-<div class="site">
+<header class="top-bar">
+<!--    <span class="product-title">FOUNTAIN FOR GOLFERS</span>-->
+    <span id="details-btn" class="details">MORE INFO ▽</span>
+</header>
 
-    <header class="top-bar">
-        <span class="product-title">FOUNTAIN FOR GOLFERS</span>
-        <span id="details-btn" class="details">MORE INFO ▽</span>
-    </header>
 
-    <section id="details-text" class="details-text">
-        <div class="details-content">
-
-            <div class="details-left">
-                <p>Title: Fountain for Golfers</p>
-                <p>Year: 2025</p>
-                <p>Medium: PVC, metal, fake grass, waterpump</p>
-                <p>Showed at: Aqua Invísivel, Lagos and Pop up event: The Museum of Contemporary art of Tuvalu, Agueda</p>
-            </div>
-
-            <div class="details-right">
-                <p>
-                    In Lagos (Portugal) specifically one thing popped my eye, the beauty of the green golf courses.
-                    And there strong contrast to the dead and dry land around it. While working on the theme of water
-                    I thought about that sentence saying “the grass is greener where you water it” meaning, the things
-                    you put most attention to will grow the most. This installation is questioning whether that grass
-                    should be the one of the golf courts.
-                </p>
-            </div>
+<section id="details-text" class="details-text">
+    <div class="details-content">
+        <div class="details-left">
+            <p>Title: Fountain for Golfers</p>
+            <p>Year: 2025</p>
+            <p>Medium: PVC, metal, fake grass, waterpump</p>
+<!--            <p>Collaborators: Perry Duarte</p>-->
+            <p>Showed at: Aqua Invísivel, Lagos and Pop up event: The Museum of Contemporary art of Tuvalu, Agueda</p>
 
         </div>
-    </section>
+        <div class="details-right">
+            <p>
+                In Lagos (Portugal) specifically one thing popped my eye, the beauty of the green golf courses. And there strong contrast to the dead and dry land around it. While working on the theme of water I thought about that sentence saying “the grass is greener where you water it” meaning, the things you put most attention to will grow the most. This installation is questioning whether that grass should be the one of the golf courts.
+            </p>
+        </div>
+    </div>
+</section>
 
-    <a href="index.html">
-        <img src="images/back.png" id="floating-back">
-    </a>
+<a href="index.html">
+    <img src="images/back.png" id="floating-back">
+</a>
 
-    <main class="feed-wrapper">
-        <div id="feed" class="feed"></div>
-    </main>
-
-</div>
+<main class="feed-wrapper">
+    <div id="feed" class="feed"></div>
+</main>
 
 <script>
-
     document.addEventListener("DOMContentLoaded", () => {
 
         const images = [
@@ -67,50 +58,36 @@
         const detailsText = document.getElementById("details-text");
 
         /* DETAILS TOGGLE */
-
         detailsBtn.addEventListener("click", () => {
 
             detailsText.classList.toggle("active");
 
-            detailsBtn.textContent =
-                detailsText.classList.contains("active")
-                    ? "CLOSE ▲"
-                    : "MORE INFO ▽";
+            detailsBtn.textContent = detailsText.classList.contains("active")
+                ? "CLOSE ▲"
+                : "MORE INFO ▽";
 
         });
 
         /* ADD IMAGES */
-
         function addImages() {
-
             images.forEach(src => {
-
                 const img = document.createElement("img");
                 img.src = src;
                 img.loading = "lazy";
-
                 feed.appendChild(img);
-
             });
-
         }
 
         /* INIT */
-
         addImages();
         addImages();
 
         /* INFINITE SCROLL */
-
         window.addEventListener("scroll", () => {
-
             if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 300) {
                 addImages();
             }
-
         });
-
-        /* FLOATING BACK BUTTON */
 
         const button = document.getElementById("floating-back");
 
@@ -124,15 +101,14 @@
 
             button.style.left = x + "px";
             button.style.top = y + "px";
-
         }
+
+        /* move every 2 seconds */
 
         moveButton();
         setInterval(moveButton, 2000);
 
     });
-
 </script>
-
 </body>
 </html>
