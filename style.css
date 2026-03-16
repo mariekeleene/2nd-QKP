@@ -41,9 +41,8 @@ body {
     justify-content: center;
     gap: 26px;
     min-height: 100vh;
+    padding-bottom: 20px;
 }
-
-
 
 .dropdown-wrapper {
     position: relative;
@@ -88,7 +87,7 @@ body {
     position: absolute;
     top: 100%; /* direct onder trigger */
     width: 280px;
-    max-height: 60vh;
+    max-height: calc(100vh - 140px);
     overflow-y: auto;
     background: #fdfcdf;
     padding: 14px 0;
@@ -102,7 +101,10 @@ body {
     font-size: 13px;
     line-height: 1.45;
     letter-spacing: 0.02em;
+    scroll-padding-bottom: 20px;
 }
+
+
 
 .dropdown-wrapper.open .dropdown-menu {
     opacity: 1;
