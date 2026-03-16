@@ -140,7 +140,7 @@
     /* Background slideshow */
 
     const images = [
-        // "images/15.jpg",
+        "images/15.jpg",
         "images/scan1.jpg",
         "images/scan3.jpg",
         "images/scan2.jpg"
@@ -168,13 +168,14 @@
         return JSON.parse(localStorage.getItem("visitedPages")) || [];
     }
 
-    /* mark visited items */
+    /* mark visited items with different emoji */
     function markVisited() {
-        const visited = getVisited();
+        const visited = JSON.parse(localStorage.getItem("visitedPages")) || {};
 
         items.forEach(item => {
             const url = item.getAttribute("href");
 
+            // check if item is in storage
             if (visited[url]) {
                 item.classList.add("visited");
 
@@ -189,23 +190,31 @@
         });
     }
 
-    /* store when clicking a project */
+    /* store visit count */
     items.forEach(item => {
-
         const url = item.getAttribute("href");
 
         item.addEventListener("click", () => {
+            let visited = JSON.parse(localStorage.getItem("visitedPages")) || {};
 
-            let visited = getVisited();
-
-            if (!visited.includes(url)) {
-                visited.push(url);
-                localStorage.setItem("visitedPages", JSON.stringify(visited));
+            // increment visit count
+            if (visited[url]) {
+                visited[url] += 1;
+            } else {
+                visited[url] = 1;
             }
 
+            localStorage.setItem("visitedPages", JSON.stringify(visited));
         });
-
     });
+
+    /* run on page load */
+    markVisited();
+
+    /* run when returning with browser back button */
+    window.addEventListener("pageshow", markVisited);
+
+
 
     /* run on page load */
     markVisited();
