@@ -73,7 +73,7 @@
     </div>
 
     <!-- Dropdown 4 -->
-    <div class="dropdown-wrapper" id="dropdown4">
+    <div class="dropdown-wrapper" id="dropdown4", padding-left: 15px;>
         <div class="dropdown-trigger" id="trigger4">
             <span>Experiments</span>
             <span class="arrow">▼</span>
@@ -116,12 +116,20 @@
 
         trigger.addEventListener("click", (e) => {
             e.stopPropagation();
+
+            document.querySelectorAll(".dropdown-wrapper").forEach(d => {
+                if (d !== dropdown) {
+                    d.classList.remove("open");
+                }
+            });
+
             dropdown.classList.toggle("open");
         });
 
         document.addEventListener("click", () => {
             dropdown.classList.remove("open");
         });
+    
     }
 
     setupDropdown(1);
@@ -132,7 +140,10 @@
     /* Background slideshow */
 
     const images = [
-        "images/15.jpg"
+        "images/15.jpg",
+        "images/scan1.jpg",
+        "images/scan3.jpg",
+        "images/scan2.jpg"
     ];
 
     document.body.style.backgroundImage = `url(${images[0]})`;
