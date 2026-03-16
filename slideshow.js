@@ -59,6 +59,6 @@ document.addEventListener("DOMContentLoaded", () => {
     /* move every 2 seconds */
 
     moveButton();
-    setInterval(moveButton, 2000);
+    setInterval(moveButton, 8000);
 
 });
