@@ -117,32 +117,37 @@
     const images = ["images/scan2.jpg"];
     document.body.style.backgroundImage = `url(${images[0]})`;
 
-    /* ================= VISITED ITEMS + EMOJI ================= */
     const items = document.querySelectorAll(".item");
 
-    /* get stored pages as object with count */
+    // get stored pages as object with count
     function getVisited() {
         return JSON.parse(localStorage.getItem("visitedPages")) || {};
     }
 
-    /* mark visited items with emoji */
+    // mark visited items with emoji
     function markVisited() {
         const visited = getVisited();
 
         items.forEach(item => {
             const url = item.getAttribute("href");
+
+            // verwijder oude emoji spans
+            const existing = item.querySelector(".visit-emoji");
+            if (existing) existing.remove();
+
             if (visited[url]) {
                 item.classList.add("visited");
 
-                // voeg emoji alleen toe als nog niet aanwezig
-                if (!item.textContent.startsWith("🏁") && !item.textContent.startsWith("💖")) {
-                    item.textContent = visited[url] === 1 ? "🏁 " + item.textContent : "💖 " + item.textContent;
-                }
+                const emoji = visited[url] === 1 ? "🏁" : "💖";
+                const span = document.createElement("span");
+                span.classList.add("visit-emoji");
+                span.textContent = emoji + " ";
+                item.prepend(span);
             }
         });
     }
 
-    /* store visit count */
+    // store visit count
     items.forEach(item => {
         const url = item.getAttribute("href");
 
@@ -153,7 +158,7 @@
         });
     });
 
-    /* init */
+    // run on page load
     markVisited();
     window.addEventListener("pageshow", markVisited);
 </script>
