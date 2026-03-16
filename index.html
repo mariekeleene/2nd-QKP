@@ -157,11 +157,15 @@
     // changeBackground();
     // setInterval(changeBackground, 6000);
 
+    /* ===============================
+   VISITED PROJECT TRACKING
+   =============================== */
+
     const items = document.querySelectorAll(".item");
 
-    /* get stored pages with visit counts */
+    /* get stored pages */
     function getVisited() {
-        return JSON.parse(localStorage.getItem("visitedPages")) || {};
+        return JSON.parse(localStorage.getItem("visitedPages")) || [];
     }
 
     /* mark visited items */
@@ -171,12 +175,10 @@
         items.forEach(item => {
             const url = item.getAttribute("href");
 
-            if (visited[url]) {
+            if (visited.includes(url)) {
                 item.classList.add("visited");
-
-                // Add emoji depending on visit count
-                if (!item.textContent.includes("🏁") && !item.textContent.includes("💖")) { // avoid duplicates
-                    item.textContent = visited[url] === 1 ? "🏁 " + item.textContent : "💖 " + item.textContent;
+                if (!item.textContent.includes("🏁")) { // dubbele voorkomen
+                    item.textContent = "🏁 " + item.textContent;
                 }
             }
         });
@@ -191,10 +193,11 @@
 
             let visited = getVisited();
 
-            // ✅ increment visit count
-            visited[url] = visited[url] ? visited[url] + 1 : 1;
+            if (!visited.includes(url)) {
+                visited.push(url);
+                localStorage.setItem("visitedPages", JSON.stringify(visited));
+            }
 
-            localStorage.setItem("visitedPages", JSON.stringify(visited));
         });
 
     });
@@ -204,8 +207,6 @@
 
     /* run when returning with browser back button */
     window.addEventListener("pageshow", markVisited);
-
-
 
 </script>
 
