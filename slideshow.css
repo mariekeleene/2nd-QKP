@@ -10,12 +10,12 @@
     align-items: center;
 
     background: white;
-    color: #0000EE;
 
     padding: 0 20px;
     z-index: 10000;
 
-    font-family: "Times New Roman", serif;
+    font-family: "Menlo", monospace;
+    color: #0034ff;
     font-size: 14px;
     letter-spacing: 0.02em;
 }
