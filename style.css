@@ -152,6 +152,12 @@ body {
     object-fit: cover;
 }
 
+#dropdown4 .dropdown-menu p {
+    margin: 0 26px 12px 26px;
+    line-height: 1.4;
+    margin-top: 10px
+}
+
 /* ================= FOOTER ================= */
 .site-footer {
     position: fixed;
