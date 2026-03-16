@@ -39,7 +39,7 @@
             <a href="We.html" class="item">WNFBNTO 2023</a>
             <a href="Lets.html" class="item">Lets Keep It Gezellig 2022</a>
             <a href="These.html" class="item">These Were All My Clothes 2021/2022</a>
-            <a href="Gezellig.html" class="item">Gezellig/ Ongezellig 2020</a>
+            <a href="Gezellig.html" class="item">Gezellig/ Ongezellig  2020</a>
             <a href="Screen.html" class="item">Screen Based Works 2020</a>
             <a href="Cow.html" class="item">Cow to 3d Printer 2019</a>
             <a href="Space.html" class="item">Space Waste</a>
@@ -56,27 +56,49 @@
         <div class="dropdown-menu">
             <p>
                 My work explores the strange and often humorous contradictions of living in a world shaped by technology, global systems, and environmental crises. Working across video, installation, performance, sound, and material experimentation, I create situations where digital logic collides with physical reality.
+
             </p>
+
             <img src="images/marieke.jpg" class="inline-img">
+
             <p>
+
                 I am particularly interested in translation: how things change when they move between worlds — from physical to digital, from data to material, from machine perception to human interpretation. In these moments of translation, something is always lost, distorted, or unexpectedly revealed.
-                <br><br>
+
+                <br> <br>
                 For collaborations or further information, please reach out via email: mariekeleene[at]pm.me
+
             </p>
         </div>
     </div>
 
     <!-- Dropdown 4 -->
-    <div class="dropdown-wrapper" id="dropdown4">
+    <div class="dropdown-wrapper" id="dropdown4", padding-left: 15px;>
         <div class="dropdown-trigger" id="trigger4">
             <span>Experiments</span>
             <span class="arrow">▼</span>
         </div>
         <div class="dropdown-menu">
-            <p>⚒️ Coming soon 🛠️
-                <br><br><br>
-                This part is still under construction 🚧
-            </p>
+            <p>    ⚒️coming soon 🛠️
+                <br> <br> <br>
+                This part is still under construction 🚧 </p>
+
+
+            <!--            <a href="Space.html" class="item">Space Waste</a>-->
+            <!--            <a href="Blender.html" class="item">Blender</a>-->
+            <!--            <a href="Costumes.html" class="item">Costumes</a>-->
+            <!--            <a href="orchidee.html" class="item">Orchidee</a>-->
+            <!--            <a href="hond.html" class="item">Hond</a>-->
+            <!--            <a href="Onwetendheid.html" class="item">Onwetendheid</a>-->
+            <!--            <a href="Google.html" class="item">OK Google</a>-->
+            <!--            <a href="Merch.html" class="item">Jelsa Merch</a>-->
+            <!--            <a href="viermensen.html" class="item">vier mensen</a>-->
+            <!--            <a href="bb.html" class="item">blank </a>-->
+            <!--            <a href="Paintings.html" class="item">Programmed Paintings 2018</a>-->
+            <!--            <a href="stairs.html" class="item">Wrapped up stairs</a>-->
+            <!--            <a href="paradise.html" class="item">Your paradise is (not for me)</a>-->
+            <!--            <a href="Dance.html" class="item">Dance </a>-->
+            <!--            <a href="sattelites.html" class="item">Sattelites </a>-->
         </div>
     </div>
 
@@ -87,7 +109,7 @@
 </footer>
 
 <script>
-    /* ================= DROPDOWN LOGIC ================= */
+
     function setupDropdown(number) {
         const dropdown = document.getElementById("dropdown" + number);
         const trigger = document.getElementById("trigger" + number);
@@ -95,9 +117,10 @@
         trigger.addEventListener("click", (e) => {
             e.stopPropagation();
 
-            // Sluit andere dropdowns
             document.querySelectorAll(".dropdown-wrapper").forEach(d => {
-                if (d !== dropdown) d.classList.remove("open");
+                if (d !== dropdown) {
+                    d.classList.remove("open");
+                }
             });
 
             dropdown.classList.toggle("open");
@@ -106,6 +129,7 @@
         document.addEventListener("click", () => {
             dropdown.classList.remove("open");
         });
+
     }
 
     setupDropdown(1);
@@ -113,54 +137,77 @@
     setupDropdown(3);
     setupDropdown(4);
 
-    /* ================= BACKGROUND ================= */
-    const images = ["images/scan2.jpg"];
+    /* Background slideshow */
+
+    const images = [
+        // "images/15.jpg",
+        "images/scan1.jpg",
+        "images/scan3.jpg",
+        "images/scan2.jpg"
+    ];
+
     document.body.style.backgroundImage = `url(${images[0]})`;
+
+    // let i = 0;
+    // function changeBackground() {
+    //     document.body.style.backgroundImage = `url(${images[i]})`;
+    //     i = (i + 1) % images.length;
+    // }
+    //
+    // changeBackground();
+    // setInterval(changeBackground, 6000);
+
+    /* ===============================
+   VISITED PROJECT TRACKING
+   =============================== */
 
     const items = document.querySelectorAll(".item");
 
-    // get stored pages as object with count
+    /* get stored pages */
     function getVisited() {
-        return JSON.parse(localStorage.getItem("visitedPages")) || {};
+        return JSON.parse(localStorage.getItem("visitedPages")) || [];
     }
 
-    // mark visited items with emoji
+    /* mark visited items */
     function markVisited() {
         const visited = getVisited();
 
         items.forEach(item => {
             const url = item.getAttribute("href");
 
-            // verwijder oude emoji spans
-            const existing = item.querySelector(".visit-emoji");
-            if (existing) existing.remove();
-
-            if (visited[url]) {
+            if (visited.includes(url)) {
                 item.classList.add("visited");
-
-                const emoji = visited[url] === 1 ? "🏁" : "💖";
-                const span = document.createElement("span");
-                span.classList.add("visit-emoji");
-                span.textContent = emoji + " ";
-                item.prepend(span);
+                if (!item.textContent.includes("🏁")) { // dubbele voorkomen
+                    item.textContent = "🏁 " + item.textContent;
+                }
             }
         });
     }
 
-    // store visit count
+    /* store when clicking a project */
     items.forEach(item => {
+
         const url = item.getAttribute("href");
 
         item.addEventListener("click", () => {
+
             let visited = getVisited();
-            visited[url] = visited[url] ? visited[url] + 1 : 1;
-            localStorage.setItem("visitedPages", JSON.stringify(visited));
+
+            if (!visited.includes(url)) {
+                visited.push(url);
+                localStorage.setItem("visitedPages", JSON.stringify(visited));
+            }
+
         });
+
     });
 
-    // run on page load
+    /* run on page load */
     markVisited();
+
+    /* run when returning with browser back button */
     window.addEventListener("pageshow", markVisited);
+
 </script>
 
 </body>
