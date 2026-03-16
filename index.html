@@ -175,11 +175,16 @@
         items.forEach(item => {
             const url = item.getAttribute("href");
 
-            if (visited.includes(url)) {
+            if (visited[url]) {
                 item.classList.add("visited");
-                if (!item.textContent.includes("🏁")) { // dubbele voorkomen
+
+                // first visit: 🏁 ; subsequent visits: 💖
+                if (visited[url] === 1) {
                     item.textContent = "🏁 " + item.textContent;
+                } else {
+                    item.textContent = "💖 " + item.textContent;
                 }
+
             }
         });
     }
