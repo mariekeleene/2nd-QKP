@@ -101,7 +101,7 @@
     const list = document.getElementById("list");
 
     // Generate dropdown options 3–100
-    for (let i = 3; i <= 100; i++) {
+    for (let i = 3; i <= 11; i++) {
         const option = document.createElement("option");
         option.value = i;
         option.textContent = i;
@@ -113,7 +113,7 @@
         if (baseData[n]) return baseData[n];
         const arr = baseData[10].slice(); // first 10
         for (let i = 11; i <= n; i++) {
-            arr.push(`participant ${i} doing something inexplicable`);
+            arr.push(`person ${i} doing something inexplicable`);
         }
         return arr;
     }
