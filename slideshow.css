@@ -142,7 +142,7 @@
     .details-right { margin: 0; }
 
     .feed { max-width: 100%; padding: 0 10px; }
-    .feed img { max-width: 50%; margin-bottom: 10px; }
+    .feed img { max-width: 100%; margin-bottom: 10px; }
 
     #floating-back { width: 100px; }
 }
