@@ -146,3 +146,72 @@
 
     #floating-back { width: 100px; }
 }
+
+
+/*----dancing images*/
+.floating-images {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+.img {
+    position: absolute;
+    width: 120px;
+    height: auto;
+    offset-path: path("M 0 600 C 300 200, 600 1000, 1000 400");
+    offset-rotate: auto;
+    animation: move 25s linear infinite,
+    pulse 4s ease-in-out infinite;
+}
+
+
+.img1 {
+    animation-delay: 0s, 0s;
+}
+.img2 {
+    offset-path: path("M 200 800 C 400 100, 800 900, 1200 300");
+    animation-delay: 5s, 1s;
+}
+.img3 {
+    offset-path: path("M 100 900 C 500 300, 900 700, 1400 200");
+    animation-delay: 10s, 2s;
+}
+.img4 {
+    offset-path: path("M 300 700 C 700 50, 1000 800, 1600 400");
+    animation-delay: 15s, 0.5s;
+}
+.img5 {
+    offset-path: path("M 50 850 C 350 250, 750 950, 1300 350");
+    animation-delay: 20s, 1.5s;
+}
+
+
+@keyframes move {
+    0% {
+        offset-distance: 0%;
+    }
+    100% {
+        offset-distance: 100%;
+    }
+}
+
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1) rotate(0deg);
+    }
+    25% {
+        transform: scale(1.1) rotate(5deg);
+    }
+    50% {
+        transform: scale(0.9) rotate(-5deg);
+    }
+    75% {
+        transform: scale(1.15) rotate(3deg);
+    }
+}
