@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>And It Might Not Be True</title>
+    <title>Immigration Celebration️</title>
 
     <link rel="stylesheet" href="slideshow.css">
 </head>
@@ -11,24 +11,24 @@
 <body>
 
 <header class="top-bar">
-    <!--    <a href="index.html" class="top-right-word">  x</a>-->
-    <span id="details-btn" class="details">MORE INFO ▽</span>
-    <!--    <a href="index.html" class="top-right-word">x</a>-->
+    <!--    <span class="product-title">Fountain for golfers &#45;&#45; </span>-->
+    <span id="details-btn" class="details">MORE INFO ▽ </span>
 </header>
+
 
 <section id="details-text" class="details-text">
     <div class="details-content">
         <div class="details-left">
-            <p>Title: And It Might Not Be True</p>
-            <p>Year: 2025</p>
-            <p>Medium: text/ filmstills</p>
-            <p> </p>
-            <p>Showed at: Layer Gallery Bucharest</p>
+            <p><b>Title:</b> Immigration Celebration</p>
+            <p><b>Year:</b> 2024</p>
+            <p><b>Medium:</b> PVC, plastics</p>
+            <!--            <p>Collaborators: Perry Duarte</p>-->
+            <p><b>Showed at:</b> Aqua Invísivel, Lagos and Pop up event: The Museum of Contemporary art of Tuvalu, Agueda</p>
+
         </div>
         <div class="details-right">
             <p>
-                This work reflects on misinformation and the nature of reality. To understand what is going wrong, and to trace where misinformation begins, we must be critical not only of others but, most importantly, of ourselves. We can easily fall into thinking traps — often without realizing it — and terms and concepts can feel vague or difficult. Yet it is our responsibility to seek clarity.
-                The work brings together a feeling of illusion and an aim to inform. Below follows a crash course in critical thinking and common thinking errors, of the terms shown in the video:
+                In Lagos (Portugal) specifically one thing popped my eye, the beauty of the green golf courses. And there strong contrast to the dead and dry land around it. While working on the theme of water I thought about that sentence saying “the grass is greener where you water it” meaning, the things you put most attention to will grow the most. This installation is questioning whether that grass should be the one of the golf courts.
             </p>
         </div>
     </div>
@@ -42,86 +42,81 @@
     <div id="feed" class="feed"></div>
 </main>
 
-<script>
-    document.addEventListener("DOMContentLoaded", () => {
+<div class="floating-images">
+    <img src="images/1.jpg" class="img img1">
+    <img src="images/2.jpg" class="img img2">
+    <img src="images/3.jpg" class="img img3">
+    <img src="images/4.jpg" class="img img4">
+    <img src="images/5.jpg" class="img img5">
+</div>
 
-        const images = [
-            "images/True14.png",
-            "images/True15.png",
-            "images/True16.png",
-            "images/True17.png",
-            "images/True18.png",
-            "images/True2.png",
-            "images/True3.png",
-            "images/True4.png",
-            "images/True5.png",
-            "images/True6.png",
-            "images/True7.png",
-            "images/True8.png",
-            "images/True9.png",
-            "images/True10.png",
-            "images/True11.png",
-            "images/True12.png",
-            "images/True13.png",
-            "images/True1.png"
-        ];
+<!--<script>-->
+<!--    document.addEventListener("DOMContentLoaded", () => {-->
 
-        const feed = document.getElementById("feed");
-        const detailsBtn = document.getElementById("details-btn");
-        const detailsText = document.getElementById("details-text");
+<!--        const images = [-->
+<!--            "images/fountain 1.png",-->
+<!--            "images/fountain2.png",-->
+<!--            "images/fountain3.png",-->
+<!--            "images/fountain4.png",-->
+<!--            "images/fountain7.png"-->
+<!--        ];-->
 
-        /* DETAILS TOGGLE */
-        detailsBtn.addEventListener("click", () => {
+<!--        const feed = document.getElementById("feed");-->
+<!--        const detailsBtn = document.getElementById("details-btn");-->
+<!--        const detailsText = document.getElementById("details-text");-->
 
-            detailsText.classList.toggle("active");
+<!--        /* DETAILS TOGGLE */-->
+<!--        detailsBtn.addEventListener("click", () => {-->
 
-            detailsBtn.textContent = detailsText.classList.contains("active")
-                ? "CLOSE ▲"
-                : "MORE INFO ▽";
+<!--            detailsText.classList.toggle("active");-->
 
-        });
+<!--            detailsBtn.textContent = detailsText.classList.contains("active")-->
+<!--                ? "CLOSE ▲"-->
+<!--                : "MORE INFO ▽";-->
 
-        /* ADD IMAGES */
-        function addImages() {
-            images.forEach(src => {
-                const img = document.createElement("img");
-                img.src = src;
-                img.loading = "lazy";
-                feed.appendChild(img);
-            });
-        }
+<!--        });-->
 
-        /* INIT */
-        addImages();
-        addImages();
+<!--        /* ADD IMAGES */-->
+<!--        function addImages() {-->
+<!--            images.forEach(src => {-->
+<!--                const img = document.createElement("img");-->
+<!--                img.src = src;-->
+<!--                img.loading = "lazy";-->
+<!--                feed.appendChild(img);-->
+<!--            });-->
+<!--        }-->
 
-        /* INFINITE SCROLL */
-        window.addEventListener("scroll", () => {
-            if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 300) {
-                addImages();
-            }
-        });
+<!--        /* INIT */-->
+<!--        addImages();-->
+<!--        addImages();-->
 
-        const button = document.getElementById("floating-back");
+<!--        /* INFINITE SCROLL */-->
+<!--        window.addEventListener("scroll", () => {-->
+<!--            if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 300) {-->
+<!--                addImages();-->
+<!--            }-->
+<!--        });-->
 
-        function moveButton() {
+<!--        const button = document.getElementById("floating-back");-->
 
-            const w = window.innerWidth - button.offsetWidth;
-            const h = window.innerHeight - button.offsetHeight;
+<!--        function moveButton() {-->
 
-            const x = Math.random() * w;
-            const y = Math.random() * h;
+<!--            const w = window.innerWidth - button.offsetWidth;-->
+<!--            const h = window.innerHeight - button.offsetHeight;-->
 
-            button.style.left = x + "px";
-            button.style.top = y + "px";
-        }
+<!--            const x = Math.random() * w;-->
+<!--            const y = Math.random() * h;-->
 
-        /* move every 2 seconds */
+<!--            button.style.left = x + "px";-->
+<!--            button.style.top = y + "px";-->
+<!--        }-->
 
-        moveButton();
-        setInterval(moveButton, 2000);
+<!--        /* move every 2 seconds */-->
 
-    });
-</script>
+<!--        moveButton();-->
+<!--        setInterval(moveButton, 8000);-->
+
+<!--    });-->
+<!--</script>-->
 </body>
 </html>

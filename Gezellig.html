@@ -1,157 +1,122 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <style>
-        html, body {
-            margin: 0;
-        }
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Immigration Celebration️</title>
 
-        body {
-            background-color: #0600ff;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-        }
-
-        .background{
-            height: 100vh;
-            width: 100vw;
-            z-index: -1;
-            position: fixed;
-        }
-
-        .orchidee {
-            height: 60px;
-            width: 60px;
-            position: fixed;
-            animation-duration: 10s;
-            animation-name: orchidee;
-            animation-iteration-count: infinite;
-            animation-timing-function: linear;
-            cursor: pointer;
-        }
-
-        .orchidee > a > img {
-            width: 120px;
-            height: 150px;
-        }
-
-        @keyframes orchidee {
-            0% {
-                top: 0vw;
-                left: 50vw;
-            }
-            10% {
-                top: 20vw;
-            }
-            12% {
-                top: 18vw;
-            }
-            15% {
-                top: 20vw;
-            }
-            25% {
-                top: 30vw;
-            }
-            30% {
-                transform: rotate(-80deg);
-                top: 40vw;
-            }
-            35% {
-                transform: rotate(-180deg);
-                top: 30vw;
-            }
-            50% {
-                transform: rotate(-180deg);
-                top: 35vw;
-            }
-            60% {
-                transform: rotate(-300deg);
-                top: 20vw;
-            }
-            65% {
-                transform: rotate(-360deg);
-                top: 80vw;
-            }
-            80% {
-                transform: rotate(-360deg);
-                top: 70vw;
-            }
-            85% {
-                transform: rotate(-360deg);
-                top: 80vw;
-            }
-            90% {
-                transform: rotate(-360deg);
-                top: 90vw;
-            }
-            100% {
-                top: 100vw;
-            }
-        }
-
-        .closebutton {
-            position: fixed;
-            height: 40px;
-            top: 10px;
-            left: 10px;
-            cursor: url("/images/krab.png")22 22, auto;
-            color: #ff8181;
-        }
-
-
-    </style>
+    <link rel="stylesheet" href="slideshow.css">
 </head>
+
 <body>
 
-<img src="images/krab.png"  class="background">
-
-<a href="/index1.html"><svg class="closebutton" xmlns="http://www.w3.org/2000/svg" fill="none"
-                            viewBox="0 0 24 24" stroke="currentColor">
-    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-</svg></a>
-
-<!--<a href="/VJ.html"><img src="/img/icons website/orchid.png" class="orchidee"></a>-->
-
-<script>
-    for(i=0; i<90;i++) {
-        var orchidee = document.createElement('div');
-        orchidee.innerHTML = "<a href='/index1.html'><img src='/images/krab.png'></a>";
-        orchidee.style.left = i * 15 + "px";
-        orchidee.className = "orchidee";
-        orchidee.style.animationDelay = 20 * i + "ms";
-
-        document.body.appendChild(orchidee);
-    }
-
-    for(i=0; i<70;i++) {
-        var orchidee = document.createElement('div');
-        orchidee.innerHTML = "<a href='/index1.html'><img src='/images/krab.png'></a>";
-        orchidee.style.top = i * 40 + "px";
-        orchidee.className = "orchidee";
-        orchidee.style.animationDelay = 90 * i + "ms";
-
-        document.body.appendChild(orchidee);
-    }
-
-    for(i=0; i<30;i++) {
-        var orchidee = document.createElement('div');
-        orchidee.innerHTML = "<a href='/index1.html'><img src='/images/krab.png'></a>";
-        orchidee.style.left = Math.random() * 500 + "px";
-        // orchidee.style.top = i * 80 + "px";
-        orchidee.className = "orchidee";
-        orchidee.style.animationDelay = i * 1000 + "ms";
+<header class="top-bar">
+    <!--    <span class="product-title">Fountain for golfers &#45;&#45; </span>-->
+    <span id="details-btn" class="details">MORE INFO ▽ </span>
+</header>
 
 
-        document.body.appendChild(orchidee);
-    }
+<section id="details-text" class="details-text">
+    <div class="details-content">
+        <div class="details-left">
+            <p><b>Title:</b> Immigration Celebration</p>
+            <p><b>Year:</b> 2024</p>
+            <p><b>Medium:</b> PVC, plastics</p>
+            <!--            <p>Collaborators: Perry Duarte</p>-->
+            <p><b>Showed at:</b> Aqua Invísivel, Lagos and Pop up event: The Museum of Contemporary art of Tuvalu, Agueda</p>
 
-</script>
+        </div>
+        <div class="details-right">
+            <p>
+                In Lagos (Portugal) specifically one thing popped my eye, the beauty of the green golf courses. And there strong contrast to the dead and dry land around it. While working on the theme of water I thought about that sentence saying “the grass is greener where you water it” meaning, the things you put most attention to will grow the most. This installation is questioning whether that grass should be the one of the golf courts.
+            </p>
+        </div>
+    </div>
+</section>
 
+<a href="index.html">
+    <img src="images/back.png" id="floating-back">
+</a>
+
+<main class="feed-wrapper">
+    <div id="feed" class="feed"></div>
+</main>
+
+<div class="floating-images">
+    <img src="images/1.jpg" class="img img1">
+    <img src="images/2.jpg" class="img img2">
+    <img src="images/3.jpg" class="img img3">
+    <img src="images/4.jpg" class="img img4">
+    <img src="images/5.jpg" class="img img5">
+</div>
+
+<!--<script>-->
+<!--    document.addEventListener("DOMContentLoaded", () => {-->
+
+<!--        const images = [-->
+<!--            "images/fountain 1.png",-->
+<!--            "images/fountain2.png",-->
+<!--            "images/fountain3.png",-->
+<!--            "images/fountain4.png",-->
+<!--            "images/fountain7.png"-->
+<!--        ];-->
+
+<!--        const feed = document.getElementById("feed");-->
+<!--        const detailsBtn = document.getElementById("details-btn");-->
+<!--        const detailsText = document.getElementById("details-text");-->
+
+<!--        /* DETAILS TOGGLE */-->
+<!--        detailsBtn.addEventListener("click", () => {-->
+
+<!--            detailsText.classList.toggle("active");-->
+
+<!--            detailsBtn.textContent = detailsText.classList.contains("active")-->
+<!--                ? "CLOSE ▲"-->
+<!--                : "MORE INFO ▽";-->
+
+<!--        });-->
+
+<!--        /* ADD IMAGES */-->
+<!--        function addImages() {-->
+<!--            images.forEach(src => {-->
+<!--                const img = document.createElement("img");-->
+<!--                img.src = src;-->
+<!--                img.loading = "lazy";-->
+<!--                feed.appendChild(img);-->
+<!--            });-->
+<!--        }-->
+
+<!--        /* INIT */-->
+<!--        addImages();-->
+<!--        addImages();-->
+
+<!--        /* INFINITE SCROLL */-->
+<!--        window.addEventListener("scroll", () => {-->
+<!--            if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 300) {-->
+<!--                addImages();-->
+<!--            }-->
+<!--        });-->
+
+<!--        const button = document.getElementById("floating-back");-->
+
+<!--        function moveButton() {-->
+
+<!--            const w = window.innerWidth - button.offsetWidth;-->
+<!--            const h = window.innerHeight - button.offsetHeight;-->
+
+<!--            const x = Math.random() * w;-->
+<!--            const y = Math.random() * h;-->
+
+<!--            button.style.left = x + "px";-->
+<!--            button.style.top = y + "px";-->
+<!--        }-->
+
+<!--        /* move every 2 seconds */-->
+
+<!--        moveButton();-->
+<!--        setInterval(moveButton, 8000);-->
+
+<!--    });-->
+<!--</script>-->
 </body>
 </html>
