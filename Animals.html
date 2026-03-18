@@ -5,34 +5,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>also Animals</title>
 
-    <link rel="stylesheet" href="slideshow.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: sans-serif;
+            background: #000;
+        }
+
+        /* BACK BUTTON */
+        #floating-back {
+            position: fixed;
+            width: 60px;
+            z-index: 10;
+            cursor: pointer;
+        }
+
+        /* FEED */
+        .feed-wrapper {
+            padding: 10px;
+        }
+
+        .feed {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .feed img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* MOBILE tweak */
+        @media (max-width: 600px) {
+            .feed {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+    </style>
 </head>
 
 <body>
-
-<header class="top-bar">
-    <!--    <span class="product-title">Fountain for golfers -- </span>-->
-    <span id="details-btn" class="details">MORE INFO ▽ </span>
-</header>
-
-
-<section id="details-text" class="details-text">
-    <div class="details-content">
-        <div class="details-left">
-            <h1><b>Title:</b> Immigration Celebration</h1>
-            <p><b>Year:</b> 2024</p>
-            <p><b>Medium:</b> PVC, plastics</p>
-            <!--            <p>Collaborators: Perry Duarte</p>-->
-            <!--            <p><b>Showed at:</b> Aqua Invísivel, Lagos and Pop up event: The Museum of Contemporary art of Tuvalu, Agueda</p>-->
-
-        </div>
-        <div class="details-right">
-            <p>
-                <!--                In Lagos (Portugal) specifically one thing popped my eye, the beauty of the green golf courses. And there strong contrast to the dead and dry land around it. While working on the theme of water I thought about that sentence saying “the grass is greener where you water it” meaning, the things you put most attention to will grow the most. This installation is questioning whether that grass should be the one of the golf courts.-->
-            </p>
-        </div>
-    </div>
-</section>
 
 <a href="index.html">
     <img src="images/back.png" id="floating-back">
@@ -42,65 +56,21 @@
     <div id="feed" class="feed"></div>
 </main>
 
-<!--<div class="floating-images">-->
-<!--    <img src="images/1.jpg" class="img img1">-->
-<!--    <img src="images/2.jpg" class="img img2">-->
-<!--    <img src="images/3.jpg" class="img img3">-->
-<!--    <img src="images/4.jpg" class="img img4">-->
-<!--    <img src="images/5.jpg" class="img img5">-->
-<!--</div>-->
-
 <script>
     document.addEventListener("DOMContentLoaded", () => {
 
         const images = [
-            "images/1a.jpg",
-            "images/2a.jpg",
-            "images/3a.jpg",
-            "images/4a.jpg",
-            "images/6.jpg",
-            "images/7.jpg",
-            "images/8.jpg",
-            "images/9.jpg",
-            "images/10.jpg",
-            "images/11.jpg",
-            "images/12.jpg",
-            "images/13.jpg",
-            "images/14.jpg",
-            "images/15.jpg",
-            "images/16.jpg",
-            "images/17.jpg",
-            "images/18.jpg",
-            "images/19.jpg",
-            "images/20.jpg",
-            "images/21.jpg",
-            "images/22.jpg",
-            "images/23.jpg",
-            "images/24.jpg",
-            "images/25.jpg",
-            "images/26.jpg",
-            "images/27.jpg",
-            "images/28.jpg",
-            "images/29.jpg",
-            "images/30.jpg"
+            "images/1a.jpg","images/2a.jpg","images/3a.jpg","images/4a.jpg",
+            "images/6.jpg","images/7.jpg","images/8.jpg","images/9.jpg",
+            "images/10.jpg","images/11.jpg","images/12.jpg","images/13.jpg",
+            "images/14.jpg","images/15.jpg","images/16.jpg","images/17.jpg",
+            "images/18.jpg","images/19.jpg","images/20.jpg","images/21.jpg",
+            "images/22.jpg","images/23.jpg","images/24.jpg","images/25.jpg",
+            "images/26.jpg","images/27.jpg","images/28.jpg","images/29.jpg","images/30.jpg"
         ];
 
         const feed = document.getElementById("feed");
-        const detailsBtn = document.getElementById("details-btn");
-        const detailsText = document.getElementById("details-text");
 
-        /* DETAILS TOGGLE */
-        detailsBtn.addEventListener("click", () => {
-
-            detailsText.classList.toggle("active");
-
-            detailsBtn.textContent = detailsText.classList.contains("active")
-                ? "CLOSE ▲"
-                : "MORE INFO ▽";
-
-        });
-
-        /* ADD IMAGES */
         function addImages() {
             images.forEach(src => {
                 const img = document.createElement("img");
@@ -110,21 +80,20 @@
             });
         }
 
-        /* INIT */
-        addImages();
+        /* initial load */
         addImages();
 
-        /* INFINITE SCROLL */
+        /* infinite scroll */
         window.addEventListener("scroll", () => {
             if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 300) {
                 addImages();
             }
         });
 
+        /* FLOATING BUTTON */
         const button = document.getElementById("floating-back");
 
         function moveButton() {
-
             const w = window.innerWidth - button.offsetWidth;
             const h = window.innerHeight - button.offsetHeight;
 
@@ -135,12 +104,10 @@
             button.style.top = y + "px";
         }
 
-        /* move every 2 seconds */
-
         moveButton();
         setInterval(moveButton, 8000);
-
     });
 </script>
+
 </body>
 </html>
