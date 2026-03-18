@@ -9,39 +9,49 @@
         body {
             margin: 0;
             font-family: sans-serif;
-            background: #000;
+            background: black;
+            overflow-x: hidden;
         }
 
         /* BACK BUTTON */
         #floating-back {
             position: fixed;
             width: 60px;
-            z-index: 10;
+            z-index: 20;
             cursor: pointer;
         }
 
-        /* FEED */
-        .feed-wrapper {
-            padding: 10px;
-        }
-
-        .feed {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-        }
-
-        .feed img {
+        /* EACH IMAGE SECTION */
+        .item {
+            position: relative;
             width: 100%;
-            height: auto;
-            display: block;
+            height: 100vh;
+            overflow: hidden;
         }
 
-        /* MOBILE tweak */
-        @media (max-width: 600px) {
-            .feed {
-                grid-template-columns: 1fr 1fr;
-            }
+        /* BLURRED BACKGROUND */
+        .bg {
+            position: absolute;
+            width: 110%;
+            height: 110%;
+            object-fit: cover;
+            filter: blur(40px);
+            transform: scale(1.1);
+            top: -5%;
+            left: -5%;
+        }
+
+        /* SHARP FOREGROUND IMAGE */
+        .fg {
+            position: absolute;
+            max-width: 80%;
+            max-height: 80%;
+            object-fit: contain;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.6);
         }
     </style>
 </head>
@@ -52,9 +62,7 @@
     <img src="images/back.png" id="floating-back">
 </a>
 
-<main class="feed-wrapper">
-    <div id="feed" class="feed"></div>
-</main>
+<div id="feed"></div>
 
 <script>
     document.addEventListener("DOMContentLoaded", () => {
@@ -73,10 +81,21 @@
 
         function addImages() {
             images.forEach(src => {
-                const img = document.createElement("img");
-                img.src = src;
-                img.loading = "lazy";
-                feed.appendChild(img);
+
+                const item = document.createElement("div");
+                item.className = "item";
+
+                const bg = document.createElement("img");
+                bg.src = src;
+                bg.className = "bg";
+
+                const fg = document.createElement("img");
+                fg.src = src;
+                fg.className = "fg";
+
+                item.appendChild(bg);
+                item.appendChild(fg);
+                feed.appendChild(item);
             });
         }
 
@@ -106,6 +125,7 @@
 
         moveButton();
         setInterval(moveButton, 8000);
+
     });
 </script>
 
