@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cow to 3D Printer️</title>
+
+    <link rel="stylesheet" href="slideshow.css">
+</head>
+
+<body>
+
+<header class="top-bar">
+    <!--    <span class="product-title">Fountain for golfers &#45;&#45; </span>-->
+    <span id="details-btn" class="details">more information ▽ </span>
+</header>
+
+
+<section id="details-text" class="details-text">
+    <div class="details-content">
+        <div class="details-left">
+            <p><b>Title:</b>Cow to 3D Printer️</p>
+            <p><b>Year:</b>2019</p>
+            <p><b>Medium:</b> sound installation</p>
+            <!--            <p>Collaborators: Perry Duarte</p>-->
+<!--            <p><b>Showed at:</b> Aqua Invísivel, Lagos and Pop up event: The Museum of Contemporary art of Tuvalu, Agueda</p>-->
+
+        </div>
+        <div class="details-right">
+            <p>
+                This sound installation explores the blurred
+                boundary between nature and machine. The
+                work consists of six speakers arranged in a
+                sequence. The first speaker plays the natural
+                sound of cows, while the final speaker emits
+                the mechanical sound of a 3D printer. Moving
+                through the installation, the listener hears
+                a gradual transformation in which the animal
+                sound slowly merges with the machine noise.
+                The piece reflects on the increasing
+                entanglement of biological and technological
+                systems. Inspired by theories of hybrid
+                ecologies and post-human relationships, the
+                work questions where the boundary between
+                living organisms and machines might lie.
+            </p>
+        </div>
+    </div>
+</section>
+
+<a href="index.html">
+    <img src="images/back.png" id="floating-back">
+</a>
+
+<main class="feed-wrapper">
+    <div id="feed" class="feed"></div>
+</main>
+
+<!--<div class="floating-images">-->
+<!--    <img src="images/1.jpg" class="img img1">-->
+<!--    <img src="images/2.jpg" class="img img2">-->
+<!--    <img src="images/3.jpg" class="img img3">-->
+<!--    <img src="images/4.jpg" class="img img4">-->
+<!--    <img src="images/5.jpg" class="img img5">-->
+<!--</div>-->
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+
+        const images = [
+            "images/2cow.jpg"
+        ];
+
+        const feed = document.getElementById("feed");
+        const detailsBtn = document.getElementById("details-btn");
+        const detailsText = document.getElementById("details-text");
+
+        /* DETAILS TOGGLE */
+        detailsBtn.addEventListener("click", () => {
+
+            detailsText.classList.toggle("active");
+
+            detailsBtn.textContent = detailsText.classList.contains("active")
+                ? "close ▲"
+                : "more information ▽";
+
+        });
+
+        /* ADD IMAGES */
+        function addImages() {
+            images.forEach(src => {
+                const img = document.createElement("img");
+                img.src = src;
+                img.loading = "lazy";
+                feed.appendChild(img);
+            });
+        }
+
+        /* INIT */
+        addImages();
+        addImages();
+
+        /* INFINITE SCROLL */
+        window.addEventListener("scroll", () => {
+            if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 300) {
+                addImages();
+            }
+        });
+
+        const button = document.getElementById("floating-back");
+
+        function moveButton() {
+
+            const w = window.innerWidth - button.offsetWidth;
+            const h = window.innerHeight - button.offsetHeight;
+
+            const x = Math.random() * w;
+            const y = Math.random() * h;
+
+            button.style.left = x + "px";
+            button.style.top = y + "px";
+        }
+
+        /* move every 2 seconds */
+
+        moveButton();
+        setInterval(moveButton, 8000);
+
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>These Where All My Clothes</title>
+
+    <link rel="stylesheet" href="slideshow.css">
+</head>
+
+<body>
+
+<header class="top-bar">
+    <!--    <span class="product-title">Fountain for golfers &#45;&#45; </span>-->
+    <span id="details-btn" class="details">MORE INFO ▽ </span>
+</header>
+
+
+<section id="details-text" class="details-text">
+    <div class="details-content">
+        <div class="details-left">
+            <p><b>Title:</b> These Where All My Clothes</p>
+            <p><b>Year:</b>2022</p>
+            <p><b>Medium:</b> Textile</p>
+            <!--            <p>Collaborators: Perry Duarte</p>-->
+            <p><b>Showed at:</b>  A Casa E Sua Agueda, Portugal, Street Art Festival Marrakech, Morocco</p>
+
+        </div>
+        <div class="details-right">
+            <p>
+                During the COVID-19 lockdown, I began sewing
+                together every item of clothing I owned into
+                one large wearable textile structure. I
+                wanted to experience the discomfort of
+                letting go of something that felt important
+                to my identity. Surprisingly, the loss of
+                these belongings did not bother me as much as
+                I had expected.
+                The process continued until I had nothing
+                left to wear. In a two-hour performance I
+                wore each garment one final time, creating a
+                ritual farewell to a previous version of
+                myself. The work became a physical archive of
+                personal history.
+                When the piece was later exhibited hanging in
+                the streets of Marrakech, visitors removed
+                the clothes in an unguarded moment and began
+                wearing them again, unexpectedly returning
+                the garments to their original purpose and
+                redistributing the work back into everyday
+                life.
+            </p>
+        </div>
+    </div>
+</section>
+
+<a href="index.html">
+    <img src="images/back.png" id="floating-back">
+</a>
+
+<main class="feed-wrapper">
+    <div id="feed" class="feed"></div>
+</main>
+
+<!--<div class="floating-images">-->
+<!--    <img src="images/1.jpg" class="img img1">-->
+<!--    <img src="images/2.jpg" class="img img2">-->
+<!--    <img src="images/3.jpg" class="img img3">-->
+<!--    <img src="images/4.jpg" class="img img4">-->
+<!--    <img src="images/5.jpg" class="img img5">-->
+<!--</div>-->
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+
+        const images = [
+            "images/marieke300dpi.jpg",
+            "images/marieke300dpi3.jpg",
+            "images/Screen Shot 2023-05-24 at 17.36.17.png",
+            "images/fountain4.png",
+            "images/fountain7.png"
+        ];
+
+        const feed = document.getElementById("feed");
+        const detailsBtn = document.getElementById("details-btn");
+        const detailsText = document.getElementById("details-text");
+
+        /* DETAILS TOGGLE */
+        detailsBtn.addEventListener("click", () => {
+
+            detailsText.classList.toggle("active");
+
+            detailsBtn.textContent = detailsText.classList.contains("active")
+                ? "CLOSE ▲"
+                : "MORE INFO ▽";
+
+        });
+
+        /* ADD IMAGES */
+        function addImages() {
+            images.forEach(src => {
+                const img = document.createElement("img");
+                img.src = src;
+                img.loading = "lazy";
+                feed.appendChild(img);
+            });
+        }
+
+        /* INIT */
+        addImages();
+        addImages();
+
+        /* INFINITE SCROLL */
+        window.addEventListener("scroll", () => {
+            if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 300) {
+                addImages();
+            }
+        });
+
+        const button = document.getElementById("floating-back");
+
+        function moveButton() {
+
+            const w = window.innerWidth - button.offsetWidth;
+            const h = window.innerHeight - button.offsetHeight;
+
+            const x = Math.random() * w;
+            const y = Math.random() * h;
+
+            button.style.left = x + "px";
+            button.style.top = y + "px";
+        }
+
+        /* move every 2 seconds */
+
+        moveButton();
+        setInterval(moveButton, 8000);
+
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Fountain for Golfers 🏌️‍♀️</title>
+
+    <link rel="stylesheet" href="slideshow.css">
+</head>
+
+<body>
+
+<header class="top-bar">
+<!--    <span class="product-title">Fountain for golfers &#45;&#45; </span>-->
+    <span id="details-btn" class="details">more info ▽ </span>
+</header>
+
+
+<section id="details-text" class="details-text">
+    <div class="details-content">
+        <div class="details-left">
+            <p><b>Fountain for Golfers</b></p>
+            <p><b>Year:</b> 2025</p>
+            <p><b>Medium:</b> PVC, metal, fake grass, waterpump</p>
+            <!--            <p>Collaborators: Perry Duarte</p>-->
+            <p><b>Showed at:</b> Aqua Invísivel, Lagos and Pop up event: The Museum of Contemporary art of Tuvalu, Agueda</p>
+
+        </div>
+        <div class="details-right">
+            <p>
+                In Lagos (Portugal) specifically one thing popped my eye, the beauty of the green golf courses. And there strong contrast to the dead and dry land around it. While working on the theme of water I thought about that sentence saying “the grass is greener where you water it” meaning, the things you put most attention to will grow the most. This installation is questioning whether that grass should be the one of the golf courts.
+            </p>
+        </div>
+    </div>
+</section>
+
+<a href="index.html">
+    <img src="images/back.png" id="floating-back">
+</a>
+
+<main class="feed-wrapper">
+    <div id="feed" class="feed"></div>
+</main>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+
+        const images = [
+            "images/fontein.jpeg",
+            "images/fontein.jpeg",
+            "images/fontein.jpeg",
+            "images/fountain4.png",
+            "images/fontein.jpeg"
+        ];
+
+        const feed = document.getElementById("feed");
+        const detailsBtn = document.getElementById("details-btn");
+        const detailsText = document.getElementById("details-text");
+
+        /* DETAILS TOGGLE */
+        detailsBtn.addEventListener("click", () => {
+
+            detailsText.classList.toggle("active");
+
+            detailsBtn.textContent = detailsText.classList.contains("active")
+                ? "close ▲"
+                : "more info ▽";
+
+        });
+
+        /* ADD IMAGES */
+        function addImages() {
+            images.forEach(src => {
+                const img = document.createElement("img");
+                img.src = src;
+                img.loading = "lazy";
+                feed.appendChild(img);
+            });
+        }
+
+        /* INIT */
+        addImages();
+        addImages();
+
+        /* INFINITE SCROLL */
+        window.addEventListener("scroll", () => {
+            if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 300) {
+                addImages();
+            }
+        });
+
+        const button = document.getElementById("floating-back");
+
+        function moveButton() {
+
+            const w = window.innerWidth - button.offsetWidth;
+            const h = window.innerHeight - button.offsetHeight;
+
+            const x = Math.random() * w;
+            const y = Math.random() * h;
+
+            button.style.left = x + "px";
+            button.style.top = y + "px";
+        }
+
+        /* move every 2 seconds */
+
+        moveButton();
+        setInterval(moveButton, 8000);
+
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animals Gallery</title>
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        body{
+            font-family:Arial, Helvetica, sans-serif;
+            background:#fff;
+            color:#222;
+            padding:40px;
+        }
+
+        /* Floating Back Button */
+        #floating-back{
+            position:fixed;
+            width:130px;
+            z-index:1000;
+            cursor:pointer;
+            transition:left 1.5s ease, top 1.5s ease;
+        }
+
+        /* Gallery */
+        .gallery{
+            display:grid;
+            grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+            gap:35px;
+        }
+
+        .card{
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+        }
+
+        .card img{
+            width:100%;
+            aspect-ratio:3 / 4;
+            object-fit:cover;
+            box-shadow:0 8px 24px rgba(0,0,0,.15);
+        }
+
+        .caption{
+            margin-top:12px;
+            text-align:center;
+            font-size:14px;
+            line-height:1.5;
+        }
+
+        .caption strong{
+            font-weight:bold;
+        }
+    </style>
+
+</head>
+<body>
+
+<a href="index.html">
+    <img src="images/back.png" id="floating-back" alt="Back">
+</a>
+
+<div class="gallery" id="gallery"></div>
+
+<script>
+
+    // --------------------
+    // Photos
+    // --------------------
+
+    const photos = [
+        {src:"images/1a.jpg", type:"Gallus gallus domesticus", place:"Portugal"},
+        {src:"images/2a.jpg", type:"Palaemon serratus", place:"Portugal"},
+        {src:"images/3a.jpg", type:"Sus domesticus", place:"France"},
+        {src:"images/4a.jpg", type:"Scorpaena scrofa", place:"Portugal"},
+        {src:"images/6.jpg", type:"Bos taurus", place:"Romania"},
+        {src:"images/7.jpg", type:"Bos taurus", place:"Norway"},
+        {src:"images/8.jpg", type:"Bos taurus", place:"Norway"},
+        {src:"images/9.jpg", type:"Bos taurus", place:"Brazil"},
+        {src:"images/10.jpg", type:"Ovis aries", place:"Romania"},
+        {src:"images/11.jpg", type:"Gallus gallus domesticus", place:"Romania"},
+        {src:"images/12.jpg", type:"Bos taurus", place:"Norway"},
+        {src:"images/13.jpg", type:"Gallus gallus domesticus", place:"Portugal"},
+        {src:"images/14.jpg", type:"Gallus gallus domesticus", place:"Norway"},
+        {src:"images/15.jpg", type:"Bos taurus", place:"Norway"},
+        {src:"images/16.jpg", type:"Decapoda", place:"Portugal"},
+        {src:"images/17.jpg", type:"Trachurus trachurus", place:"Portugal"},
+        {src:"images/18.jpg", type:"Sparus aurata", place:"Portugal"},
+        {src:"images/19.jpg", type:"Sus domesticus", place:"Romania"},
+        {src:"images/20.jpg", type:"Cervus elaphus", place:"Norway"},
+        {src:"images/21.jpg", type:"Bos taurus", place:"Portugal"},
+        {src:"images/22.jpg", type:"Bos taurus", place:"Portugal"},
+        {src:"images/23.jpg", type:"Sus domesticus", place:"Norway"},
+        {src:"images/24.jpg", type:"Aphanopus carbo", place:"Portugal"},
+        {src:"images/25.jpg", type:"Sus domesticus", place:"Norway"},
+        {src:"images/26.jpg", type:"Oncorhynchus mykiss", place:"Norway"},
+        {src:"images/27.jpg", type:"Scophthalmus maximus", place:"Norway"},
+        {src:"images/28.jpg", type:"Lepidorhombus whiffiagonis", place:"Spain"},
+        {src:"images/29.jpg", type:"Sus domesticus", place:"Romania"},
+        {src:"images/30.jpg", type:"Salmo salar", place:"Norway"}
+    ];
+
+    // --------------------
+    // Build gallery
+    // --------------------
+
+    const gallery = document.getElementById("gallery");
+
+    photos.forEach(photo => {
+
+        const card = document.createElement("div");
+        card.className = "card";
+
+        card.innerHTML = `
+        <img src="${photo.src}" alt="${photo.type}">
+        <div class="caption">
+            <strong>Type:</strong> ${photo.type}<br>
+            <strong>Place:</strong> ${photo.place}
+        </div>
+    `;
+
+        gallery.appendChild(card);
+
+    });
+
+    // --------------------
+    // Floating back button
+    // --------------------
+
+    const button = document.getElementById("floating-back");
+
+    function moveButton(){
+
+        const maxX = window.innerWidth - button.offsetWidth;
+        const maxY = window.innerHeight - button.offsetHeight;
+
+        const x = Math.random() * maxX;
+        const y = Math.random() * maxY;
+
+        button.style.left = `${x}px`;
+        button.style.top = `${y}px`;
+
+    }
+
+    moveButton();
+
+    // Move every 8 seconds
+    setInterval(moveButton, 8000);
+
+    // Also reposition after resizing
+    window.addEventListener("resize", moveButton);
+
+</script>
+
+</body>
+</html>
+```

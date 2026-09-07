@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Lets Keep It Gezellig️</title>
+
+    <link rel="stylesheet" href="slideshow.css">
+</head>
+
+<body>
+
+<header class="top-bar">
+    <!--    <span class="product-title">Fountain for golfers &#45;&#45; </span>-->
+    <span id="details-btn" class="details">MORE INFO ▽ </span>
+</header>
+
+
+<section id="details-text" class="details-text">
+    <div class="details-content">
+        <div class="details-left">
+            <p><b>Title:</b> Lets Keep It Gezellig</p>
+            <p><b>Year:</b>2022</p>
+            <p><b>Medium:</b> multimedia installation</p>
+            <!--            <p>Collaborators: Perry Duarte</p>-->
+            <p><b>Showed at:</b> ArtEZ Finals Arnhem, Netherlands, The Vibe of the Future Festival Nijmegen, Netherlands, AgitLAB, Portugal</p>
+
+        </div>
+        <div class="details-right">
+            <p>
+                There are times when we feel overwhelmed by
+                all around disaster: the bio-industry’s
+                large-scale slaughtering of animals, the
+                pandemic, wars, nuclear threat, climate
+                change, natural disasters - to name just a
+                few. The awareness of the pain of the world
+                can be paralyzing. How can you escape these
+                facts and continue to live your life in peace
+                without falling into ignorance.
+                I have tried to capture this contradictory
+                feeling in 40 light-hearted animations that
+                show melting icecaps, broken appliances, an
+                endless stream of packages, flight shame, a
+                pile of dead chickens, a tea cup pouring
+                over, a horse pulling a dead horse, and me
+                myself - drowning, ploughing trough thick
+                snow, over and over again.
+            </p>
+        </div>
+    </div>
+</section>
+
+<a href="index.html">
+    <img src="images/back.png" id="floating-back">
+</a>
+
+<main class="feed-wrapper">
+    <div id="feed" class="feed"></div>
+</main>
+
+<!--<div class="floating-images">-->
+<!--    <img src="images/1.jpg" class="img img1">-->
+<!--    <img src="images/2.jpg" class="img img2">-->
+<!--    <img src="images/3.jpg" class="img img3">-->
+<!--    <img src="images/4.jpg" class="img img4">-->
+<!--    <img src="images/5.jpg" class="img img5">-->
+<!--</div>-->
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+
+        const images = [
+            "images/lift.jpeg",
+            "images/lets keep it gezellig5.JPG",
+            "images/COWS.mov",
+            "images/CLOUDS.mov",
+            "images/ME AND DUCKS.mov"
+        ];
+
+        const feed = document.getElementById("feed");
+        const detailsBtn = document.getElementById("details-btn");
+        const detailsText = document.getElementById("details-text");
+
+        /* DETAILS TOGGLE */
+        detailsBtn.addEventListener("click", () => {
+
+            detailsText.classList.toggle("active");
+
+            detailsBtn.textContent = detailsText.classList.contains("active")
+                ? "CLOSE ▲"
+                : "MORE INFO ▽";
+
+        });
+
+        /* ADD IMAGES */
+        function addImages() {
+            images.forEach(src => {
+                const img = document.createElement("img");
+                img.src = src;
+                img.loading = "lazy";
+                feed.appendChild(img);
+            });
+        }
+
+        /* INIT */
+        addImages();
+        addImages();
+
+        /* INFINITE SCROLL */
+        window.addEventListener("scroll", () => {
+            if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 300) {
+                addImages();
+            }
+        });
+
+        const button = document.getElementById("floating-back");
+
+        function moveButton() {
+
+            const w = window.innerWidth - button.offsetWidth;
+            const h = window.innerHeight - button.offsetHeight;
+
+            const x = Math.random() * w;
+            const y = Math.random() * h;
+
+            button.style.left = x + "px";
+            button.style.top = y + "px";
+        }
+
+        /* move every 2 seconds */
+
+        moveButton();
+        setInterval(moveButton, 8000);
+
+    });
+</script>
+</body>
+</html>

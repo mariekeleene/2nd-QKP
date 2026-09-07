@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dance</title>
+
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: rgba(255,255,255,0.05);
+            touch-action: none;
+            user-select: none;
+        }
+
+        .carousel {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 800px;
+            height: 500px;
+            transform: translate(-50%, -50%);
+        }
+
+        .circle {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .item {
+            position: absolute;
+            width: 300px;
+            height: 180px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .item img,
+        .item video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 0px;
+            pointer-events: none;
+        }
+
+        .item video {
+            display: none;
+        }
+
+        /* Mobile: groot & tegen elkaar */
+        @media (max-width:600px) {
+            .carousel {
+                width: 100%;
+                height: 80%;
+            }
+
+            .item {
+                width: 50vw;
+                height: 32vw;
+            }
+        }
+
+        /* Close button */
+        #homeButton {
+            position: absolute;
+            top: 41%;
+            left: 46%;
+            transform: translate(-50%, -50%);
+            width: 40px;
+            height: 40px;
+            font-size: 18px;
+            background: transparent;
+            color: #373737;
+            border: none;
+            cursor: pointer;
+            z-index: 1000;
+            font-family: "Menlo", monospace;
+        }
+
+        #floating-back{
+            position: fixed;
+            width: 130px;
+            z-index: 1000;
+            cursor: pointer;
+            transition: left 1.5s ease, top 1.5s ease;
+        }
+
+    </style>
+</head>
+
+<body>
+<a href="index.html"> <img src="images/back.png" id="floating-back" alt="Back"> </a>
+<button id="homeButton" onclick="location.href='index.html'">what is <br> unsought<br>will go<br> undetected</button>
+
+<script>
+    const mediaSet1 = [
+        { image: "images/Dans1.png", video: "images/pigeonreverse.mov" },
+        { image: "images/Dans2.png", video: "images/pigeonreverse.mov" },
+        { image: "images/Dans3.png", video: "images/pigeonreverse.mov" },
+        { image: "images/Dans4.png", video: "images/pigeonreverse.mov" },
+        { image: "images/Dans5.png", video: "images/pigeonreverse.mov" },
+        { image: "images/Dans6.png", video: "images/pigeonreverse.mov" }
+    ];
+
+    function createCarousel({ media }) {
+
+        const container = document.createElement("div");
+        container.className = "carousel";
+
+        const circle = document.createElement("div");
+        circle.className = "circle";
+
+        container.appendChild(circle);
+        document.body.appendChild(container);
+
+        const items = [];
+        let isDragging = false;
+        let lastTouchX = 0;
+        let dragVelocity = 0;
+        let lastTime = performance.now();
+
+        const radiusDesktop = 200;
+        let radiusMobile = 0;
+
+        // Items maken
+        media.forEach((m, i) => {
+            const el = document.createElement("div");
+            el.className = "item";
+
+            const img = document.createElement("img");
+            img.src = m.image;
+
+            const video = document.createElement("video");
+            video.src = m.video;
+            video.loop = true;
+            video.muted = true;
+            video.playsInline = true;
+            video.preload = "auto";
+
+            el.appendChild(img);
+            el.appendChild(video);
+            circle.appendChild(el);
+
+            // Desktop hover
+            el.addEventListener("mouseenter", () => {
+                if (window.innerWidth > 600) {
+                    img.style.display = "none";
+                    video.style.display = "block";
+                    video.play().catch(()=>{});
+                }
+            });
+
+            el.addEventListener("mouseleave", () => {
+                video.pause();
+                video.style.display = "none";
+                img.style.display = "block";
+            });
+
+            items.push({
+                el, img, video,
+                angle: (Math.PI * 2 / media.length) * i
+            });
+        });
+
+        // Mobiele radius ÉÉN KEER berekenen
+        function calculateRadius() {
+            if (window.innerWidth <= 600) {
+                const itemWidth = window.innerWidth * 0.5;
+                radiusMobile = (window.innerWidth / 2) - (itemWidth / 2);
+            }
+        }
+        calculateRadius();
+        window.addEventListener("resize", calculateRadius);
+
+        // Touch = video zichtbaar
+        container.addEventListener("touchstart", e => {
+            isDragging = true;
+            lastTouchX = e.touches[0].clientX;
+
+            items.forEach(item => {
+                item.img.style.display = "none";
+                item.video.style.display = "block";
+                item.video.play().catch(()=>{});
+            });
+        });
+
+        container.addEventListener("touchmove", e => {
+            if (!isDragging) return;
+            const dx = e.touches[0].clientX - lastTouchX;
+            lastTouchX = e.touches[0].clientX;
+            dragVelocity = dx * 0.005;
+        });
+
+        container.addEventListener("touchend", () => {
+            isDragging = false;
+            items.forEach(item => {
+                item.video.pause();
+                item.video.style.display = "none";
+                item.img.style.display = "block";
+            });
+        });
+
+        // Animatie
+        function animate(time) {
+            const delta = time - lastTime;
+            lastTime = time;
+
+            if (!isDragging) dragVelocity *= 0.95;
+
+            const radius = window.innerWidth <= 600 ? radiusMobile : radiusDesktop;
+
+            items.forEach(item => {
+                item.angle += delta * 0.00015 + dragVelocity;
+                const x = Math.cos(item.angle) * radius;
+                const y = Math.sin(item.angle) * radius;
+                item.el.style.transform =
+                    `translate(${x}px, ${y}px) translate(-50%, -50%)`;
+            });
+
+            requestAnimationFrame(animate);
+        }
+
+        requestAnimationFrame(animate);
+    }
+
+    createCarousel({ media: mediaSet1 });
+
+    // --------------------
+    // Floating back button
+    // --------------------
+
+    const button = document.getElementById("floating-back");
+
+    function moveButton(){
+
+        const maxX = window.innerWidth - button.offsetWidth;
+        const maxY = window.innerHeight - button.offsetHeight;
+
+        const x = Math.random() * maxX;
+        // const y = Math.random() * maxY;
+
+        button.style.left = `${x}px`;
+        button.style.top = `${y}px`;
+
+    }
+
+    moveButton();
+
+    // Move every 8 seconds
+    setInterval(moveButton, 8000);
+
+    // Also reposition after resizing
+    window.addEventListener("resize", moveButton);
+
+</script>
+
+</body>
+</html>

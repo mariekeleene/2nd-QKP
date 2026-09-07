@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>️Hard Working Artists</title>
+
+    <link rel="stylesheet" href="slideshow.css">
+</head>
+
+<body>
+
+<header class="top-bar">
+    <!--    <span class="product-title">Fountain for golfers &#45;&#45; </span>-->
+    <span id="details-btn" class="details">MORE INFO ▽ </span>
+</header>
+
+
+<section id="details-text" class="details-text">
+    <div class="details-content">
+        <div class="details-left">
+            <p><b>Title:</b> Hard Working Artists</p>
+            <p><b>Year:</b> 2024</p>
+            <p><b>Medium:</b> Happening</p>
+                        <p>Collaborators: Kalin Mihov</p>
+            <p><b>Showed at:</b> residency LAB852</p>
+
+        </div>
+        <div class="details-right">
+            <p>
+                Hard Working Artists is a series of
+                performative situations developed during a
+                residency on the Croatian island of Hvar. The
+                project reflects on the tension between labor,
+                leisure, and artistic identity within a
+                tourist landscape often defined by relaxation
+                and slow rhythms of life. In collaboration
+                with Kalin Mihov, we attempted to participate
+                in traditional forms of manual labor, such as
+                vineyard work or building stone walls.
+                However, these attempts repeatedly turned
+                into what we called “pillow work,” a state in
+                which the desire to work exists but the
+                conditions for meaningful labor remain out of
+                reach. The project humorously reflects on
+                productivity, hospitality, and the role of
+                artists within unfamiliar communities.            </p>
+        </div>
+    </div>
+</section>
+
+<a href="index.html">
+    <img src="images/back.png" id="floating-back">
+</a>
+
+<main class="feed-wrapper">
+    <div id="feed" class="feed"></div>
+</main>
+
+<!--<div class="floating-images">-->
+<!--    <img src="images/1.jpg" class="img img1">-->
+<!--    <img src="images/2.jpg" class="img img2">-->
+<!--    <img src="images/3.jpg" class="img img3">-->
+<!--    <img src="images/4.jpg" class="img img4">-->
+<!--    <img src="images/5.jpg" class="img img5">-->
+<!--</div>-->
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+
+        const images = [
+            "images/IMG_4520 2.jpg",
+            "images/IMG_4575.jpg",
+            "images/IMG_4720(1).jpg ",
+            "images/DSC_8767.JPG",
+            "images/IMG_9136.JPG"
+        ];
+
+        const feed = document.getElementById("feed");
+        const detailsBtn = document.getElementById("details-btn");
+        const detailsText = document.getElementById("details-text");
+
+        /* DETAILS TOGGLE */
+        detailsBtn.addEventListener("click", () => {
+
+            detailsText.classList.toggle("active");
+
+            detailsBtn.textContent = detailsText.classList.contains("active")
+                ? "CLOSE ▲"
+                : "MORE INFO ▽";
+
+        });
+
+        /* ADD IMAGES */
+        function addImages() {
+            images.forEach(src => {
+                const img = document.createElement("img");
+                img.src = src;
+                img.loading = "lazy";
+                feed.appendChild(img);
+            });
+        }
+
+        /* INIT */
+        addImages();
+        addImages();
+
+        /* INFINITE SCROLL */
+        window.addEventListener("scroll", () => {
+            if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 300) {
+                addImages();
+            }
+        });
+
+        const button = document.getElementById("floating-back");
+
+        function moveButton() {
+
+            const w = window.innerWidth - button.offsetWidth;
+            const h = window.innerHeight - button.offsetHeight;
+
+            const x = Math.random() * w;
+            const y = Math.random() * h;
+
+            button.style.left = x + "px";
+            button.style.top = y + "px";
+        }
+
+        /* move every 2 seconds */
+
+        moveButton();
+        setInterval(moveButton, 8000);
+
+    });
+</script>
+</body>
+</html>

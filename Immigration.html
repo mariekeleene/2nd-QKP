@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Immigration Celebration️</title>
+
+    <link rel="stylesheet" href="slideshow.css">
+</head>
+
+<body>
+
+<header class="top-bar">
+    <!--    <span class="product-title">Fountain for golfers &#45;&#45; </span>-->
+    <span id="details-btn" class="details">more information ▽ </span>
+</header>
+
+
+<section id="details-text" class="details-text">
+    <div class="details-content">
+        <div class="details-left">
+            <h1><b>Title:</b> Immigration Celebration</h1>
+            <p><b>Year:</b>2024</p>
+            <p><b>Medium:</b> PVC, plastics, outdoor lights with sensor</p>
+            <!--            <p>Collaborators: Perry Duarte</p>-->
+            <p><b>Showed at:</b>  Biennale Architectures, Luxembourg</p>
+
+        </div>
+        <div class="details-right">
+            <p>
+                Coming Home:
+                A light installation with 20 lights turning on
+                and off by a guesture of coming home
+                <br><br>
+                Immigration Celebration:
+                A celebration ‘banner’ made from swimming pool inflatable plastics, celebrating the stay of 1 person for 50 years in Esch sur Alzette - Luxembourg            </p>
+        </div>
+    </div>
+</section>
+
+<a href="index.html">
+    <img src="images/back.png" id="floating-back">
+</a>
+
+<main class="feed-wrapper">
+    <div id="feed" class="feed"></div>
+</main>
+
+<!--<div class="floating-images">-->
+<!--    <img src="images/1.jpg" class="img img1">-->
+<!--    <img src="images/2.jpg" class="img img2">-->
+<!--    <img src="images/3.jpg" class="img img3">-->
+<!--    <img src="images/4.jpg" class="img img4">-->
+<!--    <img src="images/5.jpg" class="img img5">-->
+<!--</div>-->
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+
+        const images = [
+            "images/bolhoed.png"
+        ];
+
+        const feed = document.getElementById("feed");
+        const detailsBtn = document.getElementById("details-btn");
+        const detailsText = document.getElementById("details-text");
+
+        /* DETAILS TOGGLE */
+        detailsBtn.addEventListener("click", () => {
+
+            detailsText.classList.toggle("active");
+
+            detailsBtn.textContent = detailsText.classList.contains("active")
+                ? "close ▲"
+                : "more information ▽";
+
+        });
+
+        /* ADD IMAGES */
+        function addImages() {
+            images.forEach(src => {
+                const img = document.createElement("img");
+                img.src = src;
+                img.loading = "lazy";
+                feed.appendChild(img);
+            });
+        }
+
+        /* INIT */
+        addImages();
+        addImages();
+
+        /* INFINITE SCROLL */
+        window.addEventListener("scroll", () => {
+            if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 300) {
+                addImages();
+            }
+        });
+
+        const button = document.getElementById("floating-back");
+
+        function moveButton() {
+
+            const w = window.innerWidth - button.offsetWidth;
+            const h = window.innerHeight - button.offsetHeight;
+
+            const x = Math.random() * w;
+            const y = Math.random() * h;
+
+            button.style.left = x + "px";
+            button.style.top = y + "px";
+        }
+
+        /* move every 2 seconds */
+
+        moveButton();
+        setInterval(moveButton, 8000);
+
+    });
+</script>
+</body>
+</html>

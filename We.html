@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>We Need Forest But Not This One️</title>
+
+    <link rel="stylesheet" href="slideshow.css">
+</head>
+
+<body>
+
+<header class="top-bar">
+    <!--    <span class="product-title">Fountain for golfers &#45;&#45; </span>-->
+    <span id="details-btn" class="details">MORE INFO ▽ </span>
+</header>
+
+
+<section id="details-text" class="details-text">
+    <div class="details-content">
+        <div class="details-left">
+            <p><b>Title:</b> We Need Forest But Not This One️</p>
+            <p><b>Year:</b>2024</p>
+            <p><b>Medium:</b> Multimedia installation/ performance</p>
+                        <p>Collaborators: Alina Tofan</p>
+            <p><b>Showed at:</b> LAMB- Land Art Movement Biennial - Agueda, Portugal, Art Alive - Aveiro, Portugal, VideoClub - Berlin, Germany
+            </p>
+
+
+        </div>
+        <div class="details-right">
+            <p>
+                This work addresses the ecological
+                consequences of eucalyptus monoculture in
+                Portugal. Using photogrammetry and motion
+                capture, a digital forest was created
+                 defined by repetition and visual
+                monotony. Within this environment, two
+                figures move endlessly through the same
+                terrain, emphasizing the predictable and
+                controlled structure of monoculture
+                plantations. The work is presented as a
+                video loop, reinforcing the sense of ecological
+                and social stagnation. During the
+                exhibition, the installation was activated
+                through a performance in which participants
+                collectively transformed into a forest and
+                recited a manifesto addressing the
+                environmental impact of eucalyptus
+                plantations. The work reflects on ecological
+                uniformity and the tensions between natural
+                ecosystems and industrial landscapes.
+            </p>
+        </div>
+    </div>
+</section>
+
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+
+        const images = [
+            "images/20230905_211810(1).jpg",
+            "images/20230905_215511(1).jpg",
+            "images/3.mov"
+        ];
+
+        const feed = document.getElementById("feed");
+        const detailsBtn = document.getElementById("details-btn");
+        const detailsText = document.getElementById("details-text");
+
+        /* DETAILS TOGGLE */
+        detailsBtn.addEventListener("click", () => {
+
+            detailsText.classList.toggle("active");
+
+            detailsBtn.textContent = detailsText.classList.contains("active")
+                ? "close ▲"
+                : "more information ▽";
+
+        });
+
+        /* ADD IMAGES */
+        function addImages() {
+            images.forEach(src => {
+                const img = document.createElement("img");
+                img.src = src;
+                img.loading = "lazy";
+                feed.appendChild(img);
+            });
+        }
+
+        /* INIT */
+        addImages();
+        addImages();
+
+        /* INFINITE SCROLL */
+        window.addEventListener("scroll", () => {
+            if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 300) {
+                addImages();
+            }
+        });
+
+        const button = document.getElementById("floating-back");
+
+        function moveButton() {
+
+            const w = window.innerWidth - button.offsetWidth;
+            const h = window.innerHeight - button.offsetHeight;
+
+            const x = Math.random() * w;
+            const y = Math.random() * h;
+
+            button.style.left = x + "px";
+            button.style.top = y + "px";
+        }
+
+        /* move every 2 seconds */
+
+        moveButton();
+        setInterval(moveButton, 8000);
+
+    });
+</script>
+</body>
+</html>

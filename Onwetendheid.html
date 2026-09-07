@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Embroidery — Hold</title>
+
+    <style>
+        :root {
+            --bg-lila: #c6b7e2; /* lila background */
+            --fg-dark: #000000;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html, body {
+            margin: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+
+        /* IMAGE VIEW */
+        .image-view {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: #000;
+        }
+
+        .image-view img {
+            width: 100vw;
+            height: 100vh;
+            object-fit: contain;
+        }
+
+        /* INFO VIEW */
+        .info-view {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+
+            padding: 20px 18px 28px;
+            background: var(--bg-lila);
+            color: var(--fg-dark);
+
+            font-family: Menlo, Monaco, Consolas, monospace;
+            line-height: 1.55;
+
+            overflow-y: auto;
+            display: none;
+        }
+
+        .info-view h1 {
+            font-size: 1.1rem;
+            margin: 0 0 12px 0;
+            font-weight: 600;
+        }
+
+        .meta {
+            font-size: 0.9rem;
+            margin-bottom: 14px;
+        }
+
+        .info-view p {
+            font-size: 1rem;
+            margin-bottom: 12px;
+        }
+
+        a {
+            color: #000;
+            text-decoration: underline;
+        }
+
+        .hint {
+            position: fixed;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.7rem;
+            opacity: 0.6;
+            color: #fff;
+            pointer-events: none;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- IMAGE -->
+<div class="image-view" id="imageView">
+    <img src="mariekebetter.jpg" alt="Embroidery artwork">
+    <div class="hint">press & hold</div>
+</div>
+
+<!-- INFO -->
+<div class="info-view" id="infoView">
+    <h1>Free Embroidery — 2024</h1>
+
+    <div class="meta">
+        15 × 15 cm<br>
+        Made by Maria Virginia de Almeida Aguiar
+    </div>
+
+    <p>
+        This hand-embroidered work was created in 2024 and draws inspiration from the practice of Dutch artist Marieke Leene, particularly her installation presented at the ArtEZ Finals 2022 in Arnhem.
+    </p>
+
+    <p>
+        Through embroidery, Maria Virginia translates this critical perspective into textile form, connecting contemporary artistic discourse with traditional handcraft.
+    </p>
+
+    <p>
+        Her practice is rooted in Brazilian embroidery traditions and Indigenous artisanship, weaving together ancestral knowledge and contemporary art.
+    </p>
+
+    <p>
+        More about the artist:<br>
+        <a href="https://staging.vialmeida.com/para-marieke-que-reflete-sobre-a-ignorancia-do-mundo/" target="_blank" rel="noopener noreferrer">
+            staging.vialmeida.com/para-marieke-que-reflete-sobre-a-ignorancia-do-mundo/
+        </a>
+    </p>
+</div>
+
+<script>
+    const imageView = document.getElementById('imageView');
+    const infoView = document.getElementById('infoView');
+
+    function showInfo() {
+        infoView.style.display = 'block';
+        imageView.style.display = 'none';
+    }
+
+    function showImage() {
+        infoView.style.display = 'none';
+        imageView.style.display = 'flex';
+    }
+
+    /* TOUCH */
+    imageView.addEventListener('touchstart', showInfo);
+    imageView.addEventListener('touchend', showImage);
+    imageView.addEventListener('touchcancel', showImage);
+
+    /* MOUSE */
+    imageView.addEventListener('mousedown', showInfo);
+    imageView.addEventListener('mouseup', showImage);
+    imageView.addEventListener('mouseleave', showImage);
+</script>
+
+</body>
+</html>

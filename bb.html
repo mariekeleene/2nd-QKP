@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>love is more thicker than forget</title>
+
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            background: #ffffff;
+            font-family: serif;
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .poem {
+            color: white;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            text-align: center;
+            max-width: 90%;
+            padding: 1.5rem;
+            white-space: pre-line;
+
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        .char {
+            display: inline;
+        }
+
+        .selected {
+            background: #294bff;
+            color: white;
+        }
+
+        #floating-back{
+            position: fixed;
+            width: 130px;
+            z-index: 1000;
+            cursor: pointer;
+            transition: left 1.5s ease, top 1.5s ease;
+        }
+
+    </style>
+</head>
+
+<body>
+<a href="index.html"> <img src="images/back.png" id="floating-back" alt="Back"> </a>
+<div class="poem" id="poem">
+<br>
+    love is more thicker than forget<br>
+    more thinner than recall<br>
+    more seldom than a wave is wet<br>
+    more frequent than to fail<br>
+    <br>
+    it is most mad and moonly<br>
+    and less it shall unbe<br>
+    than all the sea which only<br>
+    is deeper than the sea<br>
+    <br>
+    love is less always than to win<br>
+    less never than alive<br>
+    less bigger than the least begin<br>
+    less littler than forgive<br>
+    <br>
+    it is most sane and sunly<br>
+    and more it cannot die<br>
+    than all the sky which only<br>
+    is higher than the sky<br>
+    <br>
+</div>
+
+<script>
+    const poem = document.getElementById("poem");
+    const text = poem.innerText;
+    poem.innerHTML = "";
+
+
+    [...text].forEach(char => {
+        if (char === "\n") {
+            poem.appendChild(document.createElement("br"));
+        } else {
+            const span = document.createElement("span");
+            span.className = "char";
+            span.textContent = char;
+            poem.appendChild(span);
+        }
+    });
+
+    let firstB = true; // flag to skip first "b"
+
+    document.querySelectorAll(".char").forEach(span => {
+        if (span.textContent === "b") {
+            if (firstB) {
+                firstB = false; // skip the first "b"
+            } else {
+                span.style.color = "hotpink"; // color all other "b"s
+            }
+        }
+    });
+
+
+    let selecting = false;
+
+    poem.addEventListener("touchstart", e => {
+        selecting = true;
+        const target = e.target;
+        if (target.classList.contains("char")) {
+            target.classList.add("selected");
+        }
+    });
+
+    poem.addEventListener("touchmove", e => {
+        if (!selecting) return;
+        const touch = e.touches[0];
+        const el = document.elementFromPoint(touch.clientX, touch.clientY);
+        if (el && el.classList.contains("char")) {
+            el.classList.add("selected");
+        }
+    });
+
+    poem.addEventListener("touchend", () => {
+        selecting = false;
+    });
+
+    // Desktop
+    poem.addEventListener("mousedown", e => {
+        selecting = true;
+        if (e.target.classList.contains("char")) {
+            e.target.classList.add("selected");
+        }
+    });
+
+    poem.addEventListener("mouseover", e => {
+        if (selecting && e.target.classList.contains("char")) {
+            e.target.classList.add("selected");
+        }
+    });
+
+    document.addEventListener("mouseup", () => {
+        selecting = false;
+    });
+
+    // --------------------
+    // Floating back button
+    // --------------------
+
+    const button = document.getElementById("floating-back");
+
+    function moveButton(){
+
+        const maxX = window.innerWidth - button.offsetWidth;
+        const maxY = window.innerHeight - button.offsetHeight;
+
+        const x = Math.random() * maxX;
+        const y = Math.random() * maxY;
+
+        button.style.left = `${x}px`;
+        button.style.top = `${y}px`;
+
+    }
+
+    moveButton();
+
+    // Move every 8 seconds
+    setInterval(moveButton, 8000);
+
+    // Also reposition after resizing
+    window.addEventListener("resize", moveButton);
+
+</script>
+
+</body>
+</html>
