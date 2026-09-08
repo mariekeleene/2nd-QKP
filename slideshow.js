@@ -3,7 +3,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const images = [
         "images/rollade.jpeg",
         "images/hamburger.jpeg",
-        "images/varkenspoot.jpeg"
+        "images/varkenspoot.jpeg",
+        "images/3.mp4"
     ];
 
     const feed = document.getElementById("feed");
@@ -21,13 +22,40 @@ document.addEventListener("DOMContentLoaded", () => {
 
     });
 
-    /* ADD IMAGES */
+    /* ADD IMAGES AND VIDEOS */
     function addImages() {
         images.forEach(src => {
-            const img = document.createElement("img");
-            img.src = src;
-            img.loading = "lazy";
-            feed.appendChild(img);
+
+            const extension = src.split(".").pop().toLowerCase();
+
+            /* VIDEO */
+            if (["mp4", "mov", "webm", "ogg"].includes(extension)) {
+
+                const video = document.createElement("video");
+
+                video.src = src;
+                video.autoplay = true;
+                video.loop = true;
+                video.muted = true;
+                video.playsInline = true;
+                video.controls = false;
+                video.loading = "lazy";
+
+                feed.appendChild(video);
+
+            }
+
+            /* IMAGE */
+            else {
+
+                const img = document.createElement("img");
+
+                img.src = src;
+                img.loading = "lazy";
+
+                feed.appendChild(img);
+            }
+
         });
     }
 
@@ -37,11 +65,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* INFINITE SCROLL */
     window.addEventListener("scroll", () => {
-        if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 300) {
+
+        if (
+            window.innerHeight + window.scrollY >=
+            document.body.offsetHeight - 300
+        ) {
             addImages();
         }
+
     });
 
+    /* FLOATING BACK BUTTON */
     const button = document.getElementById("floating-back");
 
     function moveButton() {
@@ -56,8 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
         button.style.top = y + "px";
     }
 
-    /* move every 2 seconds */
-
+    /* MOVE EVERY 8 SECONDS */
     moveButton();
     setInterval(moveButton, 8000);
 
