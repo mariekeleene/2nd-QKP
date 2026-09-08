@@ -90,11 +90,13 @@
     max-width: 420px;
 }
 
-.feed img {
+.feed img,
+.feed video {
     width: 200%;
     display: block;
     margin-bottom: 8px;
 }
+
 
 /* floating back */
 #floating-back {
