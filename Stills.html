@@ -75,13 +75,33 @@
 
         });
 
-        /* ADD IMAGES */
         function addImages() {
             images.forEach(src => {
-                const img = document.createElement("img");
-                img.src = src;
-                img.loading = "lazy";
-                feed.appendChild(img);
+
+                const extension = src.split(".").pop().toLowerCase();
+
+                if (["mp4", "mov", "webm", "ogg"].includes(extension)) {
+
+                    const video = document.createElement("video");
+
+                    video.src = src;
+                    video.autoplay = true;
+                    video.loop = true;
+                    video.muted = true;
+                    video.playsInline = true;
+                    video.controls = false;
+
+                    feed.appendChild(video);
+
+                } else {
+
+                    const img = document.createElement("img");
+
+                    img.src = src;
+                    img.loading = "lazy";
+
+                    feed.appendChild(img);
+                }
             });
         }
 
