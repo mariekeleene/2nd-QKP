@@ -112,11 +112,11 @@
     body { padding-top: 70px; }
 
     .top-bar {
-        height: 70px;
+        height: 80px;
         grid-template-columns: 1fr;
         text-align: center;
         font-size: 30px;
-        padding: 0 10px;
+        padding: 0 0px;
         letter-spacing: 0.04em;
     }
 
