@@ -115,14 +115,14 @@
         height: 80px;
         grid-template-columns: 1fr;
         text-align: center;
-        font-size: 30px;
-        padding: 0 0px;
+        font-size: 12px;
+        padding: 0 10px;
         letter-spacing: 0.04em;
     }
 
     .product-title,
     .details,
-    .top-right-word { justify-self: center; font-size: 30px; }
+    .top-right-word { justify-self: center; font-size: 12px; }
     .top-right-word { display: none; }
 
     /* -------- MOBIELE DETAILS TEXT AANPASSING -------- */
