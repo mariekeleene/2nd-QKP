@@ -312,10 +312,10 @@
     }
 
     .feed video {
-        width: 68%;
-        max-width: 68%;
+        width: 100%;
+        max-width: 100%;
 
-        max-height: 50vh;
+        max-height: 110vh;
     }
 
     #floating-back {
