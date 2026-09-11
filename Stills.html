@@ -2,8 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>🏚️QKP - Jelsa Stills️</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>🏚️ QKP - Jelsa Stills</title>
 
     <link rel="stylesheet" href="slideshow.css">
 </head>
@@ -11,49 +12,44 @@
 <body>
 
 <header class="top-bar">
-    <!--    <span class="product-title">Fountain for golfers &#45;&#45; </span>-->
-    <span id="details-btn" class="details">more information ▽ </span>
+    <span id="details-btn" class="details">more information ▽</span>
 </header>
 
 
 <section id="details-text" class="details-text">
     <div class="details-content">
+
         <div class="details-left">
             <p><b>Title:</b> Jelsa Stills</p>
             <p><b>Year:</b> 2024</p>
             <p><b>Medium:</b> video/animation/3D scanning</p>
-            <!--            <p>Collaborators: Perry Duarte</p>-->
-<!--            <p><b>Showed at:</b> Aqua Invísivel, Lagos and Pop up event: The Museum of Contemporary art of Tuvalu, Agueda</p>-->
-
         </div>
+
         <div class="details-right">
             <p>
-                A series of small loops made in Jelsa- Croatia during a 4 month residency.
+                A series of small loops made in Jelsa - Croatia
+                during a 4 month residency.
             </p>
         </div>
+
     </div>
 </section>
 
-<a href="index.html">
-    <img src="images/back.png" id="floating-back">
+
+<a href="index.html" aria-label="Back to home">
+    <img src="images/back.png" id="floating-back" alt="Back">
 </a>
+
 
 <main class="feed-wrapper">
     <div id="feed" class="feed"></div>
 </main>
 
-<!--<div class="floating-images">-->
-<!--    <img src="images/1.jpg" class="img img1">-->
-<!--    <img src="images/2.jpg" class="img img2">-->
-<!--    <img src="images/3.jpg" class="img img3">-->
-<!--    <img src="images/4.jpg" class="img img4">-->
-<!--    <img src="images/5.jpg" class="img img5">-->
-<!--</div>-->
 
 <script>
     document.addEventListener("DOMContentLoaded", () => {
 
-        const images = [
+        const media = [
             "images/TROPHEES.mov",
             "images/SHOPPING.mov",
             "images/Screenshot 2024-07-09 at 23.23.09.png",
@@ -63,22 +59,37 @@
         const feed = document.getElementById("feed");
         const detailsBtn = document.getElementById("details-btn");
         const detailsText = document.getElementById("details-text");
+        const button = document.getElementById("floating-back");
 
-        /* DETAILS TOGGLE */
+
+        /* -----------------------------
+           DETAILS TOGGLE
+        ----------------------------- */
+
         detailsBtn.addEventListener("click", () => {
 
             detailsText.classList.toggle("active");
 
-            detailsBtn.textContent = detailsText.classList.contains("active")
-                ? "close ▲"
-                : "more information ▽";
+            detailsBtn.textContent =
+                detailsText.classList.contains("active")
+                    ? "close ▲"
+                    : "more information ▽";
 
         });
 
-        function addImages() {
-            images.forEach(src => {
 
-                const extension = src.split(".").pop().toLowerCase();
+        /* -----------------------------
+           ADD MEDIA
+        ----------------------------- */
+
+        function addMedia() {
+
+            media.forEach(src => {
+
+                const extension = src
+                    .split(".")
+                    .pop()
+                    .toLowerCase();
 
                 if (["mp4", "mov", "webm", "ogg"].includes(extension)) {
 
@@ -91,6 +102,9 @@
                     video.playsInline = true;
                     video.controls = false;
 
+                    // Helps the browser display the first frame immediately
+                    video.preload = "metadata";
+
                     feed.appendChild(video);
 
                 } else {
@@ -99,43 +113,86 @@
 
                     img.src = src;
                     img.loading = "lazy";
+                    img.alt = "";
 
                     feed.appendChild(img);
                 }
             });
         }
 
-        /* INIT */
-        addImages();
-        addImages();
 
-        /* INFINITE SCROLL */
+        /* -----------------------------
+           INITIAL LOAD
+        ----------------------------- */
+
+        addMedia();
+
+
+        /* -----------------------------
+           INFINITE SCROLL
+        ----------------------------- */
+
+        let loading = false;
+
         window.addEventListener("scroll", () => {
-            if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 300) {
-                addImages();
+
+            if (loading) return;
+
+            const nearBottom =
+                window.innerHeight + window.scrollY >=
+                document.body.offsetHeight - 500;
+
+            if (nearBottom) {
+
+                loading = true;
+
+                addMedia();
+
+                // Prevent adding multiple batches
+                // during the same scroll event.
+                setTimeout(() => {
+                    loading = false;
+                }, 300);
             }
         });
 
-        const button = document.getElementById("floating-back");
+
+        /* -----------------------------
+           FLOATING BACK BUTTON
+        ----------------------------- */
 
         function moveButton() {
 
-            const w = window.innerWidth - button.offsetWidth;
-            const h = window.innerHeight - button.offsetHeight;
+            const buttonWidth = button.offsetWidth;
+            const buttonHeight = button.offsetHeight;
 
-            const x = Math.random() * w;
-            const y = Math.random() * h;
+            const maxX = Math.max(
+                10,
+                window.innerWidth - buttonWidth - 10
+            );
 
-            button.style.left = x + "px";
-            button.style.top = y + "px";
+            const maxY = Math.max(
+                10,
+                window.innerHeight - buttonHeight - 10
+            );
+
+            const x = 10 + Math.random() * (maxX - 10);
+            const y = 10 + Math.random() * (maxY - 10);
+
+            button.style.left = `${x}px`;
+            button.style.top = `${y}px`;
         }
 
-        /* move every 2 seconds */
 
         moveButton();
+
         setInterval(moveButton, 8000);
+
+        // Recalculate if phone is rotated/resized
+        window.addEventListener("resize", moveButton);
 
     });
 </script>
+
 </body>
 </html>
