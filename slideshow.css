@@ -100,44 +100,45 @@
 ========================= */
 
 .feed-wrapper {
+    width: 100%;
     display: flex;
     justify-content: center;
-
-    width: 100%;
 }
 
 .feed {
     width: 100%;
-    max-width: 420px;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 
+/* =========================
+   ALL MEDIA
+========================= */
+
 /*
-   Desktop:
-   Keep your intentionally oversized
-   200% media effect.
+   Images and videos are exactly
+   the same width on desktop.
 */
 
 .feed img,
 .feed video {
-    width: 200%;
-    max-width: none;
-
     display: block;
 
-    margin-left: 50%;
-    transform: translateX(-50%);
-
-    margin-bottom: 8px;
+    width: 100%;
+    max-width: 100%;
 
     height: auto;
+
+    margin: 0 0 8px 0;
+
+    object-fit: contain;
 }
 
 
 /* Videos should not become excessively tall */
 .feed video {
     max-height: 90vh;
-    object-fit: contain;
 }
 
 
@@ -237,57 +238,35 @@
 
     .feed {
         width: 100%;
-
         max-width: none;
 
         padding: 0 10px;
+
+        box-sizing: border-box;
     }
 
 
     /*
-       IMAGES
-
-       Images remain relatively large,
-       but never overflow the phone.
+       ALL IMAGES AND VIDEOS
+       HAVE EXACTLY THE SAME WIDTH
     */
 
-    .feed img {
+    .feed img,
+    .feed video {
+        display: block;
+
         width: 100%;
         max-width: 100%;
 
-        margin-left: 0;
-
-        transform: none;
-
-        margin-bottom: 10px;
-    }
-
-
-    /*
-       VIDEOS
-
-       This is the important change.
-
-       Instead of 200% width, videos are
-       deliberately smaller on mobile.
-    */
-
-    .feed video {
-        width: 72%;
-        max-width: 72%;
-
         height: auto;
 
-        max-height: 55vh;
-
-        margin-left: auto;
-        margin-right: auto;
+        margin: 0 0 10px 0;
 
         transform: none;
 
-        margin-bottom: 14px;
-
         object-fit: contain;
+
+        box-sizing: border-box;
     }
 
 
@@ -311,11 +290,10 @@
         padding: 0 8px;
     }
 
+    .feed img,
     .feed video {
         width: 100%;
         max-width: 100%;
-
-        max-height: 110vh;
     }
 
     #floating-back {
