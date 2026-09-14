@@ -75,6 +75,10 @@
 
         });
 
+        /* -----------------------------
+       ADD MEDIA
+    ----------------------------- */
+
         function addMedia() {
 
             media.forEach(src => {
@@ -113,31 +117,75 @@
             });
         }
 
-        /* INFINITE SCROLL */
+
+        /* -----------------------------
+           INITIAL LOAD
+        ----------------------------- */
+
+        addMedia();
+
+
+        /* -----------------------------
+           INFINITE SCROLL
+        ----------------------------- */
+
+        let loading = false;
+
         window.addEventListener("scroll", () => {
-            if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 300) {
-                addImages();
+
+            if (loading) return;
+
+            const nearBottom =
+                window.innerHeight + window.scrollY >=
+                document.body.offsetHeight - 500;
+
+            if (nearBottom) {
+
+                loading = true;
+
+                addMedia();
+
+                // Prevent adding multiple batches
+                // during the same scroll event.
+                setTimeout(() => {
+                    loading = false;
+                }, 300);
             }
         });
 
-        const button = document.getElementById("floating-back");
+        /* -----------------------------
+                  FLOATING BACK BUTTON
+               ----------------------------- */
 
         function moveButton() {
 
-            const w = window.innerWidth - button.offsetWidth;
-            const h = window.innerHeight - button.offsetHeight;
+            const buttonWidth = button.offsetWidth;
+            const buttonHeight = button.offsetHeight;
 
-            const x = Math.random() * w;
-            const y = Math.random() * h;
+            const maxX = Math.max(
+                10,
+                window.innerWidth - buttonWidth - 10
+            );
 
-            button.style.left = x + "px";
-            button.style.top = y + "px";
+            const maxY = Math.max(
+                10,
+                window.innerHeight - buttonHeight - 10
+            );
+
+            const x = 10 + Math.random() * (maxX - 10);
+            const y = 10 + Math.random() * (maxY - 10);
+
+            button.style.left = `${x}px`;
+            button.style.top = `${y}px`;
         }
 
-        /* move every 2 seconds */
 
         moveButton();
+
         setInterval(moveButton, 8000);
+
+        // Recalculate if phone is rotated/resized
+        window.addEventListener("resize", moveButton);
 
     });
 </script>
