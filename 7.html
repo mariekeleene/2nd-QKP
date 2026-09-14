@@ -53,31 +53,38 @@
 <script>
     document.addEventListener("DOMContentLoaded", () => {
 
-        const images = [
-            "images/bonsai.mov",
-            "images/Chopped.mov",
-            "images/FALLEN.mov",
-            "images/smog.mov"
+        const media = [
+            "images/bonsai.mp4",
+            "images/Chopped.mp4",
+            "images/FALLEN.mp4",
+            "images/smog.mp4"
         ];
 
         const feed = document.getElementById("feed");
         const detailsBtn = document.getElementById("details-btn");
         const detailsText = document.getElementById("details-text");
+        const button = document.getElementById("floating-back");
 
-        /* DETAILS TOGGLE */
+
+        /* -----------------------------
+           DETAILS TOGGLE
+        ----------------------------- */
+
         detailsBtn.addEventListener("click", () => {
 
             detailsText.classList.toggle("active");
 
-            detailsBtn.textContent = detailsText.classList.contains("active")
-                ? "7 TREES ⇶ close ▲"
-                : "7 TREES ⇶ more information ▽";
+            detailsBtn.textContent =
+                detailsText.classList.contains("active")
+                    ? "close ▲"
+                    : "more information ▽";
 
         });
 
+
         /* -----------------------------
-       ADD MEDIA
-    ----------------------------- */
+           ADD MEDIA
+        ----------------------------- */
 
         function addMedia() {
 
@@ -153,9 +160,10 @@
             }
         });
 
+
         /* -----------------------------
-                  FLOATING BACK BUTTON
-               ----------------------------- */
+           FLOATING BACK BUTTON
+        ----------------------------- */
 
         function moveButton() {
 
@@ -189,5 +197,6 @@
 
     });
 </script>
+
 </body>
 </html>
