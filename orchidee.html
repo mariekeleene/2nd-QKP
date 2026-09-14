@@ -118,7 +118,7 @@
     </style>
 </head>
 <body>
-<!--<a href="index.html"> <img src="images/back.png" id="floating-back" alt="Back"> </a>-->
+<a href="index.html"> <img src="images/back.png" id="floating-back" alt="Back"> </a>
 
 
 
@@ -157,20 +157,20 @@
     // Floating back button
     // --------------------
 
-    // const button = document.getElementById("floating-back");
-    //
-    // function moveButton(){
-    //
-    //     const maxX = window.innerWidth - button.offsetWidth;
-    //     const maxY = window.innerHeight - button.offsetHeight;
-    //
-    //     const x = Math.random() * maxX;
-    //     const y = Math.random() * maxY;
-    //
-    //     button.style.left = `${x}px`;
-    //     button.style.top = `${y}px`;jj
-    //
-    // }
+    const button = document.getElementById("floating-back");
+
+    function moveButton(){
+
+        const maxX = window.innerWidth - button.offsetWidth;
+        const maxY = window.innerHeight - button.offsetHeight;
+
+        const x = Math.random() * maxX;
+        const y = Math.random() * maxY;
+
+        button.style.left = `${x}px`;
+        button.style.top = `${y}px`;jj
+
+    }
 
     moveButton();
 
