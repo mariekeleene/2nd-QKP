@@ -109,7 +109,7 @@
        Everything in the feed will use
        exactly this same width.
     */
-    width: 900px;
+    width: 600px;
     max-width: calc(100vw - 20px);
 
     margin: 0 auto;
@@ -139,9 +139,9 @@
    VIDEOS
 ========================= */
 
-.feed video {
-    max-height: 90vh;
-}
+/*.feed video {*/
+/*    max-height: 90vh;*/
+/*}*/
 
 
 /* =========================
