@@ -24,7 +24,6 @@
         .poem {
             color: white;
             font-size: 1.1rem;
-            line-height: 1.6;
             text-align: center;
             max-width: 90%;
             padding: 1.5rem;
@@ -36,28 +35,43 @@
 
         .char {
             display: inline;
+            color: transparent;
         }
 
-        .selected {
+        /* Revealed characters stay visible */
+        .char.revealed {
+            color: deeppink;
+        }
+
+        /* Pink b's are ALWAYS visible */
+        .char.pink-b {
+            color: hotpink;
+        }
+
+        /* When hovering an unrevealed character */
+        .char:not(.revealed):not(.pink-b):hover {
+            color: deeppink;
             background: #294bff;
-            color: white;
         }
 
-        #floating-back{
+        #floating-back {
             position: fixed;
             width: 130px;
             z-index: 1000;
             cursor: pointer;
             transition: left 1.5s ease, top 1.5s ease;
         }
-
     </style>
 </head>
 
 <body>
-<a href="index.html"> <img src="images/back.png" id="floating-back" alt="Back"> </a>
+
+<a href="index.html">
+    <img src="images/back.png" id="floating-back" alt="Back">
+</a>
+
 <div class="poem" id="poem">
-<br>
+    <br>
     love is more thicker than forget<br>
     more thinner than recall<br>
     more seldom than a wave is wet<br>
@@ -83,81 +97,99 @@
 <script>
     const poem = document.getElementById("poem");
     const text = poem.innerText;
+
+    // Clear original poem
     poem.innerHTML = "";
 
-
+    // Turn every character into a span
     [...text].forEach(char => {
+
         if (char === "\n") {
             poem.appendChild(document.createElement("br"));
         } else {
+
             const span = document.createElement("span");
+
             span.className = "char";
             span.textContent = char;
+
             poem.appendChild(span);
         }
     });
 
-    let firstB = true; // flag to skip first "b"
+
+    // --------------------------------
+    // Make every b after the first one
+    // permanently pink and visible
+    // --------------------------------
+
+    let firstB = true;
 
     document.querySelectorAll(".char").forEach(span => {
+
         if (span.textContent === "b") {
+
             if (firstB) {
-                firstB = false; // skip the first "b"
+                firstB = false;
             } else {
-                span.style.color = "hotpink"; // color all other "b"s
+                span.classList.add("pink-b");
             }
         }
+
     });
 
 
-    let selecting = false;
+    // --------------------------------
+    // HOVER TO REVEAL PERMANENTLY
+    // --------------------------------
 
-    poem.addEventListener("touchstart", e => {
-        selecting = true;
-        const target = e.target;
-        if (target.classList.contains("char")) {
-            target.classList.add("selected");
-        }
+    document.querySelectorAll(".char").forEach(span => {
+
+        span.addEventListener("mouseenter", () => {
+
+            // Don't do anything to the pink b's
+            if (span.classList.contains("pink-b")) {
+                return;
+            }
+
+            // Reveal permanently
+            span.classList.add("revealed");
+
+        });
+
     });
 
-    poem.addEventListener("touchmove", e => {
-        if (!selecting) return;
-        const touch = e.touches[0];
-        const el = document.elementFromPoint(touch.clientX, touch.clientY);
-        if (el && el.classList.contains("char")) {
-            el.classList.add("selected");
-        }
+
+    // --------------------------------
+    // TOUCH SUPPORT
+    // Tap a character to reveal it
+    // permanently on mobile
+    // --------------------------------
+
+    document.querySelectorAll(".char").forEach(span => {
+
+        span.addEventListener("touchstart", () => {
+
+            // Don't do anything to the pink b's
+            if (span.classList.contains("pink-b")) {
+                return;
+            }
+
+            // Reveal permanently
+            span.classList.add("revealed");
+
+        });
+
     });
 
-    poem.addEventListener("touchend", () => {
-        selecting = false;
-    });
 
-    // Desktop
-    poem.addEventListener("mousedown", e => {
-        selecting = true;
-        if (e.target.classList.contains("char")) {
-            e.target.classList.add("selected");
-        }
-    });
-
-    poem.addEventListener("mouseover", e => {
-        if (selecting && e.target.classList.contains("char")) {
-            e.target.classList.add("selected");
-        }
-    });
-
-    document.addEventListener("mouseup", () => {
-        selecting = false;
-    });
-
-    // --------------------
+    // --------------------------------
     // Floating back button
-    // --------------------
+    // --------------------------------
 
     const button = document.getElementById("floating-back");
 
-    function moveButton(){
+    function moveButton() {
 
         const maxX = window.innerWidth - button.offsetWidth;
         const maxY = window.innerHeight - button.offsetHeight;
@@ -167,7 +199,6 @@
 
         button.style.left = `${x}px`;
         button.style.top = `${y}px`;
-
     }
 
     moveButton();
