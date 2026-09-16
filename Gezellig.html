@@ -12,7 +12,7 @@
 
 <header class="top-bar">
     <!--    <span class="product-title">Fountain for golfers &#45;&#45; </span>-->
-    <span id="details-btn" class="details">more information ▽ </span>
+    <span id="details-btn" class="details">Gezellig/ Ongezellig ⇶ more information ▽ </span>
 </header>
 
 
@@ -23,7 +23,7 @@
             <p><b>Year:</b> 2020</p>
             <p><b>Medium:</b> Ai, dataset training</p>
             <!--            <p>Collaborators: Perry Duarte</p>-->
-            <p><b>Showed at:</b> https://www.instagram.com/gezellig_ongezellig/ </p>
+            <p><b>viewable at:</b> <a href="https://www.instagram.com/gezellig_ongezellig/" target="https://www.instagram.com/gezellig_ongezellig/" rel="https://www.instagram.com/gezellig_ongezellig/"> @Gezellig/Ongezellig</a> </p>
 
         </div>
         <div class="details-right">
@@ -32,7 +32,7 @@
                 classify artworks according to the Dutch
                 concept of “gezelligheid,” a word associated
                 with warmth, comfort, and pleasant
-                atmosphere. I trained an AI model to evaluate
+                atmosphere. An AI model was trained to evaluate
                 artworks and determine whether they are
                 “gezellig” or “ongezellig.”
                 The results reveal the strange and often
@@ -40,11 +40,12 @@
                 Classical paintings are suddenly judged
                 through this cultural filter, sometimes
                 producing unexpected or absurd outcomes.
-                The project also reflects on the human
-                influence behind AI systems. During training I
-                repeatedly labelled images of asses as
+                The project simultaneously reflects on the human
+                influence behind AI systems.
+                <br> <br>
+                During the training I repeatedly labelled images of buttocks as
                 “gezellig,” which caused the system to
-                strongly associate this category with them.
+                strongly associate this category with them, as well as anything that resembles buttocks.
                 This moment of feedback exposed my own
                 subjective role in shaping the dataset and
                 highlighted how algorithmic decisions often
@@ -97,8 +98,8 @@
             detailsText.classList.toggle("active");
 
             detailsBtn.textContent = detailsText.classList.contains("active")
-                ? "close ▲"
-                : "more information ▽";
+                ? "Gezellig/ Ongezellig ⇶ close ▲"
+                : "Gezellig/ Ongezellig ⇶ more information ▽";
 
         });
 
