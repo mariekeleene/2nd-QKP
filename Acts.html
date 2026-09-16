@@ -12,7 +12,7 @@
 
 <header class="top-bar">
 <!--    <span class="product-title">Fountain for golfers &#45;&#45; </span>-->
-    <span id="details-btn" class="details">more information ▽ </span>
+    <span id="details-btn" class="details">Fountain for Golfers ⇶ more information ▽ </span>
 </header>
 
 
@@ -22,8 +22,8 @@
             <p><b>Title:</b> Acts Of Belonging</p>
             <p><b>Year:</b> 2026</p>
             <p><b>Medium:</b> Multimedia installation</p>
-            <!--            <p>Collaborators: Perry Duarte</p>-->
-            <p><b>Showed at:</b> S+T+ARTS Aqua Motion residency</p>
+            <p>Collaborators: Malgosia Sus, Doeke Wartena, Harris Iveson, Jessica, Francisca Mariz</p>
+            <p><b>Exhibited at:</b> S+T+ARTS Aqua Motion residency, Esposende-Portugal, 2026</p> </p>
 
         </div>
         <div class="details-right">
@@ -46,11 +46,11 @@
     document.addEventListener("DOMContentLoaded", () => {
 
         const images = [
-            "images/fountain 1.png",
-            "images/fountain2.png",
-            "images/fountain3.png",
-            "images/fountain4.png",
-            "images/fountain7.png"
+            "images/AOB1.jpg",
+            "images/AOB2.jpg",
+            "images/AOB3.jpg",
+            "images/AOB4.jpg"
+
         ];
 
         const feed = document.getElementById("feed");
@@ -63,8 +63,8 @@
             detailsText.classList.toggle("active");
 
             detailsBtn.textContent = detailsText.classList.contains("active")
-                ? "close ▲"
-                : "more information ▽";
+                ? "Fountain for Golfers ⇶ close ▲"
+                : "Fountain for Golfers ⇶ more information ▽";
 
         });
 
