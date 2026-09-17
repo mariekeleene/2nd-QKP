@@ -12,7 +12,7 @@
 
 <header class="top-bar">
     <!--    <span class="product-title">Fountain for golfers &#45;&#45; </span>-->
-    <span id="details-btn" class="details">more information ▽ </span>
+    <span id="details-btn" class="details">Screen Based Work ⇶ more information ▽ </span>
 </header>
 
 
@@ -23,7 +23,7 @@
             <p><b>Year:</b> 2020</p>
             <p><b>Medium:</b> Screens </p>
             <!--            <p>Collaborators: Perry Duarte</p>-->
-<!--            <p><b>Showed at:</b> Aqua Invísivel, Lagos and Pop up event: The Museum of Contemporary art of Tuvalu, Agueda</p>-->
+<!--            <p><b>Exhibited at:</b> Aqua Invísivel, Lagos and Pop up event: The Museum of Contemporary art of Tuvalu, Agueda</p>&ndash;&gt;-->
 
         </div>
         <div class="details-right">
@@ -54,9 +54,15 @@
     document.addEventListener("DOMContentLoaded", () => {
 
         const images = [
-            "images/IMG_2175.jpeg",
-            "images/IMG_2230.jpeg",
-            "images/Screenshot 2024-04-08 at 13.30.28.png"
+            "images/screen1.png",
+            "images/screen2.png",
+            "images/screen3.png",
+            "images/screen4.png",
+            "images/screen5.png",
+            "images/screen6.png",
+            "images/screen7.png",
+            "images/screen8.png",
+            "images/screen9.png"
         ];
 
         const feed = document.getElementById("feed");
@@ -69,8 +75,8 @@
             detailsText.classList.toggle("active");
 
             detailsBtn.textContent = detailsText.classList.contains("active")
-                ? "close ▲"
-                : "more information ▽";
+                ? "Screen Based Work ⇶ close ▲"
+                : "Screen Based Work ⇶ more information ▽";
 
         });
 
