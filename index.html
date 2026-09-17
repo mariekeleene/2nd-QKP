@@ -3,16 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>🎀🏚️QKP</title>
+
     <link rel="stylesheet" href="style.css">
-    <meta name="description" content="Multimedia artist, technology, global systems, art, net-art, textile, Marieke Leene.">
+
+    <meta
+            name="description"
+            content="Multimedia artist, technology, global systems, art, net-art, textile, Marieke Leene."
+    >
 
     <style>
-        /* CV BUTTON */
+        /* ==================================================
+           BACKGROUND VIDEO
+        ================================================== */
+
+        #background-video {
+            position: fixed;
+            inset: 0;
+
+            width: 100vw;
+            height: 100vh;
+
+            object-fit: cover;
+
+            z-index: -2;
+
+            display: none;
+
+            pointer-events: none;
+        }
+
+
+        /* ==================================================
+           CV BUTTON
+        ================================================== */
+
         .cv-button {
             position: fixed;
+
             bottom: 100px;
             left: 50%;
+
             transform: translateX(-50%);
 
             width: 40px;
@@ -25,18 +57,20 @@
             box-sizing: border-box;
 
             text-decoration: none;
+
             font-size: 12px;
             font-family: "Menlo", monospace;
 
             background: #f5f5f5;
             color: #373737;
+
             box-shadow:
                     rgba(107, 107, 108, 0.4) 0px 2px 3px,
                     rgba(255, 29, 29, 0.3) 0px 6px 10px -3px,
                     rgba(78, 89, 255, 0.2) 0px -2px 0px inset;
 
-
             cursor: pointer;
+
             z-index: 1000;
         }
 
@@ -45,131 +79,347 @@
             color: #f5f5f5;
         }
 
-        .cv-button:hover {
-            background: currentColor;
-            color: white;
+
+        /* ==================================================
+           MOBILE
+        ================================================== */
+
+        @media (max-width: 600px) {
+
+            .cv-button {
+                bottom: 100px;
+            }
+
         }
+
     </style>
 </head>
 
+
 <body>
+
+
+<!-- ==================================================
+     BACKGROUND VIDEO
+================================================== -->
+
+<video
+        id="background-video"
+        muted
+        autoplay
+        loop
+        playsinline
+        preload="auto"
+>
+    <source src="images/fabia.mov" type="video/quicktime">
+</video>
+
+
+<!-- ==================================================
+     DROPDOWN CONTAINER
+================================================== -->
 
 <div class="dropdown-container">
 
-    <!-- Dropdown 1 -->
+
+    <!-- ==================================================
+         DROPDOWN 1
+    ================================================== -->
+
     <div class="dropdown-wrapper" id="dropdown1">
+
         <div class="dropdown-trigger" id="trigger1">
             <span>Recent Work</span>
             <span class="arrow">▼</span>
         </div>
+
         <div class="dropdown-menu">
-            <a href="Acts.html" class="item"> <i>2026</i> Acts Of Belonging</a>
-            <a href="Fountain.html" class="item"> <i>2025</i> Fountain For Golfers</a>
-            <a href="Concrete.html" class="item"><i>2025</i>  Concrete Lover</a>
-            <a href="Entertain.html" class="item"><i>2025</i>  Here We Are, Now Entertain Us</a>
+
+            <a href="Acts.html" class="item">
+                <i>2026</i> Acts Of Belonging
+            </a>
+
+            <a href="Fountain.html" class="item">
+                <i>2025</i> Fountain For Golfers
+            </a>
+
+            <a href="Concrete.html" class="item">
+                <i>2025</i> Concrete Lover
+            </a>
+
+            <a href="Entertain.html" class="item">
+                <i>2025</i> Here We Are, Now Entertain Us
+            </a>
+
         </div>
+
     </div>
 
-    <!-- Dropdown 2 -->
+
+
+    <!-- ==================================================
+         DROPDOWN 2
+    ================================================== -->
+
     <div class="dropdown-wrapper" id="dropdown2">
+
         <div class="dropdown-trigger" id="trigger2">
             <span>Work</span>
             <span class="arrow">▼</span>
         </div>
+
         <div class="dropdown-menu">
-            <a href="True.html" class="item"><i>2025</i> And It Might Not Be True</a>
-            <a href="Stills.html" class="item"><i>2024</i> Jelsa Stills</a>
-            <a href="Hard.html" class="item"><i>2024</i> Hard Working Artists</a>
-            <a href="7.html" class="item"><i>2023</i> 7 Trees</a>
-            <a href="We.html" class="item"><i>2023</i> WNFBNTO</a>
-            <a href="Immigration.html" class="item"><i>2022</i> Immigration Celebration/ <br> Welcome home</a>
-            <a href="Lets.html" class="item"><i>2022</i> Lets Keep It Gezellig</a>
-            <a href="These.html" class="item"><i>2022</i> These Were All My Clothes</a>
-            <a href="Mackerel.html" class="item"><i>2021</i> Lost Data of a Mackerel</a>
-            <a href="Gezellig.html" class="item"><i>2020</i> Gezellig/ Ongezellig</a>
-            <a href="Screen.html" class="item"><i>2019</i> Screen Based Works</a>
-            <a href="Cow.html" class="item"><i>2019</i> Cow to 3d Printer</a>
-            <!-- <a href="Space.html" class="item">Space Waste</a> -->
+
+            <a href="True.html" class="item">
+                <i>2025</i> And It Might Not Be True
+            </a>
+
+            <a href="Stills.html" class="item">
+                <i>2024</i> Jelsa Stills
+            </a>
+
+            <a href="Hard.html" class="item">
+                <i>2024</i> Hard Working Artists
+            </a>
+
+            <a href="7.html" class="item">
+                <i>2023</i> 7 Trees
+            </a>
+
+            <a href="We.html" class="item">
+                <i>2023</i> WNFBNTO
+            </a>
+
+            <a href="Immigration.html" class="item">
+                <i>2022</i> Immigration Celebration/
+                <br>
+                Welcome home
+            </a>
+
+            <a href="Lets.html" class="item">
+                <i>2022</i> Lets Keep It Gezellig
+            </a>
+
+            <a href="These.html" class="item">
+                <i>2022</i> These Were All My Clothes
+            </a>
+
+            <a href="Mackerel.html" class="item">
+                <i>2021</i> Lost Data of a Mackerel
+            </a>
+
+            <a href="Gezellig.html" class="item">
+                <i>2020</i> Gezellig/ Ongezellig
+            </a>
+
+            <a href="Screen.html" class="item">
+                <i>2019</i> Screen Based Works
+            </a>
+
+            <a href="Cow.html" class="item">
+                <i>2019</i> Cow to 3d Printer
+            </a>
+
+            <!--
+            <a href="Space.html" class="item">
+                Space Waste
+            </a>
+            -->
+
         </div>
+
     </div>
 
-    <!-- Dropdown 3 -->
+
+
+    <!-- ==================================================
+         DROPDOWN 3
+    ================================================== -->
+
     <div class="dropdown-wrapper" id="dropdown3">
+
         <div class="dropdown-trigger" id="trigger3">
             <span>About the Artist</span>
             <span class="arrow">▼</span>
         </div>
+
         <div class="dropdown-menu">
-            <p>
-                Marieke Leene's work explores the strange and often humorous contradictions of living in a world shaped by technology, global systems, and environmental crises. Working across video, installation, performance, sound, and material experimentation, she creates situations where digital logic collides with physical reality.
-            </p>
-
-            <img src="images/marieke_leene.jpg" class="inline-img">
 
             <p>
-                She is particularly interested in translation: how things change when they move between worlds — from physical to digital, from data to material, from machine perception to human interpretation. In these moments of translation, something is always lost, distorted, or unexpectedly revealed.
-
-                <br> <br>
-
-                For collaborations or further information, please reach out via email: mariekeleene[at]pm.me
+                Marieke Leene's work explores the strange and often humorous
+                contradictions of living in a world shaped by technology,
+                global systems, and environmental crises. Working across video,
+                installation, performance, sound, and material experimentation,
+                she creates situations where digital logic collides with
+                physical reality.
             </p>
+
+
+            <img
+                    src="images/marieke_leene.jpg"
+                    class="inline-img"
+                    alt=""
+            >
+
+
+            <p>
+                She is particularly interested in translation: how things
+                change when they move between worlds — from physical to digital,
+                from data to material, from machine perception to human
+                interpretation. In these moments of translation, something is
+                always lost, distorted, or unexpectedly revealed.
+
+                <br>
+                <br>
+
+                For collaborations or further information, please reach out
+                via email: mariekeleene[at]pm.me
+            </p>
+
         </div>
+
     </div>
 
-    <!-- Dropdown 4 -->
+
+
+    <!-- ==================================================
+         DROPDOWN 4
+    ================================================== -->
+
     <div class="dropdown-wrapper" id="dropdown4">
+
         <div class="dropdown-trigger" id="trigger4">
             <span>Other</span>
             <span class="arrow">▼</span>
         </div>
+
         <div class="dropdown-menu">
-            <!-- <p> ⚒️coming soon 🛠️
-                <br> <br> <br>
+
+            <!--
+            <p>
+                ⚒️coming soon 🛠️
+
+                <br>
+                <br>
+                <br>
+
                 This part is still under construction 🚧
-            </p> -->
+            </p>
+            -->
 
-            <!-- <a href="Space.html" class="item">Space Waste</a> -->
-            <!-- <a href="Blender.html" class="item">Blender</a> -->
-            <!-- <a href="Costumes.html" class="item">Costumes</a> -->
 
-            <a href="orchidee.html" class="item">2̴̟̍0̶̳1̶̬̠̿͘9 Orchidee</a>
+            <!--
+            <a href="Space.html" class="item">
+                Space Waste
+            </a>
+            -->
+
+
+            <!--
+            <a href="Blender.html" class="item">
+                Blender
+            </a>
+            -->
+
+
+            <!--
+            <a href="Costumes.html" class="item">
+                Costumes
+            </a>
+            -->
+
+
+            <a href="orchidee.html" class="item">
+                2̴̟̍0̶̳1̶̬̠̿͘9 Orchidee
+            </a>
+
 
             <a href="hond.html" class="item">
                 2̴̟͂0̶̳͐̐1̶̬̠̿͘9̸͙̺̆̋ Hond
             </a>
 
+
             <a href="Animals.html" class="item">
                 2̴̗̬̈́0̷̡̥̀2̵̘͜͝6̴̰̕ͅ also Animals
             </a>
 
-            <!-- <a href="Onwetendheid.html" class="item">Onwetendheid</a> -->
-            <!-- <a href="Google.html" class="item">OK Google</a> -->
-            <!-- <a href="Merch.html" class="item">Jelsa Merch</a> -->
+
+            <!--
+            <a href="Onwetendheid.html" class="item">
+                Onwetendheid
+            </a>
+            -->
+
+
+            <!--
+            <a href="Google.html" class="item">
+                OK Google
+            </a>
+            -->
+
+
+            <!--
+            <a href="Merch.html" class="item">
+                Jelsa Merch
+            </a>
+            -->
+
 
             <a href="viermensen.html" class="item">
-                2̴͒̏̓͂̆͜͝0̅̿̏̒̒̿͝2̷̦̣͌̐͂͛̚͝͠͠ͅ4̴̨̢͈̙̗̱͈͉̱̙̥̺̺̤͗̄̿͒̄̉̒̄̾̊̋̀̚͠ Vier Mensen
+                2̴͒̏̓͂̆͜͝0̅̿̏̒̒̿͝2̷̦̣͌̐͂͛̚͝͠͠ͅ4̴̨̢͈̙̗̱͈͉̱̙̥̺̺̤͗̄̿͒̄̉̒̄̾̊̋̀̚͠
+                Vier Mensen
             </a>
+
 
             <a href="bb.html" class="item">
                 20͈̣͒̒͝2̖̱͛̉̈́͌͌̐͂͛̚͝͠͠6 bb
             </a>
 
-            <!-- <a href="Paintings.html" class="item">Programmed Paintings 2018</a> -->
-            <!-- <a href="stairs.html" class="item">Wrapped up stairs</a> -->
-            <!-- <a href="paradise.html" class="item">Your paradise is (not for me)</a> -->
+
+            <!--
+            <a href="Paintings.html" class="item">
+                Programmed Paintings 2018
+            </a>
+            -->
+
+
+            <!--
+            <a href="stairs.html" class="item">
+                Wrapped up stairs
+            </a>
+            -->
+
+
+            <!--
+            <a href="paradise.html" class="item">
+                Your paradise is (not for me)
+            </a>
+            -->
+
 
             <a href="Dance.html" class="item">
                 2̢̟̜̫͈͒̏̓͂̆͜͝0͈̬͉̰͑̑̅̿̏̒̒̿͝2̷̱͛̉1̋̀̚͠ Dance
             </a>
 
-            <!-- <a href="sattelites.html" class="item">Sattelites</a> -->
+
+            <!--
+            <a href="sattelites.html" class="item">
+                Sattelites
+            </a>
+            -->
+
         </div>
+
     </div>
 
 </div>
 
 
-<!-- CV BUTTON -->
+
+<!-- ==================================================
+     CV BUTTON
+================================================== -->
+
 <a
         href="https://drive.proton.me/urls/9CGKKD8AD0#00pu0zfUHclB"
         class="cv-button"
@@ -181,33 +431,62 @@
 </a>
 
 
+
+<!-- ==================================================
+     FOOTER
+================================================== -->
+
 <footer class="site-footer">
     Created by Marieke Leene — Last updated Spring 2026
 </footer>
 
 
+
 <script>
 
+
+    /* ==================================================
+       DROPDOWNS
+    ================================================== */
+
     function setupDropdown(number) {
-        const dropdown = document.getElementById("dropdown" + number);
-        const trigger = document.getElementById("trigger" + number);
+
+        const dropdown =
+            document.getElementById("dropdown" + number);
+
+        const trigger =
+            document.getElementById("trigger" + number);
+
 
         trigger.addEventListener("click", (e) => {
+
             e.stopPropagation();
 
-            document.querySelectorAll(".dropdown-wrapper").forEach(d => {
-                if (d !== dropdown) {
-                    d.classList.remove("open");
-                }
-            });
+
+            document
+                .querySelectorAll(".dropdown-wrapper")
+                .forEach(d => {
+
+                    if (d !== dropdown) {
+                        d.classList.remove("open");
+                    }
+
+                });
+
 
             dropdown.classList.toggle("open");
+
         });
 
+
         document.addEventListener("click", () => {
+
             dropdown.classList.remove("open");
+
         });
+
     }
+
 
     setupDropdown(1);
     setupDropdown(2);
@@ -215,45 +494,119 @@
     setupDropdown(4);
 
 
-    /* Background slideshow */
 
-    const images = [
-        "images/wolk8.png",
-        "images/wolk9.png",
-        "images/doubledog.png",
-    ];
+    /* ==================================================
+       BACKGROUND SLIDESHOW
+    ================================================== */
 
-    document.body.style.backgroundImage = `url(${images[0]})`;
-
-    let i = 0;
-
-    function changeBackground() {
-        document.body.style.backgroundImage = `url(${images[i]})`;
-        i = (i + 1) % images.length;
-    }
-
-    changeBackground();
-    setInterval(changeBackground, 6000);
+    document.addEventListener("DOMContentLoaded", () => {
 
 
-    /* ===============================
-    VISITED PROJECT TRACKING
-    =============================== */
+        const images = [
+            "images/wolk8.png",
+            "images/wolk9.png",
+            "images/doubledog.png"
+        ];
 
-    const items = document.querySelectorAll(".item");
+
+        const video =
+            document.getElementById("background-video");
+
+
+        let currentIndex = 0;
+
+
+        function showImage(index) {
+
+            document.body.style.backgroundImage =
+                `url("${images[index]}")`;
+
+            document.body.style.backgroundSize = "cover";
+            document.body.style.backgroundPosition = "center";
+            document.body.style.backgroundRepeat = "no-repeat";
+
+            video.style.display = "none";
+
+        }
+
+
+        function showVideo() {
+
+            document.body.style.backgroundImage = "none";
+
+            video.style.display = "block";
+
+            video.currentTime = 0;
+
+            video.play().catch(() => {});
+
+        }
+
+
+        function changeBackground() {
+
+
+            if (currentIndex < images.length) {
+
+                showImage(currentIndex);
+
+                currentIndex++;
+
+                setTimeout(changeBackground, 6000);
+
+            } else {
+
+                showVideo();
+
+                currentIndex = 0;
+
+                /*
+                 * Video is shown for 6 seconds.
+                 * Change this number if you want the
+                 * video to stay longer.
+                 */
+
+                setTimeout(changeBackground, 6000);
+
+            }
+
+        }
+
+
+        /* Start slideshow */
+
+        changeBackground();
+
+    });
+
+
+
+    /* ==================================================
+       VISITED PROJECT TRACKING
+    ================================================== */
+
+    const items =
+        document.querySelectorAll(".item");
 
 
     /* Get stored pages */
 
     function getVisited() {
-        return JSON.parse(localStorage.getItem("visitedPages")) || [];
+
+        return JSON.parse(
+            localStorage.getItem("visitedPages")
+        ) || [];
+
     }
 
 
     /* Store original HTML once */
 
     items.forEach(item => {
-        item.dataset.label = item.innerHTML;
+
+        item.dataset.label =
+            item.innerHTML;
+
     });
 
 
@@ -261,19 +614,28 @@
 
     function markVisited() {
 
-        const visited = getVisited();
+        const visited =
+            getVisited();
+
 
         items.forEach(item => {
 
-            const url = item.getAttribute("href");
+            const url =
+                item.getAttribute("href");
+
 
             if (visited.includes(url)) {
-                item.innerHTML = `✅ ${item.dataset.label}`;
+
+                item.innerHTML =
+                    `✅ ${item.dataset.label}`;
+
                 item.classList.add("visited");
 
             } else {
 
-                item.innerHTML = `🫖 ${item.dataset.label}`;
+                item.innerHTML =
+                    `🫖 ${item.dataset.label}`;
+
                 item.classList.remove("visited");
 
             }
@@ -289,12 +651,17 @@
 
         item.addEventListener("click", () => {
 
-            const url = item.getAttribute("href");
-            let visited = getVisited();
+            const url =
+                item.getAttribute("href");
+
+            let visited =
+                getVisited();
+
 
             if (!visited.includes(url)) {
 
                 visited.push(url);
+
 
                 localStorage.setItem(
                     "visitedPages",
@@ -315,9 +682,14 @@
 
     /* Update when returning with browser Back */
 
-    window.addEventListener("pageshow", markVisited);
+    window.addEventListener(
+        "pageshow",
+        markVisited
+    );
+
 
 </script>
+
 
 </body>
 </html>
