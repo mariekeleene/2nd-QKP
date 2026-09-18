@@ -1,6 +1,10 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
+
+    ```
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -9,35 +13,71 @@
     <link rel="stylesheet" href="slideshow.css">
 
     <style>
+
         * {
             box-sizing: border-box;
         }
+
 
         html,
         body {
             margin: 0;
             padding: 0;
+            width: 100%;
+            height: 100%;
+
             background: white;
         }
 
+
         body {
             font-family: Menlo, serif;
+
+            overflow: hidden;
         }
 
 
         /* =====================================================
-           FIXED BACKGROUND TEXT
+           BACKGROUND SCROLL
+           ===================================================== */
+
+        .background-scroll {
+            position: fixed;
+
+            inset: 0;
+
+            width: 100%;
+            height: 100%;
+
+            overflow-y: auto;
+            overflow-x: hidden;
+
+            z-index: 1;
+
+            pointer-events: auto;
+
+            scrollbar-width: none;
+        }
+
+
+        .background-scroll::-webkit-scrollbar {
+            display: none;
+        }
+
+
+        /* =====================================================
+           BACKGROUND TEXT
            ===================================================== */
 
         .background-text {
-            position: fixed;
-            inset: 0;
+            width: 100%;
 
-            z-index: 0;
+            min-height: 200vh;
 
             padding: 25px;
 
-            font-family: menlo, serif;
+            font-family: Menlo, serif;
+
             font-size: 7rem;
             line-height: 1.35;
 
@@ -45,9 +85,80 @@
 
             white-space: pre-wrap;
 
-            overflow: hidden;
-
             pointer-events: none;
+        }
+
+
+        /* =====================================================
+           PHOTO SCROLL
+           ===================================================== */
+
+        .photo-scroll {
+            position: fixed;
+
+            inset: 0;
+
+            width: 100%;
+            height: 100%;
+
+            overflow-y: auto;
+            overflow-x: hidden;
+
+            z-index: 10;
+
+            /*
+             * This is the important part:
+             * photos are a separate scroll layer.
+             */
+
+            scrollbar-width: none;
+        }
+
+
+        .photo-scroll::-webkit-scrollbar {
+            display: none;
+        }
+
+
+        /* =====================================================
+           IMAGE FEED
+           ===================================================== */
+
+        .feed {
+            width: 100%;
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            padding-top: 80px;
+            padding-bottom: 80px;
+        }
+
+
+        .feed img {
+            display: block;
+
+            width: auto;
+
+            max-width: 90vw;
+
+            height: auto;
+
+            margin: 0 auto 80px auto;
+
+            /*
+             * White background makes the photos
+             * visually sit above the text.
+             */
+
+            background: white;
+
+            position: relative;
+
+            z-index: 11;
         }
 
 
@@ -56,96 +167,84 @@
            ===================================================== */
 
         .top-bar {
-        /*    position: relative;*/
-        /*    z-index: 10;*/
+            position: fixed;
 
-        /*    width: 100%;*/
+            top: 0;
+            left: 0;
 
-        /*    padding: 15px 20px;*/
+            width: 100%;
 
-        /*    font-family: menlo, serif;*/
-        /*    font-size: 1rem;*/
-            padding-bottom: 25px;
+            padding: 15px 20px 25px 20px;
 
-        /*    background: white;*/
-        /*}*/
+            z-index: 1000;
 
-        /*.details {*/
-        /*    cursor: pointer;*/
-        /*}*/
+            pointer-events: none;
+        }
+
+
+        .details {
+            pointer-events: auto;
+
+            cursor: pointer;
+
+            background: white;
+        }
 
 
         /* =====================================================
            DETAILS PANEL
            ===================================================== */
 
-        /*.details-text {*/
-        /*    position: relative;*/
-        /*    z-index: 20;*/
+        .details-text {
+            position: fixed;
 
-        /*    display: none;*/
-
-        /*    width: 100%;*/
-
-        /*    background: white;*/
-
-        /*    padding: 30px 25px;*/
-        /*}*/
-
-        /*.details-text.active {*/
-        /*    display: block;*/
-        /*}*/
-
-        /*.details-content {*/
-        /*    display: flex;*/
-        /*    gap: 50px;*/
-
-        /*    max-width: 1200px;*/
-        /*    margin: 0 auto;*/
-        /*}*/
-
-        /*.details-left {*/
-        /*    width: 35%;*/
-        /*}*/
-
-        /*.details-right {*/
-        /*    width: 65%;*/
-        /*}*/
-
-        /*.details-content p {*/
-        /*    margin-top: 0;*/
-        /*}*/
-
-
-        /* =====================================================
-           IMAGE FEED
-           ===================================================== */
-
-        .feed-wrapper {
-            position: relative;
-            z-index: 5;
+            top: 55px;
+            left: 0;
 
             width: 100%;
-        }
 
-        .feed {
-            width: 100%;
+            max-height: calc(100vh - 55px);
 
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .feed img {
-            display: block;
-
-            width: auto;
-            max-width: 90vw;
-            height: auto;
-
-            margin: 0 auto 80px auto;
+            overflow-y: auto;
 
             background: white;
+
+            padding: 30px 25px;
+
+            z-index: 900;
+
+            display: none;
+        }
+
+
+        .details-text.active {
+            display: block;
+        }
+
+
+        .details-content {
+            display: flex;
+
+            gap: 50px;
+
+            max-width: 1200px;
+
+            margin: 0 auto;
+        }
+
+
+        .details-left {
+            width: 35%;
+        }
+
+
+        .details-right {
+            width: 65%;
+        }
+
+
+        .details-content p {
+            margin-top: 0;
         }
 
 
@@ -158,7 +257,7 @@
 
             width: 130px;
 
-            z-index: 1000;
+            z-index: 2000;
 
             cursor: pointer;
 
@@ -178,50 +277,113 @@
                 padding: 15px;
 
                 font-size: 2rem;
+
                 line-height: 1.3;
+
+                /*
+                 * Make the text much longer than the screen,
+                 * so its own scrollbar has something to scroll.
+                 */
+
+                min-height: 300vh;
             }
+
+
+            .feed {
+                padding-top: 60px;
+
+                padding-bottom: 60px;
+            }
+
+
+            .feed img {
+                max-width: 95vw;
+
+                margin-bottom: 50px;
+            }
+
 
             .top-bar {
                 padding: 12px 15px;
             }
 
+
             .details-text {
                 padding: 20px 15px;
+
+                top: 45px;
             }
+
 
             .details-content {
                 display: block;
             }
+
 
             .details-left,
             .details-right {
                 width: 100%;
             }
 
-            .feed img {
-                max-width: 95vw;
-                margin-bottom: 50px;
-            }
 
             #floating-back {
                 width: 100px;
             }
-        }
-    </style>
-</head>
 
+        }
+
+    </style>
+    ```
+
+</head>
 
 <body>
 
-
 <!-- =========================================================
-     FIXED BACKGROUND TEXT
+     BACKGROUND SCROLL
      ========================================================== -->
 
-<div class="background-text">
-    I kiss your gray skin softly.<br> In all things resistant <br> <br> to be liquid, or to be hard. <br><br> Are we trapped in a mold ?<br> <br>  getting harder and harder every minute, <br><br> How is it to be liquid? <br> I see only concrete to bump into, <br><br> And nothing but dust to swallow.
+<div class="background-scroll">
+
+    ```
+    <div class="background-text">
+
+        I kiss your gray skin softly.<br>
+        In all things resistant<br>
+        <br>
+        to be liquid, or to be hard.
+        <br><br>
+        Are we trapped in a mold ?
+        <br>
+        <br>
+        getting harder and harder every minute,
+        <br><br>
+        How is it to be liquid?
+        <br>
+        I see only concrete to bump into,
+        <br><br>
+        And nothing but dust to swallow.
+
+    </div>
+    ```
+
 </div>
 
+<!-- =========================================================
+     PHOTO SCROLL
+     ========================================================== -->
+
+<div class="photo-scroll">
+
+    ```
+    <main class="feed-wrapper">
+
+        <div id="feed" class="feed"></div>
+
+    </main>
+    ```
+
+</div>
 
 <!-- =========================================================
      HEADER
@@ -229,12 +391,13 @@
 
 <header class="top-bar">
 
+    ```
     <span id="details-btn" class="details">
-        Concrete Lover ⇶ more information ▽
-    </span>
+    Concrete Lover ⇶ more information ▽
+</span>
+    ```
 
 </header>
-
 
 <!-- =========================================================
      DETAILS
@@ -242,15 +405,22 @@
 
 <section id="details-text" class="details-text">
 
+    ```
     <div class="details-content">
 
         <div class="details-left">
 
-            <p><b>Title:</b> Concrete Lover</p>
+            <p>
+                <b>Title:</b> Concrete Lover
+            </p>
 
-            <p><b>Year:</b> 2025</p>
+            <p>
+                <b>Year:</b> 2025
+            </p>
 
-            <p><b>Medium:</b> text, film, photo</p>
+            <p>
+                <b>Medium:</b> text, film, photo
+            </p>
 
             <p></p>
 
@@ -278,9 +448,9 @@
         </div>
 
     </div>
+    ```
 
 </section>
-
 
 <!-- =========================================================
      FLOATING BACK BUTTON
@@ -288,25 +458,15 @@
 
 <a href="index.html">
 
+    ```
     <img
             src="images/back.png"
             id="floating-back"
             alt="Back"
     >
+    ```
 
 </a>
-
-
-<!-- =========================================================
-     SCROLLING IMAGE FEED
-     ========================================================== -->
-
-<main class="feed-wrapper">
-
-    <div id="feed" class="feed"></div>
-
-</main>
-
 
 <script>
 
@@ -337,12 +497,17 @@
             document.getElementById("feed");
 
 
+        const photoScroll =
+            document.querySelector(".photo-scroll");
+
+
         /* =====================================================
            DETAILS TOGGLE
            ===================================================== */
 
         const detailsBtn =
             document.getElementById("details-btn");
+
 
         const detailsText =
             document.getElementById("details-text");
@@ -353,7 +518,9 @@
             detailsText.classList.toggle("active");
 
 
-            if (detailsText.classList.contains("active")) {
+            if (
+                detailsText.classList.contains("active")
+            ) {
 
                 detailsBtn.textContent =
                     "Concrete Lover ⇶ close ▲";
@@ -379,9 +546,11 @@
                 const img =
                     document.createElement("img");
 
+
                 img.src = src;
 
                 img.loading = "lazy";
+
 
                 feed.appendChild(img);
 
@@ -402,12 +571,12 @@
            INFINITE SCROLL
            ===================================================== */
 
-        window.addEventListener("scroll", () => {
+        photoScroll.addEventListener("scroll", () => {
 
             if (
-                window.innerHeight +
-                window.scrollY >=
-                document.body.offsetHeight - 500
+                photoScroll.scrollTop +
+                photoScroll.clientHeight >=
+                photoScroll.scrollHeight - 500
             ) {
 
                 addImages();
@@ -431,21 +600,25 @@
                 window.innerWidth -
                 button.offsetWidth;
 
+
             const h =
                 window.innerHeight -
                 button.offsetHeight;
 
 
             const x =
-                Math.random() * Math.max(0, w);
+                Math.random() *
+                Math.max(0, w);
 
 
             const y =
-                Math.random() * Math.max(0, h);
+                Math.random() *
+                Math.max(0, h);
 
 
             button.style.left =
                 x + "px";
+
 
             button.style.top =
                 y + "px";
@@ -460,7 +633,10 @@
 
         /* Move every 2 seconds */
 
-        setInterval(moveButton, 2000);
+        setInterval(
+            moveButton,
+            2000
+        );
 
 
     });
@@ -468,5 +644,5 @@
 </script>
 
 </body>
-</html>
 
+</html>
