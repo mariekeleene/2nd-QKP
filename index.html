@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="nl">
+
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -14,6 +16,7 @@
     >
 
     <style>
+
         /* ==================================================
            BACKGROUND VIDEO
         ================================================== */
@@ -22,8 +25,8 @@
             position: fixed;
             inset: 0;
 
-            width: 50vw;
-            height: 70vh;
+            width: 100vw;
+            height: 100vh;
 
             object-fit: cover;
 
@@ -32,8 +35,6 @@
             display: none;
 
             pointer-events: none;
-            padding-left:25vw;
-            padding-top:5vw;
         }
 
 
@@ -76,6 +77,7 @@
             z-index: 1000;
         }
 
+
         .cv-button:hover {
             background: #1a1a1a;
             color: #f5f5f5;
@@ -88,6 +90,25 @@
 
         @media (max-width: 600px) {
 
+            #background-video {
+                position: fixed;
+
+                top: 0;
+                left: 0;
+
+                width: 100vw;
+                height: 100dvh;
+
+                object-fit: cover;
+
+                display: block;
+
+                z-index: -2;
+
+                pointer-events: none;
+            }
+
+
             .cv-button {
                 bottom: 100px;
             }
@@ -95,6 +116,7 @@
         }
 
     </style>
+
 </head>
 
 
@@ -111,9 +133,10 @@
         autoplay
         loop
         playsinline
+        webkit-playsinline
         preload="auto"
 >
-    <source src="images/fabia.mov" type="video/quicktime">
+    <source src="images/fabia.mov" type="video/mov">
 </video>
 
 
@@ -156,7 +179,6 @@
         </div>
 
     </div>
-
 
 
     <!-- ==================================================
@@ -233,7 +255,6 @@
     </div>
 
 
-
     <!-- ==================================================
          DROPDOWN 3
     ================================================== -->
@@ -281,7 +302,6 @@
         </div>
 
     </div>
-
 
 
     <!-- ==================================================
@@ -332,7 +352,7 @@
 
 
             <a href="orchidee.html" class="item">
-                2̴̟̍0̶̳1̶̬̠̿͘9 Orchidee
+                2̴̟̍0̶̳̠̿͘1̶̬̠̿͘9 Orchidee
             </a>
 
 
@@ -400,7 +420,7 @@
 
 
             <a href="Dance.html" class="item">
-                2̢̟̜̫͈͒̏̓͂̆͜͝0͈̬͉̰͑̑̅̿̏̒̒̿͝2̷̱͛̉1̋̀̚͠ Dance
+                2̢̟̜̫͈͒̏̓͂̆͜͝0͈̬͉̰͑̑̅̿̏̒̒̿͝2̷̱͛̉̀̚͠1̋ Dance
             </a>
 
 
@@ -415,7 +435,6 @@
     </div>
 
 </div>
-
 
 
 <!-- ==================================================
@@ -433,7 +452,6 @@
 </a>
 
 
-
 <!-- ==================================================
      FOOTER
 ================================================== -->
@@ -441,7 +459,6 @@
 <footer class="site-footer">
     Created by Marieke Leene — Last updated summer 2026
 </footer>
-
 
 
 <script>
@@ -498,11 +515,10 @@
 
 
     /* ==================================================
-       BACKGROUND SLIDESHOW
+       BACKGROUND SLIDESHOW / MOBILE VIDEO
     ================================================== */
 
     document.addEventListener("DOMContentLoaded", () => {
-
 
         const images = [
             "images/wolk8.png",
@@ -518,66 +534,306 @@
         let currentIndex = 0;
 
 
+        /* ----------------------------------------------
+           MOBILE CHECK
+        ---------------------------------------------- */
+
+        function isMobile() {
+
+            return window.matchMedia(
+                "(max-width: 600px)"
+            ).matches;
+
+        }
+
+
+        /* ----------------------------------------------
+           SHOW IMAGE
+        ---------------------------------------------- */
+
         function showImage(index) {
 
             document.body.style.backgroundImage =
                 `url("${images[index]}")`;
 
-            document.body.style.backgroundSize = "cover";
-            document.body.style.backgroundPosition = "center";
-            document.body.style.backgroundRepeat = "no-repeat";
+            document.body.style.backgroundSize =
+                "cover";
+
+            document.body.style.backgroundPosition =
+                "center";
+
+            document.body.style.backgroundRepeat =
+                "no-repeat";
+
 
             video.style.display = "none";
 
+            video.pause();
+
         }
 
+
+        /* ----------------------------------------------
+           SHOW VIDEO
+        ---------------------------------------------- */
 
         function showVideo() {
 
-            document.body.style.backgroundImage = "none";
+            document.body.style.backgroundImage =
+                "none";
 
-            video.style.display = "block";
+
+            video.style.display =
+                "block";
+
+
+            /*
+             * Force the attributes again.
+             * This helps especially on iOS/Safari.
+             */
+
+            video.muted = true;
+
+            video.setAttribute(
+                "muted",
+                ""
+            );
+
+            video.setAttribute(
+                "autoplay",
+                ""
+            );
+
+            video.setAttribute(
+                "playsinline",
+                ""
+            );
+
+            video.setAttribute(
+                "webkit-playsinline",
+                ""
+            );
+
+
+            /*
+             * Restart video.
+             */
 
             video.currentTime = 0;
 
-            video.play().catch(() => {});
 
-        }
+            /*
+             * Explicitly try to start playback.
+             */
+
+            const playPromise =
+                video.play();
 
 
-        function changeBackground() {
+            if (playPromise !== undefined) {
 
+                playPromise.catch(() => {
 
-            if (currentIndex < images.length) {
+                    /*
+                     * Autoplay was blocked by
+                     * the browser.
+                     */
 
-                showImage(currentIndex);
-
-                currentIndex++;
-
-                setTimeout(changeBackground, 6000);
-
-            } else {
-
-                showVideo();
-
-                currentIndex = 0;
-
-                /*
-                 * Video is shown for 6 seconds.
-                 * Change this number if you want the
-                 * video to stay longer.
-                 */
-
-                setTimeout(changeBackground, 33000);
+                });
 
             }
 
         }
 
 
-        /* Start slideshow */
+        /* ----------------------------------------------
+           DESKTOP SLIDESHOW
+        ---------------------------------------------- */
+
+        function changeBackground() {
+
+            /*
+             * MOBILE:
+             * Always show video.
+             */
+
+            if (isMobile()) {
+
+                showVideo();
+
+                return;
+
+            }
+
+
+            /*
+             * DESKTOP:
+             * Show images first.
+             */
+
+            if (currentIndex < images.length) {
+
+                showImage(
+                    currentIndex
+                );
+
+                currentIndex++;
+
+
+                setTimeout(
+                    changeBackground,
+                    6000
+                );
+
+
+            } else {
+
+                /*
+                 * Then show video.
+                 */
+
+                showVideo();
+
+
+                currentIndex = 0;
+
+
+                /*
+                 * Video duration on desktop.
+                 */
+
+                setTimeout(
+                    changeBackground,
+                    33000
+                );
+
+            }
+
+        }
+
+
+        /* ----------------------------------------------
+           START
+        ---------------------------------------------- */
 
         changeBackground();
+
+
+        /* ----------------------------------------------
+           MOBILE AUTOPLAY
+
+           Some mobile browsers can pause background
+           video when the page becomes visible again.
+        ---------------------------------------------- */
+
+        function ensureVideoPlaying() {
+
+            if (!isMobile()) {
+                return;
+            }
+
+
+            video.muted = true;
+
+
+            const playPromise =
+                video.play();
+
+
+            if (playPromise !== undefined) {
+
+                playPromise.catch(() => {});
+
+            }
+
+        }
+
+
+        document.addEventListener(
+            "visibilitychange",
+            () => {
+
+                if (
+                    document.visibilityState ===
+                    "visible"
+                ) {
+
+                    ensureVideoPlaying();
+
+                }
+
+            }
+        );
+
+
+        window.addEventListener(
+            "pageshow",
+            () => {
+
+                ensureVideoPlaying();
+
+            }
+        );
+
+
+        /* ----------------------------------------------
+           SCREEN ROTATION / RESIZE
+        ---------------------------------------------- */
+
+        let wasMobile =
+            isMobile();
+
+
+        window.addEventListener(
+            "resize",
+            () => {
+
+                const nowMobile =
+                    isMobile();
+
+
+                /*
+                 * Only restart slideshow when switching
+                 * between mobile and desktop.
+                 */
+
+                if (
+                    nowMobile !== wasMobile
+                ) {
+
+                    wasMobile =
+                        nowMobile;
+
+
+                    if (nowMobile) {
+
+                        currentIndex = 0;
+
+                        showVideo();
+
+                    } else {
+
+                        currentIndex = 0;
+
+                        changeBackground();
+
+                    }
+
+                }
+
+            }
+        );
+
+
+        /* ----------------------------------------------
+           FIRST MOBILE PLAY ATTEMPT
+        ---------------------------------------------- */
+
+        if (isMobile()) {
+
+            showVideo();
+
+        }
 
     });
 
@@ -591,18 +847,24 @@
         document.querySelectorAll(".item");
 
 
-    /* Get stored pages */
+    /* ----------------------------------------------
+       GET STORED PAGES
+    ---------------------------------------------- */
 
     function getVisited() {
 
         return JSON.parse(
-            localStorage.getItem("visitedPages")
+            localStorage.getItem(
+                "visitedPages"
+            )
         ) || [];
 
     }
 
 
-    /* Store original HTML once */
+    /* ----------------------------------------------
+       STORE ORIGINAL HTML ONCE
+    ---------------------------------------------- */
 
     items.forEach(item => {
 
@@ -612,7 +874,9 @@
     });
 
 
-    /* Update all menu items */
+    /* ----------------------------------------------
+       UPDATE ALL MENU ITEMS
+    ---------------------------------------------- */
 
     function markVisited() {
 
@@ -631,14 +895,19 @@
                 item.innerHTML =
                     `✅ ${item.dataset.label}`;
 
-                item.classList.add("visited");
+                item.classList.add(
+                    "visited"
+                );
+
 
             } else {
 
                 item.innerHTML =
                     `🫖 ${item.dataset.label}`;
 
-                item.classList.remove("visited");
+                item.classList.remove(
+                    "visited"
+                );
 
             }
 
@@ -647,42 +916,54 @@
     }
 
 
-    /* Save page when clicked */
+    /* ----------------------------------------------
+       SAVE PAGE WHEN CLICKED
+    ---------------------------------------------- */
 
     items.forEach(item => {
 
-        item.addEventListener("click", () => {
+        item.addEventListener(
+            "click",
+            () => {
 
-            const url =
-                item.getAttribute("href");
-
-            let visited =
-                getVisited();
-
-
-            if (!visited.includes(url)) {
-
-                visited.push(url);
+                const url =
+                    item.getAttribute("href");
 
 
-                localStorage.setItem(
-                    "visitedPages",
-                    JSON.stringify(visited)
-                );
+                let visited =
+                    getVisited();
+
+
+                if (
+                    !visited.includes(url)
+                ) {
+
+                    visited.push(url);
+
+
+                    localStorage.setItem(
+                        "visitedPages",
+                        JSON.stringify(visited)
+                    );
+
+                }
 
             }
-
-        });
+        );
 
     });
 
 
-    /* Initial update */
+    /* ----------------------------------------------
+       INITIAL UPDATE
+    ---------------------------------------------- */
 
     markVisited();
 
 
-    /* Update when returning with browser Back */
+    /* ----------------------------------------------
+       UPDATE WHEN RETURNING WITH BROWSER BACK
+    ---------------------------------------------- */
 
     window.addEventListener(
         "pageshow",
